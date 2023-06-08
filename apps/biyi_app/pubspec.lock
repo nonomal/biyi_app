@@ -778,10 +778,10 @@ packages:
     dependency: "direct main"
     description:
       name: screen_capturer
-      sha256: a85d8da6f2737e762e251af2667c7c3aba6423fb221c28d1a8ae086b428b2a30
+      sha256: "5a1b6ec7f71cc928d62f1fb120ba1f08071ffe7f52f57f6b47ecfdfa05e133a9"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.4"
+    version: "0.1.5"
   screen_retriever:
     dependency: "direct main"
     description:
@@ -870,6 +870,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  shell_executor:
+    dependency: transitive
+    description:
+      name: shell_executor
+      sha256: f89eb17bb2660568a255bb5612f2773ba9295792d7bb6b96e3ef87985a9457fa
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.4"
   shortid:
     dependency: "direct main"
     description:

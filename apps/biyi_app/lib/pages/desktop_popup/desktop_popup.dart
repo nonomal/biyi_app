@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
@@ -659,13 +660,14 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       try {
         _isTextDetecting = true;
         setState(() {});
+        String base64Image = base64Encode(_capturedData!.imageBytes!);
         await Future.delayed(const Duration(milliseconds: 10));
         RecognizeTextResponse recognizeTextResponse = await sharedOcrClient
             .use(_configuration.defaultOcrEngineId ?? '')
             .recognizeText(
               RecognizeTextRequest(
                 imagePath: _capturedData?.imagePath,
-                base64Image: _capturedData?.base64Image,
+                base64Image: base64Image,
               ),
             );
         _isTextDetecting = false;
