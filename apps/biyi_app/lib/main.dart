@@ -41,7 +41,7 @@ void main() async {
         Locale(kLanguageZH),
       ],
       path: 'resources/langs',
-      assetLoader: CodegenLoader(),
+      assetLoader: const CodegenLoader(),
       fallbackLocale: const Locale(kLanguageEN),
       child: const MyApp(),
     ),
@@ -49,9 +49,7 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({
-    Key? key,
-  }) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -76,7 +74,7 @@ class _MyAppState extends State<MyApp> with LocalDbListener {
     super.dispose();
   }
 
-  void _handleChanged() async {
+  Future<void> _handleChanged() async {
     Locale oldLocale = context.locale;
     Locale newLocale = languageToLocale(_configuration.appLanguage);
     if (newLocale != oldLocale) {
@@ -93,7 +91,7 @@ class _MyAppState extends State<MyApp> with LocalDbListener {
   }
 
   Widget _buildHome(BuildContext context) {
-    return const BootstrapPage();
+    return const DesktopPopupPage();
   }
 
   @override
@@ -111,7 +109,7 @@ class _MyAppState extends State<MyApp> with LocalDbListener {
           child = Stack(
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(7),
                   topRight: Radius.circular(7),
                 ),
@@ -127,11 +125,12 @@ class _MyAppState extends State<MyApp> with LocalDbListener {
           );
         }
         child = botToastBuilder(context, child);
-        child = rise_ui.Theme(
-          data: rise_ui.ThemeData(
+        child = rise_ui.ExtendedTheme(
+          data: rise_ui.ExtendedThemeData(
             brightness: _configuration.themeMode == ThemeMode.dark
                 ? Brightness.dark
                 : Brightness.light,
+            primaryColor: rise_ui.ExtendedColors.indigo,
           ),
           child: child,
         );

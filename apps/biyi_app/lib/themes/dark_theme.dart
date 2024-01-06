@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' as md;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rise_ui/rise_ui.dart';
 
 const _kDefaultTextColor = Colors.white;
 
@@ -14,8 +16,8 @@ const _kDefaultTextStyle = TextStyle(
   fontFamily: 'MiSans',
 );
 
-final darkThemeData = ThemeData(
-  colorScheme: ColorScheme.fromSeed(
+final darkThemeData = md.ThemeData(
+  colorScheme: md.ColorScheme.fromSeed(
     brightness: Brightness.dark,
     seedColor: _kPrimaryColor,
     primary: _kPrimaryColor,
@@ -29,7 +31,7 @@ final darkThemeData = ThemeData(
   iconTheme: const IconThemeData(
     color: Colors.white,
   ),
-  textTheme: TextTheme(
+  textTheme: md.TextTheme(
     titleLarge: _kDefaultTextStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.w600,
@@ -53,7 +55,7 @@ final darkThemeData = ThemeData(
       fontSize: 12,
     ),
   ),
-  appBarTheme: AppBarTheme(
+  appBarTheme: md.AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle.light,
     color: _kCanvasColor,
     elevation: 0,
@@ -78,4 +80,11 @@ final darkThemeData = ThemeData(
       textStyle: _kDefaultTextStyle.copyWith(),
     ),
   ),
+  extensions: const [
+    ExtendedThemeData(
+      brightness: Brightness.light,
+      primaryColor: ExtendedColors.indigo,
+    ),
+    kDarkNavigationRailThemeDefaults,
+  ],
 );

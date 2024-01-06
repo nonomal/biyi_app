@@ -41,7 +41,7 @@ const kMenuSubItemKeyJoinDiscord = 'subitem-join-discord';
 const kMenuSubItemKeyJoinQQGroup = 'subitem-join-qq';
 
 class DesktopPopupPage extends StatefulWidget {
-  const DesktopPopupPage({Key? key}) : super(key: key);
+  const DesktopPopupPage({super.key});
 
   @override
   State<StatefulWidget> createState() => _DesktopPopupPageState();
@@ -166,7 +166,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     if (mounted) setState(() {});
   }
 
-  void _init() async {
+  Future<void> _init() async {
     if (kIsMacOS) {
       _isAllowedScreenCaptureAccess =
           await ScreenCapturer.instance.isAccessAllowed();
@@ -179,7 +179,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     // 初始化托盘图标
     await _initTrayIcon();
     await Future.delayed(const Duration(milliseconds: 100));
-    WindowOptions windowOptions = WindowOptions(
+    WindowOptions windowOptions = const WindowOptions(
       titleBarStyle: TitleBarStyle.hidden,
       windowButtonVisibility: false,
       skipTaskbar: true,
@@ -379,7 +379,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     });
   }
 
-  void _loadData() async {
+  Future<void> _loadData() async {
     try {
       await localDb.setCurrentUser(
         localDb.user,
@@ -611,7 +611,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     }
   }
 
-  void _handleExtractTextFromScreenSelection() async {
+  Future<void> _handleExtractTextFromScreenSelection() async {
     ExtractedData? extractedData = await screenTextExtractor.extract(
       mode: ExtractMode.screenSelection,
     );
@@ -622,7 +622,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     _handleTextChanged(extractedData?.text, isRequery: true);
   }
 
-  void _handleExtractTextFromScreenCapture() async {
+  Future<void> _handleExtractTextFromScreenCapture() async {
     setState(() {
       _querySubmitted = false;
       _text = '';
@@ -691,7 +691,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     }
   }
 
-  void _handleExtractTextFromClipboard() async {
+  Future<void> _handleExtractTextFromClipboard() async {
     bool windowIsVisible = await windowManager.isVisible();
     if (!windowIsVisible) {
       await _windowShow();
@@ -717,7 +717,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     _focusNode.requestFocus();
   }
 
-  void _handleButtonTappedTrans() async {
+  Future<void> _handleButtonTappedTrans() async {
     if (_text.isEmpty) {
       BotToast.showText(
         text: 'page_desktop_popup.msg_please_enter_word_or_text'.tr(),
@@ -903,7 +903,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   @override
-  void onProtocolUrlReceived(String url) async {
+  Future<void> onProtocolUrlReceived(String url) async {
     Uri uri = Uri.parse(url);
     if (uri.scheme != 'biyiapp') return;
 
@@ -918,7 +918,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   @override
-  void onShortcutKeyDownShowOrHide() async {
+  Future<void> onShortcutKeyDownShowOrHide() async {
     bool isVisible = await windowManager.isVisible();
     if (isVisible) {
       _windowHide();
@@ -928,7 +928,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   @override
-  void onShortcutKeyDownHide() async {
+  Future<void> onShortcutKeyDownHide() async {
     _windowHide();
   }
 
@@ -956,7 +956,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   @override
-  void onShortcutKeyDownTranslateInputContent() async {
+  Future<void> onShortcutKeyDownTranslateInputContent() async {
     await keyPressSimulator.simulateKeyPress(
       key: LogicalKeyboardKey.keyA,
       modifiers: [
@@ -1029,7 +1029,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   @override
-  void onTrayIconMouseDown() async {
+  Future<void> onTrayIconMouseDown() async {
     _windowShow(isShowBelowTray: true);
   }
 
@@ -1039,10 +1039,10 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   @override
-  void onTrayMenuItemClick(MenuItem menuItem) async {
+  Future<void> onTrayMenuItemClick(MenuItem menuItem) async {
     switch (menuItem.key) {
       case kMenuItemKeyShow:
-        await Future.delayed(Duration(milliseconds: 300));
+        await Future.delayed(const Duration(milliseconds: 300));
         await _windowShow();
         break;
       case kMenuItemKeyQuickStartGuide:
@@ -1061,12 +1061,12 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   @override
-  void onWindowFocus() async {
+  Future<void> onWindowFocus() async {
     _focusNode.requestFocus();
   }
 
   @override
-  void onWindowBlur() async {
+  Future<void> onWindowBlur() async {
     _focusNode.unfocus();
     bool isAlwaysOnTop = await windowManager.isAlwaysOnTop();
     if (!isAlwaysOnTop) {
@@ -1075,7 +1075,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   @override
-  void onWindowMove() async {
+  Future<void> onWindowMove() async {
     _lastShownPosition = await windowManager.getPosition();
   }
 }

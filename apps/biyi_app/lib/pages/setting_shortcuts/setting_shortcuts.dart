@@ -2,7 +2,7 @@ import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:flutter/material.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
-import 'package:rise_ui/rise_ui.dart' hide Theme;
+import 'package:rise_ui/rise_ui.dart';
 
 class _HotKeyDisplayView extends StatelessWidget {
   const _HotKeyDisplayView(
@@ -44,8 +44,8 @@ class _HotKeyDisplayView extends StatelessWidget {
 
 class SettingShortcutsPage extends StatefulWidget {
   const SettingShortcutsPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<StatefulWidget> createState() => _SettingShortcutsPageState();

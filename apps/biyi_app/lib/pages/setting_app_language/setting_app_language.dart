@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class SettingAppLanguagePage extends StatefulWidget {
   const SettingAppLanguagePage({
-    Key? key,
+    super.key,
     this.initialLanguage,
-  }) : super(key: key);
+  });
 
   final String? initialLanguage;
 

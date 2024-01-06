@@ -3,7 +3,7 @@ import 'package:biyi_app/includes.dart';
 import 'package:flutter/material.dart';
 
 class SettingExtractTextPage extends StatefulWidget {
-  const SettingExtractTextPage({Key? key}) : super(key: key);
+  const SettingExtractTextPage({super.key});
 
   @override
   State<StatefulWidget> createState() => _SettingExtractTextPageState();
@@ -41,12 +41,14 @@ class _SettingExtractTextPageState extends State<SettingExtractTextPage> {
               icon: _defaultOcrEngineConfig == null
                   ? null
                   : OcrEngineIcon(_defaultOcrEngineConfig!.type),
-              title: Builder(builder: (_) {
-                if (_defaultOcrEngineConfig == null) {
-                  return Text('please_choose'.tr());
-                }
-                return OcrEngineName(_defaultOcrEngineConfig!);
-              }),
+              title: Builder(
+                builder: (_) {
+                  if (_defaultOcrEngineConfig == null) {
+                    return Text('please_choose'.tr());
+                  }
+                  return OcrEngineName(_defaultOcrEngineConfig!);
+                },
+              ),
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(

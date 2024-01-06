@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 class TranslationEngineIcon extends StatelessWidget {
   const TranslationEngineIcon(
     this.type, {
-    Key? key,
+    super.key,
     this.size = 22,
     this.color,
     this.border,
-  }) : super(key: key);
+  });
 
   final String type;
   final double size;

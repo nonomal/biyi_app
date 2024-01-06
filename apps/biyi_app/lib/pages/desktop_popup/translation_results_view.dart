@@ -5,7 +5,7 @@ import 'package:sticky_headers/sticky_headers.dart';
 
 class TranslationResultsView extends StatelessWidget {
   const TranslationResultsView({
-    Key? key,
+    super.key,
     required this.viewKey,
     required this.controller,
     required this.translationMode,
@@ -14,7 +14,7 @@ class TranslationResultsView extends StatelessWidget {
     required this.textDetectedLanguage,
     required this.translationResultList,
     required this.onTextTapped,
-  }) : super(key: key);
+  });
 
   final Key viewKey;
   final ScrollController controller;

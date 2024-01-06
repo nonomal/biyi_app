@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class PreferenceListSection extends StatelessWidget {
   const PreferenceListSection({
-    Key? key,
+    super.key,
     this.leading,
     this.title,
     this.description,
     required this.children,
-  }) : super(key: key);
+  });
 
   final Widget? leading;
   final Widget? title;
@@ -44,18 +44,19 @@ class PreferenceListSection extends StatelessWidget {
               ),
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).canvasColor,
-                  ),
-                  child: Row(
-                    children: [
-                      if (leading != null) leading!,
-                      Expanded(
-                        child: Column(
-                          children: [
-                            for (var i = 0; i < children.length; i++)
-                              Builder(builder: (_) {
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).canvasColor,
+                ),
+                child: Row(
+                  children: [
+                    if (leading != null) leading!,
+                    Expanded(
+                      child: Column(
+                        children: [
+                          for (var i = 0; i < children.length; i++)
+                            Builder(
+                              builder: (_) {
                                 Widget child = children[i];
                                 return Column(
                                   children: [
@@ -68,12 +69,14 @@ class PreferenceListSection extends StatelessWidget {
                                       ),
                                   ],
                                 );
-                              })
-                          ],
-                        ),
+                              },
+                            ),
+                        ],
                       ),
-                    ],
-                  )),
+                    ),
+                  ],
+                ),
+              ),
             ),
             if (description != null)
               Container(

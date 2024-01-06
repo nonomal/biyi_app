@@ -6,9 +6,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 class NewVersionFoundBanner extends StatelessWidget {
   const NewVersionFoundBanner({
-    Key? key,
+    super.key,
     required this.latestVersion,
-  }) : super(key: key);
+  });
 
   final Version latestVersion;
 
@@ -60,7 +60,8 @@ class NewVersionFoundBanner extends StatelessWidget {
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
                         Uri url = Uri.parse(
-                            '${sharedEnv.webUrl}/release-notes#${latestVersion.version}');
+                          '${sharedEnv.webUrl}/release-notes#${latestVersion.version}',
+                        );
                         if (await canLaunchUrl(url)) {
                           await launchUrl(url);
                         } else {

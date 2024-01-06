@@ -227,7 +227,7 @@ class Configuration {
     return pref?.boolValue;
   }
 
-  void _setBool(String key, bool value) async {
+  Future<void> _setBool(String key, bool value) async {
     localDb //
         .preference(key)
         .updateOrCreate(

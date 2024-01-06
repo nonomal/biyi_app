@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class WordPronunciationView extends StatelessWidget {
   const WordPronunciationView(
     this.wordPronunciation, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final WordPronunciation wordPronunciation;
 
@@ -33,7 +33,7 @@ class WordPronunciationView extends StatelessWidget {
                 if ((wordPronunciation.phoneticSymbol ?? '').isNotEmpty)
                   TextSpan(
                     text: '[${wordPronunciation.phoneticSymbol}]',
-                  )
+                  ),
               ],
             ),
             style: textTheme.bodySmall!.copyWith(

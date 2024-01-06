@@ -5,10 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 class LanguageFlagView extends StatelessWidget {
   const LanguageFlagView(
     this.language, {
-    Key? key,
+    super.key,
     this.size = 22,
     this.borderColor,
-  }) : super(key: key);
+  });
 
   final String language;
   final double size;

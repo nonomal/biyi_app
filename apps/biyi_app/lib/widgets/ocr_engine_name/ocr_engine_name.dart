@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 class OcrEngineName extends StatelessWidget {
   const OcrEngineName(
     this.ocrEngineConfig, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final OcrEngineConfig ocrEngineConfig;
 
@@ -22,7 +22,7 @@ class OcrEngineName extends StatelessWidget {
               fontSize: 12,
               color: Colors.grey,
             ),
-          )
+          ),
         ],
       ),
     );

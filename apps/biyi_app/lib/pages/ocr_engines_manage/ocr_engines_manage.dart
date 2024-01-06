@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:reorderables/reorderables.dart';
 
 class OcrEnginesManagePage extends StatefulWidget {
-  const OcrEnginesManagePage({Key? key}) : super(key: key);
+  const OcrEnginesManagePage({super.key});
 
   @override
   State<StatefulWidget> createState() => _OcrEnginesManagePageState();
@@ -107,29 +107,31 @@ class _OcrEnginesManagePageState extends State<OcrEnginesManagePage> {
               ReorderableWidget(
                 reorderable: true,
                 key: ValueKey(i),
-                child: Builder(builder: (_) {
-                  final item = _privateOcrEngineList[i];
-                  return PreferenceListSwitchItem(
-                    icon: OcrEngineIcon(item.type),
-                    title: OcrEngineName(item),
-                    value: !item.disabled,
-                    onChanged: (newValue) {
-                      localDb //
-                          .privateOcrEngine(item.identifier)
-                          .update(disabled: !item.disabled);
-                    },
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => OcrEngineCreateOrEditPage(
-                            ocrEngineConfig: item,
+                child: Builder(
+                  builder: (_) {
+                    final item = _privateOcrEngineList[i];
+                    return PreferenceListSwitchItem(
+                      icon: OcrEngineIcon(item.type),
+                      title: OcrEngineName(item),
+                      value: !item.disabled,
+                      onChanged: (newValue) {
+                        localDb //
+                            .privateOcrEngine(item.identifier)
+                            .update(disabled: !item.disabled);
+                      },
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => OcrEngineCreateOrEditPage(
+                              ocrEngineConfig: item,
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                  );
-                }),
-              )
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
           ],
         ),
         PreferenceListItem(
@@ -141,7 +143,7 @@ class _OcrEnginesManagePageState extends State<OcrEnginesManagePage> {
           ),
           accessoryView: Container(),
           onTap: _handleClickAdd,
-        )
+        ),
       ],
     );
   }

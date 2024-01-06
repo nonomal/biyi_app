@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class TranslationTargetNewPage extends StatefulWidget {
   const TranslationTargetNewPage({
-    Key? key,
+    super.key,
     this.translationTarget,
-  }) : super(key: key);
+  });
 
   final TranslationTarget? translationTarget;
 
@@ -28,7 +28,7 @@ class _TranslationTargetNewPageState extends State<TranslationTargetNewPage> {
     super.initState();
   }
 
-  void _handleClickOk() async {
+  Future<void> _handleClickOk() async {
     await localDb //
         .translationTarget(widget.translationTarget?.id)
         .updateOrCreate(

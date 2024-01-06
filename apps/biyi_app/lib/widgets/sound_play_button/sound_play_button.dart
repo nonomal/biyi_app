@@ -10,9 +10,9 @@ const _kIconSize = 16.0;
 
 class SoundPlayButton extends StatefulWidget {
   const SoundPlayButton({
-    Key? key,
+    super.key,
     required this.audioUrl,
-  }) : super(key: key);
+  });
 
   final String audioUrl;
 
@@ -67,13 +67,13 @@ class _SoundPlayButtonState extends State<SoundPlayButton>
     _playingAnimImageIndex = 0;
   }
 
-  void _handleClickPlay() async {
+  Future<void> _handleClickPlay() async {
     _audioSource ??= UrlSource(widget.audioUrl);
     await globalAudioPlayer.play(_audioSource!);
     _startPlayingAnimTimer();
   }
 
-  void _handleClickStop() async {
+  Future<void> _handleClickStop() async {
     await globalAudioPlayer.stop();
     _stopPlayingAnimTimer();
     if (mounted) setState(() {});

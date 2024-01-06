@@ -9,12 +9,12 @@ const kDialogActionTypeDanger = 'danger';
 // ignore: must_be_immutable
 class CustomDialogAction extends StatelessWidget {
   CustomDialogAction({
-    Key? key,
+    super.key,
     this.type,
     this.processing = false,
     required this.child,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   String? type;
   final bool processing;
@@ -39,11 +39,11 @@ class CustomDialogAction extends StatelessWidget {
 
 class CustomAlertDialog extends StatelessWidget {
   const CustomAlertDialog({
-    Key? key,
+    super.key,
     this.title,
     this.content,
     this.actions,
-  }) : super(key: key);
+  });
   final Widget? title;
   final Widget? content;
   final List<Widget>? actions;

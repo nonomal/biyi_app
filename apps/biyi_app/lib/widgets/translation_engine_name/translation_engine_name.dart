@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 class TranslationEngineName extends StatelessWidget {
   const TranslationEngineName(
     this.translationEngineConfig, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final TranslationEngineConfig translationEngineConfig;
 
@@ -22,7 +22,7 @@ class TranslationEngineName extends StatelessWidget {
               fontSize: 12,
               color: Colors.grey,
             ),
-          )
+          ),
         ],
       ),
     );

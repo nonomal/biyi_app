@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 class TranslationResultView extends StatelessWidget {
   const TranslationResultView(
     this.translationResult, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final TranslationResult translationResult;
 

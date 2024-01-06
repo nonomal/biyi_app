@@ -13,11 +13,11 @@ const List<String> _kAllScopes = [
 
 class TranslationEngineCreateOrEditPage extends StatefulWidget {
   const TranslationEngineCreateOrEditPage({
-    Key? key,
+    super.key,
     this.editable = true,
     this.engineType,
     this.engineConfig,
-  }) : super(key: key);
+  });
 
   final bool editable;
   final String? engineType;

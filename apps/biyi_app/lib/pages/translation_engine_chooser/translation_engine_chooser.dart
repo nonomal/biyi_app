@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 class TranslationEngineChooserPage extends StatefulWidget {
   const TranslationEngineChooserPage({
-    Key? key,
+    super.key,
     this.initialEngineConfig,
     this.onChoosed,
-  }) : super(key: key);
+  });
 
   final TranslationEngineConfig? initialEngineConfig;
   final ValueChanged<TranslationEngineConfig>? onChoosed;
@@ -41,7 +41,7 @@ class _TranslationEngineChooserPageState
     });
   }
 
-  void _handleClickOk() async {
+  Future<void> _handleClickOk() async {
     if (widget.onChoosed != null) {
       TranslationEngineConfig? engineConfig = localDb.engine(_identifier).get();
       widget.onChoosed!(engineConfig!);

@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 class WordPhraseView extends StatelessWidget {
   const WordPhraseView(
     this.wordPhrase, {
-    Key? key,
+    super.key,
     required this.onTextTapped,
-  }) : super(key: key);
+  });
 
   final WordPhrase wordPhrase;
   final ValueChanged<String> onTextTapped;

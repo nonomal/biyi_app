@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 class LanguageLabel extends StatelessWidget {
   const LanguageLabel(
     this.language, {
-    Key? key,
+    super.key,
     this.flagSize = 22,
     this.flagBorderColor,
     this.style,
-  }) : super(key: key);
+  });
 
   final String language;
   final double flagSize;

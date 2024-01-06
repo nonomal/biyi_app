@@ -2,7 +2,7 @@ import 'package:biyi_app/includes.dart';
 import 'package:flutter/material.dart';
 
 class DesktopSettingsPage extends StatefulWidget {
-  const DesktopSettingsPage({Key? key, this.onDismiss}) : super(key: key);
+  const DesktopSettingsPage({super.key, this.onDismiss});
 
   final VoidCallback? onDismiss;
 

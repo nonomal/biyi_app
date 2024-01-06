@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class SettingThemeModePage extends StatefulWidget {
   const SettingThemeModePage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<StatefulWidget> createState() => _SettingThemeModePageState();

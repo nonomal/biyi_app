@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' as md;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rise_ui/rise_ui.dart';
 
 const _kDefaultTextColor = Color(0xff333333);
 
@@ -14,8 +16,8 @@ const _kDefaultTextStyle = TextStyle(
   fontFamily: 'MiSans',
 );
 
-final lightThemeData = ThemeData(
-  colorScheme: ColorScheme.fromSeed(
+final lightThemeData = md.ThemeData(
+  colorScheme: md.ColorScheme.fromSeed(
     brightness: Brightness.light,
     seedColor: _kPrimaryColor,
     primary: _kPrimaryColor,
@@ -27,7 +29,7 @@ final lightThemeData = ThemeData(
   dividerColor: Colors.grey.withOpacity(0.2),
   dialogBackgroundColor: _kCanvasColor,
   fontFamily: 'MiSans',
-  textTheme: TextTheme(
+  textTheme: md.TextTheme(
     titleLarge: _kDefaultTextStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.w600,
@@ -51,7 +53,7 @@ final lightThemeData = ThemeData(
       fontSize: 12,
     ),
   ),
-  appBarTheme: AppBarTheme(
+  appBarTheme: md.AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle.dark,
     color: _kCanvasColor,
     elevation: 0,
@@ -73,4 +75,11 @@ final lightThemeData = ThemeData(
     primaryColor: _kPrimaryColor,
     barBackgroundColor: _kCanvasColor,
   ),
+  extensions: const [
+    ExtendedThemeData(
+      brightness: Brightness.light,
+      primaryColor: ExtendedColors.indigo,
+    ),
+    kLightNavigationRailThemeDefaults,
+  ],
 );

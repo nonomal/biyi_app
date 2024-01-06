@@ -62,14 +62,11 @@ dev_dependencies:
   dependency_validator: ^3.0.0
   flutter_test:
     sdk: flutter
+  mostly_reasonable_lints: ^0.1.1
 
 dependency_overrides:
-  # biyi_advanced_features:
-  #   path: ../../../biyi_advanced_features
-  dart_openai:
-    git:
-      ref: fix/stream-mode-error-handling
-      url: https://github.com/biyidev/openai.git
+  rise_ui:
+    path: ../../../../leanflutter/rise_ui/packages/rise_ui
 
 flutter:
   uses-material-design: false

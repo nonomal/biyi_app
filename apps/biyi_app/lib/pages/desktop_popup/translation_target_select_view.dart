@@ -30,32 +30,34 @@ class _AvailableLanguageSelector extends StatelessWidget {
             Container(
               margin: EdgeInsets.zero,
               height: 28,
-              child: Builder(builder: (_) {
-                bool isSelected = value == supportedLanguage;
-                EdgeInsets padding = const EdgeInsets.only(left: 6, right: 6);
-                Widget child = LanguageLabel(
-                  supportedLanguage,
-                  flagSize: 18,
-                  style: TextStyle(
-                    color: !isSelected ? null : Colors.white,
-                  ),
-                );
+              child: Builder(
+                builder: (_) {
+                  bool isSelected = value == supportedLanguage;
+                  EdgeInsets padding = const EdgeInsets.only(left: 6, right: 6);
+                  Widget child = LanguageLabel(
+                    supportedLanguage,
+                    flagSize: 18,
+                    style: TextStyle(
+                      color: !isSelected ? null : Colors.white,
+                    ),
+                  );
 
-                return isSelected
-                    ? CustomButton.filled(
-                        padding: padding,
-                        borderRadius: BorderRadius.circular(2),
-                        onPressed: () => onChanged(supportedLanguage),
-                        child: child,
-                      )
-                    : CustomButton.outlined(
-                        padding: padding,
-                        color: Theme.of(context).dividerColor,
-                        borderRadius: BorderRadius.circular(2),
-                        onPressed: () => onChanged(supportedLanguage),
-                        child: child,
-                      );
-              }),
+                  return isSelected
+                      ? CustomButton.filled(
+                          padding: padding,
+                          borderRadius: BorderRadius.circular(2),
+                          onPressed: () => onChanged(supportedLanguage),
+                          child: child,
+                        )
+                      : CustomButton.outlined(
+                          padding: padding,
+                          color: Theme.of(context).dividerColor,
+                          borderRadius: BorderRadius.circular(2),
+                          onPressed: () => onChanged(supportedLanguage),
+                          child: child,
+                        );
+                },
+              ),
             ),
         ],
       ),
@@ -65,7 +67,7 @@ class _AvailableLanguageSelector extends StatelessWidget {
 
 class TranslationTargetSelectView extends StatefulWidget {
   const TranslationTargetSelectView({
-    Key? key,
+    super.key,
     // this.viewKey,
     required this.translationMode,
     required this.isShowSourceLanguageSelector,
@@ -75,7 +77,7 @@ class TranslationTargetSelectView extends StatefulWidget {
     required this.sourceLanguage,
     required this.targetLanguage,
     required this.onChanged,
-  }) : super(key: key);
+  });
   // final Key viewKey;
   final String translationMode;
   final bool isShowSourceLanguageSelector;
@@ -176,7 +178,8 @@ class _TranslationTargetSelectViewState
                     ),
                     onPressed: () {
                       widget.onToggleShowSourceLanguageSelector(
-                          !widget.isShowSourceLanguageSelector);
+                        !widget.isShowSourceLanguageSelector,
+                      );
                     },
                   ),
                   SizedBox(
@@ -249,7 +252,8 @@ class _TranslationTargetSelectViewState
                     ),
                     onPressed: () {
                       widget.onToggleShowTargetLanguageSelector(
-                          !widget.isShowTargetLanguageSelector);
+                        !widget.isShowTargetLanguageSelector,
+                      );
                     },
                   ),
                 ],

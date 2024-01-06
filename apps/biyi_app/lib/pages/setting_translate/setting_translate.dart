@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 
 class SettingTranslatePage extends StatefulWidget {
   const SettingTranslatePage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<StatefulWidget> createState() => _SettingTranslatePageState();
@@ -54,14 +54,16 @@ class _SettingTranslatePageState extends State<SettingTranslatePage> {
                   : TranslationEngineIcon(
                       _configuration.defaultTranslateEngineConfig!.type,
                     ),
-              title: Builder(builder: (_) {
-                if (_configuration.defaultTranslateEngineConfig == null) {
-                  return Text('please_choose'.tr());
-                }
-                return TranslationEngineName(
-                  _configuration.defaultTranslateEngineConfig!,
-                );
-              }),
+              title: Builder(
+                builder: (_) {
+                  if (_configuration.defaultTranslateEngineConfig == null) {
+                    return Text('please_choose'.tr());
+                  }
+                  return TranslationEngineName(
+                    _configuration.defaultTranslateEngineConfig!,
+                  );
+                },
+              ),
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -106,14 +108,16 @@ class _SettingTranslatePageState extends State<SettingTranslatePage> {
                     : TranslationEngineIcon(
                         _configuration.defaultEngineConfig!.type,
                       ),
-                title: Builder(builder: (_) {
-                  if (_configuration.defaultEngineConfig == null) {
-                    return Text('please_choose'.tr());
-                  }
-                  return TranslationEngineName(
-                    _configuration.defaultEngineConfig!,
-                  );
-                }),
+                title: Builder(
+                  builder: (_) {
+                    if (_configuration.defaultEngineConfig == null) {
+                      return Text('please_choose'.tr());
+                    }
+                    return TranslationEngineName(
+                      _configuration.defaultEngineConfig!,
+                    );
+                  },
+                ),
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -182,7 +186,7 @@ class _SettingTranslatePageState extends State<SettingTranslatePage> {
                     ),
                   );
                 },
-              )
+              ),
             ],
           ),
         PreferenceListSection(

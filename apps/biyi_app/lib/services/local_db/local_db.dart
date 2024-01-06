@@ -146,13 +146,14 @@ class LocalDb {
       try {
         if (await kDefaultBuiltInOcrEngine.isSupportedOnCurrentPlatform()) {
           newProOcrEngineList.insert(
-              0,
-              OcrEngineConfig(
-                identifier: kDefaultBuiltInOcrEngine.identifier,
-                type: kDefaultBuiltInOcrEngine.type,
-                option: kDefaultBuiltInOcrEngine.option ?? {},
-                disabled: true,
-              ));
+            0,
+            OcrEngineConfig(
+              identifier: kDefaultBuiltInOcrEngine.identifier,
+              type: kDefaultBuiltInOcrEngine.type,
+              option: kDefaultBuiltInOcrEngine.option ?? {},
+              disabled: true,
+            ),
+          );
         }
       } catch (error) {
         // skip error

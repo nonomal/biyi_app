@@ -4,9 +4,9 @@ import 'package:window_manager/window_manager.dart';
 
 class ModalBottomSheetWrapped extends StatefulWidget {
   const ModalBottomSheetWrapped({
-    Key? key,
+    super.key,
     required this.child,
-  }) : super(key: key);
+  });
 
   final Widget child;
 

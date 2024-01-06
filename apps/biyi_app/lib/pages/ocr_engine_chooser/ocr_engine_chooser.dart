@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 class OcrEngineChooserPage extends StatefulWidget {
   const OcrEngineChooserPage({
-    Key? key,
+    super.key,
     this.initialOcrEngineConfig,
     this.onChoosed,
-  }) : super(key: key);
+  });
 
   final OcrEngineConfig? initialOcrEngineConfig;
   final ValueChanged<OcrEngineConfig>? onChoosed;
@@ -36,7 +36,7 @@ class _OcrEngineChooserPageState extends State<OcrEngineChooserPage> {
     });
   }
 
-  void _handleClickOk() async {
+  Future<void> _handleClickOk() async {
     if (widget.onChoosed != null) {
       OcrEngineConfig? ocrEngineConfig = localDb.ocrEngine(_identifier).get();
       widget.onChoosed!(ocrEngineConfig!);

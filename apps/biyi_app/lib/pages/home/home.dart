@@ -20,7 +20,7 @@ class _TabBarItem extends BottomNavigationBarItem {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<StatefulWidget> createState() => _HomePageState();
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage>
   }
 
   Widget _buildBottomNavigationBar(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         boxShadow: Theme.of(context).brightness == Brightness.light
             ? [

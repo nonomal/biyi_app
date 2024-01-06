@@ -8,12 +8,12 @@ export './custom_app_bar_close_button.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
-    Key? key,
+    super.key,
     this.leading,
     this.automaticallyImplyLeading = true,
     this.title,
     this.actions,
-  }) : super(key: key);
+  });
 
   final Widget? leading;
   final bool automaticallyImplyLeading;
@@ -43,7 +43,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: title,
       actions: actions,
     );
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(

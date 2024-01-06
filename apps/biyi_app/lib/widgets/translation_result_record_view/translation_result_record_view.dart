@@ -19,11 +19,11 @@ import 'package:uni_translate_client/uni_translate_client.dart';
 
 class TranslationResultRecordView extends StatelessWidget {
   const TranslationResultRecordView({
-    Key? key,
+    super.key,
     required this.translationResult,
     required this.translationResultRecord,
     required this.onTextTapped,
-  }) : super(key: key);
+  });
 
   final TranslationResult translationResult;
   final TranslationResultRecord translationResultRecord;
@@ -160,7 +160,7 @@ class TranslationResultRecordView extends StatelessWidget {
               children: [
                 TextSpan(text: textTranslation.text),
                 if (_isGenerating)
-                  WidgetSpan(
+                  const WidgetSpan(
                     child: GeneratingCursor(),
                     alignment: PlaceholderAlignment.middle,
                   ),
@@ -201,7 +201,7 @@ class TranslationResultRecordView extends StatelessWidget {
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: <Widget>[
                   for (WordPronunciation wordPronunciation in pronunciations!)
-                    WordPronunciationView(wordPronunciation)
+                    WordPronunciationView(wordPronunciation),
                 ],
               ),
             ),
@@ -223,7 +223,8 @@ class TranslationResultRecordView extends StatelessWidget {
                           if ((definitions[i].name ?? '').isNotEmpty)
                             const TextSpan(text: ' '),
                           TextSpan(
-                              text: (definitions[i].values ?? []).join('；')),
+                            text: (definitions[i].values ?? []).join('；'),
+                          ),
                           if (i < definitions.length - 1)
                             const TextSpan(text: '\n'),
                         ],

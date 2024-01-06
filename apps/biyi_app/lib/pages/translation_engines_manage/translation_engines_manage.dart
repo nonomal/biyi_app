@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:reorderables/reorderables.dart';
 
 class TranslationEnginesManagePage extends StatefulWidget {
-  const TranslationEnginesManagePage({Key? key}) : super(key: key);
+  const TranslationEnginesManagePage({super.key});
 
   @override
   State<StatefulWidget> createState() => _TranslationEnginesManagePageState();
@@ -109,29 +109,31 @@ class _TranslationEnginesManagePageState
               ReorderableWidget(
                 reorderable: true,
                 key: ValueKey(i),
-                child: Builder(builder: (_) {
-                  final item = _privateEngineList[i];
-                  return PreferenceListSwitchItem(
-                    icon: TranslationEngineIcon(item.type),
-                    title: TranslationEngineName(item),
-                    value: !item.disabled,
-                    onChanged: (newValue) {
-                      localDb //
-                          .privateEngine(item.identifier)
-                          .update(disabled: !item.disabled);
-                    },
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => TranslationEngineCreateOrEditPage(
-                            engineConfig: item,
+                child: Builder(
+                  builder: (_) {
+                    final item = _privateEngineList[i];
+                    return PreferenceListSwitchItem(
+                      icon: TranslationEngineIcon(item.type),
+                      title: TranslationEngineName(item),
+                      value: !item.disabled,
+                      onChanged: (newValue) {
+                        localDb //
+                            .privateEngine(item.identifier)
+                            .update(disabled: !item.disabled);
+                      },
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => TranslationEngineCreateOrEditPage(
+                              engineConfig: item,
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                  );
-                }),
-              )
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
           ],
         ),
         PreferenceListItem(
@@ -143,7 +145,7 @@ class _TranslationEnginesManagePageState
           ),
           accessoryView: Container(),
           onTap: _handleClickAdd,
-        )
+        ),
       ],
     );
   }

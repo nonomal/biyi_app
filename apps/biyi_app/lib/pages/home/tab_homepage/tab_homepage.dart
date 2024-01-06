@@ -2,7 +2,7 @@ import 'package:biyi_app/includes.dart';
 import 'package:flutter/material.dart';
 
 class TabHomepageScene extends StatefulWidget {
-  const TabHomepageScene({Key? key}) : super(key: key);
+  const TabHomepageScene({super.key});
 
   @override
   State<StatefulWidget> createState() => _TabHomepageSceneState();

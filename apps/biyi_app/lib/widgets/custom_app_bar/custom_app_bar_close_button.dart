@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class CustomAppBarCloseButton extends StatelessWidget {
   const CustomAppBarCloseButton({
-    Key? key,
+    super.key,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   final VoidCallback? onPressed;
 

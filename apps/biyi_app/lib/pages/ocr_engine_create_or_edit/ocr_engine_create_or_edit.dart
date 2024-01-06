@@ -7,11 +7,11 @@ import 'package:shortid/shortid.dart';
 
 class OcrEngineCreateOrEditPage extends StatefulWidget {
   const OcrEngineCreateOrEditPage({
-    Key? key,
+    super.key,
     this.editable = true,
     this.ocrEngineType,
     this.ocrEngineConfig,
-  }) : super(key: key);
+  });
 
   final bool editable;
   final String? ocrEngineType;
@@ -60,7 +60,7 @@ class _OcrEngineCreateOrEditPageState extends State<OcrEngineCreateOrEditPage> {
     super.initState();
   }
 
-  void _handleClickOk() async {
+  Future<void> _handleClickOk() async {
     await localDb //
         .privateOcrEngine(_identifier)
         .updateOrCreate(

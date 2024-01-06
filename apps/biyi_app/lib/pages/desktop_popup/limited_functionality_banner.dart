@@ -64,11 +64,11 @@ class _AllowAccessListItem extends StatelessWidget {
 
 class LimitedFunctionalityBanner extends StatelessWidget {
   const LimitedFunctionalityBanner({
-    Key? key,
+    super.key,
     required this.isAllowedScreenCaptureAccess,
     required this.isAllowedScreenSelectionAccess,
     required this.onTappedRecheckIsAllowedAllAccess,
-  }) : super(key: key);
+  });
   final bool isAllowedScreenCaptureAccess;
   final bool isAllowedScreenSelectionAccess;
   final VoidCallback onTappedRecheckIsAllowedAllAccess;
@@ -214,7 +214,7 @@ class LimitedFunctionalityBanner extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

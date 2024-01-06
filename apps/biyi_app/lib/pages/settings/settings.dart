@@ -10,7 +10,7 @@ import 'package:tray_manager/tray_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key? key, this.onDismiss}) : super(key: key);
+  const SettingsPage({super.key, this.onDismiss});
 
   final VoidCallback? onDismiss;
 
@@ -50,7 +50,7 @@ class _SettingsPageState extends State<SettingsPage> {
     if (mounted) setState(() {});
   }
 
-  void _init() async {
+  Future<void> _init() async {
     // if (kIsMacOS || kIsWindows) {
     //   _launchAtStartupIsEnabled = await launchAtStartup.isEnabled();
     // }
@@ -155,9 +155,13 @@ class _SettingsPageState extends State<SettingsPage> {
             PreferenceListRadioItem<String>(
               value: kInputSettingSubmitWithMetaEnter,
               groupValue: _configuration.inputSetting,
-              title: Text(t(kIsMacOS
-                  ? 'pref_item_title_submit_with_meta_enter_mac'
-                  : 'pref_item_title_submit_with_meta_enter')),
+              title: Text(
+                t(
+                  kIsMacOS
+                      ? 'pref_item_title_submit_with_meta_enter_mac'
+                      : 'pref_item_title_submit_with_meta_enter',
+                ),
+              ),
               onChanged: (newValue) {
                 _configuration.inputSetting = newValue;
               },
@@ -294,10 +298,13 @@ class _SettingsPageState extends State<SettingsPage> {
                 bottom: 20,
               ),
               child: Text(
-                t('text_version', args: [
-                  sharedEnv.appVersion,
-                  '${sharedEnv.appBuildNumber}',
-                ]),
+                t(
+                  'text_version',
+                  args: [
+                    sharedEnv.appVersion,
+                    '${sharedEnv.appBuildNumber}',
+                  ],
+                ),
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ),

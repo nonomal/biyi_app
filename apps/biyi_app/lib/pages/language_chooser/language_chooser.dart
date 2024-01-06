@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 
 class LanguageChooserPage extends StatefulWidget {
   const LanguageChooserPage({
-    Key? key,
+    super.key,
     this.initialLanguage,
     this.onChoosed,
-  }) : super(key: key);
+  });
 
   final String? initialLanguage;
   final ValueChanged<String>? onChoosed;
@@ -25,7 +25,7 @@ class _LanguageChooserPageState extends State<LanguageChooserPage> {
     super.initState();
   }
 
-  void _handleClickOk() async {
+  Future<void> _handleClickOk() async {
     widget.onChoosed?.call(_language!);
 
     Navigator.of(context).pop();

@@ -20,3 +20,4 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mostly_reasonable_lints: ^0.1.1

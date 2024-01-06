@@ -4,13 +4,15 @@ import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' as md;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:rise_ui/rise_ui.dart';
 import 'package:screen_capturer/screen_capturer.dart';
 
 class TranslationInputView extends StatelessWidget {
   const TranslationInputView({
-    Key? key,
+    super.key,
     required this.focusNode,
     required this.controller,
     required this.onChanged,
@@ -23,7 +25,7 @@ class TranslationInputView extends StatelessWidget {
     required this.onClickExtractTextFromClipboard,
     required this.onButtonTappedClear,
     required this.onButtonTappedTrans,
-  }) : super(key: key);
+  });
 
   final FocusNode focusNode;
   final TextEditingController controller;
@@ -47,10 +49,12 @@ class TranslationInputView extends StatelessWidget {
   Widget _buildToolbarItems(BuildContext context) {
     return Row(
       children: [
-        Tooltip(
-          message: 'page_desktop_popup.tip_translation_mode'.tr(args: [
-            'translation_mode.$translationMode'.tr(),
-          ]),
+        md.Tooltip(
+          message: 'page_desktop_popup.tip_translation_mode'.tr(
+            args: [
+              'translation_mode.$translationMode'.tr(),
+            ],
+          ),
           child: SizedBox(
             width: 30,
             height: 26,
@@ -122,11 +126,11 @@ class TranslationInputView extends StatelessWidget {
         ),
         const SizedBox(
           height: 20,
-          child: VerticalDivider(
+          child: md.VerticalDivider(
             width: 8,
           ),
         ),
-        Tooltip(
+        md.Tooltip(
           message:
               'page_desktop_popup.tip_extract_text_from_screen_capture'.tr(),
           child: SizedBox(
@@ -143,7 +147,7 @@ class TranslationInputView extends StatelessWidget {
             ),
           ),
         ),
-        Tooltip(
+        md.Tooltip(
           message: 'page_desktop_popup.tip_extract_text_from_clipboard'.tr(),
           child: SizedBox(
             width: 30,
@@ -180,17 +184,15 @@ class TranslationInputView extends StatelessWidget {
           constraints: const BoxConstraints(
             minWidth: 56,
           ),
-          child: CustomButton.outlined(
+          child: Button(
+            variant: ButtonVariant.outline,
+            label: 'page_desktop_popup.btn_clear'.tr(),
             padding: const EdgeInsets.only(
               left: 12,
               right: 12,
             ),
-            borderRadius: BorderRadius.circular(2),
+            size: ButtonSize.small,
             onPressed: onButtonTappedClear,
-            child: Text(
-              'page_desktop_popup.btn_clear'.tr(),
-              style: const TextStyle(fontSize: 12),
-            ),
           ),
         ),
         const SizedBox(width: 10),
@@ -199,17 +201,15 @@ class TranslationInputView extends StatelessWidget {
           constraints: const BoxConstraints(
             minWidth: 56,
           ),
-          child: CustomButton.filled(
+          child: Button(
+            variant: ButtonVariant.filled,
+            label: 'page_desktop_popup.btn_trans'.tr(),
             padding: const EdgeInsets.only(
               left: 12,
               right: 12,
             ),
-            borderRadius: BorderRadius.circular(2),
+            size: ButtonSize.small,
             onPressed: onButtonTappedTrans,
-            child: Text(
-              'page_desktop_popup.btn_trans'.tr(),
-              style: const TextStyle(fontSize: 12),
-            ),
           ),
         ),
       ],
@@ -218,7 +218,7 @@ class TranslationInputView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
+    md.TextTheme textTheme = md.Theme.of(context).textTheme;
     return Container(
       margin: const EdgeInsets.only(
         left: 12,
@@ -226,7 +226,7 @@ class TranslationInputView extends StatelessWidget {
         top: 0,
         bottom: 12,
       ),
-      child: Container(
+      child: DecoratedBox(
         decoration: BoxDecoration(
           color: Theme.of(context).canvasColor,
           borderRadius: BorderRadius.circular(2),
@@ -310,7 +310,7 @@ class TranslationInputView extends StatelessWidget {
                 ],
               ),
             ),
-            const Divider(
+            const md.Divider(
               height: 0,
               indent: 12,
               endIndent: 12,

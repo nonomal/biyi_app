@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class WordTranslationView extends StatefulWidget {
   const WordTranslationView(
     this.wordTranslation, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final TextTranslation wordTranslation;
 
   @override

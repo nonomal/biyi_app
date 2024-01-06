@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class WordTagView extends StatelessWidget {
   const WordTagView(
     this.wordTag, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final WordTag wordTag;
 
