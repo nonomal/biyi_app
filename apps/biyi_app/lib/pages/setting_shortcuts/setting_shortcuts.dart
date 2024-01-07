@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:rise_ui/rise_ui.dart';
 
-class _HotKeyDisplayView extends StatelessWidget {
-  const _HotKeyDisplayView(
+class HotKeyDisplayView extends StatelessWidget {
+  const HotKeyDisplayView(
     this.hotKey, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final HotKey hotKey;
 
@@ -100,7 +100,7 @@ class _SettingShortcutsPageState extends State<SettingShortcutsPage> {
           children: [
             PreferenceListItem(
               title: Text(t('pref_item_title_show_or_hide')),
-              detailText: _HotKeyDisplayView(
+              detailText: HotKeyDisplayView(
                 _configuration.shortcutShowOrHide,
               ),
               onTap: () {
@@ -112,7 +112,7 @@ class _SettingShortcutsPageState extends State<SettingShortcutsPage> {
             ),
             PreferenceListItem(
               title: Text(t('pref_item_title_hide')),
-              detailText: _HotKeyDisplayView(
+              detailText: HotKeyDisplayView(
                 _configuration.shortcutHide,
               ),
               onTap: () {
@@ -130,7 +130,7 @@ class _SettingShortcutsPageState extends State<SettingShortcutsPage> {
           children: [
             PreferenceListItem(
               title: Text(t('pref_item_title_extract_text_from_selection')),
-              detailText: _HotKeyDisplayView(
+              detailText: HotKeyDisplayView(
                 _configuration.shortcutExtractFromScreenSelection,
               ),
               onTap: () {
@@ -143,7 +143,7 @@ class _SettingShortcutsPageState extends State<SettingShortcutsPage> {
             if (!kIsLinux)
               PreferenceListItem(
                 title: Text(t('pref_item_title_extract_text_from_capture')),
-                detailText: _HotKeyDisplayView(
+                detailText: HotKeyDisplayView(
                   _configuration.shortcutExtractFromScreenCapture,
                 ),
                 onTap: () {
@@ -155,7 +155,7 @@ class _SettingShortcutsPageState extends State<SettingShortcutsPage> {
               ),
             PreferenceListItem(
               title: Text(t('pref_item_title_extract_text_from_clipboard')),
-              detailText: _HotKeyDisplayView(
+              detailText: HotKeyDisplayView(
                 _configuration.shortcutExtractFromClipboard,
               ),
               onTap: () {
@@ -173,7 +173,7 @@ class _SettingShortcutsPageState extends State<SettingShortcutsPage> {
             children: [
               PreferenceListItem(
                 title: Text(t('pref_item_title_translate_input_content')),
-                detailText: _HotKeyDisplayView(
+                detailText: HotKeyDisplayView(
                   _configuration.shortcutTranslateInputContent,
                 ),
                 onTap: () {

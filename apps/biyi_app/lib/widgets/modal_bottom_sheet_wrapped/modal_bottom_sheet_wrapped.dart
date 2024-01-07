@@ -66,6 +66,7 @@ Future<T?> showModalBottomSheetPage<T>({
     await windowManager.setSize(Size(size.width, 680.0));
   }
 
+  // ignore: use_build_context_synchronously
   return showModalBottomSheet<T>(
     context: context,
     shape: const RoundedRectangleBorder(

@@ -8,14 +8,14 @@ import 'package:screen_capturer/screen_capturer.dart';
 import 'package:screen_text_extractor/screen_text_extractor.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class _AllowAccessListItem extends StatelessWidget {
-  const _AllowAccessListItem({
-    Key? key,
+class AllowAccessListItem extends StatelessWidget {
+  const AllowAccessListItem({
+    super.key,
     required this.title,
     required this.allowed,
     this.onTappedTryAllow,
     this.onTappedGoSettings,
-  }) : super(key: key);
+  });
 
   final String title;
   final bool allowed;
@@ -116,7 +116,7 @@ class LimitedFunctionalityBanner extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (kIsMacOS)
-                    _AllowAccessListItem(
+                    AllowAccessListItem(
                       title:
                           'page_desktop_popup.limited_banner_text_screen_capture'
                               .tr(),
@@ -138,7 +138,7 @@ class LimitedFunctionalityBanner extends StatelessWidget {
                       },
                     ),
                   if (kIsMacOS)
-                    _AllowAccessListItem(
+                    AllowAccessListItem(
                       title:
                           'page_desktop_popup.limited_banner_text_screen_selection'
                               .tr(),

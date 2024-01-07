@@ -36,6 +36,7 @@ class _TranslationTargetNewPageState extends State<TranslationTargetNewPage> {
           targetLanguage: _targetLanguage,
         );
 
+    // ignore: use_build_context_synchronously
     Navigator.of(context).pop();
   }
 
@@ -113,6 +114,7 @@ class _TranslationTargetNewPageState extends State<TranslationTargetNewPage> {
                       .translationTarget(widget.translationTarget?.id)
                       .delete();
 
+                  // ignore: use_build_context_synchronously
                   Navigator.of(context).pop();
                 },
               ),

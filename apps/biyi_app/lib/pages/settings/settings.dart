@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/includes.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:tray_manager/tray_manager.dart';
@@ -114,7 +113,7 @@ class _SettingsPageState extends State<SettingsPage> {
             PreferenceListItem(
               title: Text(t('pref_item_title_theme_mode')),
               detailText: Text(
-                'theme_mode.${describeEnum(_configuration.themeMode)}'.tr(),
+                'theme_mode.${_configuration.themeMode.name}'.tr(),
               ),
               onTap: () {
                 Navigator.of(context).push(

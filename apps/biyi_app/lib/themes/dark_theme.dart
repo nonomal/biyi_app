@@ -85,6 +85,5 @@ final darkThemeData = md.ThemeData(
       brightness: Brightness.light,
       primaryColor: ExtendedColors.indigo,
     ),
-    kDarkNavigationRailThemeDefaults,
   ],
 );

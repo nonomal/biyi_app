@@ -5,12 +5,12 @@ import 'package:biyi_app/includes.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
-class _AvailableLanguageSelector extends StatelessWidget {
-  const _AvailableLanguageSelector({
-    Key? key,
+class AvailableLanguageSelector extends StatelessWidget {
+  const AvailableLanguageSelector({
+    super.key,
     required this.value,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   final String value;
   final ValueChanged<String> onChanged;
@@ -263,14 +263,14 @@ class _TranslationTargetSelectViewState
                 widget.isShowTargetLanguageSelector)
               const Divider(height: 0, indent: 12, endIndent: 12),
             if (widget.isShowSourceLanguageSelector)
-              _AvailableLanguageSelector(
+              AvailableLanguageSelector(
                 value: widget.sourceLanguage,
                 onChanged: (newLanguage) {
                   _handleChanged(newLanguage, widget.targetLanguage);
                 },
               ),
             if (widget.isShowTargetLanguageSelector)
-              _AvailableLanguageSelector(
+              AvailableLanguageSelector(
                 value: widget.targetLanguage,
                 onChanged: (newLanguage) {
                   _handleChanged(widget.sourceLanguage, newLanguage);
