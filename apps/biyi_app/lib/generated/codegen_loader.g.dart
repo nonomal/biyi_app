@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: prefer_single_quotes, require_trailing_commas
+// ignore_for_file: prefer_single_quotes
 
 import 'dart:ui';
 
@@ -221,17 +221,6 @@ class CodegenLoader extends AssetLoader {
       "pref_section_title_max_window_height": "最大窗口高度（逻辑像素）",
       "pref_item_title_show_tray_icon": "显示托盘图标"
     },
-    "page_setting_shortcuts": {
-      "title": "快捷键",
-      "pref_section_title_extract_text": "屏幕/剪切板取词",
-      "pref_section_title_input_assist_function": "输入辅助功能",
-      "pref_item_title_show_or_hide": "显示/隐藏",
-      "pref_item_title_hide": "隐藏",
-      "pref_item_title_extract_text_from_selection": "选中文字",
-      "pref_item_title_extract_text_from_capture": "截取区域",
-      "pref_item_title_extract_text_from_clipboard": "剪切板",
-      "pref_item_title_translate_input_content": "翻译当前输入框内容"
-    },
     "page_setting_theme_mode": {"title": "主题模式"},
     "page_setting_translate": {
       "title": "翻译",
@@ -304,7 +293,49 @@ class CodegenLoader extends AssetLoader {
       "pref_item_title_get_activation_code": "获取会员计划激活码",
       "msg_plan_pro_coming_soon": "即将推出，敬请期待。"
     },
-    "widget_record_shortcut_dialog": {"title": "自定义快捷键"}
+    "widget_record_shortcut_dialog": {"title": "自定义快捷键"},
+    "app": {
+      "settings": {
+        "_layout": {
+          "navgroup": {
+            "client": "客户端",
+            "integrations": "服务接入",
+            "resources": "资源"
+          }
+        },
+        "about": {"title": "关于"},
+        "advanced": {"title": "高级设置"},
+        "appearance": {"title": "外观"},
+        "changelog": {"title": "变更日志"},
+        "general": {"title": "通用"},
+        "keybinds": {
+          "title": "快捷键",
+          "window": {
+            "show_or_hide": {"title": "显示/隐藏"},
+            "hide": {"title": "隐藏"}
+          },
+          "extract_text": {
+            "title": "屏幕/剪切板取词",
+            "from_selection": {"title": "选中文字"},
+            "from_capture": {"title": "截取区域"},
+            "from_clipboard": {"title": "剪切板"}
+          },
+          "input_assist_function": {
+            "title": "输入辅助功能",
+            "translate_input_content": {"title": "翻译当前输入框内容"}
+          }
+        },
+        "language": {"title": "语言"},
+        "text_detections": {
+          "title": "文字识别",
+          "private": {"title": "私有", "description": "长按项目以重新排序"}
+        },
+        "text_translations": {
+          "title": "文本翻译",
+          "private": {"title": "私有", "description": "长按项目以重新排序"}
+        }
+      }
+    }
   };
   static const Map<String, dynamic> en = {
     "app_name": "Biyi",
@@ -524,17 +555,6 @@ class CodegenLoader extends AssetLoader {
           "Maximum window height (logical pixels)",
       "pref_item_title_show_tray_icon": "Show Tray Icon"
     },
-    "page_setting_shortcuts": {
-      "title": "Shortcuts",
-      "pref_section_title_extract_text": "Screen / Clipboard extract text",
-      "pref_section_title_input_assist_function": "Input assist function",
-      "pref_item_title_show_or_hide": "Show/Hide",
-      "pref_item_title_hide": "Hide",
-      "pref_item_title_extract_text_from_selection": "Selection",
-      "pref_item_title_extract_text_from_capture": "Capture Area",
-      "pref_item_title_extract_text_from_clipboard": "Clipboard",
-      "pref_item_title_translate_input_content": "Translate input content"
-    },
     "page_setting_theme_mode": {"title": "Theme Mode"},
     "page_setting_translate": {
       "title": "Translate",
@@ -609,7 +629,55 @@ class CodegenLoader extends AssetLoader {
       "pref_item_title_get_activation_code": "Get activation code",
       "msg_plan_pro_coming_soon": "Coming soon, Please stay tuned."
     },
-    "widget_record_shortcut_dialog": {"title": "Customize your shortcut"}
+    "widget_record_shortcut_dialog": {"title": "Customize your shortcut"},
+    "app": {
+      "settings": {
+        "_layout": {
+          "navgroup": {
+            "client": "Client",
+            "integrations": "Integrations",
+            "resources": "Resources"
+          }
+        },
+        "about": {"title": "About"},
+        "advanced": {"title": "Advanced"},
+        "appearance": {"title": "Appearance"},
+        "changelog": {"title": "Changelog"},
+        "general": {"title": "General"},
+        "keybinds": {
+          "title": "Keybinds",
+          "window": {
+            "show_or_hide": {"title": "Show/Hide"},
+            "hide": {"title": "Hide"}
+          },
+          "extract_text": {
+            "title": "Screen / Clipboard extract text",
+            "from_selection": {"title": "Selection"},
+            "from_capture": {"title": "Capture Area"},
+            "from_clipboard": {"title": "Clipboard"}
+          },
+          "input_assist_function": {
+            "title": "Input assist function",
+            "translate_input_content": {"title": "Translate input content"}
+          }
+        },
+        "language": {"title": "Language"},
+        "text_detections": {
+          "title": "Text Detections",
+          "private": {
+            "title": "Private",
+            "description": "Long press an item to reorder it"
+          }
+        },
+        "text_translations": {
+          "title": "Text Translations",
+          "private": {
+            "title": "Private",
+            "description": "Long press an item to reorder it"
+          }
+        }
+      }
+    }
   };
   static const Map<String, Map<String, dynamic>> mapLocales = {
     "zh": zh,

@@ -3,12 +3,16 @@ import 'dart:io';
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/generated/codegen_loader.g.dart';
 import 'package:biyi_app/includes.dart';
+import 'package:biyi_app/providers/providers.dart';
+import 'package:biyi_app/router_config.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:protocol_handler/protocol_handler.dart';
-import 'package:rise_ui/rise_ui.dart' as rise_ui;
+import 'package:provider/provider.dart';
+import 'package:rise_ui/rise_ui.dart';
 import 'package:window_manager/window_manager.dart';
 
 Future<void> _ensureInitialized() async {
@@ -34,16 +38,36 @@ Future<void> _ensureInitialized() async {
 void main() async {
   await _ensureInitialized();
 
+  if (!kIsWeb) {
+    const WindowOptions windowOptions = WindowOptions(
+      size: Size(840, 600),
+      center: true,
+      minimumSize: Size(840, 600),
+      alwaysOnTop: false,
+      skipTaskbar: false,
+      titleBarStyle: TitleBarStyle.hidden,
+      windowButtonVisibility: true,
+    );
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+    });
+  }
+
   runApp(
-    EasyLocalization(
-      supportedLocales: const [
-        Locale(kLanguageEN),
-        Locale(kLanguageZH),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AppSettings()),
       ],
-      path: 'resources/langs',
-      assetLoader: const CodegenLoader(),
-      fallbackLocale: const Locale(kLanguageEN),
-      child: const MyApp(),
+      child: EasyLocalization(
+        supportedLocales: const [
+          Locale(kLanguageEN),
+          Locale(kLanguageZH),
+        ],
+        path: 'resources/langs',
+        assetLoader: const CodegenLoader(),
+        fallbackLocale: const Locale(kLanguageEN),
+        child: const MyApp(),
+      ),
     ),
   );
 }
@@ -55,55 +79,18 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> with LocalDbListener {
-  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
-
-  Configuration get _configuration => localDb.configuration;
-
-  @override
-  void initState() {
-    localDb.addListener(this);
-    localDb.preferences.addListener(_handleChanged);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    localDb.removeListener(this);
-    localDb.preferences.removeListener(_handleChanged);
-    super.dispose();
-  }
-
-  Future<void> _handleChanged() async {
-    Locale oldLocale = context.locale;
-    Locale newLocale = languageToLocale(_configuration.appLanguage);
-    if (newLocale != oldLocale) {
-      await context.setLocale(newLocale);
-    }
-
-    await windowManager.setBrightness(
-      _configuration.themeMode == ThemeMode.dark
-          ? Brightness.dark
-          : Brightness.light,
-    );
-
-    if (mounted) setState(() {});
-  }
-
-  Widget _buildHome(BuildContext context) {
-    return const DesktopPopupPage();
-  }
-
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final botToastBuilder = BotToastInit();
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      navigatorKey: _navigatorKey,
+    final AppSettings appSettings = context.watch<AppSettings>();
+
+    return MaterialApp.router(
+      routerConfig: routerConfig,
       theme: lightThemeData,
       darkTheme: darkThemeData,
-      themeMode: _configuration.themeMode,
+      themeMode: appSettings.themeMode,
       builder: (context, child) {
         if (kIsLinux || kIsWindows) {
           child = Stack(
@@ -125,27 +112,20 @@ class _MyAppState extends State<MyApp> with LocalDbListener {
           );
         }
         child = botToastBuilder(context, child);
-        child = rise_ui.ExtendedTheme(
-          data: rise_ui.ExtendedThemeData(
-            brightness: _configuration.themeMode == ThemeMode.dark
+        child = ExtendedTheme(
+          data: ExtendedThemeData(
+            brightness: appSettings.themeMode == ThemeMode.dark
                 ? Brightness.dark
                 : Brightness.light,
-            primaryColor: rise_ui.ExtendedColors.indigo,
+            primaryColor: ExtendedColors.indigo,
           ),
           child: child,
         );
         return child;
       },
-      navigatorObservers: [BotToastNavigatorObserver()],
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      home: _buildHome(context),
     );
-  }
-
-  @override
-  void onUserChanged(User oldUser, User newUser) {
-    _handleChanged();
   }
 }

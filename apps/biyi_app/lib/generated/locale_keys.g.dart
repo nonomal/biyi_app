@@ -1,7 +1,5 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: constant_identifier_names
-
 abstract class LocaleKeys {
   static const app_name = 'app_name';
   static const ok = 'ok';
@@ -250,24 +248,6 @@ abstract class LocaleKeys {
   static const page_setting_interface_pref_item_title_show_tray_icon =
       'page_setting_interface.pref_item_title_show_tray_icon';
   static const page_setting_interface = 'page_setting_interface';
-  static const page_setting_shortcuts_title = 'page_setting_shortcuts.title';
-  static const page_setting_shortcuts_pref_section_title_extract_text =
-      'page_setting_shortcuts.pref_section_title_extract_text';
-  static const page_setting_shortcuts_pref_section_title_input_assist_function =
-      'page_setting_shortcuts.pref_section_title_input_assist_function';
-  static const page_setting_shortcuts_pref_item_title_show_or_hide =
-      'page_setting_shortcuts.pref_item_title_show_or_hide';
-  static const page_setting_shortcuts_pref_item_title_hide =
-      'page_setting_shortcuts.pref_item_title_hide';
-  static const page_setting_shortcuts_pref_item_title_extract_text_from_selection =
-      'page_setting_shortcuts.pref_item_title_extract_text_from_selection';
-  static const page_setting_shortcuts_pref_item_title_extract_text_from_capture =
-      'page_setting_shortcuts.pref_item_title_extract_text_from_capture';
-  static const page_setting_shortcuts_pref_item_title_extract_text_from_clipboard =
-      'page_setting_shortcuts.pref_item_title_extract_text_from_clipboard';
-  static const page_setting_shortcuts_pref_item_title_translate_input_content =
-      'page_setting_shortcuts.pref_item_title_translate_input_content';
-  static const page_setting_shortcuts = 'page_setting_shortcuts';
   static const page_setting_theme_mode_title = 'page_setting_theme_mode.title';
   static const page_setting_theme_mode = 'page_setting_theme_mode';
   static const page_setting_translate_title = 'page_setting_translate.title';
@@ -396,4 +376,80 @@ abstract class LocaleKeys {
   static const widget_record_shortcut_dialog_title =
       'widget_record_shortcut_dialog.title';
   static const widget_record_shortcut_dialog = 'widget_record_shortcut_dialog';
+  static const app_settings__layout_navgroup_client =
+      'app.settings._layout.navgroup.client';
+  static const app_settings__layout_navgroup_integrations =
+      'app.settings._layout.navgroup.integrations';
+  static const app_settings__layout_navgroup_resources =
+      'app.settings._layout.navgroup.resources';
+  static const app_settings__layout_navgroup = 'app.settings._layout.navgroup';
+  static const app_settings__layout = 'app.settings._layout';
+  static const app_settings_about_title = 'app.settings.about.title';
+  static const app_settings_about = 'app.settings.about';
+  static const app_settings_advanced_title = 'app.settings.advanced.title';
+  static const app_settings_advanced = 'app.settings.advanced';
+  static const app_settings_appearance_title = 'app.settings.appearance.title';
+  static const app_settings_appearance = 'app.settings.appearance';
+  static const app_settings_changelog_title = 'app.settings.changelog.title';
+  static const app_settings_changelog = 'app.settings.changelog';
+  static const app_settings_general_title = 'app.settings.general.title';
+  static const app_settings_general = 'app.settings.general';
+  static const app_settings_keybinds_title = 'app.settings.keybinds.title';
+  static const app_settings_keybinds_window_show_or_hide_title =
+      'app.settings.keybinds.window.show_or_hide.title';
+  static const app_settings_keybinds_window_show_or_hide =
+      'app.settings.keybinds.window.show_or_hide';
+  static const app_settings_keybinds_window_hide_title =
+      'app.settings.keybinds.window.hide.title';
+  static const app_settings_keybinds_window_hide =
+      'app.settings.keybinds.window.hide';
+  static const app_settings_keybinds_window = 'app.settings.keybinds.window';
+  static const app_settings_keybinds_extract_text_title =
+      'app.settings.keybinds.extract_text.title';
+  static const app_settings_keybinds_extract_text_from_selection_title =
+      'app.settings.keybinds.extract_text.from_selection.title';
+  static const app_settings_keybinds_extract_text_from_selection =
+      'app.settings.keybinds.extract_text.from_selection';
+  static const app_settings_keybinds_extract_text_from_capture_title =
+      'app.settings.keybinds.extract_text.from_capture.title';
+  static const app_settings_keybinds_extract_text_from_capture =
+      'app.settings.keybinds.extract_text.from_capture';
+  static const app_settings_keybinds_extract_text_from_clipboard_title =
+      'app.settings.keybinds.extract_text.from_clipboard.title';
+  static const app_settings_keybinds_extract_text_from_clipboard =
+      'app.settings.keybinds.extract_text.from_clipboard';
+  static const app_settings_keybinds_extract_text =
+      'app.settings.keybinds.extract_text';
+  static const app_settings_keybinds_input_assist_function_title =
+      'app.settings.keybinds.input_assist_function.title';
+  static const app_settings_keybinds_input_assist_function_translate_input_content_title =
+      'app.settings.keybinds.input_assist_function.translate_input_content.title';
+  static const app_settings_keybinds_input_assist_function_translate_input_content =
+      'app.settings.keybinds.input_assist_function.translate_input_content';
+  static const app_settings_keybinds_input_assist_function =
+      'app.settings.keybinds.input_assist_function';
+  static const app_settings_keybinds = 'app.settings.keybinds';
+  static const app_settings_language_title = 'app.settings.language.title';
+  static const app_settings_language = 'app.settings.language';
+  static const app_settings_text_detections_title =
+      'app.settings.text_detections.title';
+  static const app_settings_text_detections_private_title =
+      'app.settings.text_detections.private.title';
+  static const app_settings_text_detections_private_description =
+      'app.settings.text_detections.private.description';
+  static const app_settings_text_detections_private =
+      'app.settings.text_detections.private';
+  static const app_settings_text_detections = 'app.settings.text_detections';
+  static const app_settings_text_translations_title =
+      'app.settings.text_translations.title';
+  static const app_settings_text_translations_private_title =
+      'app.settings.text_translations.private.title';
+  static const app_settings_text_translations_private_description =
+      'app.settings.text_translations.private.description';
+  static const app_settings_text_translations_private =
+      'app.settings.text_translations.private';
+  static const app_settings_text_translations =
+      'app.settings.text_translations';
+  static const app_settings = 'app.settings';
+  static const app = 'app';
 }

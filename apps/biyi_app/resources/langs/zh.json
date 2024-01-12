@@ -222,17 +222,6 @@
     "pref_section_title_max_window_height": "最大窗口高度（逻辑像素）",
     "pref_item_title_show_tray_icon": "显示托盘图标"
   },
-  "page_setting_shortcuts": {
-    "title": "快捷键",
-    "pref_section_title_extract_text": "屏幕/剪切板取词",
-    "pref_section_title_input_assist_function": "输入辅助功能",
-    "pref_item_title_show_or_hide": "显示/隐藏",
-    "pref_item_title_hide": "隐藏",
-    "pref_item_title_extract_text_from_selection": "选中文字",
-    "pref_item_title_extract_text_from_capture": "截取区域",
-    "pref_item_title_extract_text_from_clipboard": "剪切板",
-    "pref_item_title_translate_input_content": "翻译当前输入框内容"
-  },
   "page_setting_theme_mode": {
     "title": "主题模式"
   },
@@ -313,5 +302,67 @@
   },
   "widget_record_shortcut_dialog": {
     "title": "自定义快捷键"
+  },
+  "app": {
+    "settings": {
+      "_layout": {
+        "navgroup": {
+          "client": "客户端",
+          "integrations": "服务接入",
+          "resources": "资源"
+        }
+      },
+      "about": {
+        "title": "关于"
+      },
+      "advanced": {
+        "title": "高级设置"
+      },
+      "appearance": {
+        "title": "外观"
+      },
+      "changelog": {
+        "title": "变更日志"
+      },
+      "general": {
+        "title": "通用"
+      },
+      "keybinds": {
+        "title": "快捷键",
+        "window": {
+          "show_or_hide": { "title": "显示/隐藏" },
+          "hide": { "title": "隐藏" }
+        },
+        "extract_text": {
+          "title": "屏幕/剪切板取词",
+          "from_selection": { "title": "选中文字" },
+          "from_capture": { "title": "截取区域" },
+          "from_clipboard": { "title": "剪切板" }
+        },
+        "input_assist_function": {
+          "title": "输入辅助功能",
+          "translate_input_content": {
+            "title": "翻译当前输入框内容"
+          }
+        }
+      },
+      "language": {
+        "title": "语言"
+      },
+      "text_detections": {
+        "title": "文字识别",
+        "private": {
+          "title": "私有",
+          "description": "长按项目以重新排序"
+        }
+      },
+      "text_translations": {
+        "title": "文本翻译",
+        "private": {
+          "title": "私有",
+          "description": "长按项目以重新排序"
+        }
+      }
+    }
   }
 }
