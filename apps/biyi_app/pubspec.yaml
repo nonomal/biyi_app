@@ -29,10 +29,8 @@ dependencies:
   ocr_engine_builtin: ^0.1.1
   ocr_engine_youdao: ^0.1.1
   package_info_plus: ^5.0.1
-  page_transition: ^2.0.9
   path: ^1.8.3
   path_provider: ^2.1.1
-  photo_view: ^0.14.0
   protocol_handler: ^0.1.6
   provider: ^6.1.1
   reorderables: ^0.6.0

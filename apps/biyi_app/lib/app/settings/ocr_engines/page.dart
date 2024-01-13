@@ -1,21 +1,21 @@
 import 'package:biyi_advanced_features/models/models.dart';
+import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/pages/pages.dart';
 import 'package:biyi_app/services/services.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:reorderables/reorderables.dart';
 
-class TextDetectionsSettingPage extends StatefulWidget {
-  const TextDetectionsSettingPage({super.key});
+class OcrEnginesSettingPage extends StatefulWidget {
+  const OcrEnginesSettingPage({super.key});
 
   @override
-  State<TextDetectionsSettingPage> createState() =>
-      _TextDetectionsSettingPageState();
+  State<OcrEnginesSettingPage> createState() => _OcrEnginesSettingPageState();
 }
 
-class _TextDetectionsSettingPageState extends State<TextDetectionsSettingPage> {
+class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
   List<OcrEngineConfig> get _proOcrEngineList => (localDb.proOcrEngines.list());
   List<OcrEngineConfig> get _privateOcrEngineList =>
       (localDb.privateOcrEngines.list());
@@ -36,23 +36,19 @@ class _TextDetectionsSettingPageState extends State<TextDetectionsSettingPage> {
     if (mounted) setState(() {});
   }
 
-  void _handleClickAdd() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => OcrEngineTypeChooserPage(
-          engineType: null,
-          onChoosed: (String ocrEngineType) {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (_) => OcrEngineCreateOrEditPage(
-                  ocrEngineType: ocrEngineType,
-                ),
-              ),
-            );
-          },
-        ),
-      ),
+  Future<void> _handleClickAdd() async {
+    final ocrEngineType = await context.push<String?>(
+      PageId.ocrEngineTypes,
     );
+    if (ocrEngineType != null) {
+      // ignore: use_build_context_synchronously
+      await context.push<String?>(
+        PageId.ocrEnginesNew,
+        extra: {
+          'ocrEngineType': ocrEngineType,
+        },
+      );
+    }
   }
 
   Widget _buildListSectionProEngines(BuildContext context) {
@@ -70,13 +66,12 @@ class _TextDetectionsSettingPageState extends State<TextDetectionsSettingPage> {
                   .update(disabled: !item.disabled);
             },
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => OcrEngineCreateOrEditPage(
-                    ocrEngineConfig: item,
-                    editable: false,
-                  ),
-                ),
+              context.push<String?>(
+                PageId.ocrEngine(item.identifier),
+                extra: {
+                  'ocrEngineConfig': item,
+                  'editable': false,
+                },
               );
             },
           ),
@@ -101,10 +96,10 @@ class _TextDetectionsSettingPageState extends State<TextDetectionsSettingPage> {
 
     return PreferenceListSection(
       title: Text(
-        LocaleKeys.app_settings_text_detections_private_title.tr(),
+        LocaleKeys.app_settings_ocr_engines_private_title.tr(),
       ),
       description: Text(
-        LocaleKeys.app_settings_text_detections_private_description.tr(),
+        LocaleKeys.app_settings_ocr_engines_private_description.tr(),
       ),
       children: [
         ReorderableColumn(
@@ -128,12 +123,12 @@ class _TextDetectionsSettingPageState extends State<TextDetectionsSettingPage> {
                             .update(disabled: !item.disabled);
                       },
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => OcrEngineCreateOrEditPage(
-                              ocrEngineConfig: item,
-                            ),
-                          ),
+                        context.push<String?>(
+                          PageId.ocrEngine(item.identifier),
+                          extra: {
+                            'ocrEngineConfig': item,
+                            'editable': true,
+                          },
                         );
                       },
                     );
@@ -169,7 +164,7 @@ class _TextDetectionsSettingPageState extends State<TextDetectionsSettingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: Text(LocaleKeys.app_settings_text_detections_title.tr()),
+        title: Text(LocaleKeys.app_settings_ocr_engines_title.tr()),
       ),
       body: _buildBody(context),
     );

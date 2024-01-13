@@ -168,81 +168,41 @@ class CodegenLoader extends AssetLoader {
       "item_discussion_subitem_discord_server": "加入 Discord",
       "item_discussion_subitem_qq_group": "加入 QQ 群"
     },
-    "page_desktop_popup": {
-      "newversion_banner_text_found_new_version": "发现新版本：{}",
-      "newversion_banner_btn_update": "立即更新",
-      "limited_banner_title": "功能受限，请根据提示进行检查。",
-      "limited_banner_text_screen_capture": "授予屏幕录制权限",
-      "limited_banner_text_screen_selection": "授予辅助功能权限",
-      "limited_banner_btn_allow": "允许",
-      "limited_banner_btn_go_settings": "前往设置",
-      "limited_banner_btn_check_again": "重新检查",
-      "limited_banner_tip_help": "查看帮助文档",
-      "limited_banner_msg_allow_access_tip": "点击「授权」后如无任何响应，请点击「前往设置」进行手动设置。",
-      "limited_banner_msg_all_access_allowed": "屏幕取词功能已启用",
-      "limited_banner_msg_all_access_not_allowed": "未获得所需权限，\n请重新检查并进行设置。",
-      "input_hint": "在此处输入单词或文本",
-      "text_extracting_text": "正在提取文字...",
-      "tip_translation_mode": "当前翻译模式：{}",
-      "tip_extract_text_from_screen_capture": "截取屏幕区域并识别文字",
-      "tip_extract_text_from_clipboard": "读取剪切板内容",
-      "btn_clear": "清空",
-      "btn_trans": "翻译",
-      "msg_please_enter_word_or_text": "未输入或未提取到文本",
-      "msg_capture_screen_area_canceled": "截取屏幕区域已取消"
-    },
-    "page_ocr_engine_create_or_edit": {
-      "title": "添加文字识别引擎",
-      "pref_section_title_engine_type": "引擎类型",
-      "pref_section_title_option": "选项"
-    },
-    "page_ocr_engine_type_chooser": {"title": "引擎类型"},
-    "page_settings": {
-      "title": "设置",
-      "text_version": "版本 {} BUILD {}",
-      "pref_section_title_general": "常规",
-      "pref_section_title_appearance": "外观",
-      "pref_section_title_shortcuts": "快捷键",
-      "pref_section_title_input_settings": "输入设置",
-      "pref_section_title_advanced": "高级",
-      "pref_section_title_service_integration": "服务接入",
-      "pref_section_title_others": "其他",
-      "pref_item_title_your_plan": "当前会员计划",
-      "pref_item_title_extract_text": "取词",
-      "pref_item_title_translate": "翻译",
-      "pref_item_title_interface": "界面",
-      "pref_item_title_app_language": "显示语言",
-      "pref_item_title_theme_mode": "主题模式",
-      "pref_item_title_keyboard_shortcuts": "键盘快捷键",
-      "pref_item_title_submit_with_enter": "用 Enter 提交",
-      "pref_item_title_submit_with_meta_enter": "用 Ctrl + Enter 提交",
-      "pref_item_title_submit_with_meta_enter_mac": "用 ⌘ + Enter 提交",
-      "pref_item_title_launch_at_startup": "登录时启动",
-      "pref_item_title_engines": "文本翻译",
-      "pref_item_title_ocr_engines": "文字识别",
-      "pref_item_title_about": "关于比译",
-      "pref_item_title_exit_app": "退出应用",
-      "exit_app_dialog": {"title": "您确定要退出吗？"}
-    },
-    "page_translation_engine_chooser": {
-      "title": "文本翻译引擎",
-      "pref_section_title_private": "私有",
-      "pref_item_title_no_available_engines": "无可用的引擎"
-    },
-    "page_translation_engine_create_or_edit": {
-      "title": "添加文本翻译引擎",
-      "pref_section_title_engine_type": "引擎类型",
-      "pref_section_title_support_interface": "支持接口",
-      "pref_section_title_option": "选项"
-    },
-    "page_translation_engine_type_chooser": {"title": "引擎类型"},
-    "page_translation_engines_manage": {
-      "title": "文本翻译引擎",
-      "pref_section_title_private": "私有",
-      "pref_section_description_private": "长按项目以重新排序"
-    },
-    "widget_record_shortcut_dialog": {"title": "自定义快捷键"},
     "app": {
+      "home": {
+        "newversion_banner_text_found_new_version": "发现新版本：{}",
+        "newversion_banner_btn_update": "立即更新",
+        "limited_banner_title": "功能受限，请根据提示进行检查。",
+        "limited_banner_text_screen_capture": "授予屏幕录制权限",
+        "limited_banner_text_screen_selection": "授予辅助功能权限",
+        "limited_banner_btn_allow": "允许",
+        "limited_banner_btn_go_settings": "前往设置",
+        "limited_banner_btn_check_again": "重新检查",
+        "limited_banner_tip_help": "查看帮助文档",
+        "limited_banner_msg_allow_access_tip": "点击「授权」后如无任何响应，请点击「前往设置」进行手动设置。",
+        "limited_banner_msg_all_access_allowed": "屏幕取词功能已启用",
+        "limited_banner_msg_all_access_not_allowed": "未获得所需权限，\n请重新检查并进行设置。",
+        "input_hint": "在此处输入单词或文本",
+        "text_extracting_text": "正在提取文字...",
+        "tip_translation_mode": "当前翻译模式：{}",
+        "tip_extract_text_from_screen_capture": "截取屏幕区域并识别文字",
+        "tip_extract_text_from_clipboard": "读取剪切板内容",
+        "btn_clear": "清空",
+        "btn_trans": "翻译",
+        "msg_please_enter_word_or_text": "未输入或未提取到文本",
+        "msg_capture_screen_area_canceled": "截取屏幕区域已取消"
+      },
+      "ocr_engine_types": {"title": "引擎类型"},
+      "ocr_engines": {
+        "title": "文字识别引擎",
+        "_msg": {"no_available_engines": "无可用的引擎"},
+        "private": {"title": "私有"}
+      },
+      "ocr_engines_new": {
+        "title": "添加文字识别引擎",
+        "engine_type": {"title": "引擎类型"},
+        "option": {"title": "选项"}
+      },
       "settings": {
         "_layout": {
           "navgroup": {
@@ -301,11 +261,11 @@ class CodegenLoader extends AssetLoader {
           }
         },
         "language": {"title": "语言"},
-        "text_detections": {
+        "ocr_engines": {
           "title": "文字识别",
           "private": {"title": "私有", "description": "长按项目以重新排序"}
         },
-        "text_translations": {
+        "translation_engines": {
           "title": "文本翻译",
           "private": {"title": "私有", "description": "长按项目以重新排序"}
         }
@@ -314,15 +274,17 @@ class CodegenLoader extends AssetLoader {
         "title": "支持的语言",
         "all": {"title": "全部"}
       },
-      "text_detections": {
-        "title": "文字识别引擎",
-        "_msg": {"no_available_engines": "无可用的引擎"},
-        "private": {"title": "私有"}
-      },
-      "text_translations": {
+      "translation_engine_types": {"title": "引擎类型"},
+      "translation_engines": {
         "title": "文本翻译引擎",
         "_msg": {"no_available_engines": "无可用的引擎"},
         "private": {"title": "私有"}
+      },
+      "translation_engines_new": {
+        "title": "添加文本翻译引擎",
+        "engine_type": {"title": "引擎类型"},
+        "support_interface": {"title": "支持接口"},
+        "option": {"title": "选项"}
       },
       "translation_targets": {
         "new": {
@@ -332,6 +294,9 @@ class CodegenLoader extends AssetLoader {
           "target_language": "目标语言"
         }
       }
+    },
+    "widget": {
+      "record_shortcut_dialog": {"title": "自定义快捷键"}
     }
   };
   static const Map<String, dynamic> en = {
@@ -488,87 +453,48 @@ class CodegenLoader extends AssetLoader {
       "item_discussion_subitem_discord_server": "Join Discord",
       "item_discussion_subitem_qq_group": "Join QQ Group"
     },
-    "page_desktop_popup": {
-      "newversion_banner_text_found_new_version": "New version found: {}",
-      "newversion_banner_btn_update": "Update",
-      "limited_banner_title":
-          "Functionality is limited, please follow the tips to check.",
-      "limited_banner_text_screen_capture": "Grant screen recording access",
-      "limited_banner_text_screen_selection": "Grant accessibility access",
-      "limited_banner_btn_allow": "Allow",
-      "limited_banner_btn_go_settings": "Go Settings",
-      "limited_banner_btn_check_again": "Check Again",
-      "limited_banner_tip_help": "View the help document",
-      "limited_banner_msg_allow_access_tip":
-          "If there is no response after clicking \"Allow\", please click \"Go Settings\" to set it manually.",
-      "limited_banner_msg_all_access_allowed":
-          "The Screen extract text is enabled",
-      "limited_banner_msg_all_access_not_allowed":
-          "The required access are not allowed.\nPlease check and set again.",
-      "input_hint": "Enter the word or text here",
-      "text_extracting_text": "Extracting text...",
-      "tip_translation_mode": "Current translation mode: {}",
-      "tip_extract_text_from_screen_capture":
-          "Capture screen area and recognize text",
-      "tip_extract_text_from_clipboard": "Read clipboard content",
-      "btn_clear": "Clear",
-      "btn_trans": "Translate",
-      "msg_please_enter_word_or_text": "No text entered or text not extracted",
-      "msg_capture_screen_area_canceled":
-          "Capture screen area has been canceled"
-    },
-    "page_ocr_engine_create_or_edit": {
-      "title": "Add Text Detection Engine",
-      "pref_section_title_engine_type": "Engine type",
-      "pref_section_title_option": "Option"
-    },
-    "page_ocr_engine_type_chooser": {"title": "Engine Type"},
-    "page_settings": {
-      "title": "Settings",
-      "text_version": "Version {} BUILD {}",
-      "pref_section_title_general": "General",
-      "pref_section_title_appearance": "Appearance",
-      "pref_section_title_shortcuts": "Shortcuts",
-      "pref_section_title_input_settings": "Input Settings",
-      "pref_section_title_advanced": "Advanced",
-      "pref_section_title_service_integration": "Service Integration",
-      "pref_section_title_others": "Others",
-      "pref_item_title_your_plan": "Your Plan",
-      "pref_item_title_extract_text": "Extract text",
-      "pref_item_title_interface": "Interface",
-      "pref_item_title_translate": "Translate",
-      "pref_item_title_app_language": "Display Language",
-      "pref_item_title_theme_mode": "Theme Mode",
-      "pref_item_title_keyboard_shortcuts": "Keyboard Shortcuts",
-      "pref_item_title_submit_with_enter": "Submit with Enter",
-      "pref_item_title_submit_with_meta_enter": "Submit with Ctrl + Enter",
-      "pref_item_title_submit_with_meta_enter_mac": "Submit with ⌘ + Enter",
-      "pref_item_title_launch_at_startup": "Launch when you log in",
-      "pref_item_title_engines": "Text Translation",
-      "pref_item_title_ocr_engines": "Text Detection",
-      "pref_item_title_about": "About Biyi",
-      "pref_item_title_exit_app": "Exit App",
-      "exit_app_dialog": {"title": "Are you sure you want to exit?"}
-    },
-    "page_translation_engine_chooser": {
-      "title": "Text Translation Engine",
-      "pref_section_title_private": "Private",
-      "pref_item_title_no_available_engines": "No available engines"
-    },
-    "page_translation_engine_create_or_edit": {
-      "title": "Add Text Translation Engine",
-      "pref_section_title_engine_type": "Engine type",
-      "pref_section_title_support_interface": "Support interface",
-      "pref_section_title_option": "Option"
-    },
-    "page_translation_engine_type_chooser": {"title": "Engine type"},
-    "page_translation_engines_manage": {
-      "title": "Text Translation Engine",
-      "pref_section_title_private": "Private",
-      "pref_section_description_private": "Long press an item to reorder it"
-    },
-    "widget_record_shortcut_dialog": {"title": "Customize your shortcut"},
     "app": {
+      "home": {
+        "newversion_banner_text_found_new_version": "New version found: {}",
+        "newversion_banner_btn_update": "Update",
+        "limited_banner_title":
+            "Functionality is limited, please follow the tips to check.",
+        "limited_banner_text_screen_capture": "Grant screen recording access",
+        "limited_banner_text_screen_selection": "Grant accessibility access",
+        "limited_banner_btn_allow": "Allow",
+        "limited_banner_btn_go_settings": "Go Settings",
+        "limited_banner_btn_check_again": "Check Again",
+        "limited_banner_tip_help": "View the help document",
+        "limited_banner_msg_allow_access_tip":
+            "If there is no response after clicking \"Allow\", please click \"Go Settings\" to set it manually.",
+        "limited_banner_msg_all_access_allowed":
+            "The Screen extract text is enabled",
+        "limited_banner_msg_all_access_not_allowed":
+            "The required access are not allowed.\nPlease check and set again.",
+        "input_hint": "Enter the word or text here",
+        "text_extracting_text": "Extracting text...",
+        "tip_translation_mode": "Current translation mode: {}",
+        "tip_extract_text_from_screen_capture":
+            "Capture screen area and recognize text",
+        "tip_extract_text_from_clipboard": "Read clipboard content",
+        "btn_clear": "Clear",
+        "btn_trans": "Translate",
+        "msg_please_enter_word_or_text":
+            "No text entered or text not extracted",
+        "msg_capture_screen_area_canceled":
+            "Capture screen area has been canceled"
+      },
+      "ocr_engine_types": {"title": "Engine Type"},
+      "ocr_engines": {
+        "title": "Text Detections Engines",
+        "_msg": {"no_available_engines": "No available engines"},
+        "private": {"title": "Private"}
+      },
+      "ocr_engines_new": {
+        "title": "Add Text Detection Engine",
+        "engine_type": {"title": "Engine type"},
+        "option": {"title": "Option"}
+      },
       "settings": {
         "_layout": {
           "navgroup": {
@@ -633,14 +559,14 @@ class CodegenLoader extends AssetLoader {
           }
         },
         "language": {"title": "Language"},
-        "text_detections": {
+        "ocr_engines": {
           "title": "Text Detections",
           "private": {
             "title": "Private",
             "description": "Long press an item to reorder it"
           }
         },
-        "text_translations": {
+        "translation_engines": {
           "title": "Text Translations",
           "private": {
             "title": "Private",
@@ -652,15 +578,17 @@ class CodegenLoader extends AssetLoader {
         "title": "Supported Languages",
         "all": {"title": "All"}
       },
-      "text_detections": {
-        "title": "Text Detections Engines",
-        "_msg": {"no_available_engines": "No available engines"},
-        "private": {"title": "Private"}
-      },
-      "text_translations": {
+      "translation_engine_types": {"title": "Engine Type"},
+      "translation_engines": {
         "title": "Text Translation Engines",
         "_msg": {"no_available_engines": "No available engines"},
         "private": {"title": "Private"}
+      },
+      "translation_engines_new": {
+        "title": "Add Text Translation Engine",
+        "engine_type": {"title": "Engine type"},
+        "support_interface": {"title": "Support interface"},
+        "option": {"title": "Option"}
       },
       "translation_targets": {
         "new": {
@@ -670,6 +598,9 @@ class CodegenLoader extends AssetLoader {
           "target_language": "Target language"
         }
       }
+    },
+    "widget": {
+      "record_shortcut_dialog": {"title": "Customize your shortcut"}
     }
   };
   static const Map<String, Map<String, dynamic>> mapLocales = {

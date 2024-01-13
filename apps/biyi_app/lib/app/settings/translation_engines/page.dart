@@ -1,23 +1,23 @@
 import 'package:biyi_advanced_features/models/models.dart';
+import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/pages/translation_engine_create_or_edit/translation_engine_create_or_edit.dart';
-import 'package:biyi_app/pages/translation_engine_type_chooser/translation_engine_type_chooser.dart';
 import 'package:biyi_app/services/services.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:reorderables/reorderables.dart';
 
-class TextTranslationsSettingPage extends StatefulWidget {
-  const TextTranslationsSettingPage({super.key});
+class TranslationEnginesSettingPage extends StatefulWidget {
+  const TranslationEnginesSettingPage({super.key});
 
   @override
-  State<TextTranslationsSettingPage> createState() =>
-      _TextTranslationsSettingPageState();
+  State<TranslationEnginesSettingPage> createState() =>
+      _TranslationEnginesSettingPageState();
 }
 
-class _TextTranslationsSettingPageState
-    extends State<TextTranslationsSettingPage> {
+class _TranslationEnginesSettingPageState
+    extends State<TranslationEnginesSettingPage> {
   List<TranslationEngineConfig> get _proEngineList =>
       (localDb.proEngines.list());
   List<TranslationEngineConfig> get _privateEngineList =>
@@ -39,23 +39,19 @@ class _TextTranslationsSettingPageState
     if (mounted) setState(() {});
   }
 
-  void _handleClickAdd() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => TranslationEngineTypeChooserPage(
-          engineType: null,
-          onChoosed: (String engineType) {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (_) => TranslationEngineCreateOrEditPage(
-                  engineType: engineType,
-                ),
-              ),
-            );
-          },
-        ),
-      ),
+  Future<void> _handleClickAdd() async {
+    final engineType = await context.push<String?>(
+      PageId.translationEngineTypes,
     );
+    if (engineType != null) {
+      // ignore: use_build_context_synchronously
+      await context.push<String?>(
+        PageId.translationEnginesNew,
+        extra: {
+          'engineType': engineType,
+        },
+      );
+    }
   }
 
   Widget _buildListSectionProEngines(BuildContext context) {
@@ -73,13 +69,12 @@ class _TextTranslationsSettingPageState
                   .update(disabled: !item.disabled);
             },
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => TranslationEngineCreateOrEditPage(
-                    engineConfig: item,
-                    editable: false,
-                  ),
-                ),
+              context.push<String?>(
+                PageId.translationEngine(item.identifier),
+                extra: {
+                  'engineConfig': item,
+                  'editable': false,
+                },
               );
             },
           ),
@@ -104,10 +99,10 @@ class _TextTranslationsSettingPageState
 
     return PreferenceListSection(
       title: Text(
-        LocaleKeys.app_settings_text_translations_private_title.tr(),
+        LocaleKeys.app_settings_translation_engines_private_title.tr(),
       ),
       description: Text(
-        LocaleKeys.app_settings_text_translations_private_description.tr(),
+        LocaleKeys.app_settings_translation_engines_private_description.tr(),
       ),
       children: [
         ReorderableColumn(
@@ -131,12 +126,12 @@ class _TextTranslationsSettingPageState
                             .update(disabled: !item.disabled);
                       },
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => TranslationEngineCreateOrEditPage(
-                              engineConfig: item,
-                            ),
-                          ),
+                        context.push<String?>(
+                          PageId.translationEngine(item.identifier),
+                          extra: {
+                            'engineConfig': item,
+                            'editable': true,
+                          },
                         );
                       },
                     );
@@ -172,7 +167,7 @@ class _TextTranslationsSettingPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: Text(LocaleKeys.app_settings_text_translations_title.tr()),
+        title: Text(LocaleKeys.app_settings_translation_engines_title.tr()),
       ),
       body: _buildBody(context),
     );

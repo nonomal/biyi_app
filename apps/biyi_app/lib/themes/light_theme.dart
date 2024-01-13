@@ -6,7 +6,7 @@ import 'package:rise_ui/rise_ui.dart';
 
 const _kDefaultTextColor = Color(0xff333333);
 
-const _kPrimaryColor = Color(0xff416ff4);
+const _kPrimaryColor = ExtendedColors.indigo;
 const _kSecondaryColor = Color(0xff008D94);
 const _kCanvasColor = Colors.white;
 const _kScaffoldBackgroundColor = Color(0xfff2f3f5);

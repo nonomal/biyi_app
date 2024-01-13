@@ -2,43 +2,38 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class TranslationEngineTypeChooserPage extends StatefulWidget {
-  const TranslationEngineTypeChooserPage({
+class TranslationEngineTypesPage extends StatefulWidget {
+  const TranslationEngineTypesPage({
     super.key,
-    this.engineType,
-    this.onChoosed,
+    this.selectedEngineType,
   });
 
-  final String? engineType;
-  final ValueChanged<String>? onChoosed;
+  final String? selectedEngineType;
 
   @override
-  State<TranslationEngineTypeChooserPage> createState() =>
-      _TranslationEngineTypeChooserPageState();
+  State<TranslationEngineTypesPage> createState() =>
+      _TranslationEngineTypesPageState();
 }
 
-class _TranslationEngineTypeChooserPageState
-    extends State<TranslationEngineTypeChooserPage> {
-  String? _type;
-
-  String t(String key, {List<String> args = const []}) {
-    return 'page_translation_engine_type_chooser.$key'.tr(args: args);
-  }
+class _TranslationEngineTypesPageState
+    extends State<TranslationEngineTypesPage> {
+  String? _selectedEngineType;
 
   @override
   void initState() {
-    _type = widget.engineType;
+    _selectedEngineType = widget.selectedEngineType;
     super.initState();
   }
 
   Future<void> _handleClickOk() async {
-    widget.onChoosed?.call(_type!);
+    context.pop<String?>(_selectedEngineType);
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
-      title: Text(t('title')),
+      title: Text(LocaleKeys.app_translation_engine_types_title.tr()),
       actions: [
         CustomAppBarActionItem(
           text: LocaleKeys.ok.tr(),
@@ -58,9 +53,9 @@ class _TranslationEngineTypeChooserPageState
                 icon: TranslationEngineIcon(engineType),
                 title: Text('engine.$engineType'.tr()),
                 value: engineType,
-                groupValue: _type,
+                groupValue: _selectedEngineType,
                 onChanged: (newGroupValue) {
-                  _type = engineType;
+                  _selectedEngineType = engineType;
                   setState(() {});
                 },
               ),

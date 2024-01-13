@@ -55,7 +55,7 @@ class SettingsLayout extends StatefulWidget {
 }
 
 class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
-  String? _selectedDestination = PageId.generalSetting;
+  String? _selectedDestination = PageId.settingsGeneral;
 
   @override
   void initState() {
@@ -114,27 +114,27 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
               ),
               destinations: [
                 NavigationRailDestination(
-                  value: PageId.generalSetting,
+                  value: PageId.settingsGeneral,
                   icon: FluentIcons.app_generic_20_regular,
                   label: LocaleKeys.app_settings_general_title.tr(),
                 ),
                 NavigationRailDestination(
-                  value: PageId.appearanceSetting,
+                  value: PageId.settingsAppearance,
                   icon: FluentIcons.style_guide_20_regular,
                   label: LocaleKeys.app_settings_appearance_title.tr(),
                 ),
                 NavigationRailDestination(
-                  value: PageId.keybindsSetting,
+                  value: PageId.settingsKeybinds,
                   icon: FluentIcons.keyboard_20_regular,
                   label: LocaleKeys.app_settings_keybinds_title.tr(),
                 ),
                 NavigationRailDestination(
-                  value: PageId.languageSetting,
+                  value: PageId.settingsLanguage,
                   icon: FluentIcons.local_language_20_regular,
                   label: LocaleKeys.app_settings_language_title.tr(),
                 ),
                 NavigationRailDestination(
-                  value: PageId.advancedSetting,
+                  value: PageId.settingsAdvanced,
                   icon: FluentIcons.settings_20_regular,
                   label: LocaleKeys.app_settings_advanced_title.tr(),
                 ),
@@ -149,14 +149,14 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
               ),
               destinations: [
                 NavigationRailDestination(
-                  value: PageId.textTranslationsSetting,
+                  value: PageId.settingsOcrEngines,
                   icon: FluentIcons.translate_20_regular,
-                  label: LocaleKeys.app_settings_text_translations_title.tr(),
+                  label: LocaleKeys.app_settings_ocr_engines_title.tr(),
                 ),
                 NavigationRailDestination(
-                  value: PageId.textDetectionsSetting,
+                  value: PageId.settingsTranslationEngines,
                   icon: FluentIcons.scan_20_regular,
-                  label: LocaleKeys.app_settings_text_detections_title.tr(),
+                  label: LocaleKeys.app_settings_translation_engines_title.tr(),
                 ),
               ],
               selectedValue: _selectedDestination,
@@ -168,12 +168,12 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
               ),
               destinations: [
                 NavigationRailDestination(
-                  value: PageId.about,
+                  value: PageId.settingsAbout,
                   icon: FluentIcons.developer_board_20_regular,
                   label: LocaleKeys.app_settings_about_title.tr(),
                 ),
                 NavigationRailDestination(
-                  value: PageId.changelog,
+                  value: PageId.settingsChangelog,
                   icon: FluentIcons.note_20_regular,
                   label: LocaleKeys.app_settings_changelog_title.tr(),
                 ),

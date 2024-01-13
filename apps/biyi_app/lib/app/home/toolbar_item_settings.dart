@@ -34,7 +34,7 @@ class _ToolbarItemSettingsState extends State<ToolbarItemSettings> {
       windowManager.setPreventClose(true),
     ]);
     // ignore: use_build_context_synchronously
-    context.go(PageId.generalSetting);
+    context.go(PageId.settingsGeneral);
     await Future<void>.delayed(const Duration(milliseconds: 200));
     await windowManager.show();
   }

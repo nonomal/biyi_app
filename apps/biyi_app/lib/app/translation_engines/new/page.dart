@@ -1,9 +1,11 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
+import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shortid/shortid.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
@@ -13,8 +15,8 @@ const List<String> _kAllScopes = [
   kScopeTranslate,
 ];
 
-class TranslationEngineCreateOrEditPage extends StatefulWidget {
-  const TranslationEngineCreateOrEditPage({
+class TranslationEnginesNewOrEditPage extends StatefulWidget {
+  const TranslationEnginesNewOrEditPage({
     super.key,
     this.editable = true,
     this.engineType,
@@ -26,12 +28,12 @@ class TranslationEngineCreateOrEditPage extends StatefulWidget {
   final TranslationEngineConfig? engineConfig;
 
   @override
-  State<TranslationEngineCreateOrEditPage> createState() =>
-      _TranslationEngineCreateOrEditPageState();
+  State<TranslationEnginesNewOrEditPage> createState() =>
+      _TranslationEnginesNewOrEditPageState();
 }
 
-class _TranslationEngineCreateOrEditPageState
-    extends State<TranslationEngineCreateOrEditPage> {
+class _TranslationEnginesNewOrEditPageState
+    extends State<TranslationEnginesNewOrEditPage> {
   final Map<String, TextEditingController> _textEditingControllerMap = {};
 
   String? _identifier;
@@ -114,7 +116,7 @@ class _TranslationEngineCreateOrEditPageState
     return CustomAppBar(
       title: widget.engineConfig != null
           ? TranslationEngineName(widget.engineConfig!)
-          : Text(t('title')),
+          : Text(LocaleKeys.app_translation_engines_new_title.tr()),
       actions: [
         if (widget.editable)
           CustomAppBarActionItem(
@@ -129,7 +131,9 @@ class _TranslationEngineCreateOrEditPageState
     return PreferenceList(
       children: [
         PreferenceListSection(
-          title: Text(t('pref_section_title_engine_type')),
+          title: Text(
+            LocaleKeys.app_translation_engines_new_engine_type_title.tr(),
+          ),
           children: [
             PreferenceListItem(
               icon: _type == null ? null : TranslationEngineIcon(_type!),
@@ -138,21 +142,18 @@ class _TranslationEngineCreateOrEditPageState
                   : Text('engine.$_type'.tr()),
               accessoryView: widget.editable ? null : Container(),
               onTap: widget.editable
-                  ? () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => TranslationEngineTypeChooserPage(
-                            engineType: _type,
-                            onChoosed: (newEngineType) {
-                              setState(() {
-                                _type = newEngineType;
-                              });
-
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ),
+                  ? () async {
+                      final newEngineType = await context.push<String?>(
+                        PageId.translationEngineTypes,
+                        extra: {
+                          'selectedEngineType': _type,
+                        },
                       );
+                      if (newEngineType != null) {
+                        setState(() {
+                          _type = newEngineType;
+                        });
+                      }
                     }
                   : null,
             ),
@@ -160,7 +161,10 @@ class _TranslationEngineCreateOrEditPageState
         ),
         if (translationEngine != null)
           PreferenceListSection(
-            title: Text(t('pref_section_title_support_interface')),
+            title: Text(
+              LocaleKeys.app_translation_engines_new_support_interface_title
+                  .tr(),
+            ),
             children: [
               for (var scope in _kAllScopes)
                 PreferenceListItem(
@@ -197,7 +201,9 @@ class _TranslationEngineCreateOrEditPageState
           ),
         if (widget.editable && _type != null)
           PreferenceListSection(
-            title: Text(t('pref_section_title_option')),
+            title: Text(
+              LocaleKeys.app_translation_engines_new_option_title.tr(),
+            ),
             children: [
               for (var optionKey in _engineOptionKeys)
                 PreferenceListTextFieldItem(
@@ -247,9 +253,5 @@ class _TranslationEngineCreateOrEditPageState
       appBar: _buildAppBar(context),
       body: _buildBody(context),
     );
-  }
-
-  String t(String key, {List<String> args = const []}) {
-    return 'page_translation_engine_create_or_edit.$key'.tr(args: args);
   }
 }

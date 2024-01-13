@@ -5,8 +5,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class TextDetectionsPage extends StatefulWidget {
-  const TextDetectionsPage({
+class TranslationEnginesPage extends StatefulWidget {
+  const TranslationEnginesPage({
     super.key,
     this.selectedEngineId,
   });
@@ -14,16 +14,16 @@ class TextDetectionsPage extends StatefulWidget {
   final String? selectedEngineId;
 
   @override
-  State<StatefulWidget> createState() => _TextDetectionsPageState();
+  State<StatefulWidget> createState() => _TranslationEnginesPageState();
 }
 
-class _TextDetectionsPageState extends State<TextDetectionsPage> {
-  List<OcrEngineConfig> get _proOcrEngineList {
-    return localDb.proOcrEngines.list(where: ((e) => !e.disabled));
+class _TranslationEnginesPageState extends State<TranslationEnginesPage> {
+  List<TranslationEngineConfig> get _proEngineList {
+    return localDb.proEngines.list(where: ((e) => !e.disabled));
   }
 
-  List<OcrEngineConfig> get _privateOcrEngineList {
-    return localDb.privateOcrEngines.list(where: ((e) => !e.disabled));
+  List<TranslationEngineConfig> get _privateEngineList {
+    return localDb.privateEngines.list(where: ((e) => !e.disabled));
   }
 
   String? _selectedEngineId;
@@ -37,22 +37,22 @@ class _TextDetectionsPageState extends State<TextDetectionsPage> {
   }
 
   Future<void> _handleClickOk() async {
-    OcrEngineConfig? ocrEngineConfig =
-        localDb.ocrEngine(_selectedEngineId).get();
-    context.pop<OcrEngineConfig?>(ocrEngineConfig);
+    TranslationEngineConfig? engineConfig =
+        localDb.engine(_selectedEngineId).get();
+    context.pop<TranslationEngineConfig?>(engineConfig);
   }
 
   Widget _buildBody(BuildContext context) {
     return PreferenceList(
       children: [
-        if (_proOcrEngineList.isNotEmpty)
+        if (_proEngineList.isNotEmpty)
           PreferenceListSection(
             children: [
-              for (var ocrEngineConfig in _proOcrEngineList)
+              for (var engineConfig in _proEngineList)
                 PreferenceListRadioItem<String>(
-                  icon: OcrEngineIcon(ocrEngineConfig.type),
-                  title: OcrEngineName(ocrEngineConfig),
-                  value: ocrEngineConfig.identifier,
+                  icon: TranslationEngineIcon(engineConfig.type),
+                  title: TranslationEngineName(engineConfig),
+                  value: engineConfig.identifier,
                   groupValue: _selectedEngineId ?? '',
                   onChanged: (newValue) {
                     setState(() {
@@ -64,14 +64,14 @@ class _TextDetectionsPageState extends State<TextDetectionsPage> {
           ),
         PreferenceListSection(
           title: Text(
-            LocaleKeys.app_text_detections_private_title.tr(),
+            LocaleKeys.app_translation_engines_private_title.tr(),
           ),
           children: [
-            for (var ocrEngineConfig in _privateOcrEngineList)
+            for (var engineConfig in _privateEngineList)
               PreferenceListRadioItem<String>(
-                icon: OcrEngineIcon(ocrEngineConfig.type),
-                title: OcrEngineName(ocrEngineConfig),
-                value: ocrEngineConfig.identifier,
+                icon: TranslationEngineIcon(engineConfig.type),
+                title: TranslationEngineName(engineConfig),
+                value: engineConfig.identifier,
                 groupValue: _selectedEngineId ?? '',
                 onChanged: (newValue) {
                   setState(() {
@@ -79,10 +79,11 @@ class _TextDetectionsPageState extends State<TextDetectionsPage> {
                   });
                 },
               ),
-            if (_privateOcrEngineList.isEmpty)
+            if (_privateEngineList.isEmpty)
               PreferenceListItem(
                 title: Text(
-                  LocaleKeys.app_text_detections__msg_no_available_engines.tr(),
+                  LocaleKeys.app_translation_engines__msg_no_available_engines
+                      .tr(),
                 ),
                 accessoryView: Container(),
               ),
@@ -96,7 +97,7 @@ class _TextDetectionsPageState extends State<TextDetectionsPage> {
     return Scaffold(
       appBar: CustomAppBar(
         title: Text(
-          LocaleKeys.app_text_detections_private_title.tr(),
+          LocaleKeys.app_translation_engines_title.tr(),
         ),
         actions: [
           CustomAppBarActionItem(

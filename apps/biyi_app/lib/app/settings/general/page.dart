@@ -20,8 +20,10 @@ class GeneralSettingPage extends StatefulWidget {
 class _GeneralSettingPageState extends State<GeneralSettingPage> {
   Configuration get _configuration => localDb.configuration;
 
-  OcrEngineConfig? get _defaultOcrEngineConfig =>
-      localDb.ocrEngine(_configuration.defaultOcrEngineId).get();
+  OcrEngineConfig? get _defaultOcrEngineConfig {
+    if (_configuration.defaultOcrEngineId == null) return null;
+    return localDb.ocrEngine(_configuration.defaultOcrEngineId).get();
+  }
 
   List<TranslationTarget> get _translationTargets {
     return localDb.translationTargets.list();
@@ -73,7 +75,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               onTap: () async {
                 final OcrEngineConfig? ocrEngineConfig =
                     await context.push<OcrEngineConfig?>(
-                  '${PageId.textDetections}?selectedEngineId=${_configuration.defaultOcrEngineId}',
+                  '${PageId.ocrEngines}?selectedEngineId=${_configuration.defaultOcrEngineId}',
                 );
                 if (ocrEngineConfig != null) {
                   _configuration.defaultOcrEngineId =
@@ -122,7 +124,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               onTap: () async {
                 final TranslationEngineConfig? engineConfig =
                     await context.push<TranslationEngineConfig?>(
-                  '${PageId.textTranslations}?selectedEngineId=${_configuration.defaultTranslateEngineId}',
+                  '${PageId.translationEngines}?selectedEngineId=${_configuration.defaultTranslateEngineId}',
                 );
                 if (engineConfig != null) {
                   _configuration.defaultTranslateEngineId =
@@ -177,7 +179,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                 onTap: () async {
                   final TranslationEngineConfig? engineConfig =
                       await context.push<TranslationEngineConfig?>(
-                    '${PageId.textTranslations}?selectedEngineId=${_configuration.defaultEngineId}',
+                    '${PageId.translationEngines}?selectedEngineId=${_configuration.defaultEngineId}',
                   );
                   if (engineConfig != null) {
                     _configuration.defaultEngineId = engineConfig.identifier;
@@ -217,7 +219,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                   ),
                   onTap: () async {
                     await context.push<TranslationEngineConfig?>(
-                      PageId.newTranslationTarget,
+                      PageId.translationTargetsNew,
                     );
                   },
                 ),
@@ -231,7 +233,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                 accessoryView: Container(),
                 onTap: () async {
                   await context.push<TranslationEngineConfig?>(
-                    PageId.newTranslationTarget,
+                    PageId.translationTargetsNew,
                   );
                 },
               ),

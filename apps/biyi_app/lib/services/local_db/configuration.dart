@@ -93,8 +93,7 @@ class Configuration {
   }
 
   ThemeMode get themeMode {
-    String themeModeString =
-        _getString(kPrefThemeMode) ?? ThemeMode.light.name;
+    String themeModeString = _getString(kPrefThemeMode) ?? ThemeMode.light.name;
     return kKnownThemeModes[themeModeString]!;
   }
 

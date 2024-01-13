@@ -1,13 +1,15 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
+import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ocr_engine_youdao/ocr_engine_youdao.dart';
 import 'package:shortid/shortid.dart';
 
-class OcrEngineCreateOrEditPage extends StatefulWidget {
-  const OcrEngineCreateOrEditPage({
+class OcrEnginesNewOrEditPage extends StatefulWidget {
+  const OcrEnginesNewOrEditPage({
     super.key,
     this.editable = true,
     this.ocrEngineType,
@@ -19,11 +21,11 @@ class OcrEngineCreateOrEditPage extends StatefulWidget {
   final OcrEngineConfig? ocrEngineConfig;
 
   @override
-  State<OcrEngineCreateOrEditPage> createState() =>
-      _OcrEngineCreateOrEditPageState();
+  State<OcrEnginesNewOrEditPage> createState() =>
+      _OcrEnginesNewOrEditPageState();
 }
 
-class _OcrEngineCreateOrEditPageState extends State<OcrEngineCreateOrEditPage> {
+class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
   final Map<String, TextEditingController> _textEditingControllerMap = {};
 
   String? _identifier;
@@ -36,10 +38,6 @@ class _OcrEngineCreateOrEditPageState extends State<OcrEngineCreateOrEditPage> {
         return YoudaoOcrEngine.optionKeys;
     }
     return [];
-  }
-
-  String t(String key, {List<String> args = const []}) {
-    return 'page_ocr_engine_create_or_edit.$key'.tr(args: args);
   }
 
   @override
@@ -79,7 +77,7 @@ class _OcrEngineCreateOrEditPageState extends State<OcrEngineCreateOrEditPage> {
     return CustomAppBar(
       title: widget.ocrEngineConfig != null
           ? OcrEngineName(widget.ocrEngineConfig!)
-          : Text(t('title')),
+          : Text(LocaleKeys.app_ocr_engines_new_title.tr()),
       actions: [
         if (widget.editable)
           CustomAppBarActionItem(
@@ -94,7 +92,9 @@ class _OcrEngineCreateOrEditPageState extends State<OcrEngineCreateOrEditPage> {
     return PreferenceList(
       children: [
         PreferenceListSection(
-          title: Text(t('pref_section_title_engine_type')),
+          title: Text(
+            LocaleKeys.app_ocr_engines_new_engine_type_title.tr(),
+          ),
           children: [
             PreferenceListItem(
               icon: _type == null ? null : OcrEngineIcon(_type!),
@@ -103,21 +103,18 @@ class _OcrEngineCreateOrEditPageState extends State<OcrEngineCreateOrEditPage> {
                   : Text('ocr_engine.$_type'.tr()),
               accessoryView: widget.editable ? null : Container(),
               onTap: widget.editable
-                  ? () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => OcrEngineTypeChooserPage(
-                            engineType: _type,
-                            onChoosed: (newEngineType) {
-                              setState(() {
-                                _type = newEngineType;
-                              });
-
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ),
+                  ? () async {
+                      final newEngineType = await context.push<String?>(
+                        PageId.ocrEngineTypes,
+                        extra: {
+                          'selectedEngineType': _type,
+                        },
                       );
+                      if (newEngineType != null) {
+                        setState(() {
+                          _type = newEngineType;
+                        });
+                      }
                     }
                   : null,
             ),
@@ -125,7 +122,9 @@ class _OcrEngineCreateOrEditPageState extends State<OcrEngineCreateOrEditPage> {
         ),
         if (widget.editable && _type != null)
           PreferenceListSection(
-            title: Text(t('pref_section_title_option')),
+            title: Text(
+              LocaleKeys.app_ocr_engines_new_option_title.tr(),
+            ),
             children: [
               for (var optionKey in _engineOptionKeys)
                 PreferenceListTextFieldItem(

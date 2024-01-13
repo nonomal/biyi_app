@@ -2,38 +2,36 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class OcrEngineTypeChooserPage extends StatefulWidget {
-  const OcrEngineTypeChooserPage({
+class OcrEngineTypesPage extends StatefulWidget {
+  const OcrEngineTypesPage({
     super.key,
-    this.engineType,
-    this.onChoosed,
+    this.selectedEngineType,
   });
 
-  final String? engineType;
-  final ValueChanged<String>? onChoosed;
+  final String? selectedEngineType;
 
   @override
-  State<OcrEngineTypeChooserPage> createState() =>
-      _OcrEngineTypeChooserPageState();
+  State<OcrEngineTypesPage> createState() => _OcrEngineTypesPageState();
 }
 
-class _OcrEngineTypeChooserPageState extends State<OcrEngineTypeChooserPage> {
-  String? _type;
+class _OcrEngineTypesPageState extends State<OcrEngineTypesPage> {
+  String? _selectedEngineType;
 
   @override
   void initState() {
-    _type = widget.engineType;
+    _selectedEngineType = widget.selectedEngineType;
     super.initState();
   }
 
   Future<void> _handleClickOk() async {
-    widget.onChoosed?.call(_type!);
+    context.pop<String?>(_selectedEngineType);
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
-      title: Text(t('title')),
+      title: Text(LocaleKeys.app_ocr_engine_types_title.tr()),
       actions: [
         CustomAppBarActionItem(
           text: LocaleKeys.ok.tr(),
@@ -53,9 +51,9 @@ class _OcrEngineTypeChooserPageState extends State<OcrEngineTypeChooserPage> {
                 icon: OcrEngineIcon(engineType),
                 title: Text('ocr_engine.$engineType'.tr()),
                 value: engineType,
-                groupValue: _type,
+                groupValue: _selectedEngineType,
                 onChanged: (newGroupValue) {
-                  _type = engineType;
+                  _selectedEngineType = engineType;
                   setState(() {});
                 },
               ),
@@ -71,9 +69,5 @@ class _OcrEngineTypeChooserPageState extends State<OcrEngineTypeChooserPage> {
       appBar: _buildAppBar(context),
       body: _buildBody(context),
     );
-  }
-
-  String t(String key, {List<String> args = const []}) {
-    return 'page_ocr_engine_type_chooser.$key'.tr(args: args);
   }
 }

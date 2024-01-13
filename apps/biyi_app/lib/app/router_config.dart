@@ -1,4 +1,7 @@
 import 'package:biyi_app/app/home/page.dart';
+import 'package:biyi_app/app/ocr_engine_types/page.dart';
+import 'package:biyi_app/app/ocr_engines/new/page.dart';
+import 'package:biyi_app/app/ocr_engines/page.dart';
 import 'package:biyi_app/app/settings/about/page.dart';
 import 'package:biyi_app/app/settings/advanced/page.dart';
 import 'package:biyi_app/app/settings/appearance/page.dart';
@@ -7,32 +10,42 @@ import 'package:biyi_app/app/settings/general/page.dart';
 import 'package:biyi_app/app/settings/keybinds/page.dart';
 import 'package:biyi_app/app/settings/language/page.dart';
 import 'package:biyi_app/app/settings/layout.dart';
-import 'package:biyi_app/app/settings/text_detections/page.dart';
-import 'package:biyi_app/app/settings/text_translations/page.dart';
+import 'package:biyi_app/app/settings/ocr_engines/page.dart';
+import 'package:biyi_app/app/settings/page.dart';
+import 'package:biyi_app/app/settings/translation_engines/page.dart';
 import 'package:biyi_app/app/supported_languages/page.dart';
-import 'package:biyi_app/app/text_detections/page.dart';
-import 'package:biyi_app/app/text_translations/page.dart';
+import 'package:biyi_app/app/translation_engine_types/page.dart';
+import 'package:biyi_app/app/translation_engines/new/page.dart';
+import 'package:biyi_app/app/translation_engines/page.dart';
 import 'package:biyi_app/app/translation_targets/new/page.dart';
+import 'package:biyi_app/includes.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 class PageId {
   static const String home = '/home';
-  // 设置相关的
-  static const String generalSetting = '/settings/general';
-  static const String appearanceSetting = '/settings/appearance';
-  static const String keybindsSetting = '/settings/keybinds';
-  static const String languageSetting = '/settings/language';
-  static const String advancedSetting = '/settings/advanced';
-  static const String textTranslationsSetting = '/settings/text-translations';
-  static const String textDetectionsSetting = '/settings/text-detections';
-  static const String about = '/settings/about';
-  static const String changelog = '/settings/changelog';
+  static const String ocrEngineTypes = '/ocr-engine-types';
+  static const String ocrEngines = '/ocr-engines';
+  static const String ocrEnginesNew = '/ocr-engines/new';
+  static const String settingsGeneral = '/settings/general';
+  static const String settingsAppearance = '/settings/appearance';
+  static const String settingsKeybinds = '/settings/keybinds';
+  static const String settingsLanguage = '/settings/language';
+  static const String settingsAdvanced = '/settings/advanced';
+  static const String settingsTranslationEngines =
+      '/settings/translation-engines';
+  static const String settingsOcrEngines = '/settings/ocr-engines';
+  static const String settingsAbout = '/settings/about';
+  static const String settingsChangelog = '/settings/changelog';
   static const String supportedLanguages = '/supported-languages';
-  static const String textTranslations = '/text-translations';
-  static const String textDetections = '/text-detections';
-  static const String newTranslationTarget = '/translation-targets/new';
+  static const String translationEngineTypes = '/translation-engine-types';
+  static const String translationEngines = '/translation-engines';
+  static const String translationEnginesNew = '/translation-engines/new';
+  static const String translationTargetsNew = '/translation-targets/new';
+
+  static String ocrEngine(String id) => '/ocr-engines/$id';
+  static String translationEngine(String id) => '/translation-engines/$id';
 }
 
 // GoRouter configuration
@@ -54,6 +67,39 @@ final routerConfig = GoRouter(
         );
       },
     ),
+    GoRoute(
+      path: '/ocr-engine-types',
+      builder: (context, state) {
+        return const OcrEngineTypesPage();
+      },
+    ),
+    GoRoute(
+      path: '/ocr-engines',
+      builder: (context, state) {
+        return OcrEnginesPage(
+          selectedEngineId: state.uri.queryParameters['selectedEngineId'],
+        );
+      },
+    ),
+    GoRoute(
+      path: '/ocr-engines/:id',
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>?;
+        return OcrEnginesNewOrEditPage(
+          ocrEngineConfig: extra?['ocrEngineConfig'],
+          editable: extra?['editable'],
+        );
+      },
+    ),
+    GoRoute(
+      path: '/ocr-engines/new',
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>?;
+        return OcrEnginesNewOrEditPage(
+          ocrEngineType: extra?['ocrEngineType'],
+        );
+      },
+    ),
     ShellRoute(
       pageBuilder: (context, state, child) {
         return FadeTransitionPage(
@@ -67,6 +113,11 @@ final routerConfig = GoRouter(
           redirect: (context, state) {
             return null;
           },
+          builder: (kIsAndroid || kIsIOS)
+              ? (context, state) {
+                  return const SettingsPage();
+                }
+              : null,
           routes: [
             GoRoute(
               path: 'about',
@@ -132,20 +183,20 @@ final routerConfig = GoRouter(
               },
             ),
             GoRoute(
-              path: 'text-detections',
+              path: 'ocr-engines',
               pageBuilder: (context, state) {
                 return FadeTransitionPage(
                   key: state.pageKey,
-                  child: const TextDetectionsSettingPage(),
+                  child: const OcrEnginesSettingPage(),
                 );
               },
             ),
             GoRoute(
-              path: 'text-translations',
+              path: 'translation-engines',
               pageBuilder: (context, state) {
                 return FadeTransitionPage(
                   key: state.pageKey,
-                  child: const TextTranslationsSettingPage(),
+                  child: const TranslationEnginesSettingPage(),
                 );
               },
             ),
@@ -162,18 +213,35 @@ final routerConfig = GoRouter(
       },
     ),
     GoRoute(
-      path: '/text-detections',
+      path: '/translation-engine-types',
       builder: (context, state) {
-        return TextDetectionsPage(
+        return const TranslationEngineTypesPage();
+      },
+    ),
+    GoRoute(
+      path: '/translation-engines',
+      builder: (context, state) {
+        return TranslationEnginesPage(
           selectedEngineId: state.uri.queryParameters['selectedEngineId'],
         );
       },
     ),
     GoRoute(
-      path: '/text-translations',
+      path: '/translation-engines/:id',
       builder: (context, state) {
-        return TextTranslationsPage(
-          selectedEngineId: state.uri.queryParameters['selectedEngineId'],
+        final extra = state.extra as Map<String, dynamic>?;
+        return TranslationEnginesNewOrEditPage(
+          engineConfig: extra?['engineConfig'],
+          editable: extra?['editable'],
+        );
+      },
+    ),
+    GoRoute(
+      path: '/translation-engines/new',
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>?;
+        return TranslationEnginesNewOrEditPage(
+          engineType: extra?['engineType'],
         );
       },
     ),
