@@ -1,3 +1,4 @@
+import 'package:biyi_app/app/home/page.dart';
 import 'package:biyi_app/app/settings/about/page.dart';
 import 'package:biyi_app/app/settings/advanced/page.dart';
 import 'package:biyi_app/app/settings/appearance/page.dart';
@@ -8,7 +9,10 @@ import 'package:biyi_app/app/settings/language/page.dart';
 import 'package:biyi_app/app/settings/layout.dart';
 import 'package:biyi_app/app/settings/text_detections/page.dart';
 import 'package:biyi_app/app/settings/text_translations/page.dart';
-import 'package:biyi_app/pages/pages.dart';
+import 'package:biyi_app/app/supported_languages/page.dart';
+import 'package:biyi_app/app/text_detections/page.dart';
+import 'package:biyi_app/app/text_translations/page.dart';
+import 'package:biyi_app/app/translation_targets/new/page.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
@@ -25,6 +29,10 @@ class PageId {
   static const String textDetectionsSetting = '/settings/text-detections';
   static const String about = '/settings/about';
   static const String changelog = '/settings/changelog';
+  static const String supportedLanguages = '/supported-languages';
+  static const String textTranslations = '/text-translations';
+  static const String textDetections = '/text-detections';
+  static const String newTranslationTarget = '/translation-targets/new';
 }
 
 // GoRouter configuration
@@ -144,6 +152,36 @@ final routerConfig = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: '/supported-languages',
+      builder: (context, state) {
+        return SupportedLanguagesPage(
+          selectedLanguage: state.uri.queryParameters['selectedLanguage'],
+        );
+      },
+    ),
+    GoRoute(
+      path: '/text-detections',
+      builder: (context, state) {
+        return TextDetectionsPage(
+          selectedEngineId: state.uri.queryParameters['selectedEngineId'],
+        );
+      },
+    ),
+    GoRoute(
+      path: '/text-translations',
+      builder: (context, state) {
+        return TextTranslationsPage(
+          selectedEngineId: state.uri.queryParameters['selectedEngineId'],
+        );
+      },
+    ),
+    GoRoute(
+      path: '/translation-targets/new',
+      builder: (context, state) {
+        return const TranslationTargetNewPage();
+      },
     ),
   ],
 );

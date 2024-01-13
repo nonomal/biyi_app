@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
+import 'package:biyi_app/app/home/limited_functionality_banner.dart';
+import 'package:biyi_app/app/home/new_version_found_banner.dart';
+import 'package:biyi_app/app/home/toolbar_item_always_on_top.dart';
+import 'package:biyi_app/app/home/toolbar_item_settings.dart';
+import 'package:biyi_app/app/home/translation_input_view.dart';
+import 'package:biyi_app/app/home/translation_results_view.dart';
+import 'package:biyi_app/app/home/translation_target_select_view.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/models.dart';
 import 'package:biyi_app/networking/networking.dart';
-import 'package:biyi_app/pages/desktop_popup/limited_functionality_banner.dart';
-import 'package:biyi_app/pages/desktop_popup/new_version_found_banner.dart';
-import 'package:biyi_app/pages/desktop_popup/toolbar_item_always_on_top.dart';
-import 'package:biyi_app/pages/desktop_popup/toolbar_item_settings.dart';
-import 'package:biyi_app/pages/desktop_popup/translation_input_view.dart';
-import 'package:biyi_app/pages/desktop_popup/translation_results_view.dart';
-import 'package:biyi_app/pages/desktop_popup/translation_target_select_view.dart';
 import 'package:biyi_app/services/services.dart';
 import 'package:biyi_app/utilities/utilities.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -178,34 +178,36 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
 
     // 初始化托盘图标
     await _initTrayIcon();
-    await Future.delayed(const Duration(milliseconds: 100));
-    WindowOptions windowOptions = const WindowOptions(
-      titleBarStyle: TitleBarStyle.hidden,
-      windowButtonVisibility: false,
-      skipTaskbar: true,
-      backgroundColor: Colors.transparent,
-    );
-    windowManager.waitUntilReadyToShow(windowOptions, () async {
-      if (kIsMacOS) {
-        await windowManager.setVisibleOnAllWorkspaces(
-          true,
-          visibleOnFullScreen: true,
-        );
-      }
-      if (kIsLinux || kIsWindows) {
-        Display primaryDisplay = await screenRetriever.getPrimaryDisplay();
-        Size windowSize = await windowManager.getSize();
-        _lastShownPosition = Offset(
-          primaryDisplay.size.width - windowSize.width - 50,
-          50,
-        );
-        await windowManager.setPosition(_lastShownPosition);
-      }
-      await Future.delayed(const Duration(milliseconds: 100));
-      await _windowShow(
-        isShowBelowTray: kIsMacOS,
+    await Future.delayed(const Duration(milliseconds: 400));
+
+    // 初始化窗口
+    const size = Size(380, 185);
+    const minimunSize = Size(380, 185);
+    const maximumSize = Size(380, 600);
+
+    await Future.any([
+      windowManager.setSize(size),
+      windowManager.setMinimumSize(minimunSize),
+      windowManager.setMaximumSize(maximumSize),
+      windowManager.setSkipTaskbar(true),
+      windowManager.setTitleBarStyle(
+        TitleBarStyle.hidden,
+        windowButtonVisibility: false,
+      ),
+      windowManager.setPreventClose(true),
+    ]);
+    if (kIsLinux || kIsWindows) {
+      Display primaryDisplay = await screenRetriever.getPrimaryDisplay();
+      Size windowSize = await windowManager.getSize();
+      _lastShownPosition = Offset(
+        primaryDisplay.size.width - windowSize.width - 50,
+        50,
       );
-    });
+      await windowManager.setPosition(_lastShownPosition);
+    }
+    await _windowShow(
+      isShowBelowTray: kIsMacOS,
+    );
     setState(() {});
   }
 
@@ -873,8 +875,6 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
-    handleDismissed() => setState(() {});
-
     return PreferredSize(
       preferredSize: const Size.fromHeight(34),
       child: Container(
@@ -884,9 +884,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
           children: [
             const ToolbarItemAlwaysOnTop(),
             Expanded(child: Container()),
-            ToolbarItemSettings(
-              onSubPageDismissed: handleDismissed,
-            ),
+            const ToolbarItemSettings(),
           ],
         ),
       ),

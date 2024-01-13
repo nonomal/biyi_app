@@ -201,16 +201,6 @@ abstract class LocaleKeys {
   static const page_desktop_popup_msg_capture_screen_area_canceled =
       'page_desktop_popup.msg_capture_screen_area_canceled';
   static const page_desktop_popup = 'page_desktop_popup';
-  static const page_language_chooser_title = 'page_language_chooser.title';
-  static const page_language_chooser_pref_section_title_all =
-      'page_language_chooser.pref_section_title_all';
-  static const page_language_chooser = 'page_language_chooser';
-  static const page_ocr_engine_chooser_title = 'page_ocr_engine_chooser.title';
-  static const page_ocr_engine_chooser_pref_section_title_private =
-      'page_ocr_engine_chooser.pref_section_title_private';
-  static const page_ocr_engine_chooser_pref_item_title_no_available_engines =
-      'page_ocr_engine_chooser.pref_item_title_no_available_engines';
-  static const page_ocr_engine_chooser = 'page_ocr_engine_chooser';
   static const page_ocr_engine_create_or_edit_title =
       'page_ocr_engine_create_or_edit.title';
   static const page_ocr_engine_create_or_edit_pref_section_title_engine_type =
@@ -222,12 +212,6 @@ abstract class LocaleKeys {
   static const page_ocr_engine_type_chooser_title =
       'page_ocr_engine_type_chooser.title';
   static const page_ocr_engine_type_chooser = 'page_ocr_engine_type_chooser';
-  static const page_ocr_engines_manage_title = 'page_ocr_engines_manage.title';
-  static const page_ocr_engines_manage_pref_section_title_private =
-      'page_ocr_engines_manage.pref_section_title_private';
-  static const page_ocr_engines_manage_pref_section_description_private =
-      'page_ocr_engines_manage.pref_section_description_private';
-  static const page_ocr_engines_manage = 'page_ocr_engines_manage';
   static const page_settings_title = 'page_settings.title';
   static const page_settings_text_version = 'page_settings.text_version';
   static const page_settings_pref_section_title_general =
@@ -308,37 +292,6 @@ abstract class LocaleKeys {
       'page_translation_engines_manage.pref_section_description_private';
   static const page_translation_engines_manage =
       'page_translation_engines_manage';
-  static const page_translation_target_new_title =
-      'page_translation_target_new.title';
-  static const page_translation_target_new_title_with_edit =
-      'page_translation_target_new.title_with_edit';
-  static const page_translation_target_new_source_language =
-      'page_translation_target_new.source_language';
-  static const page_translation_target_new_target_language =
-      'page_translation_target_new.target_language';
-  static const page_translation_target_new = 'page_translation_target_new';
-  static const page_your_plan_selector_title = 'page_your_plan_selector.title';
-  static const page_your_plan_selector_label_free =
-      'page_your_plan_selector.label_free';
-  static const page_your_plan_selector_label_forever =
-      'page_your_plan_selector.label_forever';
-  static const page_your_plan_selector_btn_plan_benefits =
-      'page_your_plan_selector.btn_plan_benefits';
-  static const page_your_plan_selector_btn_activate =
-      'page_your_plan_selector.btn_activate';
-  static const page_your_plan_selector_activation_code_input_hint =
-      'page_your_plan_selector.activation_code_input_hint';
-  static const page_your_plan_selector_pref_section_title_plans =
-      'page_your_plan_selector.pref_section_title_plans';
-  static const page_your_plan_selector_pref_section_title_activate_your_plan =
-      'page_your_plan_selector.pref_section_title_activate_your_plan';
-  static const page_your_plan_selector_pref_section_title_your_plan_expiry_date =
-      'page_your_plan_selector.pref_section_title_your_plan_expiry_date';
-  static const page_your_plan_selector_pref_item_title_get_activation_code =
-      'page_your_plan_selector.pref_item_title_get_activation_code';
-  static const page_your_plan_selector_msg_plan_pro_coming_soon =
-      'page_your_plan_selector.msg_plan_pro_coming_soon';
-  static const page_your_plan_selector = 'page_your_plan_selector';
   static const widget_record_shortcut_dialog_title =
       'widget_record_shortcut_dialog.title';
   static const widget_record_shortcut_dialog = 'widget_record_shortcut_dialog';
@@ -481,5 +434,31 @@ abstract class LocaleKeys {
   static const app_settings_text_translations =
       'app.settings.text_translations';
   static const app_settings = 'app.settings';
+  static const app_text_detections_title = 'app.text_detections.title';
+  static const app_text_detections__msg_no_available_engines =
+      'app.text_detections._msg.no_available_engines';
+  static const app_text_detections__msg = 'app.text_detections._msg';
+  static const app_text_detections_private_title =
+      'app.text_detections.private.title';
+  static const app_text_detections_private = 'app.text_detections.private';
+  static const app_text_detections = 'app.text_detections';
+  static const app_text_translations_title = 'app.text_translations.title';
+  static const app_text_translations__msg_no_available_engines =
+      'app.text_translations._msg.no_available_engines';
+  static const app_text_translations__msg = 'app.text_translations._msg';
+  static const app_text_translations_private_title =
+      'app.text_translations.private.title';
+  static const app_text_translations_private = 'app.text_translations.private';
+  static const app_text_translations = 'app.text_translations';
+  static const app_translation_targets_new_title =
+      'app.translation_targets.new.title';
+  static const app_translation_targets_new_title_with_edit =
+      'app.translation_targets.new.title_with_edit';
+  static const app_translation_targets_new_source_language =
+      'app.translation_targets.new.source_language';
+  static const app_translation_targets_new_target_language =
+      'app.translation_targets.new.target_language';
+  static const app_translation_targets_new = 'app.translation_targets.new';
+  static const app_translation_targets = 'app.translation_targets';
   static const app = 'app';
 }

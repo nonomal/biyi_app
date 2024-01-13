@@ -1,5 +1,5 @@
 import 'package:biyi_app/includes.dart';
-import 'package:biyi_app/router_config.dart';
+import 'package:biyi_app/app/router_config.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rise_ui/rise_ui.dart';
@@ -20,6 +20,18 @@ class _TabHomepageSceneState extends State<TabHomepageScene> {
           label: 'settings/general',
           onPressed: () {
             context.go(PageId.generalSetting);
+          },
+        ),
+        Button(
+          label: '/text-detections',
+          onPressed: () {
+            context.go(PageId.textDetections);
+          },
+        ),
+        Button(
+          label: '/text-translations',
+          onPressed: () {
+            context.go(PageId.textTranslations);
           },
         ),
       ],

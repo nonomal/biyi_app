@@ -1,34 +1,31 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class LanguageChooserPage extends StatefulWidget {
-  const LanguageChooserPage({
+class SupportedLanguagesPage extends StatefulWidget {
+  const SupportedLanguagesPage({
     super.key,
-    this.initialLanguage,
-    this.onChoosed,
+    this.selectedLanguage,
   });
 
-  final String? initialLanguage;
-  final ValueChanged<String>? onChoosed;
+  final String? selectedLanguage;
 
   @override
-  State<StatefulWidget> createState() => _LanguageChooserPageState();
+  State<StatefulWidget> createState() => _SupportedLanguagesPageState();
 }
 
-class _LanguageChooserPageState extends State<LanguageChooserPage> {
-  String? _language;
+class _SupportedLanguagesPageState extends State<SupportedLanguagesPage> {
+  String? _selectedLanguage;
 
   @override
   void initState() {
-    _language = widget.initialLanguage;
+    _selectedLanguage = widget.selectedLanguage;
     super.initState();
   }
 
-  Future<void> _handleClickOk() async {
-    widget.onChoosed?.call(_language!);
-
-    Navigator.of(context).pop();
+  void _handleClickOk() {
+    context.pop<String?>(_selectedLanguage);
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
@@ -54,9 +51,9 @@ class _LanguageChooserPageState extends State<LanguageChooserPage> {
                 title: LanguageLabel(supportedLanguage),
                 accessoryView: Container(),
                 value: supportedLanguage,
-                groupValue: _language,
+                groupValue: _selectedLanguage,
                 onChanged: (newGroupValue) {
-                  _language = supportedLanguage;
+                  _selectedLanguage = supportedLanguage;
                   setState(() {});
                 },
               ),

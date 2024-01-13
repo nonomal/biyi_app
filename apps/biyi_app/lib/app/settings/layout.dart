@@ -1,7 +1,7 @@
 import 'dart:io';
 
+import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/router_config.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/foundation.dart';
@@ -10,6 +10,7 @@ import 'package:flutter/material.dart'
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rise_ui/rise_ui.dart';
+import 'package:window_manager/window_manager.dart';
 
 class _NavigationRailLeading extends StatelessWidget {
   const _NavigationRailLeading({required this.label});
@@ -53,8 +54,41 @@ class SettingsLayout extends StatefulWidget {
   State<SettingsLayout> createState() => _SettingsLayoutState();
 }
 
-class _SettingsLayoutState extends State<SettingsLayout> {
+class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
   String? _selectedDestination = PageId.generalSetting;
+
+  @override
+  void initState() {
+    super.initState();
+    windowManager.addListener(this);
+  }
+
+  @override
+  void dispose() {
+    windowManager.removeListener(this);
+    super.dispose();
+  }
+
+  @override
+  Future<void> onWindowClose() async {
+    const size = Size(380, 185);
+    const minimunSize = Size(380, 185);
+    const maximumSize = Size(380, 600);
+
+    await windowManager.hide();
+    await Future.any([
+      windowManager.setSize(size),
+      windowManager.setMinimumSize(minimunSize),
+      windowManager.setMaximumSize(maximumSize),
+      windowManager.setSkipTaskbar(true),
+      windowManager.setTitleBarStyle(
+        TitleBarStyle.hidden,
+        windowButtonVisibility: false,
+      ),
+      windowManager.setPreventClose(true),
+    ]);
+    context.go(PageId.home);
+  }
 
   Future<void> _handleDestinationSelected(String value) async {
     setState(() {

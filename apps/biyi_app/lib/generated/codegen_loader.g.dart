@@ -191,23 +191,12 @@ class CodegenLoader extends AssetLoader {
       "msg_please_enter_word_or_text": "未输入或未提取到文本",
       "msg_capture_screen_area_canceled": "截取屏幕区域已取消"
     },
-    "page_language_chooser": {"title": "选择语言", "pref_section_title_all": "全部"},
-    "page_ocr_engine_chooser": {
-      "title": "文字识别引擎",
-      "pref_section_title_private": "私有",
-      "pref_item_title_no_available_engines": "无可用的引擎"
-    },
     "page_ocr_engine_create_or_edit": {
       "title": "添加文字识别引擎",
       "pref_section_title_engine_type": "引擎类型",
       "pref_section_title_option": "选项"
     },
     "page_ocr_engine_type_chooser": {"title": "引擎类型"},
-    "page_ocr_engines_manage": {
-      "title": "文字识别引擎",
-      "pref_section_title_private": "私有",
-      "pref_section_description_private": "长按项目以重新排序"
-    },
     "page_settings": {
       "title": "设置",
       "text_version": "版本 {} BUILD {}",
@@ -251,25 +240,6 @@ class CodegenLoader extends AssetLoader {
       "title": "文本翻译引擎",
       "pref_section_title_private": "私有",
       "pref_section_description_private": "长按项目以重新排序"
-    },
-    "page_translation_target_new": {
-      "title": "添加翻译目标",
-      "title_with_edit": "编辑翻译目标",
-      "source_language": "源语言",
-      "target_language": "目标语言"
-    },
-    "page_your_plan_selector": {
-      "title": "选择您的会员计划",
-      "label_free": "免费",
-      "label_forever": "永久",
-      "btn_plan_benefits": "会员权益",
-      "btn_activate": "立即激活",
-      "activation_code_input_hint": "请输入激活码",
-      "pref_section_title_plans": "选择适合您的会员方案。",
-      "pref_section_title_activate_your_plan": "激活您的会员计划",
-      "pref_section_title_your_plan_expiry_date": "您的计划到期日",
-      "pref_item_title_get_activation_code": "获取会员计划激活码",
-      "msg_plan_pro_coming_soon": "即将推出，敬请期待。"
     },
     "widget_record_shortcut_dialog": {"title": "自定义快捷键"},
     "app": {
@@ -338,6 +308,24 @@ class CodegenLoader extends AssetLoader {
         "text_translations": {
           "title": "文本翻译",
           "private": {"title": "私有", "description": "长按项目以重新排序"}
+        }
+      },
+      "text_detections": {
+        "title": "文字识别引擎",
+        "_msg": {"no_available_engines": "无可用的引擎"},
+        "private": {"title": "私有"}
+      },
+      "text_translations": {
+        "title": "文本翻译引擎",
+        "_msg": {"no_available_engines": "无可用的引擎"},
+        "private": {"title": "私有"}
+      },
+      "translation_targets": {
+        "new": {
+          "title": "添加翻译目标",
+          "title_with_edit": "编辑翻译目标",
+          "source_language": "源语言",
+          "target_language": "目标语言"
         }
       }
     }
@@ -525,26 +513,12 @@ class CodegenLoader extends AssetLoader {
       "msg_capture_screen_area_canceled":
           "Capture screen area has been canceled"
     },
-    "page_language_chooser": {
-      "title": "Choose language",
-      "pref_section_title_all": "All"
-    },
-    "page_ocr_engine_chooser": {
-      "title": "Text Detection Engine",
-      "pref_section_title_private": "Private",
-      "pref_item_title_no_available_engines": "No available engines"
-    },
     "page_ocr_engine_create_or_edit": {
       "title": "Add Text Detection Engine",
       "pref_section_title_engine_type": "Engine type",
       "pref_section_title_option": "Option"
     },
     "page_ocr_engine_type_chooser": {"title": "Engine Type"},
-    "page_ocr_engines_manage": {
-      "title": "Text Detection Engine",
-      "pref_section_title_private": "Private",
-      "pref_section_description_private": "Long press an item to reorder it"
-    },
     "page_settings": {
       "title": "Settings",
       "text_version": "Version {} BUILD {}",
@@ -588,25 +562,6 @@ class CodegenLoader extends AssetLoader {
       "title": "Text Translation Engine",
       "pref_section_title_private": "Private",
       "pref_section_description_private": "Long press an item to reorder it"
-    },
-    "page_translation_target_new": {
-      "title": "Add Translation Target",
-      "title_with_edit": "Edit Translation Target",
-      "source_language": "Source language",
-      "target_language": "Target language"
-    },
-    "page_your_plan_selector": {
-      "title": "Select Your Plan",
-      "label_free": "Free",
-      "label_forever": "Forever",
-      "btn_plan_benefits": "Plan benefits",
-      "btn_activate": "activate",
-      "activation_code_input_hint": "Activation code",
-      "pref_section_title_plans": "Choose the right plan for you.",
-      "pref_section_title_activate_your_plan": "Activate Your Pla",
-      "pref_section_title_your_plan_expiry_date": "Your plan expiry date",
-      "pref_item_title_get_activation_code": "Get activation code",
-      "msg_plan_pro_coming_soon": "Coming soon, Please stay tuned."
     },
     "widget_record_shortcut_dialog": {"title": "Customize your shortcut"},
     "app": {
@@ -687,6 +642,24 @@ class CodegenLoader extends AssetLoader {
             "title": "Private",
             "description": "Long press an item to reorder it"
           }
+        }
+      },
+      "text_detections": {
+        "title": "Text Detections Engines",
+        "_msg": {"no_available_engines": "No available engines"},
+        "private": {"title": "Private"}
+      },
+      "text_translations": {
+        "title": "Text Translation Engines",
+        "_msg": {"no_available_engines": "No available engines"},
+        "private": {"title": "Private"}
+      },
+      "translation_targets": {
+        "new": {
+          "title": "Add Translation Target",
+          "title_with_edit": "Edit Translation Target",
+          "source_language": "Source language",
+          "target_language": "Target language"
         }
       }
     }

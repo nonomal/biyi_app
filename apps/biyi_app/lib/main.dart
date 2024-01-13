@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/codegen_loader.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:biyi_app/providers/providers.dart';
-import 'package:biyi_app/router_config.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -39,16 +39,18 @@ void main() async {
 
   if (!kIsWeb) {
     const WindowOptions windowOptions = WindowOptions(
-      size: Size(840, 600),
-      center: true,
-      minimumSize: Size(840, 600),
       alwaysOnTop: false,
       skipTaskbar: false,
       titleBarStyle: TitleBarStyle.hidden,
-      windowButtonVisibility: true,
+      windowButtonVisibility: false,
     );
     windowManager.waitUntilReadyToShow(windowOptions, () async {
-      await windowManager.show();
+      if (kIsMacOS) {
+        await windowManager.setVisibleOnAllWorkspaces(
+          true,
+          visibleOnFullScreen: true,
+        );
+      }
     });
   }
 

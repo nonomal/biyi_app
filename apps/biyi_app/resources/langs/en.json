@@ -185,15 +185,6 @@
     "msg_please_enter_word_or_text": "No text entered or text not extracted",
     "msg_capture_screen_area_canceled": "Capture screen area has been canceled"
   },
-  "page_language_chooser": {
-    "title": "Choose language",
-    "pref_section_title_all": "All"
-  },
-  "page_ocr_engine_chooser": {
-    "title": "Text Detection Engine",
-    "pref_section_title_private": "Private",
-    "pref_item_title_no_available_engines": "No available engines"
-  },
   "page_ocr_engine_create_or_edit": {
     "title": "Add Text Detection Engine",
     "pref_section_title_engine_type": "Engine type",
@@ -201,11 +192,6 @@
   },
   "page_ocr_engine_type_chooser": {
     "title": "Engine Type"
-  },
-  "page_ocr_engines_manage": {
-    "title": "Text Detection Engine",
-    "pref_section_title_private": "Private",
-    "pref_section_description_private": "Long press an item to reorder it"
   },
   "page_settings": {
     "title": "Settings",
@@ -254,25 +240,6 @@
     "title": "Text Translation Engine",
     "pref_section_title_private": "Private",
     "pref_section_description_private": "Long press an item to reorder it"
-  },
-  "page_translation_target_new": {
-    "title": "Add Translation Target",
-    "title_with_edit": "Edit Translation Target",
-    "source_language": "Source language",
-    "target_language": "Target language"
-  },
-  "page_your_plan_selector": {
-    "title": "Select Your Plan",
-    "label_free": "Free",
-    "label_forever": "Forever",
-    "btn_plan_benefits": "Plan benefits",
-    "btn_activate": "activate",
-    "activation_code_input_hint": "Activation code",
-    "pref_section_title_plans": "Choose the right plan for you.",
-    "pref_section_title_activate_your_plan": "Activate Your Pla",
-    "pref_section_title_your_plan_expiry_date": "Your plan expiry date",
-    "pref_item_title_get_activation_code": "Get activation code",
-    "msg_plan_pro_coming_soon": "Coming soon, Please stay tuned."
   },
   "widget_record_shortcut_dialog": {
     "title": "Customize your shortcut"
@@ -385,6 +352,32 @@
           "title": "Private",
           "description": "Long press an item to reorder it"
         }
+      }
+    },
+    "text_detections": {
+      "title": "Text Detections Engines",
+      "_msg": {
+        "no_available_engines": "No available engines"
+      },
+      "private": {
+        "title": "Private"
+      }
+    },
+    "text_translations": {
+      "title": "Text Translation Engines",
+      "_msg": {
+        "no_available_engines": "No available engines"
+      },
+      "private": {
+        "title": "Private"
+      }
+    },
+    "translation_targets": {
+      "new": {
+        "title": "Add Translation Target",
+        "title_with_edit": "Edit Translation Target",
+        "source_language": "Source language",
+        "target_language": "Target language"
       }
     }
   }

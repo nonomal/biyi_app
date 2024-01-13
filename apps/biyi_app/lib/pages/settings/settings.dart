@@ -20,14 +20,6 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   Configuration get _configuration => localDb.configuration;
 
-  List<TranslationEngineConfig> get _engineList {
-    return (localDb.engines.list(where: (e) => !e.disabled));
-  }
-
-  List<OcrEngineConfig> get _ocrEngineList {
-    return (localDb.ocrEngines.list(where: (e) => !e.disabled));
-  }
-
   // bool _launchAtStartupIsEnabled = false;
 
   @override
@@ -59,61 +51,6 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _buildBody(BuildContext context) {
     return PreferenceList(
       children: [
-        PreferenceListSection(
-          title: Text(t('pref_section_title_general')),
-          children: [
-            PreferenceListItem(
-              title: Text(t('pref_item_title_extract_text')),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const SettingExtractTextPage(),
-                  ),
-                );
-              },
-            ),
-            PreferenceListItem(
-              title: Text(t('pref_item_title_translate')),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const SettingTranslatePage(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-        PreferenceListSection(
-          title: Text(t('pref_section_title_appearance')),
-          children: [
-            PreferenceListItem(
-              title: Text(t('pref_item_title_interface')),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const SettingInterfacePage(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-        PreferenceListSection(
-          title: Text(t('pref_section_title_shortcuts')),
-          children: [
-            PreferenceListItem(
-              title: Text(t('pref_item_title_keyboard_shortcuts')),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const SettingShortcutsPage(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
         PreferenceListSection(
           title: Text(t('pref_section_title_input_settings')),
           children: [
@@ -159,55 +96,6 @@ class _SettingsPageState extends State<SettingsPage> {
         //     ),
         //   ],
         // ),
-        PreferenceListSection(
-          title: Text(t('pref_section_title_service_integration')),
-          children: [
-            PreferenceListItem(
-              title: Text(t('pref_item_title_engines')),
-              detailText: Row(
-                children: [
-                  for (var item in _engineList)
-                    Container(
-                      margin: const EdgeInsets.only(left: 4),
-                      child: TranslationEngineIcon(
-                        item.type,
-                        size: 18,
-                      ),
-                    ),
-                ],
-              ),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const TranslationEnginesManagePage(),
-                  ),
-                );
-              },
-            ),
-            PreferenceListItem(
-              title: Text(t('pref_item_title_ocr_engines')),
-              detailText: Row(
-                children: [
-                  for (var item in _ocrEngineList)
-                    Container(
-                      margin: const EdgeInsets.only(left: 4),
-                      child: OcrEngineIcon(
-                        item.type,
-                        size: 18,
-                      ),
-                    ),
-                ],
-              ),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const OcrEnginesManagePage(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
         PreferenceListSection(
           title: Text(t('pref_section_title_others')),
           children: [

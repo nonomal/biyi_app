@@ -2,12 +2,14 @@ import 'package:biyi_advanced_features/models/models.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/models.dart';
 import 'package:biyi_app/pages/pages.dart';
+import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/services/services.dart';
 import 'package:biyi_app/utilities/utilities.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class GeneralSettingPage extends StatefulWidget {
   const GeneralSettingPage({super.key});
@@ -69,18 +71,15 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                   return OcrEngineName(_defaultOcrEngineConfig!);
                 },
               ),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => OcrEngineChooserPage(
-                      initialOcrEngineConfig: _defaultOcrEngineConfig,
-                      onChoosed: (ocrEngineConfig) {
-                        _configuration.defaultOcrEngineId =
-                            ocrEngineConfig.identifier;
-                      },
-                    ),
-                  ),
+              onTap: () async {
+                final OcrEngineConfig? ocrEngineConfig =
+                    await context.push<OcrEngineConfig?>(
+                  '${PageId.textDetections}?selectedEngineId=${_configuration.defaultOcrEngineId}',
                 );
+                if (ocrEngineConfig != null) {
+                  _configuration.defaultOcrEngineId =
+                      ocrEngineConfig.identifier;
+                }
               },
             ),
           ],
@@ -121,19 +120,15 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                   );
                 },
               ),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => TranslationEngineChooserPage(
-                      initialEngineConfig:
-                          _configuration.defaultTranslateEngineConfig,
-                      onChoosed: (engineConfig) {
-                        _configuration.defaultTranslateEngineId =
-                            engineConfig.identifier;
-                      },
-                    ),
-                  ),
+              onTap: () async {
+                final TranslationEngineConfig? engineConfig =
+                    await context.push<TranslationEngineConfig?>(
+                  '${PageId.textTranslations}?selectedEngineId=${_configuration.defaultTranslateEngineId}',
                 );
+                if (engineConfig != null) {
+                  _configuration.defaultTranslateEngineId =
+                      engineConfig.identifier;
+                }
               },
             ),
           ],
@@ -180,18 +175,14 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                     );
                   },
                 ),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => TranslationEngineChooserPage(
-                        initialEngineConfig: _configuration.defaultEngineConfig,
-                        onChoosed: (engineConfig) {
-                          _configuration.defaultEngineId =
-                              engineConfig.identifier;
-                        },
-                      ),
-                    ),
+                onTap: () async {
+                  final TranslationEngineConfig? engineConfig =
+                      await context.push<TranslationEngineConfig?>(
+                    '${PageId.textTranslations}?selectedEngineId=${_configuration.defaultEngineId}',
                   );
+                  if (engineConfig != null) {
+                    _configuration.defaultEngineId = engineConfig.identifier;
+                  }
                 },
               ),
             ],
@@ -225,13 +216,9 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                       );
                     },
                   ),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => TranslationTargetNewPage(
-                          translationTarget: translationTarget,
-                        ),
-                      ),
+                  onTap: () async {
+                    await context.push<TranslationEngineConfig?>(
+                      PageId.newTranslationTarget,
                     );
                   },
                 ),
@@ -243,11 +230,9 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                   ),
                 ),
                 accessoryView: Container(),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const TranslationTargetNewPage(),
-                    ),
+                onTap: () async {
+                  await context.push<TranslationEngineConfig?>(
+                    PageId.newTranslationTarget,
                   );
                 },
               ),
