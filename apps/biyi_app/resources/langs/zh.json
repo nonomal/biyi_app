@@ -354,6 +354,12 @@
         }
       }
     },
+    "supported_languages": {
+      "title": "支持的语言",
+      "all": {
+        "title": "全部"
+      }
+    },
     "text_detections": {
       "title": "文字识别引擎",
       "_msg": {

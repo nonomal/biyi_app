@@ -13,7 +13,6 @@ const _kScaffoldBackgroundColor = Color(0xff1d1d1d);
 
 const _kDefaultTextStyle = TextStyle(
   color: _kDefaultTextColor,
-  fontFamily: 'MiSans',
 );
 
 final darkThemeData = md.ThemeData(
@@ -27,7 +26,6 @@ final darkThemeData = md.ThemeData(
   canvasColor: _kCanvasColor,
   scaffoldBackgroundColor: _kScaffoldBackgroundColor,
   dialogBackgroundColor: _kCanvasColor,
-  fontFamily: 'MiSans',
   iconTheme: const IconThemeData(
     color: Colors.white,
   ),

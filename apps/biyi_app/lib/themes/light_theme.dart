@@ -13,7 +13,6 @@ const _kScaffoldBackgroundColor = Color(0xfff2f3f5);
 
 const _kDefaultTextStyle = TextStyle(
   color: _kDefaultTextColor,
-  fontFamily: 'MiSans',
 );
 
 final lightThemeData = md.ThemeData(
@@ -28,7 +27,6 @@ final lightThemeData = md.ThemeData(
   scaffoldBackgroundColor: _kScaffoldBackgroundColor,
   dividerColor: Colors.grey.withOpacity(0.2),
   dialogBackgroundColor: _kCanvasColor,
-  fontFamily: 'MiSans',
   textTheme: md.TextTheme(
     titleLarge: _kDefaultTextStyle.copyWith(
       fontSize: 18,

@@ -310,6 +310,10 @@ class CodegenLoader extends AssetLoader {
           "private": {"title": "私有", "description": "长按项目以重新排序"}
         }
       },
+      "supported_languages": {
+        "title": "支持的语言",
+        "all": {"title": "全部"}
+      },
       "text_detections": {
         "title": "文字识别引擎",
         "_msg": {"no_available_engines": "无可用的引擎"},
@@ -643,6 +647,10 @@ class CodegenLoader extends AssetLoader {
             "description": "Long press an item to reorder it"
           }
         }
+      },
+      "supported_languages": {
+        "title": "Supported Languages",
+        "all": {"title": "All"}
       },
       "text_detections": {
         "title": "Text Detections Engines",

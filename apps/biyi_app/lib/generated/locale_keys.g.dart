@@ -436,6 +436,11 @@ abstract class LocaleKeys {
   static const app_settings_text_translations =
       'app.settings.text_translations';
   static const app_settings = 'app.settings';
+  static const app_supported_languages_title = 'app.supported_languages.title';
+  static const app_supported_languages_all_title =
+      'app.supported_languages.all.title';
+  static const app_supported_languages_all = 'app.supported_languages.all';
+  static const app_supported_languages = 'app.supported_languages';
   static const app_text_detections_title = 'app.text_detections.title';
   static const app_text_detections__msg_no_available_engines =
       'app.text_detections._msg.no_available_engines';

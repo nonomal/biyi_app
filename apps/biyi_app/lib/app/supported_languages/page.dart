@@ -1,5 +1,8 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/includes.dart';
+import 'package:biyi_app/utilities/language_util.dart';
+import 'package:biyi_app/widgets/custom_app_bar/custom_app_bar.dart';
+import 'package:biyi_app/widgets/language_label/language_label.dart';
+import 'package:biyi_app/widgets/preference_list/preference_list.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -31,7 +34,9 @@ class _SupportedLanguagesPageState extends State<SupportedLanguagesPage> {
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
-      title: Text(t('title')),
+      title: Text(
+        LocaleKeys.app_supported_languages_title.tr(),
+      ),
       actions: [
         CustomAppBarActionItem(
           text: LocaleKeys.ok.tr(),
@@ -45,7 +50,9 @@ class _SupportedLanguagesPageState extends State<SupportedLanguagesPage> {
     return PreferenceList(
       children: [
         PreferenceListSection(
-          title: Text(t('pref_section_title_all')),
+          title: Text(
+            LocaleKeys.app_supported_languages_all_title.tr(),
+          ),
           children: [
             for (var supportedLanguage in kSupportedLanguages)
               PreferenceListRadioItem(
@@ -70,9 +77,5 @@ class _SupportedLanguagesPageState extends State<SupportedLanguagesPage> {
       appBar: _buildAppBar(context),
       body: _buildBody(context),
     );
-  }
-
-  String t(String key, {List<String> args = const []}) {
-    return 'page_language_chooser.$key'.tr(args: args);
   }
 }

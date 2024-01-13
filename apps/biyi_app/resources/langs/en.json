@@ -354,6 +354,12 @@
         }
       }
     },
+    "supported_languages": {
+      "title": "Supported Languages",
+      "all": {
+        "title": "All"
+      }
+    },
     "text_detections": {
       "title": "Text Detections Engines",
       "_msg": {
