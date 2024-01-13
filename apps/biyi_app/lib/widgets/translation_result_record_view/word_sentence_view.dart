@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class WordSentenceView extends StatelessWidget {
   const WordSentenceView(
     this.wordSentence, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final WordSentence wordSentence;
 

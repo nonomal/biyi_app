@@ -1,5 +1,3 @@
-// import 'package:biyi_app/includes.dart';
-
 import 'package:biyi_app/pages/home/tab_homepage/tab_homepage.dart';
 import 'package:biyi_app/pages/home/tab_settings/tab_settings.dart';
 import 'package:biyi_app/pages/home/tab_vocabulary/tab_vocabulary.dart';
@@ -11,16 +9,16 @@ const _kHomeTabHomepage = 0;
 // const _kHomeTabVocabulary = 1;
 // const _kHomeTabSettings = 2;
 
-class _TabBarItem extends BottomNavigationBarItem {
-  _TabBarItem({
-    required Widget icon,
-    required String label,
-    required Widget activeIcon,
-  }) : super(icon: icon, label: label, activeIcon: activeIcon);
+class TabBarItem extends BottomNavigationBarItem {
+  const TabBarItem({
+    required super.icon,
+    required String super.label,
+    required Widget super.activeIcon,
+  });
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<StatefulWidget> createState() => _HomePageState();
@@ -47,7 +45,7 @@ class _HomePageState extends State<HomePage>
   }
 
   Widget _buildBottomNavigationBar(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         boxShadow: Theme.of(context).brightness == Brightness.light
             ? [
@@ -59,20 +57,20 @@ class _HomePageState extends State<HomePage>
             : null,
       ),
       child: CupertinoTabBar(
-        items: [
-          _TabBarItem(
-            icon: const Icon(FluentIcons.home_20_regular),
-            activeIcon: const Icon(FluentIcons.home_20_filled),
+        items: const [
+          TabBarItem(
+            icon: Icon(FluentIcons.home_20_regular),
+            activeIcon: Icon(FluentIcons.home_20_filled),
             label: 'Home',
           ),
-          _TabBarItem(
-            icon: const Icon(FluentIcons.book_20_regular),
-            activeIcon: const Icon(FluentIcons.book_20_filled),
+          TabBarItem(
+            icon: Icon(FluentIcons.book_20_regular),
+            activeIcon: Icon(FluentIcons.book_20_filled),
             label: 'Vocabulary',
           ),
-          _TabBarItem(
-            icon: const Icon(FluentIcons.settings_20_regular),
-            activeIcon: const Icon(FluentIcons.settings_20_filled),
+          TabBarItem(
+            icon: Icon(FluentIcons.settings_20_regular),
+            activeIcon: Icon(FluentIcons.settings_20_filled),
             label: 'Settings',
           ),
         ],

@@ -191,56 +191,12 @@ class CodegenLoader extends AssetLoader {
       "msg_please_enter_word_or_text": "未输入或未提取到文本",
       "msg_capture_screen_area_canceled": "截取屏幕区域已取消"
     },
-    "page_language_chooser": {"title": "选择语言", "pref_section_title_all": "全部"},
-    "page_ocr_engine_chooser": {
-      "title": "文字识别引擎",
-      "pref_section_title_private": "私有",
-      "pref_item_title_no_available_engines": "无可用的引擎"
-    },
     "page_ocr_engine_create_or_edit": {
       "title": "添加文字识别引擎",
       "pref_section_title_engine_type": "引擎类型",
       "pref_section_title_option": "选项"
     },
     "page_ocr_engine_type_chooser": {"title": "引擎类型"},
-    "page_ocr_engines_manage": {
-      "title": "文字识别引擎",
-      "pref_section_title_private": "私有",
-      "pref_section_description_private": "长按项目以重新排序"
-    },
-    "page_setting_app_language": {"title": "显示语言"},
-    "page_setting_extract_text": {
-      "title": "取词",
-      "pref_section_title_default_detect_text_engine": "默认文字识别引擎",
-      "pref_item_auto_copy_detected_text": "自动复制检测到的文本"
-    },
-    "page_setting_interface": {
-      "title": "界面",
-      "pref_section_title_tray_icon": "托盘图标",
-      "pref_section_title_tray_icon_style": "托盘图标样式",
-      "pref_section_title_max_window_height": "最大窗口高度（逻辑像素）",
-      "pref_item_title_show_tray_icon": "显示托盘图标"
-    },
-    "page_setting_shortcuts": {
-      "title": "快捷键",
-      "pref_section_title_extract_text": "屏幕/剪切板取词",
-      "pref_section_title_input_assist_function": "输入辅助功能",
-      "pref_item_title_show_or_hide": "显示/隐藏",
-      "pref_item_title_hide": "隐藏",
-      "pref_item_title_extract_text_from_selection": "选中文字",
-      "pref_item_title_extract_text_from_capture": "截取区域",
-      "pref_item_title_extract_text_from_clipboard": "剪切板",
-      "pref_item_title_translate_input_content": "翻译当前输入框内容"
-    },
-    "page_setting_theme_mode": {"title": "主题模式"},
-    "page_setting_translate": {
-      "title": "翻译",
-      "pref_section_title_default_translate_engine": "默认翻译引擎",
-      "pref_section_title_translation_mode": "翻译模式",
-      "pref_section_title_default_detect_language_engine": "默认语种识别引擎",
-      "pref_section_title_translation_target": "翻译目标",
-      "pref_item_title_double_click_copy_result": "双击复制翻译结果"
-    },
     "page_settings": {
       "title": "设置",
       "text_version": "版本 {} BUILD {}",
@@ -285,26 +241,94 @@ class CodegenLoader extends AssetLoader {
       "pref_section_title_private": "私有",
       "pref_section_description_private": "长按项目以重新排序"
     },
-    "page_translation_target_new": {
-      "title": "添加翻译目标",
-      "title_with_edit": "编辑翻译目标",
-      "source_language": "源语言",
-      "target_language": "目标语言"
-    },
-    "page_your_plan_selector": {
-      "title": "选择您的会员计划",
-      "label_free": "免费",
-      "label_forever": "永久",
-      "btn_plan_benefits": "会员权益",
-      "btn_activate": "立即激活",
-      "activation_code_input_hint": "请输入激活码",
-      "pref_section_title_plans": "选择适合您的会员方案。",
-      "pref_section_title_activate_your_plan": "激活您的会员计划",
-      "pref_section_title_your_plan_expiry_date": "您的计划到期日",
-      "pref_item_title_get_activation_code": "获取会员计划激活码",
-      "msg_plan_pro_coming_soon": "即将推出，敬请期待。"
-    },
-    "widget_record_shortcut_dialog": {"title": "自定义快捷键"}
+    "widget_record_shortcut_dialog": {"title": "自定义快捷键"},
+    "app": {
+      "settings": {
+        "_layout": {
+          "navgroup": {
+            "client": "客户端",
+            "integrations": "服务接入",
+            "resources": "资源"
+          }
+        },
+        "about": {"title": "关于"},
+        "advanced": {"title": "高级设置"},
+        "appearance": {
+          "title": "外观",
+          "tray_icon": {
+            "title": "托盘图标",
+            "style": {"title": "托盘图标样式"},
+            "show": {"title": "显示托盘图标"}
+          },
+          "max_window_height": {"title": "最大窗口高度（逻辑像素）"}
+        },
+        "changelog": {"title": "变更日志"},
+        "general": {
+          "title": "通用",
+          "default_detect_text_engine": {"title": "默认文字识别引擎"},
+          "extract_text": {
+            "auto_copy_detected_text": {"title": "自动复制检测到的文本"}
+          },
+          "default_translate_engine": {"title": "默认翻译引擎"},
+          "translation_mode": {"title": "翻译模式"},
+          "default_detect_language_engine": {"title": "默认语种识别引擎"},
+          "translation_target": {"title": "翻译目标"},
+          "translate": {
+            "double_click_copy_result": {"title": "双击复制翻译结果"}
+          },
+          "input_settings": {
+            "title": "输入设置",
+            "submit_with_enter": {"title": "用 Enter 提交"},
+            "submit_with_meta_enter": {"title": "用 Ctrl + Enter 提交"},
+            "submit_with_meta_enter_mac": {"title": "用 ⌘ + Enter 提交"}
+          }
+        },
+        "keybinds": {
+          "title": "快捷键",
+          "window": {
+            "show_or_hide": {"title": "显示/隐藏"},
+            "hide": {"title": "隐藏"}
+          },
+          "extract_text": {
+            "title": "屏幕/剪切板取词",
+            "from_selection": {"title": "选中文字"},
+            "from_capture": {"title": "截取区域"},
+            "from_clipboard": {"title": "剪切板"}
+          },
+          "input_assist_function": {
+            "title": "输入辅助功能",
+            "translate_input_content": {"title": "翻译当前输入框内容"}
+          }
+        },
+        "language": {"title": "语言"},
+        "text_detections": {
+          "title": "文字识别",
+          "private": {"title": "私有", "description": "长按项目以重新排序"}
+        },
+        "text_translations": {
+          "title": "文本翻译",
+          "private": {"title": "私有", "description": "长按项目以重新排序"}
+        }
+      },
+      "text_detections": {
+        "title": "文字识别引擎",
+        "_msg": {"no_available_engines": "无可用的引擎"},
+        "private": {"title": "私有"}
+      },
+      "text_translations": {
+        "title": "文本翻译引擎",
+        "_msg": {"no_available_engines": "无可用的引擎"},
+        "private": {"title": "私有"}
+      },
+      "translation_targets": {
+        "new": {
+          "title": "添加翻译目标",
+          "title_with_edit": "编辑翻译目标",
+          "source_language": "源语言",
+          "target_language": "目标语言"
+        }
+      }
+    }
   };
   static const Map<String, dynamic> en = {
     "app_name": "Biyi",
@@ -489,63 +513,12 @@ class CodegenLoader extends AssetLoader {
       "msg_capture_screen_area_canceled":
           "Capture screen area has been canceled"
     },
-    "page_language_chooser": {
-      "title": "Choose language",
-      "pref_section_title_all": "All"
-    },
-    "page_ocr_engine_chooser": {
-      "title": "Text Detection Engine",
-      "pref_section_title_private": "Private",
-      "pref_item_title_no_available_engines": "No available engines"
-    },
     "page_ocr_engine_create_or_edit": {
       "title": "Add Text Detection Engine",
       "pref_section_title_engine_type": "Engine type",
       "pref_section_title_option": "Option"
     },
     "page_ocr_engine_type_chooser": {"title": "Engine Type"},
-    "page_ocr_engines_manage": {
-      "title": "Text Detection Engine",
-      "pref_section_title_private": "Private",
-      "pref_section_description_private": "Long press an item to reorder it"
-    },
-    "page_setting_app_language": {"title": "Display Language"},
-    "page_setting_extract_text": {
-      "title": "Screen extract text",
-      "pref_section_title_default_detect_text_engine":
-          "Default detect text engine",
-      "pref_item_auto_copy_detected_text": "Auto copy the detected text"
-    },
-    "page_setting_interface": {
-      "title": "Interface",
-      "pref_section_title_tray_icon": "Tray Icon",
-      "pref_section_title_tray_icon_style": "Tray Icon Style",
-      "pref_section_title_max_window_height":
-          "Maximum window height (logical pixels)",
-      "pref_item_title_show_tray_icon": "Show Tray Icon"
-    },
-    "page_setting_shortcuts": {
-      "title": "Shortcuts",
-      "pref_section_title_extract_text": "Screen / Clipboard extract text",
-      "pref_section_title_input_assist_function": "Input assist function",
-      "pref_item_title_show_or_hide": "Show/Hide",
-      "pref_item_title_hide": "Hide",
-      "pref_item_title_extract_text_from_selection": "Selection",
-      "pref_item_title_extract_text_from_capture": "Capture Area",
-      "pref_item_title_extract_text_from_clipboard": "Clipboard",
-      "pref_item_title_translate_input_content": "Translate input content"
-    },
-    "page_setting_theme_mode": {"title": "Theme Mode"},
-    "page_setting_translate": {
-      "title": "Translate",
-      "pref_section_title_default_translate_engine": "Default translate engine",
-      "pref_section_title_translation_mode": "Translation mode",
-      "pref_section_title_default_detect_language_engine":
-          "Default detect language engine",
-      "pref_section_title_translation_target": "Translation target",
-      "pref_item_title_double_click_copy_result":
-          "Double-click to copy translation result"
-    },
     "page_settings": {
       "title": "Settings",
       "text_version": "Version {} BUILD {}",
@@ -590,26 +563,106 @@ class CodegenLoader extends AssetLoader {
       "pref_section_title_private": "Private",
       "pref_section_description_private": "Long press an item to reorder it"
     },
-    "page_translation_target_new": {
-      "title": "Add Translation Target",
-      "title_with_edit": "Edit Translation Target",
-      "source_language": "Source language",
-      "target_language": "Target language"
-    },
-    "page_your_plan_selector": {
-      "title": "Select Your Plan",
-      "label_free": "Free",
-      "label_forever": "Forever",
-      "btn_plan_benefits": "Plan benefits",
-      "btn_activate": "activate",
-      "activation_code_input_hint": "Activation code",
-      "pref_section_title_plans": "Choose the right plan for you.",
-      "pref_section_title_activate_your_plan": "Activate Your Pla",
-      "pref_section_title_your_plan_expiry_date": "Your plan expiry date",
-      "pref_item_title_get_activation_code": "Get activation code",
-      "msg_plan_pro_coming_soon": "Coming soon, Please stay tuned."
-    },
-    "widget_record_shortcut_dialog": {"title": "Customize your shortcut"}
+    "widget_record_shortcut_dialog": {"title": "Customize your shortcut"},
+    "app": {
+      "settings": {
+        "_layout": {
+          "navgroup": {
+            "client": "Client",
+            "integrations": "Integrations",
+            "resources": "Resources"
+          }
+        },
+        "about": {"title": "About"},
+        "advanced": {"title": "Advanced"},
+        "appearance": {
+          "title": "Appearance",
+          "tray_icon": {
+            "title": "Tray Icon",
+            "style": {"title": "Tray Icon Style"},
+            "show": {"title": "Show Tray Icon"}
+          },
+          "max_window_height": {
+            "title": "Maximum window height (logical pixels)"
+          }
+        },
+        "changelog": {"title": "Changelog"},
+        "general": {
+          "title": "General",
+          "default_detect_text_engine": {"title": "Default detect text engine"},
+          "extract_text": {
+            "auto_copy_detected_text": {"title": "Auto copy the detected text"}
+          },
+          "default_translate_engine": {"title": "Default translate engine"},
+          "translation_mode": {"title": "Translation Mode"},
+          "default_detect_language_engine": {
+            "title": "Default detect language engine"
+          },
+          "translation_target": {"title": "Translation target"},
+          "translate": {
+            "double_click_copy_result": {
+              "title": "Double-click to copy translation result"
+            }
+          },
+          "input_settings": {
+            "title": "Input Settings",
+            "submit_with_enter": {"title": "Submit with Enter"},
+            "submit_with_meta_enter": {"title": "Submit with Ctrl + Enter"},
+            "submit_with_meta_enter_mac": {"title": "Submit with ⌘ + Enter"}
+          }
+        },
+        "keybinds": {
+          "title": "Keybinds",
+          "window": {
+            "show_or_hide": {"title": "Show/Hide"},
+            "hide": {"title": "Hide"}
+          },
+          "extract_text": {
+            "title": "Screen / Clipboard extract text",
+            "from_selection": {"title": "Selection"},
+            "from_capture": {"title": "Capture Area"},
+            "from_clipboard": {"title": "Clipboard"}
+          },
+          "input_assist_function": {
+            "title": "Input assist function",
+            "translate_input_content": {"title": "Translate input content"}
+          }
+        },
+        "language": {"title": "Language"},
+        "text_detections": {
+          "title": "Text Detections",
+          "private": {
+            "title": "Private",
+            "description": "Long press an item to reorder it"
+          }
+        },
+        "text_translations": {
+          "title": "Text Translations",
+          "private": {
+            "title": "Private",
+            "description": "Long press an item to reorder it"
+          }
+        }
+      },
+      "text_detections": {
+        "title": "Text Detections Engines",
+        "_msg": {"no_available_engines": "No available engines"},
+        "private": {"title": "Private"}
+      },
+      "text_translations": {
+        "title": "Text Translation Engines",
+        "_msg": {"no_available_engines": "No available engines"},
+        "private": {"title": "Private"}
+      },
+      "translation_targets": {
+        "new": {
+          "title": "Add Translation Target",
+          "title_with_edit": "Edit Translation Target",
+          "source_language": "Source language",
+          "target_language": "Target language"
+        }
+      }
+    }
   };
   static const Map<String, Map<String, dynamic>> mapLocales = {
     "zh": zh,

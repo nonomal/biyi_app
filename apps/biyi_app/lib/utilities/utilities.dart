@@ -42,10 +42,12 @@ Future<Directory> getUserDataDirectory() async {
   final appDirectory = await getAppDirectory();
   final currentUser = await getCurrentUser();
 
-  final userDataDirectory = Directory(path.join(
-    appDirectory.path,
-    currentUser.id == -1 ? 'local' : currentUser.email,
-  ));
+  final userDataDirectory = Directory(
+    path.join(
+      appDirectory.path,
+      currentUser.id == -1 ? 'local' : currentUser.email,
+    ),
+  );
 
   return userDataDirectory;
 }

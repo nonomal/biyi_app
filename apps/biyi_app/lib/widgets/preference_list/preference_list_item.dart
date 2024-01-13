@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class PreferenceListItem extends StatelessWidget {
   const PreferenceListItem({
-    Key? key,
+    super.key,
     this.padding,
     this.icon,
     this.title,
@@ -14,7 +14,7 @@ class PreferenceListItem extends StatelessWidget {
     this.bottomView,
     this.disabled = false,
     this.onTap,
-  }) : super(key: key);
+  });
 
   final EdgeInsets? padding;
   final Widget? icon;
@@ -124,27 +124,18 @@ class PreferenceListItem extends StatelessWidget {
 
 class PreferenceListRadioItem<T> extends PreferenceListItem {
   const PreferenceListRadioItem({
-    Key? key,
-    EdgeInsets? padding,
-    Widget? icon,
-    Widget? title,
-    Widget? summary,
-    Widget? detailText,
-    Widget? accessoryView,
-    VoidCallback? onTap,
+    super.key,
+    super.padding,
+    super.icon,
+    super.title,
+    super.summary,
+    super.detailText,
+    super.accessoryView,
+    super.onTap,
     required this.value,
     required this.groupValue,
     required this.onChanged,
-  }) : super(
-          key: key,
-          padding: padding,
-          icon: icon,
-          title: title,
-          summary: summary,
-          detailText: detailText,
-          accessoryView: accessoryView,
-          onTap: onTap,
-        );
+  });
   final T value;
   final T groupValue;
   final ValueChanged<T> onChanged;
@@ -173,24 +164,16 @@ class PreferenceListRadioItem<T> extends PreferenceListItem {
 
 class PreferenceListSwitchItem extends PreferenceListItem {
   const PreferenceListSwitchItem({
-    Key? key,
-    Widget? icon,
-    Widget? title,
-    Widget? summary,
-    Widget? detailText,
-    Widget? accessoryView,
-    VoidCallback? onTap,
+    super.key,
+    super.icon,
+    super.title,
+    super.summary,
+    super.detailText,
+    super.accessoryView,
+    super.onTap,
     required this.value,
     required this.onChanged,
-  }) : super(
-          key: key,
-          icon: icon,
-          title: title,
-          summary: summary,
-          detailText: detailText,
-          accessoryView: accessoryView,
-          onTap: onTap,
-        );
+  });
   final bool value;
   final ValueChanged<bool> onChanged;
 
@@ -221,25 +204,18 @@ class PreferenceListSwitchItem extends PreferenceListItem {
 
 class PreferenceListTextFieldItem extends PreferenceListItem {
   const PreferenceListTextFieldItem({
-    Key? key,
-    Widget? icon,
-    Widget? title,
-    Widget? summary,
-    Widget? accessoryView,
-    VoidCallback? onTap,
+    super.key,
+    super.icon,
+    super.title,
+    super.summary,
+    super.accessoryView,
+    super.onTap,
     this.controller,
     this.placeholder,
     this.onChanged,
     this.onEditingComplete,
     this.onSubmitted,
-  }) : super(
-          key: key,
-          icon: icon,
-          title: title,
-          summary: summary,
-          accessoryView: accessoryView,
-          onTap: onTap,
-        );
+  });
   final TextEditingController? controller;
   final String? placeholder;
   final ValueChanged<String>? onChanged;

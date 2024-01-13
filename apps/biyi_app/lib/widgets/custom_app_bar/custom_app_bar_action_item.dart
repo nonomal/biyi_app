@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 class CustomAppBarActionItem extends StatelessWidget {
   const CustomAppBarActionItem({
-    Key? key,
+    super.key,
     this.icon,
     this.text,
     this.child,
     this.padding,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   final IconData? icon;
   final String? text;

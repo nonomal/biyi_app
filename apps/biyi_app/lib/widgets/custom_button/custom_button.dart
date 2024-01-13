@@ -29,7 +29,7 @@ const double _kCustomButtonMinHeight = 48;
 class CustomButton extends StatefulWidget {
   /// Creates an iOS-style button.
   const CustomButton({
-    Key? key,
+    super.key,
     this.processing = false,
     required this.child,
     this.padding,
@@ -40,11 +40,12 @@ class CustomButton extends StatefulWidget {
     this.borderRadius = const BorderRadius.all(Radius.circular(4.0)),
     this.alignment = Alignment.center,
     required this.onPressed,
-  })  : assert(pressedOpacity == null ||
-            (pressedOpacity >= 0.0 && pressedOpacity <= 1.0)),
+  })  : assert(
+          pressedOpacity == null ||
+              (pressedOpacity >= 0.0 && pressedOpacity <= 1.0),
+        ),
         _filled = false,
-        _outlined = false,
-        super(key: key);
+        _outlined = false;
 
   /// Creates an iOS-style button with a filled background.
   ///
@@ -53,7 +54,7 @@ class CustomButton extends StatefulWidget {
   /// To specify a custom background color, use the [color] argument of the
   /// default constructor.
   const CustomButton.filled({
-    Key? key,
+    super.key,
     this.processing = false,
     required this.child,
     this.padding,
@@ -63,15 +64,16 @@ class CustomButton extends StatefulWidget {
     this.borderRadius = const BorderRadius.all(Radius.circular(4.0)),
     this.alignment = Alignment.center,
     required this.onPressed,
-  })  : assert(pressedOpacity == null ||
-            (pressedOpacity >= 0.0 && pressedOpacity <= 1.0)),
+  })  : assert(
+          pressedOpacity == null ||
+              (pressedOpacity >= 0.0 && pressedOpacity <= 1.0),
+        ),
         color = null,
         _filled = true,
-        _outlined = false,
-        super(key: key);
+        _outlined = false;
 
   const CustomButton.outlined({
-    Key? key,
+    super.key,
     this.processing = false,
     required this.child,
     this.padding,
@@ -82,11 +84,12 @@ class CustomButton extends StatefulWidget {
     this.borderRadius = const BorderRadius.all(Radius.circular(6.0)),
     this.alignment = Alignment.center,
     required this.onPressed,
-  })  : assert(pressedOpacity == null ||
-            (pressedOpacity >= 0.0 && pressedOpacity <= 1.0)),
+  })  : assert(
+          pressedOpacity == null ||
+              (pressedOpacity >= 0.0 && pressedOpacity <= 1.0),
+        ),
         _filled = false,
-        _outlined = true,
-        super(key: key);
+        _outlined = true;
 
   final bool processing;
 
@@ -234,10 +237,16 @@ class _CustomButtonState extends State<CustomButton>
     if (_animationController.isAnimating) return;
     final bool wasHeldDown = _buttonHeldDown;
     final TickerFuture ticker = _buttonHeldDown
-        ? _animationController.animateTo(1.0,
-            duration: kFadeOutDuration, curve: Curves.easeInOutCubicEmphasized)
-        : _animationController.animateTo(0.0,
-            duration: kFadeInDuration, curve: Curves.easeOutCubic);
+        ? _animationController.animateTo(
+            1.0,
+            duration: kFadeOutDuration,
+            curve: Curves.easeInOutCubicEmphasized,
+          )
+        : _animationController.animateTo(
+            0.0,
+            duration: kFadeInDuration,
+            curve: Curves.easeOutCubic,
+          );
     ticker.then<void>((void value) {
       if (mounted && wasHeldDown != _buttonHeldDown) _animate();
     });
@@ -257,7 +266,9 @@ class _CustomButtonState extends State<CustomButton>
         : enabled
             ? primaryColor
             : CupertinoDynamicColor.resolve(
-                CupertinoColors.placeholderText, context);
+                CupertinoColors.placeholderText,
+                context,
+              );
 
     if (widget._outlined && widget.color != null) {
       backgroundColor = null;
@@ -296,7 +307,9 @@ class _CustomButtonState extends State<CustomButton>
                 borderRadius: widget.borderRadius,
                 color: backgroundColor != null && !enabled
                     ? CupertinoDynamicColor.resolve(
-                        widget.disabledColor, context)
+                        widget.disabledColor,
+                        context,
+                      )
                     : backgroundColor,
               ),
               child: Padding(
@@ -311,7 +324,9 @@ class _CustomButtonState extends State<CustomButton>
                       data: IconThemeData(color: foregroundColor),
                       child: widget.processing == true
                           ? SpinKitThreeBounce(
-                              color: foregroundColor, size: 14.0)
+                              color: foregroundColor,
+                              size: 14.0,
+                            )
                           : widget.child,
                     ),
                   ),

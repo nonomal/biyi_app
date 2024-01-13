@@ -9,10 +9,9 @@ import 'package:photo_view/photo_view_gallery.dart';
 class ImageViewerPage extends StatefulWidget {
   ImageViewerPage(
     this.imageList, {
-    Key? key,
+    super.key,
     this.initialIndex = 0,
-  })  : pageController = PageController(initialPage: initialIndex),
-        super(key: key);
+  })  : pageController = PageController(initialPage: initialIndex);
 
   final List<String> imageList;
   final int initialIndex;
@@ -47,7 +46,7 @@ class _ImageViewerPageState extends State<ImageViewerPage> {
       backgroundColor: Colors.transparent,
       body: Stack(
         children: <Widget>[
-          Container(
+          ColoredBox(
             color: Colors.black.withOpacity(0.5),
             child: PhotoViewGallery.builder(
               scrollPhysics: const BouncingScrollPhysics(),

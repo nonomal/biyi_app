@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/includes.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 
@@ -95,12 +94,12 @@ class Configuration {
 
   ThemeMode get themeMode {
     String themeModeString =
-        _getString(kPrefThemeMode) ?? describeEnum(ThemeMode.light);
+        _getString(kPrefThemeMode) ?? ThemeMode.light.name;
     return kKnownThemeModes[themeModeString]!;
   }
 
-  set themeMode(value) {
-    _setString(kPrefThemeMode, describeEnum(value));
+  set themeMode(ThemeMode value) {
+    _setString(kPrefThemeMode, value.name);
   }
 
   String get inputSetting {
@@ -227,7 +226,7 @@ class Configuration {
     return pref?.boolValue;
   }
 
-  void _setBool(String key, bool value) async {
+  Future<void> _setBool(String key, bool value) async {
     localDb //
         .preference(key)
         .updateOrCreate(

@@ -3,14 +3,13 @@ import 'dart:io';
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/includes.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:tray_manager/tray_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key? key, this.onDismiss}) : super(key: key);
+  const SettingsPage({super.key, this.onDismiss});
 
   final VoidCallback? onDismiss;
 
@@ -20,14 +19,6 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   Configuration get _configuration => localDb.configuration;
-
-  List<TranslationEngineConfig> get _engineList {
-    return (localDb.engines.list(where: (e) => !e.disabled));
-  }
-
-  List<OcrEngineConfig> get _ocrEngineList {
-    return (localDb.ocrEngines.list(where: (e) => !e.disabled));
-  }
 
   // bool _launchAtStartupIsEnabled = false;
 
@@ -50,7 +41,7 @@ class _SettingsPageState extends State<SettingsPage> {
     if (mounted) setState(() {});
   }
 
-  void _init() async {
+  Future<void> _init() async {
     // if (kIsMacOS || kIsWindows) {
     //   _launchAtStartupIsEnabled = await launchAtStartup.isEnabled();
     // }
@@ -60,87 +51,6 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _buildBody(BuildContext context) {
     return PreferenceList(
       children: [
-        PreferenceListSection(
-          title: Text(t('pref_section_title_general')),
-          children: [
-            PreferenceListItem(
-              title: Text(t('pref_item_title_extract_text')),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const SettingExtractTextPage(),
-                  ),
-                );
-              },
-            ),
-            PreferenceListItem(
-              title: Text(t('pref_item_title_translate')),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const SettingTranslatePage(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-        PreferenceListSection(
-          title: Text(t('pref_section_title_appearance')),
-          children: [
-            PreferenceListItem(
-              title: Text(t('pref_item_title_interface')),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const SettingInterfacePage(),
-                  ),
-                );
-              },
-            ),
-            PreferenceListItem(
-              title: Text(t('pref_item_title_app_language')),
-              detailText: Text(getLanguageName(_configuration.appLanguage)),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => SettingAppLanguagePage(
-                      initialLanguage: _configuration.appLanguage,
-                    ),
-                  ),
-                );
-              },
-            ),
-            PreferenceListItem(
-              title: Text(t('pref_item_title_theme_mode')),
-              detailText: Text(
-                'theme_mode.${describeEnum(_configuration.themeMode)}'.tr(),
-              ),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const SettingThemeModePage(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-        PreferenceListSection(
-          title: Text(t('pref_section_title_shortcuts')),
-          children: [
-            PreferenceListItem(
-              title: Text(t('pref_item_title_keyboard_shortcuts')),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const SettingShortcutsPage(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
         PreferenceListSection(
           title: Text(t('pref_section_title_input_settings')),
           children: [
@@ -155,9 +65,13 @@ class _SettingsPageState extends State<SettingsPage> {
             PreferenceListRadioItem<String>(
               value: kInputSettingSubmitWithMetaEnter,
               groupValue: _configuration.inputSetting,
-              title: Text(t(kIsMacOS
-                  ? 'pref_item_title_submit_with_meta_enter_mac'
-                  : 'pref_item_title_submit_with_meta_enter')),
+              title: Text(
+                t(
+                  kIsMacOS
+                      ? 'pref_item_title_submit_with_meta_enter_mac'
+                      : 'pref_item_title_submit_with_meta_enter',
+                ),
+              ),
               onChanged: (newValue) {
                 _configuration.inputSetting = newValue;
               },
@@ -182,55 +96,6 @@ class _SettingsPageState extends State<SettingsPage> {
         //     ),
         //   ],
         // ),
-        PreferenceListSection(
-          title: Text(t('pref_section_title_service_integration')),
-          children: [
-            PreferenceListItem(
-              title: Text(t('pref_item_title_engines')),
-              detailText: Row(
-                children: [
-                  for (var item in _engineList)
-                    Container(
-                      margin: const EdgeInsets.only(left: 4),
-                      child: TranslationEngineIcon(
-                        item.type,
-                        size: 18,
-                      ),
-                    ),
-                ],
-              ),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const TranslationEnginesManagePage(),
-                  ),
-                );
-              },
-            ),
-            PreferenceListItem(
-              title: Text(t('pref_item_title_ocr_engines')),
-              detailText: Row(
-                children: [
-                  for (var item in _ocrEngineList)
-                    Container(
-                      margin: const EdgeInsets.only(left: 4),
-                      child: OcrEngineIcon(
-                        item.type,
-                        size: 18,
-                      ),
-                    ),
-                ],
-              ),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const OcrEnginesManagePage(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
         PreferenceListSection(
           title: Text(t('pref_section_title_others')),
           children: [
@@ -294,10 +159,13 @@ class _SettingsPageState extends State<SettingsPage> {
                 bottom: 20,
               ),
               child: Text(
-                t('text_version', args: [
-                  sharedEnv.appVersion,
-                  '${sharedEnv.appBuildNumber}',
-                ]),
+                t(
+                  'text_version',
+                  args: [
+                    sharedEnv.appVersion,
+                    '${sharedEnv.appBuildNumber}',
+                  ],
+                ),
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ),

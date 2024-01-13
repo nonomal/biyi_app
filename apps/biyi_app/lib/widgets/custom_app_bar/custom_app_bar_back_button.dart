@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class CustomAppBarBackButton extends StatelessWidget {
   const CustomAppBarBackButton({
-    Key? key,
+    super.key,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   final VoidCallback? onPressed;
 

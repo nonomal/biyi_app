@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class CustomImage extends StatelessWidget {
   const CustomImage(
     this.url, {
-    Key? key,
+    super.key,
     this.width,
     this.height,
     this.fit,
-  }) : super(key: key);
+  });
 
   final String url;
   final double? width;

@@ -13,11 +13,11 @@ const List<String> _kAllScopes = [
 
 class TranslationEngineCreateOrEditPage extends StatefulWidget {
   const TranslationEngineCreateOrEditPage({
-    Key? key,
+    super.key,
     this.editable = true,
     this.engineType,
     this.engineConfig,
-  }) : super(key: key);
+  });
 
   final bool editable;
   final String? engineType;
@@ -80,7 +80,7 @@ class _TranslationEngineCreateOrEditPageState
     super.initState();
   }
 
-  void _handleClickOk() async {
+  Future<void> _handleClickOk() async {
     // try {
     //   var resp = await translationEngine?.lookUp(
     //     LookUpRequest(
@@ -104,6 +104,7 @@ class _TranslationEngineCreateOrEditPageState
     (translateClient.adapter as AutoloadTranslateClientAdapter)
         .renew(_identifier!);
 
+    // ignore: use_build_context_synchronously
     Navigator.of(context).pop();
   }
 
@@ -228,6 +229,7 @@ class _TranslationEngineCreateOrEditPageState
                 onTap: () async {
                   await localDb.privateEngine(_identifier).delete();
 
+                  // ignore: use_build_context_synchronously
                   Navigator.of(context).pop();
                 },
               ),

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class OcrEngineIcon extends StatelessWidget {
   const OcrEngineIcon(
     this.type, {
-    Key? key,
+    super.key,
     this.size = 22,
-  }) : super(key: key);
+  });
 
   final String type;
   final double size;

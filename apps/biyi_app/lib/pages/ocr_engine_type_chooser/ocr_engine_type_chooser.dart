@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 
 class OcrEngineTypeChooserPage extends StatefulWidget {
   const OcrEngineTypeChooserPage({
-    Key? key,
+    super.key,
     this.engineType,
     this.onChoosed,
-  }) : super(key: key);
+  });
 
   final String? engineType;
   final ValueChanged<String>? onChoosed;
@@ -26,7 +26,7 @@ class _OcrEngineTypeChooserPageState extends State<OcrEngineTypeChooserPage> {
     super.initState();
   }
 
-  void _handleClickOk() async {
+  Future<void> _handleClickOk() async {
     widget.onChoosed?.call(_type!);
   }
 

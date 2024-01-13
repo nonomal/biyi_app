@@ -146,13 +146,14 @@ class LocalDb {
       try {
         if (await kDefaultBuiltInOcrEngine.isSupportedOnCurrentPlatform()) {
           newProOcrEngineList.insert(
-              0,
-              OcrEngineConfig(
-                identifier: kDefaultBuiltInOcrEngine.identifier,
-                type: kDefaultBuiltInOcrEngine.type,
-                option: kDefaultBuiltInOcrEngine.option ?? {},
-                disabled: true,
-              ));
+            0,
+            OcrEngineConfig(
+              identifier: kDefaultBuiltInOcrEngine.identifier,
+              type: kDefaultBuiltInOcrEngine.type,
+              option: kDefaultBuiltInOcrEngine.option ?? {},
+              disabled: true,
+            ),
+          );
         }
       } catch (error) {
         // skip error
@@ -317,7 +318,6 @@ Future<void> initLocalDb() async {
   await _safeOpenBox(userDataDirectory, 'engines');
   await _safeOpenBox(userDataDirectory, 'ocr_engines');
   await _safeOpenBox(userDataDirectory, 'translation_targets');
-  await _safeOpenBox(userDataDirectory, 'newwords');
   // await migrateOldDb();
   if (!kIsWeb) {
     await initDataIfNeed();

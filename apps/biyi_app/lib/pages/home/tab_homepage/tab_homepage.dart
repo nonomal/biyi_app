@@ -1,8 +1,11 @@
 import 'package:biyi_app/includes.dart';
+import 'package:biyi_app/app/router_config.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:rise_ui/rise_ui.dart';
 
 class TabHomepageScene extends StatefulWidget {
-  const TabHomepageScene({Key? key}) : super(key: key);
+  const TabHomepageScene({super.key});
 
   @override
   State<StatefulWidget> createState() => _TabHomepageSceneState();
@@ -10,9 +13,28 @@ class TabHomepageScene extends StatefulWidget {
 
 class _TabHomepageSceneState extends State<TabHomepageScene> {
   Widget _buildBody(BuildContext context) {
-    return const Column(
+    return Column(
       mainAxisSize: MainAxisSize.max,
-      children: [],
+      children: [
+        Button(
+          label: 'settings/general',
+          onPressed: () {
+            context.go(PageId.generalSetting);
+          },
+        ),
+        Button(
+          label: '/text-detections',
+          onPressed: () {
+            context.go(PageId.textDetections);
+          },
+        ),
+        Button(
+          label: '/text-translations',
+          onPressed: () {
+            context.go(PageId.textTranslations);
+          },
+        ),
+      ],
     );
   }
 

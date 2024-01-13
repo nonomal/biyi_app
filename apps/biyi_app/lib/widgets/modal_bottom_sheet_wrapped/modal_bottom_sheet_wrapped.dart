@@ -4,9 +4,9 @@ import 'package:window_manager/window_manager.dart';
 
 class ModalBottomSheetWrapped extends StatefulWidget {
   const ModalBottomSheetWrapped({
-    Key? key,
+    super.key,
     required this.child,
-  }) : super(key: key);
+  });
 
   final Widget child;
 
@@ -66,6 +66,7 @@ Future<T?> showModalBottomSheetPage<T>({
     await windowManager.setSize(Size(size.width, 680.0));
   }
 
+  // ignore: use_build_context_synchronously
   return showModalBottomSheet<T>(
     context: context,
     shape: const RoundedRectangleBorder(

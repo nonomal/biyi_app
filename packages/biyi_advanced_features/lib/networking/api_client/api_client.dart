@@ -12,16 +12,18 @@ class ApiClient {
       receiveTimeout: const Duration(seconds: 60),
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       responseType: ResponseType.json,
     );
     _http = Dio(options);
     if (!kReleaseMode) {
-      _http.interceptors.add(LogInterceptor(
-        requestBody: true,
-        responseBody: true,
-      ));
+      _http.interceptors.add(
+        LogInterceptor(
+          requestBody: true,
+          responseBody: true,
+        ),
+      );
     }
 
     _enginesApi = EnginesApi();

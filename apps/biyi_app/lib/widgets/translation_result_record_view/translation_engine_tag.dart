@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 
 class TranslationEngineTag extends StatefulWidget {
   const TranslationEngineTag({
-    Key? key,
+    super.key,
     required this.translationResultRecord,
-  }) : super(key: key);
+  });
 
   final TranslationResultRecord translationResultRecord;
 

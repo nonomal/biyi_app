@@ -5,9 +5,9 @@ import 'package:hotkey_manager/hotkey_manager.dart';
 
 class RecordHotKeyDialog extends StatefulWidget {
   const RecordHotKeyDialog({
-    Key? key,
+    super.key,
     required this.onHotKeyRecorded,
-  }) : super(key: key);
+  });
 
   final ValueChanged<HotKey> onHotKeyRecorded;
 

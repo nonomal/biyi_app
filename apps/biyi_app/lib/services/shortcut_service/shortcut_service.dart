@@ -25,7 +25,7 @@ class ShortcutService {
     _listener = listener;
   }
 
-  void start() async {
+  Future<void> start() async {
     await hotKeyManager.unregisterAll();
     await hotKeyManager.register(
       _configuration.shortcutInputSettingSubmitWithMetaEnter,
