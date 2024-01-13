@@ -6,7 +6,7 @@ PODS:
   - device_info_plus (0.0.1):
     - FlutterMacOS
   - FlutterMacOS (1.0.0)
-  - HotKey (0.1.2)
+  - HotKey (0.2.0)
   - hotkey_manager (0.0.1):
     - FlutterMacOS
     - HotKey
@@ -101,7 +101,7 @@ SPEC CHECKSUMS:
   clipboard_watcher: a71da520051c24c1b969a411b3e152d4dcc93ca5
   device_info_plus: 5401765fde0b8d062a2f8eb65510fb17e77cf07f
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
-  HotKey: ad59450195936c10992438c4210f673de5aee43e
+  HotKey: e96d8a2ddbf4591131e2bb3f54e69554d90cdca6
   hotkey_manager: c32bf0bfe8f934b7bc17ab4ad5c4c142960b023c
   keypress_simulator: c9697f52dc29725ce0185dcd52b6731718e0b9ca
   ocr_engine_builtin: 99c65f8f4a156830ceaf0da86940610fefe50f50

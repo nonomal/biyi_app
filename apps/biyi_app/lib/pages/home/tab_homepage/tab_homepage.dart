@@ -1,5 +1,5 @@
-import 'package:biyi_app/includes.dart';
 import 'package:biyi_app/app/router_config.dart';
+import 'package:biyi_app/includes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rise_ui/rise_ui.dart';

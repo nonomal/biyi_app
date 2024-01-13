@@ -1,5 +1,7 @@
-import 'package:biyi_app/includes.dart';
+import 'package:biyi_app/models/ext_word_pronunciation.dart';
+import 'package:biyi_app/widgets/sound_play_button/sound_play_button.dart';
 import 'package:flutter/material.dart';
+import 'package:uni_translate_client/uni_translate_client.dart';
 
 class WordPronunciationView extends StatelessWidget {
   const WordPronunciationView(

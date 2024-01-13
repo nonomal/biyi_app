@@ -87,6 +87,7 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
       ),
       windowManager.setPreventClose(true),
     ]);
+    // ignore: use_build_context_synchronously
     context.go(PageId.home);
   }
 

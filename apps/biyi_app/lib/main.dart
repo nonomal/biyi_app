@@ -5,6 +5,7 @@ import 'package:biyi_app/generated/codegen_loader.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:biyi_app/providers/providers.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';

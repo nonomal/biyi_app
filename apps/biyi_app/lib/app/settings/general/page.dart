@@ -1,8 +1,7 @@
 import 'package:biyi_advanced_features/models/models.dart';
+import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/models.dart';
-import 'package:biyi_app/pages/pages.dart';
-import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/services/services.dart';
 import 'package:biyi_app/utilities/utilities.dart';
 import 'package:biyi_app/widgets/widgets.dart';

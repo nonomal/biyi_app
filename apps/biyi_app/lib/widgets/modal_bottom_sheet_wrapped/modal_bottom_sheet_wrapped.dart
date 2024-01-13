@@ -1,4 +1,5 @@
 import 'package:biyi_app/includes.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 

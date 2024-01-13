@@ -1,6 +1,7 @@
-import 'package:biyi_app/includes.dart';
+import 'package:biyi_app/widgets/custom_image/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:uni_translate_client/uni_translate_client.dart';
 
 const kWordImageSize = 74.0;
 
