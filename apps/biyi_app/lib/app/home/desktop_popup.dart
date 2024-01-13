@@ -248,22 +248,23 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
             ),
           MenuItem(
             key: kMenuItemKeyQuickStartGuide,
-            label: 'tray_context_menu.item_quick_start_guide'.tr(),
+            label: LocaleKeys.tray_context_menu_item_quick_start_guide.tr(),
           ),
           MenuItem.submenu(
-            label: 'tray_context_menu.item_discussion'.tr(),
+            label: LocaleKeys.tray_context_menu_item_discussion.tr(),
             submenu: Menu(
               items: [
                 MenuItem(
                   key: kMenuSubItemKeyJoinDiscord,
-                  label:
-                      'tray_context_menu.item_discussion_subitem_discord_server'
-                          .tr(),
+                  label: LocaleKeys
+                      .tray_context_menu_item_discussion_subitem_discord_server
+                      .tr(),
                 ),
                 MenuItem(
                   key: kMenuSubItemKeyJoinQQGroup,
-                  label:
-                      'tray_context_menu.item_discussion_subitem_qq_group'.tr(),
+                  label: LocaleKeys
+                      .tray_context_menu_item_discussion_subitem_qq_group
+                      .tr(),
                 ),
               ],
             ),
@@ -271,7 +272,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
           MenuItem.separator(),
           MenuItem(
             key: kMenuItemKeyQuitApp,
-            label: 'tray_context_menu.item_quit_app'.tr(),
+            label: LocaleKeys.tray_context_menu_item_quit_app.tr(),
           ),
         ],
       );
@@ -653,7 +654,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
 
     if (_capturedData == null) {
       BotToast.showText(
-        text: 'page_desktop_popup.msg_capture_screen_area_canceled'.tr(),
+        text: LocaleKeys.app_home_msg_capture_screen_area_canceled.tr(),
         align: Alignment.center,
       );
       setState(() {});
@@ -722,7 +723,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   Future<void> _handleButtonTappedTrans() async {
     if (_text.isEmpty) {
       BotToast.showText(
-        text: 'page_desktop_popup.msg_please_enter_word_or_text'.tr(),
+        text: LocaleKeys.app_home_msg_please_enter_word_or_text.tr(),
         align: Alignment.center,
       );
       _focusNode.requestFocus();
@@ -766,16 +767,16 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
                 if (_isAllowedScreenCaptureAccess &&
                     _isAllowedScreenSelectionAccess) {
                   BotToast.showText(
-                    text:
-                        'page_desktop_popup.limited_banner_msg_all_access_allowed'
-                            .tr(),
+                    text: LocaleKeys
+                        .app_home_limited_banner_msg_all_access_allowed
+                        .tr(),
                     align: Alignment.center,
                   );
                 } else {
                   BotToast.showText(
-                    text:
-                        'page_desktop_popup.limited_banner_msg_all_access_not_allowed'
-                            .tr(),
+                    text: LocaleKeys
+                        .app_home_limited_banner_msg_all_access_not_allowed
+                        .tr(),
                     align: Alignment.center,
                   );
                 }

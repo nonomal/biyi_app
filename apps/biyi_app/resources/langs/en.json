@@ -208,6 +208,8 @@
       }
     },
     "settings": {
+      "title": "Settings",
+      "text_version": "Version {} BUILD {}",
       "_layout": {
         "navgroup": {
           "client": "Client",

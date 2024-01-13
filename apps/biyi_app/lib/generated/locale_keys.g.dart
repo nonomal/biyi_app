@@ -218,6 +218,8 @@ abstract class LocaleKeys {
       'app.ocr_engines_new.option.title';
   static const app_ocr_engines_new_option = 'app.ocr_engines_new.option';
   static const app_ocr_engines_new = 'app.ocr_engines_new';
+  static const app_settings_title = 'app.settings.title';
+  static const app_settings_text_version = 'app.settings.text_version';
   static const app_settings__layout_navgroup_client =
       'app.settings._layout.navgroup.client';
   static const app_settings__layout_navgroup_integrations =

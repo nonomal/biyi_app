@@ -204,6 +204,8 @@ class CodegenLoader extends AssetLoader {
         "option": {"title": "选项"}
       },
       "settings": {
+        "title": "Settings",
+        "text_version": "Version {} BUILD {}",
         "_layout": {
           "navgroup": {
             "client": "客户端",
@@ -496,6 +498,8 @@ class CodegenLoader extends AssetLoader {
         "option": {"title": "Option"}
       },
       "settings": {
+        "title": "Settings",
+        "text_version": "Version {} BUILD {}",
         "_layout": {
           "navgroup": {
             "client": "Client",

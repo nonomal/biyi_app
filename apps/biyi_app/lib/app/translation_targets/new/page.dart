@@ -87,7 +87,7 @@ class _TranslationTargetNewPageState extends State<TranslationTargetNewPage> {
               ),
               detailText: _targetLanguage != null
                   ? LanguageLabel(_targetLanguage!)
-                  : Text('please_choose'.tr()),
+                  : Text(LocaleKeys.please_choose.tr()),
               onTap: () async {
                 final selectedLanguage = await context.push<String?>(
                   '${PageId.supportedLanguages}?selectedLanguage=$_targetLanguage',

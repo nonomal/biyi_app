@@ -1,3 +1,4 @@
+import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -36,7 +37,7 @@ class AllowAccessListItem extends StatelessWidget {
           const TextSpan(text: '      '),
           if (onTappedTryAllow != null)
             TextSpan(
-              text: 'page_desktop_popup.limited_banner_btn_allow'.tr(),
+              text: LocaleKeys.app_home_limited_banner_btn_allow.tr(),
               style: const TextStyle(
                 decoration: TextDecoration.underline,
                 decorationColor: Colors.white,
@@ -46,7 +47,7 @@ class AllowAccessListItem extends StatelessWidget {
           if (onTappedTryAllow != null) const TextSpan(text: ' / '),
           if (onTappedGoSettings != null)
             TextSpan(
-              text: 'page_desktop_popup.limited_banner_btn_go_settings'.tr(),
+              text: LocaleKeys.app_home_limited_banner_btn_go_settings.tr(),
               style: const TextStyle(
                 decoration: TextDecoration.underline,
                 decorationColor: Colors.white,
@@ -103,7 +104,7 @@ class LimitedFunctionalityBanner extends StatelessWidget {
           children: [
             Text.rich(
               TextSpan(
-                text: 'page_desktop_popup.limited_banner_title'.tr(),
+                text: LocaleKeys.app_home_limited_banner_title.tr(),
               ),
               style: textTheme.bodyMedium!.copyWith(
                 color: Colors.white,
@@ -118,16 +119,16 @@ class LimitedFunctionalityBanner extends StatelessWidget {
                 children: [
                   if (kIsMacOS)
                     AllowAccessListItem(
-                      title:
-                          'page_desktop_popup.limited_banner_text_screen_capture'
-                              .tr(),
+                      title: LocaleKeys
+                          .app_home_limited_banner_text_screen_capture
+                          .tr(),
                       allowed: isAllowedScreenCaptureAccess,
                       onTappedTryAllow: () {
                         ScreenCapturer.instance.requestAccess();
                         BotToast.showText(
-                          text:
-                              'page_desktop_popup.limited_banner_msg_allow_access_tip'
-                                  .tr(),
+                          text: LocaleKeys
+                              .app_home_limited_banner_msg_allow_access_tip
+                              .tr(),
                           align: Alignment.center,
                           duration: const Duration(seconds: 5),
                         );
@@ -140,16 +141,16 @@ class LimitedFunctionalityBanner extends StatelessWidget {
                     ),
                   if (kIsMacOS)
                     AllowAccessListItem(
-                      title:
-                          'page_desktop_popup.limited_banner_text_screen_selection'
-                              .tr(),
+                      title: LocaleKeys
+                          .app_home_limited_banner_text_screen_selection
+                          .tr(),
                       allowed: isAllowedScreenSelectionAccess,
                       onTappedTryAllow: () {
                         screenTextExtractor.requestAccess();
                         BotToast.showText(
-                          text:
-                              'page_desktop_popup.limited_banner_msg_allow_access_tip'
-                                  .tr(),
+                          text: LocaleKeys
+                              .app_home_limited_banner_msg_allow_access_tip
+                              .tr(),
                           align: Alignment.center,
                           duration: const Duration(seconds: 5),
                         );
@@ -169,7 +170,7 @@ class LimitedFunctionalityBanner extends StatelessWidget {
                   width: 18,
                   height: 18,
                   child: Tooltip(
-                    message: 'page_desktop_popup.limited_banner_tip_help'.tr(),
+                    message: LocaleKeys.app_home_limited_banner_tip_help.tr(),
                     child: CupertinoButton(
                       padding: EdgeInsets.zero,
                       child: const Icon(
@@ -195,9 +196,8 @@ class LimitedFunctionalityBanner extends StatelessWidget {
                   TextSpan(
                     children: [
                       TextSpan(
-                        text:
-                            'page_desktop_popup.limited_banner_btn_check_again'
-                                .tr(),
+                        text: LocaleKeys.app_home_limited_banner_btn_check_again
+                            .tr(),
                         style: const TextStyle(
                           color: Colors.white,
                           height: 1.3,

@@ -1,4 +1,5 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
+import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
@@ -36,9 +37,9 @@ class NewVersionFoundBanner extends StatelessWidget {
           children: [
             Text.rich(
               TextSpan(
-                text:
-                    'page_desktop_popup.newversion_banner_text_found_new_version'
-                        .tr(args: [latestVersion.version]),
+                text: LocaleKeys
+                    .app_home_newversion_banner_text_found_new_version
+                    .tr(args: [latestVersion.version]),
               ),
               style: textTheme.bodyMedium!.copyWith(
                 color: Colors.white,
@@ -50,8 +51,7 @@ class NewVersionFoundBanner extends StatelessWidget {
               TextSpan(
                 children: [
                   TextSpan(
-                    text:
-                        'page_desktop_popup.newversion_banner_btn_update'.tr(),
+                    text: LocaleKeys.app_home_newversion_banner_btn_update.tr(),
                     style: const TextStyle(
                       color: Colors.white,
                       height: 1.3,

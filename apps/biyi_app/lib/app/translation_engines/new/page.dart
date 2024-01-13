@@ -138,7 +138,7 @@ class _TranslationEnginesNewOrEditPageState
             PreferenceListItem(
               icon: _type == null ? null : TranslationEngineIcon(_type!),
               title: _type == null
-                  ? Text('please_choose'.tr())
+                  ? Text(LocaleKeys.please_choose.tr())
                   : Text('engine.$_type'.tr()),
               accessoryView: widget.editable ? null : Container(),
               onTap: widget.editable

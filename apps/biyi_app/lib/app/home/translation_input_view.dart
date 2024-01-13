@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
+import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -51,7 +52,7 @@ class TranslationInputView extends StatelessWidget {
     return Row(
       children: [
         md.Tooltip(
-          message: 'page_desktop_popup.tip_translation_mode'.tr(
+          message: LocaleKeys.app_home_tip_translation_mode.tr(
             args: [
               'translation_mode.$translationMode'.tr(),
             ],
@@ -133,7 +134,7 @@ class TranslationInputView extends StatelessWidget {
         ),
         md.Tooltip(
           message:
-              'page_desktop_popup.tip_extract_text_from_screen_capture'.tr(),
+              LocaleKeys.app_home_tip_extract_text_from_screen_capture.tr(),
           child: SizedBox(
             width: 30,
             height: 26,
@@ -149,7 +150,7 @@ class TranslationInputView extends StatelessWidget {
           ),
         ),
         md.Tooltip(
-          message: 'page_desktop_popup.tip_extract_text_from_clipboard'.tr(),
+          message: LocaleKeys.app_home_tip_extract_text_from_clipboard.tr(),
           child: SizedBox(
             width: 30,
             height: 26,
@@ -187,7 +188,7 @@ class TranslationInputView extends StatelessWidget {
           ),
           child: Button(
             variant: ButtonVariant.outline,
-            label: 'page_desktop_popup.btn_clear'.tr(),
+            label: LocaleKeys.app_home_btn_clear.tr(),
             padding: const EdgeInsets.only(
               left: 12,
               right: 12,
@@ -204,7 +205,7 @@ class TranslationInputView extends StatelessWidget {
           ),
           child: Button(
             variant: ButtonVariant.filled,
-            label: 'page_desktop_popup.btn_trans'.tr(),
+            label: LocaleKeys.app_home_btn_trans.tr(),
             padding: const EdgeInsets.only(
               left: 12,
               right: 12,
@@ -261,7 +262,7 @@ class TranslationInputView extends StatelessWidget {
                     style: textTheme.bodyMedium?.copyWith(
                       height: 1.2,
                     ),
-                    placeholder: 'page_desktop_popup.input_hint'.tr(),
+                    placeholder: LocaleKeys.app_home_input_hint.tr(),
                     placeholderStyle: textTheme.bodyMedium?.copyWith(
                       color: textTheme.bodyMedium?.color?.withOpacity(0.5),
                       height: 1.2,
@@ -294,8 +295,7 @@ class TranslationInputView extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 6),
                                 Text(
-                                  'page_desktop_popup.text_extracting_text'
-                                      .tr(),
+                                  LocaleKeys.app_home_text_extracting_text.tr(),
                                   style: TextStyle(
                                     color: textTheme.bodySmall!.color,
                                     fontSize: 13,

@@ -22,7 +22,7 @@ class _RecordHotKeyDialogState extends State<RecordHotKeyDialog> {
   @override
   Widget build(BuildContext context) {
     return CustomAlertDialog(
-      title: Text('widget_record_shortcut_dialog.title'.tr()),
+      title: Text(LocaleKeys.widget_record_shortcut_dialog_title.tr()),
       content: SingleChildScrollView(
         child: ListBody(
           children: <Widget>[

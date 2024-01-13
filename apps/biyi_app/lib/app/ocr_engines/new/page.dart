@@ -99,7 +99,7 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
             PreferenceListItem(
               icon: _type == null ? null : OcrEngineIcon(_type!),
               title: _type == null
-                  ? Text('please_choose'.tr())
+                  ? Text(LocaleKeys.please_choose.tr())
                   : Text('ocr_engine.$_type'.tr()),
               accessoryView: widget.editable ? null : Container(),
               onTap: widget.editable
