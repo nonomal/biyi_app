@@ -192,8 +192,4 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
   Widget build(BuildContext context) {
     return _build(context);
   }
-
-  String t(String key) {
-    return 'page_setting_shortcuts.$key'.tr();
-  }
 }

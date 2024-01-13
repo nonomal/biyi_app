@@ -207,32 +207,6 @@
     "pref_section_title_private": "私有",
     "pref_section_description_private": "长按项目以重新排序"
   },
-  "page_setting_app_language": {
-    "title": "显示语言"
-  },
-  "page_setting_extract_text": {
-    "title": "取词",
-    "pref_section_title_default_detect_text_engine": "默认文字识别引擎",
-    "pref_item_auto_copy_detected_text": "自动复制检测到的文本"
-  },
-  "page_setting_interface": {
-    "title": "界面",
-    "pref_section_title_tray_icon": "托盘图标",
-    "pref_section_title_tray_icon_style": "托盘图标样式",
-    "pref_section_title_max_window_height": "最大窗口高度（逻辑像素）",
-    "pref_item_title_show_tray_icon": "显示托盘图标"
-  },
-  "page_setting_theme_mode": {
-    "title": "主题模式"
-  },
-  "page_setting_translate": {
-    "title": "翻译",
-    "pref_section_title_default_translate_engine": "默认翻译引擎",
-    "pref_section_title_translation_mode": "翻译模式",
-    "pref_section_title_default_detect_language_engine": "默认语种识别引擎",
-    "pref_section_title_translation_target": "翻译目标",
-    "pref_item_title_double_click_copy_result": "双击复制翻译结果"
-  },
   "page_settings": {
     "title": "设置",
     "text_version": "版本 {} BUILD {}",
@@ -319,13 +293,62 @@
         "title": "高级设置"
       },
       "appearance": {
-        "title": "外观"
+        "title": "外观",
+        "tray_icon": {
+          "title": "托盘图标",
+          "style": {
+            "title": "托盘图标样式"
+          },
+          "show": {
+            "title": "显示托盘图标"
+          }
+        },
+        "max_window_height": {
+          "title": "最大窗口高度（逻辑像素）"
+        }
       },
       "changelog": {
         "title": "变更日志"
       },
       "general": {
-        "title": "通用"
+        "title": "通用",
+        "default_detect_text_engine": {
+          "title": "默认文字识别引擎"
+        },
+        "extract_text": {
+          "auto_copy_detected_text": {
+            "title": "自动复制检测到的文本"
+          }
+        },
+        "default_translate_engine": {
+          "title": "默认翻译引擎"
+        },
+        "translation_mode": {
+          "title": "翻译模式"
+        },
+        "default_detect_language_engine": {
+          "title": "默认语种识别引擎"
+        },
+        "translation_target": {
+          "title": "翻译目标"
+        },
+        "translate": {
+          "double_click_copy_result": {
+            "title": "双击复制翻译结果"
+          }
+        },
+        "input_settings": {
+          "title": "输入设置",
+          "submit_with_enter": {
+            "title": "用 Enter 提交"
+          },
+          "submit_with_meta_enter": {
+            "title": "用 Ctrl + Enter 提交"
+          },
+          "submit_with_meta_enter_mac": {
+            "title": "用 ⌘ + Enter 提交"
+          }
+        }
       },
       "keybinds": {
         "title": "快捷键",

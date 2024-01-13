@@ -208,28 +208,6 @@ class CodegenLoader extends AssetLoader {
       "pref_section_title_private": "私有",
       "pref_section_description_private": "长按项目以重新排序"
     },
-    "page_setting_app_language": {"title": "显示语言"},
-    "page_setting_extract_text": {
-      "title": "取词",
-      "pref_section_title_default_detect_text_engine": "默认文字识别引擎",
-      "pref_item_auto_copy_detected_text": "自动复制检测到的文本"
-    },
-    "page_setting_interface": {
-      "title": "界面",
-      "pref_section_title_tray_icon": "托盘图标",
-      "pref_section_title_tray_icon_style": "托盘图标样式",
-      "pref_section_title_max_window_height": "最大窗口高度（逻辑像素）",
-      "pref_item_title_show_tray_icon": "显示托盘图标"
-    },
-    "page_setting_theme_mode": {"title": "主题模式"},
-    "page_setting_translate": {
-      "title": "翻译",
-      "pref_section_title_default_translate_engine": "默认翻译引擎",
-      "pref_section_title_translation_mode": "翻译模式",
-      "pref_section_title_default_detect_language_engine": "默认语种识别引擎",
-      "pref_section_title_translation_target": "翻译目标",
-      "pref_item_title_double_click_copy_result": "双击复制翻译结果"
-    },
     "page_settings": {
       "title": "设置",
       "text_version": "版本 {} BUILD {}",
@@ -305,9 +283,36 @@ class CodegenLoader extends AssetLoader {
         },
         "about": {"title": "关于"},
         "advanced": {"title": "高级设置"},
-        "appearance": {"title": "外观"},
+        "appearance": {
+          "title": "外观",
+          "tray_icon": {
+            "title": "托盘图标",
+            "style": {"title": "托盘图标样式"},
+            "show": {"title": "显示托盘图标"}
+          },
+          "max_window_height": {"title": "最大窗口高度（逻辑像素）"}
+        },
         "changelog": {"title": "变更日志"},
-        "general": {"title": "通用"},
+        "general": {
+          "title": "通用",
+          "default_detect_text_engine": {"title": "默认文字识别引擎"},
+          "extract_text": {
+            "auto_copy_detected_text": {"title": "自动复制检测到的文本"}
+          },
+          "default_translate_engine": {"title": "默认翻译引擎"},
+          "translation_mode": {"title": "翻译模式"},
+          "default_detect_language_engine": {"title": "默认语种识别引擎"},
+          "translation_target": {"title": "翻译目标"},
+          "translate": {
+            "double_click_copy_result": {"title": "双击复制翻译结果"}
+          },
+          "input_settings": {
+            "title": "输入设置",
+            "submit_with_enter": {"title": "用 Enter 提交"},
+            "submit_with_meta_enter": {"title": "用 Ctrl + Enter 提交"},
+            "submit_with_meta_enter_mac": {"title": "用 ⌘ + Enter 提交"}
+          }
+        },
         "keybinds": {
           "title": "快捷键",
           "window": {
@@ -540,32 +545,6 @@ class CodegenLoader extends AssetLoader {
       "pref_section_title_private": "Private",
       "pref_section_description_private": "Long press an item to reorder it"
     },
-    "page_setting_app_language": {"title": "Display Language"},
-    "page_setting_extract_text": {
-      "title": "Screen extract text",
-      "pref_section_title_default_detect_text_engine":
-          "Default detect text engine",
-      "pref_item_auto_copy_detected_text": "Auto copy the detected text"
-    },
-    "page_setting_interface": {
-      "title": "Interface",
-      "pref_section_title_tray_icon": "Tray Icon",
-      "pref_section_title_tray_icon_style": "Tray Icon Style",
-      "pref_section_title_max_window_height":
-          "Maximum window height (logical pixels)",
-      "pref_item_title_show_tray_icon": "Show Tray Icon"
-    },
-    "page_setting_theme_mode": {"title": "Theme Mode"},
-    "page_setting_translate": {
-      "title": "Translate",
-      "pref_section_title_default_translate_engine": "Default translate engine",
-      "pref_section_title_translation_mode": "Translation mode",
-      "pref_section_title_default_detect_language_engine":
-          "Default detect language engine",
-      "pref_section_title_translation_target": "Translation target",
-      "pref_item_title_double_click_copy_result":
-          "Double-click to copy translation result"
-    },
     "page_settings": {
       "title": "Settings",
       "text_version": "Version {} BUILD {}",
@@ -641,9 +620,42 @@ class CodegenLoader extends AssetLoader {
         },
         "about": {"title": "About"},
         "advanced": {"title": "Advanced"},
-        "appearance": {"title": "Appearance"},
+        "appearance": {
+          "title": "Appearance",
+          "tray_icon": {
+            "title": "Tray Icon",
+            "style": {"title": "Tray Icon Style"},
+            "show": {"title": "Show Tray Icon"}
+          },
+          "max_window_height": {
+            "title": "Maximum window height (logical pixels)"
+          }
+        },
         "changelog": {"title": "Changelog"},
-        "general": {"title": "General"},
+        "general": {
+          "title": "General",
+          "default_detect_text_engine": {"title": "Default detect text engine"},
+          "extract_text": {
+            "auto_copy_detected_text": {"title": "Auto copy the detected text"}
+          },
+          "default_translate_engine": {"title": "Default translate engine"},
+          "translation_mode": {"title": "Translation Mode"},
+          "default_detect_language_engine": {
+            "title": "Default detect language engine"
+          },
+          "translation_target": {"title": "Translation target"},
+          "translate": {
+            "double_click_copy_result": {
+              "title": "Double-click to copy translation result"
+            }
+          },
+          "input_settings": {
+            "title": "Input Settings",
+            "submit_with_enter": {"title": "Submit with Enter"},
+            "submit_with_meta_enter": {"title": "Submit with Ctrl + Enter"},
+            "submit_with_meta_enter_mac": {"title": "Submit with ⌘ + Enter"}
+          }
+        },
         "keybinds": {
           "title": "Keybinds",
           "window": {

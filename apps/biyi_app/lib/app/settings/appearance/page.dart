@@ -1,8 +1,10 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/providers/providers.dart';
 import 'package:biyi_app/services/services.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 const List<double> _kMaxWindowHeightOptions = [700, 800, 900, 1000];
 
@@ -34,6 +36,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
 
   void _handleThemeModeChanged(newValue) {
     _configuration.themeMode = newValue;
+    context.read<AppSettings>().themeMode = newValue;
   }
 
   Widget _buildBody(BuildContext context) {
@@ -46,7 +49,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
               groupValue: _configuration.themeMode,
               onChanged: _handleThemeModeChanged,
               title: Text(
-                'theme_mode.${ThemeMode.light.name}'.tr(),
+                LocaleKeys.theme_mode_light.tr(),
               ),
             ),
             PreferenceListRadioItem(
@@ -54,7 +57,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
               groupValue: _configuration.themeMode,
               onChanged: _handleThemeModeChanged,
               title: Text(
-                'theme_mode.${ThemeMode.dark.name}'.tr(),
+                LocaleKeys.theme_mode_dark.tr(),
               ),
             ),
             PreferenceListRadioItem(
@@ -62,16 +65,20 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
               groupValue: _configuration.themeMode,
               onChanged: _handleThemeModeChanged,
               title: Text(
-                'theme_mode.${ThemeMode.system.name}'.tr(),
+                LocaleKeys.theme_mode_system.tr(),
               ),
             ),
           ],
         ),
         PreferenceListSection(
-          title: Text(t('pref_section_title_tray_icon')),
+          title: Text(
+            LocaleKeys.app_settings_appearance_tray_icon_title.tr(),
+          ),
           children: [
             PreferenceListSwitchItem(
-              title: Text(t('pref_item_title_show_tray_icon')),
+              title: Text(
+                LocaleKeys.app_settings_appearance_tray_icon_show_title.tr(),
+              ),
               value: _configuration.showTrayIcon,
               onChanged: (newValue) {
                 _configuration.showTrayIcon = newValue;
@@ -80,7 +87,9 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
           ],
         ),
         PreferenceListSection(
-          title: Text(t('pref_section_title_max_window_height')),
+          title: Text(
+            LocaleKeys.app_settings_appearance_max_window_height_title.tr(),
+          ),
           children: [
             for (var option in _kMaxWindowHeightOptions)
               PreferenceListRadioItem<double>(
@@ -111,9 +120,5 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
   @override
   Widget build(BuildContext context) {
     return _build(context);
-  }
-
-  String t(String key, {List<String> args = const []}) {
-    return 'page_setting_interface.$key'.tr(args: args);
   }
 }

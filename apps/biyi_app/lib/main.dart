@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/generated/codegen_loader.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:biyi_app/providers/providers.dart';

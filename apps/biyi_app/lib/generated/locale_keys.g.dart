@@ -228,40 +228,6 @@ abstract class LocaleKeys {
   static const page_ocr_engines_manage_pref_section_description_private =
       'page_ocr_engines_manage.pref_section_description_private';
   static const page_ocr_engines_manage = 'page_ocr_engines_manage';
-  static const page_setting_app_language_title =
-      'page_setting_app_language.title';
-  static const page_setting_app_language = 'page_setting_app_language';
-  static const page_setting_extract_text_title =
-      'page_setting_extract_text.title';
-  static const page_setting_extract_text_pref_section_title_default_detect_text_engine =
-      'page_setting_extract_text.pref_section_title_default_detect_text_engine';
-  static const page_setting_extract_text_pref_item_auto_copy_detected_text =
-      'page_setting_extract_text.pref_item_auto_copy_detected_text';
-  static const page_setting_extract_text = 'page_setting_extract_text';
-  static const page_setting_interface_title = 'page_setting_interface.title';
-  static const page_setting_interface_pref_section_title_tray_icon =
-      'page_setting_interface.pref_section_title_tray_icon';
-  static const page_setting_interface_pref_section_title_tray_icon_style =
-      'page_setting_interface.pref_section_title_tray_icon_style';
-  static const page_setting_interface_pref_section_title_max_window_height =
-      'page_setting_interface.pref_section_title_max_window_height';
-  static const page_setting_interface_pref_item_title_show_tray_icon =
-      'page_setting_interface.pref_item_title_show_tray_icon';
-  static const page_setting_interface = 'page_setting_interface';
-  static const page_setting_theme_mode_title = 'page_setting_theme_mode.title';
-  static const page_setting_theme_mode = 'page_setting_theme_mode';
-  static const page_setting_translate_title = 'page_setting_translate.title';
-  static const page_setting_translate_pref_section_title_default_translate_engine =
-      'page_setting_translate.pref_section_title_default_translate_engine';
-  static const page_setting_translate_pref_section_title_translation_mode =
-      'page_setting_translate.pref_section_title_translation_mode';
-  static const page_setting_translate_pref_section_title_default_detect_language_engine =
-      'page_setting_translate.pref_section_title_default_detect_language_engine';
-  static const page_setting_translate_pref_section_title_translation_target =
-      'page_setting_translate.pref_section_title_translation_target';
-  static const page_setting_translate_pref_item_title_double_click_copy_result =
-      'page_setting_translate.pref_item_title_double_click_copy_result';
-  static const page_setting_translate = 'page_setting_translate';
   static const page_settings_title = 'page_settings.title';
   static const page_settings_text_version = 'page_settings.text_version';
   static const page_settings_pref_section_title_general =
@@ -389,10 +355,74 @@ abstract class LocaleKeys {
   static const app_settings_advanced_title = 'app.settings.advanced.title';
   static const app_settings_advanced = 'app.settings.advanced';
   static const app_settings_appearance_title = 'app.settings.appearance.title';
+  static const app_settings_appearance_tray_icon_title =
+      'app.settings.appearance.tray_icon.title';
+  static const app_settings_appearance_tray_icon_style_title =
+      'app.settings.appearance.tray_icon.style.title';
+  static const app_settings_appearance_tray_icon_style =
+      'app.settings.appearance.tray_icon.style';
+  static const app_settings_appearance_tray_icon_show_title =
+      'app.settings.appearance.tray_icon.show.title';
+  static const app_settings_appearance_tray_icon_show =
+      'app.settings.appearance.tray_icon.show';
+  static const app_settings_appearance_tray_icon =
+      'app.settings.appearance.tray_icon';
+  static const app_settings_appearance_max_window_height_title =
+      'app.settings.appearance.max_window_height.title';
+  static const app_settings_appearance_max_window_height =
+      'app.settings.appearance.max_window_height';
   static const app_settings_appearance = 'app.settings.appearance';
   static const app_settings_changelog_title = 'app.settings.changelog.title';
   static const app_settings_changelog = 'app.settings.changelog';
   static const app_settings_general_title = 'app.settings.general.title';
+  static const app_settings_general_default_detect_text_engine_title =
+      'app.settings.general.default_detect_text_engine.title';
+  static const app_settings_general_default_detect_text_engine =
+      'app.settings.general.default_detect_text_engine';
+  static const app_settings_general_extract_text_auto_copy_detected_text_title =
+      'app.settings.general.extract_text.auto_copy_detected_text.title';
+  static const app_settings_general_extract_text_auto_copy_detected_text =
+      'app.settings.general.extract_text.auto_copy_detected_text';
+  static const app_settings_general_extract_text =
+      'app.settings.general.extract_text';
+  static const app_settings_general_default_translate_engine_title =
+      'app.settings.general.default_translate_engine.title';
+  static const app_settings_general_default_translate_engine =
+      'app.settings.general.default_translate_engine';
+  static const app_settings_general_translation_mode_title =
+      'app.settings.general.translation_mode.title';
+  static const app_settings_general_translation_mode =
+      'app.settings.general.translation_mode';
+  static const app_settings_general_default_detect_language_engine_title =
+      'app.settings.general.default_detect_language_engine.title';
+  static const app_settings_general_default_detect_language_engine =
+      'app.settings.general.default_detect_language_engine';
+  static const app_settings_general_translation_target_title =
+      'app.settings.general.translation_target.title';
+  static const app_settings_general_translation_target =
+      'app.settings.general.translation_target';
+  static const app_settings_general_translate_double_click_copy_result_title =
+      'app.settings.general.translate.double_click_copy_result.title';
+  static const app_settings_general_translate_double_click_copy_result =
+      'app.settings.general.translate.double_click_copy_result';
+  static const app_settings_general_translate =
+      'app.settings.general.translate';
+  static const app_settings_general_input_settings_title =
+      'app.settings.general.input_settings.title';
+  static const app_settings_general_input_settings_submit_with_enter_title =
+      'app.settings.general.input_settings.submit_with_enter.title';
+  static const app_settings_general_input_settings_submit_with_enter =
+      'app.settings.general.input_settings.submit_with_enter';
+  static const app_settings_general_input_settings_submit_with_meta_enter_title =
+      'app.settings.general.input_settings.submit_with_meta_enter.title';
+  static const app_settings_general_input_settings_submit_with_meta_enter =
+      'app.settings.general.input_settings.submit_with_meta_enter';
+  static const app_settings_general_input_settings_submit_with_meta_enter_mac_title =
+      'app.settings.general.input_settings.submit_with_meta_enter_mac.title';
+  static const app_settings_general_input_settings_submit_with_meta_enter_mac =
+      'app.settings.general.input_settings.submit_with_meta_enter_mac';
+  static const app_settings_general_input_settings =
+      'app.settings.general.input_settings';
   static const app_settings_general = 'app.settings.general';
   static const app_settings_keybinds_title = 'app.settings.keybinds.title';
   static const app_settings_keybinds_window_show_or_hide_title =

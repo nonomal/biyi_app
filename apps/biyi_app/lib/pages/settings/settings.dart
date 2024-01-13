@@ -97,32 +97,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 );
               },
             ),
-            PreferenceListItem(
-              title: Text(t('pref_item_title_app_language')),
-              detailText: Text(getLanguageName(_configuration.appLanguage)),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => SettingAppLanguagePage(
-                      initialLanguage: _configuration.appLanguage,
-                    ),
-                  ),
-                );
-              },
-            ),
-            PreferenceListItem(
-              title: Text(t('pref_item_title_theme_mode')),
-              detailText: Text(
-                'theme_mode.${_configuration.themeMode.name}'.tr(),
-              ),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const SettingThemeModePage(),
-                  ),
-                );
-              },
-            ),
           ],
         ),
         PreferenceListSection(

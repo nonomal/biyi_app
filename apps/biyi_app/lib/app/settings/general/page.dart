@@ -52,7 +52,10 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
     return PreferenceList(
       children: [
         PreferenceListSection(
-          title: Text(t('pref_section_title_default_detect_text_engine')),
+          title: Text(
+            LocaleKeys.app_settings_general_default_detect_text_engine_title
+                .tr(),
+          ),
           children: [
             PreferenceListItem(
               icon: _defaultOcrEngineConfig == null
@@ -61,7 +64,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               title: Builder(
                 builder: (_) {
                   if (_defaultOcrEngineConfig == null) {
-                    return Text('please_choose'.tr());
+                    return Text(LocaleKeys.please_choose.tr());
                   }
                   return OcrEngineName(_defaultOcrEngineConfig!);
                 },
@@ -86,7 +89,11 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           children: [
             PreferenceListSwitchItem(
               value: _configuration.autoCopyDetectedText,
-              title: Text(t('pref_item_auto_copy_detected_text')),
+              title: Text(
+                LocaleKeys
+                    .app_settings_general_extract_text_auto_copy_detected_text_title
+                    .tr(),
+              ),
               onChanged: (newValue) async {
                 _configuration.autoCopyDetectedText = newValue;
               },
@@ -94,7 +101,9 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           ],
         ),
         PreferenceListSection(
-          title: Text(t2('pref_section_title_default_translate_engine')),
+          title: Text(
+            LocaleKeys.app_settings_general_default_translate_engine_title.tr(),
+          ),
           children: [
             PreferenceListItem(
               icon: _configuration.defaultTranslateEngineConfig == null
@@ -105,7 +114,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               title: Builder(
                 builder: (_) {
                   if (_configuration.defaultTranslateEngineConfig == null) {
-                    return Text('please_choose'.tr());
+                    return Text(LocaleKeys.please_choose.tr());
                   }
                   return TranslationEngineName(
                     _configuration.defaultTranslateEngineConfig!,
@@ -130,26 +139,30 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           ],
         ),
         PreferenceListSection(
-          title: Text(t2('pref_section_title_translation_mode')),
+          title:
+              Text(LocaleKeys.app_settings_general_translation_mode_title.tr()),
           children: [
             PreferenceListRadioItem(
               value: kTranslationModeManual,
               groupValue: _configuration.translationMode,
               onChanged: _handleTranslationModeChanged,
-              title: Text('translation_mode.manual'.tr()),
+              title: Text(LocaleKeys.translation_mode_manual.tr()),
             ),
             PreferenceListRadioItem(
               value: kTranslationModeAuto,
               groupValue: _configuration.translationMode,
               onChanged: _handleTranslationModeChanged,
-              title: Text('translation_mode.auto'.tr()),
+              title: Text(LocaleKeys.translation_mode_auto.tr()),
             ),
           ],
         ),
         if (_configuration.translationMode == kTranslationModeAuto)
           PreferenceListSection(
-            title:
-                Text(t2('pref_section_title_default_detect_language_engine')),
+            title: Text(
+              LocaleKeys
+                  .app_settings_general_default_detect_language_engine_title
+                  .tr(),
+            ),
             children: [
               PreferenceListItem(
                 icon: _configuration.defaultEngineConfig == null
@@ -160,7 +173,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                 title: Builder(
                   builder: (_) {
                     if (_configuration.defaultEngineConfig == null) {
-                      return Text('please_choose'.tr());
+                      return Text(LocaleKeys.please_choose.tr());
                     }
                     return TranslationEngineName(
                       _configuration.defaultEngineConfig!,
@@ -185,7 +198,9 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           ),
         if (_configuration.translationMode == kTranslationModeAuto)
           PreferenceListSection(
-            title: Text(t2('pref_section_title_translation_target')),
+            title: Text(
+              LocaleKeys.app_settings_general_translation_target_title.tr(),
+            ),
             children: [
               for (TranslationTarget translationTarget in _translationTargets)
                 PreferenceListItem(
@@ -242,7 +257,11 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           children: [
             PreferenceListSwitchItem(
               value: _configuration.doubleClickCopyResult,
-              title: Text(t2('pref_item_title_double_click_copy_result')),
+              title: Text(
+                LocaleKeys
+                    .app_settings_general_translate_double_click_copy_result_title
+                    .tr(),
+              ),
               onChanged: (newValue) async {
                 _configuration.doubleClickCopyResult = newValue;
               },
@@ -250,12 +269,18 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           ],
         ),
         PreferenceListSection(
-          title: Text(t3('pref_section_title_input_settings')),
+          title: Text(
+            LocaleKeys.app_settings_general_input_settings_title.tr(),
+          ),
           children: [
             PreferenceListRadioItem<String>(
               value: kInputSettingSubmitWithEnter,
               groupValue: _configuration.inputSetting,
-              title: Text(t3('pref_item_title_submit_with_enter')),
+              title: Text(
+                LocaleKeys
+                    .app_settings_general_input_settings_submit_with_enter_title
+                    .tr(),
+              ),
               onChanged: (newValue) {
                 _configuration.inputSetting = newValue;
               },
@@ -264,11 +289,13 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               value: kInputSettingSubmitWithMetaEnter,
               groupValue: _configuration.inputSetting,
               title: Text(
-                t3(
-                  kIsMacOS
-                      ? 'pref_item_title_submit_with_meta_enter_mac'
-                      : 'pref_item_title_submit_with_meta_enter',
-                ),
+                kIsMacOS
+                    ? LocaleKeys
+                        .app_settings_general_input_settings_submit_with_meta_enter_mac_title
+                        .tr()
+                    : LocaleKeys
+                        .app_settings_general_input_settings_submit_with_meta_enter_title
+                        .tr(),
               ),
               onChanged: (newValue) {
                 _configuration.inputSetting = newValue;
@@ -294,17 +321,5 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
   @override
   Widget build(BuildContext context) {
     return _build(context);
-  }
-
-  String t(String key, {List<String> args = const []}) {
-    return 'page_setting_extract_text.$key'.tr(args: args);
-  }
-
-  String t2(String key, {List<String> args = const []}) {
-    return 'page_setting_translate.$key'.tr(args: args);
-  }
-
-  String t3(String key, {List<String> args = const []}) {
-    return 'page_settings.$key'.tr(args: args);
   }
 }

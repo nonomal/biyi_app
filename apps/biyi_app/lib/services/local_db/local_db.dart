@@ -318,7 +318,6 @@ Future<void> initLocalDb() async {
   await _safeOpenBox(userDataDirectory, 'engines');
   await _safeOpenBox(userDataDirectory, 'ocr_engines');
   await _safeOpenBox(userDataDirectory, 'translation_targets');
-  await _safeOpenBox(userDataDirectory, 'newwords');
   // await migrateOldDb();
   if (!kIsWeb) {
     await initDataIfNeed();

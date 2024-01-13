@@ -9,14 +9,12 @@ import 'package:biyi_app/app/settings/layout.dart';
 import 'package:biyi_app/app/settings/text_detections/page.dart';
 import 'package:biyi_app/app/settings/text_translations/page.dart';
 import 'package:biyi_app/pages/pages.dart';
-import 'package:biyi_app/providers/providers.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 class PageId {
-  static const String home = '/';
+  static const String home = '/home';
   // 设置相关的
   static const String generalSetting = '/settings/general';
   static const String appearanceSetting = '/settings/appearance';
@@ -35,6 +33,12 @@ final routerConfig = GoRouter(
   routes: [
     GoRoute(
       path: '/',
+      redirect: (context, state) {
+        return '/home';
+      },
+    ),
+    GoRoute(
+      path: '/home',
       pageBuilder: (context, state) {
         return FadeTransitionPage(
           key: state.pageKey,
