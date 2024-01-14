@@ -225,6 +225,7 @@
       },
       "appearance": {
         "title": "Appearance",
+        "subtitle": "Change the look of your client.",
         "tray_icon": {
           "title": "Tray Icon",
           "style": {
@@ -239,10 +240,12 @@
         }
       },
       "changelog": {
-        "title": "Changelog"
+        "title": "Changelog",
+        "subtitle": "See what cool new features we're making."
       },
       "general": {
         "title": "General",
+        "subtitle": "General settings related to the client.",
         "default_detect_text_engine": {
           "title": "Default detect text engine"
         },

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:biyi_app/app/router_config.dart';
@@ -61,6 +62,7 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
   void initState() {
     super.initState();
     windowManager.addListener(this);
+    unawaited(_initWindow());
   }
 
   @override
@@ -71,24 +73,30 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
 
   @override
   Future<void> onWindowClose() async {
-    const size = Size(380, 185);
-    const minimunSize = Size(380, 185);
-    const maximumSize = Size(380, 600);
-
     await windowManager.hide();
+    // ignore: use_build_context_synchronously
+    context.go(PageId.home);
+  }
+
+  Future<void> _initWindow() async {
+    const size = Size(840, 600);
+    const minimunSize = Size(840, 600);
+    const maximumSize = Size(840, 600);
     await Future.any([
       windowManager.setSize(size),
       windowManager.setMinimumSize(minimunSize),
       windowManager.setMaximumSize(maximumSize),
-      windowManager.setSkipTaskbar(true),
+      windowManager.center(),
+      windowManager.setSkipTaskbar(false),
       windowManager.setTitleBarStyle(
         TitleBarStyle.hidden,
-        windowButtonVisibility: false,
+        windowButtonVisibility: true,
       ),
       windowManager.setPreventClose(true),
     ]);
-    // ignore: use_build_context_synchronously
-    context.go(PageId.home);
+
+    await Future<void>.delayed(const Duration(milliseconds: 200));
+    await windowManager.show();
   }
 
   Future<void> _handleDestinationSelected(String value) async {
@@ -102,6 +110,11 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surfaceVariant,
+        border: Border(
+          right: BorderSide(
+            color: Theme.of(context).dividerColor,
+          ),
+        ),
       ),
       padding: EdgeInsets.only(
         top: !kIsWeb && Platform.isMacOS ? 26 : 6,

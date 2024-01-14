@@ -60,16 +60,15 @@ class TranslationInputView extends StatelessWidget {
           child: SizedBox(
             width: 30,
             height: 26,
-            child: CustomButton(
-              padding: EdgeInsets.zero,
-              child: SizedBox(
-                width: 30,
-                height: 26,
-                child: Stack(
+            child: ActionIcon(
+              FluentIcons.target_20_regular,
+              variant: ActionIconVariant.transparent,
+              iconBuilder: (context, icon) {
+                return Stack(
                   alignment: Alignment.center,
                   children: [
                     Icon(
-                      FluentIcons.target_20_regular,
+                      icon,
                       size: 22,
                       color: translationMode == kTranslationModeAuto
                           ? Theme.of(context).primaryColor
@@ -77,7 +76,7 @@ class TranslationInputView extends StatelessWidget {
                     ),
                     if (translationMode == kTranslationModeAuto)
                       Positioned(
-                        bottom: 3,
+                        bottom: 0,
                         child: Container(
                           decoration: BoxDecoration(
                             color:
@@ -101,8 +100,9 @@ class TranslationInputView extends StatelessWidget {
                         ),
                       ),
                   ],
-                ),
-              ),
+                );
+              },
+              color: Colors.black,
               onPressed: () {
                 String newTranslationMode =
                     translationMode == kTranslationModeAuto
@@ -132,36 +132,30 @@ class TranslationInputView extends StatelessWidget {
             width: 8,
           ),
         ),
-        md.Tooltip(
+        Tooltip(
           message:
               LocaleKeys.app_home_tip_extract_text_from_screen_capture.tr(),
           child: SizedBox(
             width: 30,
             height: 26,
-            child: CustomButton(
-              padding: EdgeInsets.zero,
+            child: ActionIcon(
+              FluentIcons.crop_20_regular,
+              variant: ActionIconVariant.transparent,
+              color: Colors.black,
               onPressed: onClickExtractTextFromScreenCapture,
-              child: Icon(
-                FluentIcons.crop_20_regular,
-                size: 22,
-                color: Theme.of(context).iconTheme.color,
-              ),
             ),
           ),
         ),
-        md.Tooltip(
+        Tooltip(
           message: LocaleKeys.app_home_tip_extract_text_from_clipboard.tr(),
           child: SizedBox(
             width: 30,
             height: 26,
-            child: CustomButton(
-              padding: EdgeInsets.zero,
+            child: ActionIcon(
+              FluentIcons.clipboard_text_ltr_20_regular,
+              variant: ActionIconVariant.transparent,
+              color: Colors.black,
               onPressed: onClickExtractTextFromClipboard,
-              child: Icon(
-                FluentIcons.clipboard_text_ltr_20_regular,
-                size: 20,
-                color: Theme.of(context).iconTheme.color,
-              ),
             ),
           ),
         ),

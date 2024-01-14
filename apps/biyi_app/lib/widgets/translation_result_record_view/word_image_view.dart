@@ -1,4 +1,3 @@
-import 'package:biyi_app/widgets/custom_image/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
@@ -30,7 +29,7 @@ class WordImageView extends StatelessWidget {
         onPressed: onPressed,
         child: Hero(
           tag: wordImage.url,
-          child: CustomImage(
+          child: Image.network(
             wordImage.url,
             width: kWordImageSize,
             height: kWordImageSize,

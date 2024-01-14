@@ -13,7 +13,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   Widget _buildBody(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
         Column(
           children: [

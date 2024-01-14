@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:io';
 
 import 'package:biyi_app/app/router_config.dart';
@@ -9,8 +11,9 @@ import 'package:biyi_app/utilities/language_util.dart';
 import 'package:biyi_app/utilities/platform_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Icons;
 import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:protocol_handler/protocol_handler.dart';
@@ -18,9 +21,27 @@ import 'package:provider/provider.dart';
 import 'package:rise_ui/rise_ui.dart';
 import 'package:window_manager/window_manager.dart';
 
+class TablerIconLibrary extends IconLibrary {
+  @override
+  IconData get chevron_left => FluentIcons.chevron_left_20_regular;
+
+  @override
+  IconData get chevron_right => FluentIcons.chevron_right_20_regular;
+
+  @override
+  IconData get square => FluentIcons.square_20_regular;
+
+  @override
+  IconData get light_mode => FluentIcons.square_20_regular;
+
+  @override
+  IconData get dark_mode => FluentIcons.square_20_regular;
+}
+
 Future<void> _ensureInitialized() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  Icons.iconLibrary = TablerIconLibrary();
   if (kIsLinux || kIsMacOS || kIsWindows) {
     await windowManager.ensureInitialized();
   }
@@ -94,18 +115,18 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp.router(
       routerConfig: routerConfig,
       theme: ThemeData.light().copyWith(
+        primaryColor: Colors.indigo,
         extensions: const [
           ExtendedThemeData(
             brightness: Brightness.light,
-            primaryColor: ExtendedColors.indigo,
           ),
         ],
       ),
       darkTheme: ThemeData.dark().copyWith(
+        primaryColor: Colors.indigo,
         extensions: const [
           ExtendedThemeData(
             brightness: Brightness.dark,
-            primaryColor: ExtendedColors.indigo,
           ),
         ],
       ),
@@ -136,7 +157,6 @@ class _MyAppState extends State<MyApp> {
             brightness: appSettings.themeMode == ThemeMode.dark
                 ? Brightness.dark
                 : Brightness.light,
-            primaryColor: ExtendedColors.indigo,
           ),
           child: child,
         );

@@ -53,7 +53,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
         PreferenceListSection(
           header: Text(
@@ -299,6 +299,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
   Widget build(BuildContext context) {
     return PageScaffold(
       title: LocaleKeys.app_settings_general_title.tr(),
+      subtitle: LocaleKeys.app_settings_general_subtitle.tr(),
       child: _buildBody(context),
     );
   }

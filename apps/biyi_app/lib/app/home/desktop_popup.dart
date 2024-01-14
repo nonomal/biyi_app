@@ -121,6 +121,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     }
     _loadData();
     super.initState();
+    unawaited(_initWindow());
   }
 
   @override
@@ -150,6 +151,25 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       }
       setState(() {});
     }
+  }
+
+  Future<void> _initWindow() async {
+    const size = Size(380, 185);
+    const minimunSize = Size(380, 185);
+    const maximumSize = Size(380, 600);
+    await Future.any([
+      windowManager.setSize(size),
+      windowManager.setMinimumSize(minimunSize),
+      windowManager.setMaximumSize(maximumSize),
+      windowManager.setSkipTaskbar(true),
+      windowManager.setTitleBarStyle(
+        TitleBarStyle.hidden,
+        windowButtonVisibility: false,
+      ),
+      windowManager.setPreventClose(true),
+    ]);
+    await Future<void>.delayed(const Duration(milliseconds: 200));
+    await windowManager.show();
   }
 
   void _handleChanged() {

@@ -10,6 +10,7 @@ class ChangelogSettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageScaffold(
       title: LocaleKeys.app_settings_changelog_title.tr(),
+      subtitle: LocaleKeys.app_settings_changelog_subtitle.tr(),
       child: Container(),
     );
   }

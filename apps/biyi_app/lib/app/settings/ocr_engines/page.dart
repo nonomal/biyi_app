@@ -153,7 +153,7 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
         _buildListSectionProEngines(context),
         _buildListSectionPrivateEngines(context),

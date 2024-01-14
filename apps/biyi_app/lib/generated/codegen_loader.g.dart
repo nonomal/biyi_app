@@ -217,6 +217,7 @@ class CodegenLoader extends AssetLoader {
         "advanced": {"title": "高级设置"},
         "appearance": {
           "title": "外观",
+          "subtitle": "改变你的客户端的外观。",
           "tray_icon": {
             "title": "托盘图标",
             "style": {"title": "托盘图标样式"},
@@ -224,9 +225,10 @@ class CodegenLoader extends AssetLoader {
           },
           "max_window_height": {"title": "最大窗口高度（逻辑像素）"}
         },
-        "changelog": {"title": "变更日志"},
+        "changelog": {"title": "变更日志", "subtitle": "看看我们正在开发哪些很酷的新功能。"},
         "general": {
           "title": "通用",
+          "subtitle": "与客户端相关的通用设置。",
           "default_detect_text_engine": {"title": "默认文字识别引擎"},
           "extract_text": {
             "auto_copy_detected_text": {"title": "自动复制检测到的文本"}
@@ -247,7 +249,7 @@ class CodegenLoader extends AssetLoader {
         },
         "keybinds": {
           "title": "快捷键",
-          "subtitle": "查看和管理客户端快捷键",
+          "subtitle": "查看和管理客户端快捷键。",
           "window": {
             "show_or_hide": {"title": "显示/隐藏"},
             "hide": {"title": "隐藏"}
@@ -512,6 +514,7 @@ class CodegenLoader extends AssetLoader {
         "advanced": {"title": "Advanced"},
         "appearance": {
           "title": "Appearance",
+          "subtitle": "Change the look of your client.",
           "tray_icon": {
             "title": "Tray Icon",
             "style": {"title": "Tray Icon Style"},
@@ -521,9 +524,13 @@ class CodegenLoader extends AssetLoader {
             "title": "Maximum window height (logical pixels)"
           }
         },
-        "changelog": {"title": "Changelog"},
+        "changelog": {
+          "title": "Changelog",
+          "subtitle": "See what cool new features we're making."
+        },
         "general": {
           "title": "General",
+          "subtitle": "General settings related to the client.",
           "default_detect_text_engine": {"title": "Default detect text engine"},
           "extract_text": {
             "auto_copy_detected_text": {"title": "Auto copy the detected text"}

@@ -231,6 +231,8 @@ abstract class LocaleKeys {
   static const app_settings_advanced_title = 'app.settings.advanced.title';
   static const app_settings_advanced = 'app.settings.advanced';
   static const app_settings_appearance_title = 'app.settings.appearance.title';
+  static const app_settings_appearance_subtitle =
+      'app.settings.appearance.subtitle';
   static const app_settings_appearance_tray_icon_title =
       'app.settings.appearance.tray_icon.title';
   static const app_settings_appearance_tray_icon_style_title =
@@ -249,8 +251,11 @@ abstract class LocaleKeys {
       'app.settings.appearance.max_window_height';
   static const app_settings_appearance = 'app.settings.appearance';
   static const app_settings_changelog_title = 'app.settings.changelog.title';
+  static const app_settings_changelog_subtitle =
+      'app.settings.changelog.subtitle';
   static const app_settings_changelog = 'app.settings.changelog';
   static const app_settings_general_title = 'app.settings.general.title';
+  static const app_settings_general_subtitle = 'app.settings.general.subtitle';
   static const app_settings_general_default_detect_text_engine_title =
       'app.settings.general.default_detect_text_engine.title';
   static const app_settings_general_default_detect_text_engine =

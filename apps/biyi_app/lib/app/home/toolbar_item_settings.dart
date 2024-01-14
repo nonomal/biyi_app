@@ -16,27 +16,9 @@ class ToolbarItemSettings extends StatefulWidget {
 
 class _ToolbarItemSettingsState extends State<ToolbarItemSettings> {
   Future<void> _handleClick() async {
-    const size = Size(840, 600);
-    const minimunSize = Size(840, 600);
-    const maximumSize = Size(840, 600);
-
     await windowManager.hide();
-    await Future.any([
-      windowManager.setSize(size),
-      windowManager.setMinimumSize(minimunSize),
-      windowManager.setMaximumSize(maximumSize),
-      windowManager.center(),
-      windowManager.setSkipTaskbar(false),
-      windowManager.setTitleBarStyle(
-        TitleBarStyle.hidden,
-        windowButtonVisibility: true,
-      ),
-      windowManager.setPreventClose(true),
-    ]);
     // ignore: use_build_context_synchronously
     context.go(PageId.settingsGeneral);
-    await Future<void>.delayed(const Duration(milliseconds: 200));
-    await windowManager.show();
   }
 
   @override

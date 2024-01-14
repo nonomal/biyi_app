@@ -96,7 +96,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
         PreferenceListSection(
           children: [

@@ -225,6 +225,7 @@
       },
       "appearance": {
         "title": "外观",
+        "subtitle": "改变你的客户端的外观。",
         "tray_icon": {
           "title": "托盘图标",
           "style": {
@@ -239,10 +240,12 @@
         }
       },
       "changelog": {
-        "title": "变更日志"
+        "title": "变更日志",
+        "subtitle": "看看我们正在开发哪些很酷的新功能。"
       },
       "general": {
         "title": "通用",
+        "subtitle": "与客户端相关的通用设置。",
         "default_detect_text_engine": {
           "title": "默认文字识别引擎"
         },
@@ -283,7 +286,7 @@
       },
       "keybinds": {
         "title": "快捷键",
-        "subtitle": "查看和管理客户端快捷键",
+        "subtitle": "查看和管理客户端快捷键。",
         "window": {
           "show_or_hide": { "title": "显示/隐藏" },
           "hide": { "title": "隐藏" }

@@ -18,7 +18,7 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
   Widget _buildBody(BuildContext context) {
     final AppSettings appSettings = context.watch<AppSettings>();
 
-    return ListView(
+    return Column(
       children: [
         PreferenceListSection(
           children: [
