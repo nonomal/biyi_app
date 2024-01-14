@@ -3,6 +3,7 @@ import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rise_ui/rise_ui.dart';
 
 class OcrEngineTypesPage extends StatefulWidget {
   const OcrEngineTypesPage({
@@ -42,7 +43,7 @@ class _OcrEngineTypesPageState extends State<OcrEngineTypesPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return PreferenceList(
+    return ListView(
       children: [
         PreferenceListSection(
           children: [

@@ -96,7 +96,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return PreferenceList(
+    return ListView(
       children: [
         PreferenceListSection(
           children: [
@@ -132,7 +132,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
           ],
         ),
         PreferenceListSection(
-          title: Text(
+          header: Text(
             LocaleKeys.app_settings_keybinds_extract_text_title.tr(),
           ),
           children: [
@@ -189,7 +189,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
         ),
         if (!kIsLinux)
           PreferenceListSection(
-            title: Text(
+            header: Text(
               LocaleKeys.app_settings_keybinds_input_assist_function_title.tr(),
             ),
             children: [
@@ -216,13 +216,10 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
   }
 
   Widget _build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: Text(
-          LocaleKeys.app_settings_keybinds_title.tr(),
-        ),
-      ),
-      body: _buildBody(context),
+    return PageScaffold(
+      title: LocaleKeys.app_settings_keybinds_title.tr(),
+      subtitle: LocaleKeys.app_settings_keybinds_subtitle.tr(),
+      child: _buildBody(context),
     );
   }
 

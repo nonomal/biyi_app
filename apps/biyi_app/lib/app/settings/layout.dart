@@ -100,6 +100,9 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
 
   Widget _buildSidebar(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceVariant,
+      ),
       padding: EdgeInsets.only(
         top: !kIsWeb && Platform.isMacOS ? 26 : 6,
       ),
@@ -222,7 +225,7 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
             Breakpoints.smallAndUp: SlotLayout.from(
               key: const Key('body-medium-and-up'),
               builder: (_) => ColoredBox(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 child: widget.child,
               ),
             ),

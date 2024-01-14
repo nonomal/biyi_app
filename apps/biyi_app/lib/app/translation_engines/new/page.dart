@@ -6,6 +6,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rise_ui/rise_ui.dart';
 import 'package:shortid/shortid.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
@@ -128,10 +129,10 @@ class _TranslationEnginesNewOrEditPageState
   }
 
   Widget _buildBody(BuildContext context) {
-    return PreferenceList(
+    return ListView(
       children: [
         PreferenceListSection(
-          title: Text(
+          header: Text(
             LocaleKeys.app_translation_engines_new_engine_type_title.tr(),
           ),
           children: [
@@ -161,7 +162,7 @@ class _TranslationEnginesNewOrEditPageState
         ),
         if (translationEngine != null)
           PreferenceListSection(
-            title: Text(
+            header: Text(
               LocaleKeys.app_translation_engines_new_support_interface_title
                   .tr(),
             ),
@@ -201,7 +202,7 @@ class _TranslationEnginesNewOrEditPageState
           ),
         if (widget.editable && _type != null)
           PreferenceListSection(
-            title: Text(
+            header: Text(
               LocaleKeys.app_translation_engines_new_option_title.tr(),
             ),
             children: [
@@ -224,7 +225,7 @@ class _TranslationEnginesNewOrEditPageState
           ),
         if (widget.editable && widget.engineConfig != null)
           PreferenceListSection(
-            title: const Text(''),
+            header: const Text(''),
             children: [
               PreferenceListItem(
                 title: Center(

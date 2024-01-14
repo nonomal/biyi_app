@@ -283,6 +283,7 @@
       },
       "keybinds": {
         "title": "Keybinds",
+        "subtitle": "View and manage client keybinds",
         "window": {
           "show_or_hide": { "title": "Show/Hide" },
           "hide": { "title": "Hide" }

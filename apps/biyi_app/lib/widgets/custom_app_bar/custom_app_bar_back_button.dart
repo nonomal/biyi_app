@@ -16,7 +16,7 @@ class CustomAppBarBackButton extends StatelessWidget {
       padding: const EdgeInsets.only(right: 12),
       child: Icon(
         FluentIcons.chevron_left_20_regular,
-        color: Theme.of(context).appBarTheme.iconTheme!.color,
+        color: Theme.of(context).appBarTheme.iconTheme?.color,
         size: 24,
       ),
       onPressed: () {

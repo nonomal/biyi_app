@@ -6,6 +6,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ocr_engine_youdao/ocr_engine_youdao.dart';
+import 'package:rise_ui/rise_ui.dart';
 import 'package:shortid/shortid.dart';
 
 class OcrEnginesNewOrEditPage extends StatefulWidget {
@@ -89,10 +90,10 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return PreferenceList(
+    return ListView(
       children: [
         PreferenceListSection(
-          title: Text(
+          header: Text(
             LocaleKeys.app_ocr_engines_new_engine_type_title.tr(),
           ),
           children: [
@@ -122,7 +123,7 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
         ),
         if (widget.editable && _type != null)
           PreferenceListSection(
-            title: Text(
+            header: Text(
               LocaleKeys.app_ocr_engines_new_option_title.tr(),
             ),
             children: [
@@ -145,7 +146,7 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
           ),
         if (widget.editable && widget.ocrEngineConfig != null)
           PreferenceListSection(
-            title: const Text(''),
+            header: const Text(''),
             children: [
               PreferenceListItem(
                 title: Center(

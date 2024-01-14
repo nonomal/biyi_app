@@ -5,6 +5,7 @@ import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rise_ui/rise_ui.dart';
 
 const List<double> _kMaxWindowHeightOptions = [700, 800, 900, 1000];
 
@@ -40,7 +41,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return PreferenceList(
+    return ListView(
       children: [
         PreferenceListSection(
           children: [
@@ -71,7 +72,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
           ],
         ),
         PreferenceListSection(
-          title: Text(
+          header: Text(
             LocaleKeys.app_settings_appearance_tray_icon_title.tr(),
           ),
           children: [
@@ -87,7 +88,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
           ],
         ),
         PreferenceListSection(
-          title: Text(
+          header: Text(
             LocaleKeys.app_settings_appearance_max_window_height_title.tr(),
           ),
           children: [
@@ -106,19 +107,11 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
     );
   }
 
-  Widget _build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: Text(
-          LocaleKeys.app_settings_appearance_title.tr(),
-        ),
-      ),
-      body: _buildBody(context),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return _build(context);
+    return PageScaffold(
+      title: LocaleKeys.app_settings_appearance_title.tr(),
+      child: _buildBody(context),
+    );
   }
 }

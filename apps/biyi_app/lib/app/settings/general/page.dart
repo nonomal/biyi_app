@@ -9,6 +9,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rise_ui/rise_ui.dart';
 
 class GeneralSettingPage extends StatefulWidget {
   const GeneralSettingPage({super.key});
@@ -52,10 +53,10 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return PreferenceList(
+    return ListView(
       children: [
         PreferenceListSection(
-          title: Text(
+          header: Text(
             LocaleKeys.app_settings_general_default_detect_text_engine_title
                 .tr(),
           ),
@@ -101,7 +102,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           ],
         ),
         PreferenceListSection(
-          title: Text(
+          header: Text(
             LocaleKeys.app_settings_general_default_translate_engine_title.tr(),
           ),
           children: [
@@ -135,8 +136,9 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           ],
         ),
         PreferenceListSection(
-          title:
-              Text(LocaleKeys.app_settings_general_translation_mode_title.tr()),
+          header: Text(
+            LocaleKeys.app_settings_general_translation_mode_title.tr(),
+          ),
           children: [
             PreferenceListRadioItem(
               value: kTranslationModeManual,
@@ -154,7 +156,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
         ),
         if (_configuration.translationMode == kTranslationModeAuto)
           PreferenceListSection(
-            title: Text(
+            header: Text(
               LocaleKeys
                   .app_settings_general_default_detect_language_engine_title
                   .tr(),
@@ -190,7 +192,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           ),
         if (_configuration.translationMode == kTranslationModeAuto)
           PreferenceListSection(
-            title: Text(
+            header: Text(
               LocaleKeys.app_settings_general_translation_target_title.tr(),
             ),
             children: [
@@ -255,7 +257,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           ],
         ),
         PreferenceListSection(
-          title: Text(
+          header: Text(
             LocaleKeys.app_settings_general_input_settings_title.tr(),
           ),
           children: [
@@ -293,19 +295,11 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
     );
   }
 
-  Widget _build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: Text(
-          LocaleKeys.app_settings_general_title.tr(),
-        ),
-      ),
-      body: _buildBody(context),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return _build(context);
+    return PageScaffold(
+      title: LocaleKeys.app_settings_general_title.tr(),
+      child: _buildBody(context),
+    );
   }
 }

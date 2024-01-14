@@ -16,7 +16,7 @@ class CustomAppBarCloseButton extends StatelessWidget {
       padding: const EdgeInsets.only(right: 12),
       child: Icon(
         FluentIcons.dismiss_20_regular,
-        color: Theme.of(context).appBarTheme.iconTheme!.color,
+        color: Theme.of(context).appBarTheme.iconTheme?.color,
         size: 22,
       ),
       onPressed: () {

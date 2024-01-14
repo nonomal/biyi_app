@@ -2,8 +2,11 @@ import 'dart:io';
 
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/codegen_loader.g.dart';
-import 'package:biyi_app/includes.dart';
 import 'package:biyi_app/providers/providers.dart';
+import 'package:biyi_app/services/local_db/local_db.dart';
+import 'package:biyi_app/utilities/env.dart';
+import 'package:biyi_app/utilities/language_util.dart';
+import 'package:biyi_app/utilities/platform_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
@@ -90,8 +93,22 @@ class _MyAppState extends State<MyApp> {
 
     return MaterialApp.router(
       routerConfig: routerConfig,
-      theme: lightThemeData,
-      darkTheme: darkThemeData,
+      theme: ThemeData.light().copyWith(
+        extensions: const [
+          ExtendedThemeData(
+            brightness: Brightness.light,
+            primaryColor: ExtendedColors.indigo,
+          ),
+        ],
+      ),
+      darkTheme: ThemeData.dark().copyWith(
+        extensions: const [
+          ExtendedThemeData(
+            brightness: Brightness.dark,
+            primaryColor: ExtendedColors.indigo,
+          ),
+        ],
+      ),
       themeMode: appSettings.themeMode,
       builder: (context, child) {
         if (kIsLinux || kIsWindows) {

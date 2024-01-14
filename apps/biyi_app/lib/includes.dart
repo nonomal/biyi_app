@@ -2,6 +2,5 @@
 export './models/models.dart';
 export './networking/networking.dart';
 export './services/services.dart';
-export './themes/themes.dart';
 export './utilities/utilities.dart';
 export './widgets/widgets.dart';

@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: prefer_single_quotes, require_trailing_commas
+// ignore_for_file: prefer_single_quotes
 
 import 'dart:ui';
 
@@ -247,6 +247,7 @@ class CodegenLoader extends AssetLoader {
         },
         "keybinds": {
           "title": "快捷键",
+          "subtitle": "查看和管理客户端快捷键",
           "window": {
             "show_or_hide": {"title": "显示/隐藏"},
             "hide": {"title": "隐藏"}
@@ -547,6 +548,7 @@ class CodegenLoader extends AssetLoader {
         },
         "keybinds": {
           "title": "Keybinds",
+          "subtitle": "View and manage client keybinds",
           "window": {
             "show_or_hide": {"title": "Show/Hide"},
             "hide": {"title": "Hide"}

@@ -4,6 +4,7 @@ import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rise_ui/rise_ui.dart';
 
 class TranslationEnginesPage extends StatefulWidget {
   const TranslationEnginesPage({
@@ -43,7 +44,7 @@ class _TranslationEnginesPageState extends State<TranslationEnginesPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return PreferenceList(
+    return ListView(
       children: [
         if (_proEngineList.isNotEmpty)
           PreferenceListSection(
@@ -63,7 +64,7 @@ class _TranslationEnginesPageState extends State<TranslationEnginesPage> {
             ],
           ),
         PreferenceListSection(
-          title: Text(
+          header: Text(
             LocaleKeys.app_translation_engines_private_title.tr(),
           ),
           children: [

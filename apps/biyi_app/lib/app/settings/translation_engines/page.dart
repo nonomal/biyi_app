@@ -7,6 +7,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reorderables/reorderables.dart';
+import 'package:rise_ui/rise_ui.dart';
 
 class TranslationEnginesSettingPage extends StatefulWidget {
   const TranslationEnginesSettingPage({super.key});
@@ -98,10 +99,10 @@ class _TranslationEnginesSettingPageState
     }
 
     return PreferenceListSection(
-      title: Text(
+      header: Text(
         LocaleKeys.app_settings_translation_engines_private_title.tr(),
       ),
-      description: Text(
+      footer: Text(
         LocaleKeys.app_settings_translation_engines_private_description.tr(),
       ),
       children: [
@@ -155,7 +156,7 @@ class _TranslationEnginesSettingPageState
   }
 
   Widget _buildBody(BuildContext context) {
-    return PreferenceList(
+    return ListView(
       children: [
         _buildListSectionProEngines(context),
         _buildListSectionPrivateEngines(context),
@@ -165,11 +166,9 @@ class _TranslationEnginesSettingPageState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: Text(LocaleKeys.app_settings_translation_engines_title.tr()),
-      ),
-      body: _buildBody(context),
+    return PageScaffold(
+      title: LocaleKeys.app_settings_translation_engines_title.tr(),
+      child: _buildBody(context),
     );
   }
 }

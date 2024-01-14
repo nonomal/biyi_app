@@ -37,7 +37,7 @@ class CustomAppBarActionItem extends StatelessWidget {
                     text!,
                     style: TextStyle(
                       color:
-                          Theme.of(context).appBarTheme.actionsIconTheme!.color,
+                          Theme.of(context).appBarTheme.actionsIconTheme?.color,
                       fontSize: 14,
                     ),
                   ),

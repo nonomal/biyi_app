@@ -283,6 +283,7 @@
       },
       "keybinds": {
         "title": "快捷键",
+        "subtitle": "查看和管理客户端快捷键",
         "window": {
           "show_or_hide": { "title": "显示/隐藏" },
           "hide": { "title": "隐藏" }

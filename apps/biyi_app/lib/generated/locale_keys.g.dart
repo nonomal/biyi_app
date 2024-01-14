@@ -1,7 +1,5 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: constant_identifier_names
-
 abstract class LocaleKeys {
   static const app_name = 'app_name';
   static const ok = 'ok';
@@ -303,6 +301,8 @@ abstract class LocaleKeys {
       'app.settings.general.input_settings';
   static const app_settings_general = 'app.settings.general';
   static const app_settings_keybinds_title = 'app.settings.keybinds.title';
+  static const app_settings_keybinds_subtitle =
+      'app.settings.keybinds.subtitle';
   static const app_settings_keybinds_window_show_or_hide_title =
       'app.settings.keybinds.window.show_or_hide.title';
   static const app_settings_keybinds_window_show_or_hide =

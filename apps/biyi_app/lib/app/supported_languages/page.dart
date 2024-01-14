@@ -2,10 +2,10 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/utilities/language_util.dart';
 import 'package:biyi_app/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:biyi_app/widgets/language_label/language_label.dart';
-import 'package:biyi_app/widgets/preference_list/preference_list.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rise_ui/rise_ui.dart';
 
 class SupportedLanguagesPage extends StatefulWidget {
   const SupportedLanguagesPage({
@@ -47,10 +47,10 @@ class _SupportedLanguagesPageState extends State<SupportedLanguagesPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return PreferenceList(
+    return ListView(
       children: [
         PreferenceListSection(
-          title: Text(
+          header: Text(
             LocaleKeys.app_supported_languages_all_title.tr(),
           ),
           children: [
