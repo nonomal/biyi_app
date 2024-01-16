@@ -3,7 +3,7 @@ import 'package:biyi_app/utilities/language_util.dart';
 import 'package:biyi_app/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:biyi_app/widgets/language_label/language_label.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Icons;
 import 'package:go_router/go_router.dart';
 import 'package:rise_ui/rise_ui.dart';
 
@@ -49,18 +49,21 @@ class _SupportedLanguagesPageState extends State<SupportedLanguagesPage> {
   Widget _buildBody(BuildContext context) {
     return ListView(
       children: [
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           header: Text(
             LocaleKeys.app_supported_languages_all_title.tr(),
           ),
           children: [
             for (var supportedLanguage in kSupportedLanguages)
-              PreferenceListRadioItem(
+              PreferenceListTile(
                 title: LanguageLabel(supportedLanguage),
-                accessoryView: Container(),
-                value: supportedLanguage,
-                groupValue: _selectedLanguage,
-                onChanged: (newGroupValue) {
+                additionalInfo: _selectedLanguage == supportedLanguage
+                    ? Icon(
+                        ExtendedIcons.square,
+                        color: Theme.of(context).colorScheme.primary,
+                      )
+                    : null,
+                onTap: () {
                   _selectedLanguage = supportedLanguage;
                   setState(() {});
                 },

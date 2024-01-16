@@ -2,7 +2,7 @@ import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Icons;
 import 'package:go_router/go_router.dart';
 import 'package:rise_ui/rise_ui.dart';
 
@@ -47,46 +47,54 @@ class _TranslationEnginesPageState extends State<TranslationEnginesPage> {
     return ListView(
       children: [
         if (_proEngineList.isNotEmpty)
-          PreferenceListSection(
+          PreferenceListSection.insetGrouped(
+            hasLeading: false,
             children: [
               for (var engineConfig in _proEngineList)
-                PreferenceListRadioItem<String>(
-                  icon: TranslationEngineIcon(engineConfig.type),
+                PreferenceListTile(
+                  leading: TranslationEngineIcon(engineConfig.type),
                   title: TranslationEngineName(engineConfig),
-                  value: engineConfig.identifier,
-                  groupValue: _selectedEngineId ?? '',
-                  onChanged: (newValue) {
+                  additionalInfo: engineConfig.identifier == _selectedEngineId
+                      ? Icon(
+                          ExtendedIcons.square,
+                          color: Theme.of(context).colorScheme.primary,
+                        )
+                      : null,
+                  onTap: () {
                     setState(() {
-                      _selectedEngineId = newValue;
+                      _selectedEngineId = engineConfig.identifier;
                     });
                   },
                 ),
             ],
           ),
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           header: Text(
             LocaleKeys.app_translation_engines_private_title.tr(),
           ),
           children: [
             for (var engineConfig in _privateEngineList)
-              PreferenceListRadioItem<String>(
-                icon: TranslationEngineIcon(engineConfig.type),
+              PreferenceListTile(
+                leading: TranslationEngineIcon(engineConfig.type),
                 title: TranslationEngineName(engineConfig),
-                value: engineConfig.identifier,
-                groupValue: _selectedEngineId ?? '',
-                onChanged: (newValue) {
+                additionalInfo: engineConfig.identifier == _selectedEngineId
+                    ? Icon(
+                        ExtendedIcons.square,
+                        color: Theme.of(context).colorScheme.primary,
+                      )
+                    : null,
+                onTap: () {
                   setState(() {
-                    _selectedEngineId = newValue;
+                    _selectedEngineId = engineConfig.identifier;
                   });
                 },
               ),
             if (_privateEngineList.isEmpty)
-              PreferenceListItem(
+              PreferenceListTile(
                 title: Text(
                   LocaleKeys.app_translation_engines__msg_no_available_engines
                       .tr(),
                 ),
-                accessoryView: Container(),
               ),
           ],
         ),

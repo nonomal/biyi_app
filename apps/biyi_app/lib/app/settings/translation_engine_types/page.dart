@@ -1,12 +1,13 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/includes.dart';
+import 'package:biyi_app/networking/translate_client/translate_client.dart';
+import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Icons;
 import 'package:go_router/go_router.dart';
 import 'package:rise_ui/rise_ui.dart';
 
-class OcrEngineTypesPage extends StatefulWidget {
-  const OcrEngineTypesPage({
+class TranslationEngineTypesPage extends StatefulWidget {
+  const TranslationEngineTypesPage({
     super.key,
     this.selectedEngineType,
   });
@@ -14,10 +15,12 @@ class OcrEngineTypesPage extends StatefulWidget {
   final String? selectedEngineType;
 
   @override
-  State<OcrEngineTypesPage> createState() => _OcrEngineTypesPageState();
+  State<TranslationEngineTypesPage> createState() =>
+      _TranslationEngineTypesPageState();
 }
 
-class _OcrEngineTypesPageState extends State<OcrEngineTypesPage> {
+class _TranslationEngineTypesPageState
+    extends State<TranslationEngineTypesPage> {
   String? _selectedEngineType;
 
   @override
@@ -32,7 +35,7 @@ class _OcrEngineTypesPageState extends State<OcrEngineTypesPage> {
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
-      title: Text(LocaleKeys.app_ocr_engine_types_title.tr()),
+      title: Text(LocaleKeys.app_translation_engine_types_title.tr()),
       actions: [
         CustomAppBarActionItem(
           text: LocaleKeys.ok.tr(),
@@ -45,15 +48,19 @@ class _OcrEngineTypesPageState extends State<OcrEngineTypesPage> {
   Widget _buildBody(BuildContext context) {
     return ListView(
       children: [
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           children: [
-            for (var engineType in kSupportedOcrEngineTypes)
-              PreferenceListRadioItem(
-                icon: OcrEngineIcon(engineType),
-                title: Text('ocr_engine.$engineType'.tr()),
-                value: engineType,
-                groupValue: _selectedEngineType,
-                onChanged: (newGroupValue) {
+            for (final engineType in kSupportedEngineTypes)
+              PreferenceListTile(
+                leading: TranslationEngineIcon(engineType),
+                title: Text('engine.$engineType'.tr()),
+                additionalInfo: _selectedEngineType == engineType
+                    ? Icon(
+                        ExtendedIcons.square,
+                        color: Theme.of(context).colorScheme.primary,
+                      )
+                    : null,
+                onTap: () {
                   _selectedEngineType = engineType;
                   setState(() {});
                 },

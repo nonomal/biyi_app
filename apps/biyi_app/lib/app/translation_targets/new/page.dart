@@ -63,13 +63,14 @@ class _TranslationTargetNewPageState extends State<TranslationTargetNewPage> {
   Widget _buildBody(BuildContext context) {
     return ListView(
       children: [
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
+          hasLeading: false,
           children: [
-            PreferenceListItem(
+            PreferenceListTile(
               title: Text(
                 LocaleKeys.app_translation_targets_new_source_language.tr(),
               ),
-              detailText: _sourceLanguage != null
+              additionalInfo: _sourceLanguage != null
                   ? LanguageLabel(_sourceLanguage!)
                   : Text(LocaleKeys.please_choose.tr()),
               onTap: () async {
@@ -82,11 +83,11 @@ class _TranslationTargetNewPageState extends State<TranslationTargetNewPage> {
                 }
               },
             ),
-            PreferenceListItem(
+            PreferenceListTile(
               title: Text(
                 LocaleKeys.app_translation_targets_new_target_language.tr(),
               ),
-              detailText: _targetLanguage != null
+              additionalInfo: _targetLanguage != null
                   ? LanguageLabel(_targetLanguage!)
                   : Text(LocaleKeys.please_choose.tr()),
               onTap: () async {
@@ -102,17 +103,18 @@ class _TranslationTargetNewPageState extends State<TranslationTargetNewPage> {
           ],
         ),
         if (widget.translationTarget != null)
-          PreferenceListSection(
+          PreferenceListSection.insetGrouped(
             header: const Text(''),
+            hasLeading: false,
             children: [
-              PreferenceListItem(
+              PreferenceListTile(
                 title: Center(
                   child: Text(
                     LocaleKeys.delete.tr(),
                     style: const TextStyle(color: Colors.red),
                   ),
                 ),
-                accessoryView: Container(),
+                // accessoryView: Container(),
                 onTap: () async {
                   await localDb
                       .translationTarget(widget.translationTarget?.id)

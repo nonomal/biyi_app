@@ -4,6 +4,7 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/services/services.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reorderables/reorderables.dart';
@@ -42,7 +43,7 @@ class _TranslationEnginesSettingPageState
 
   Future<void> _handleClickAdd() async {
     final engineType = await context.push<String?>(
-      PageId.translationEngineTypes,
+      PageId.settingsTranslationEngineTypes,
     );
     if (engineType != null) {
       // ignore: use_build_context_synchronously
@@ -57,18 +58,20 @@ class _TranslationEnginesSettingPageState
 
   Widget _buildListSectionProEngines(BuildContext context) {
     if (_proEngineList.isEmpty) return Container();
-    return PreferenceListSection(
+    return PreferenceListSection.insetGrouped(
       children: [
         for (TranslationEngineConfig item in _proEngineList)
-          PreferenceListSwitchItem(
-            icon: TranslationEngineIcon(item.type),
+          PreferenceListTile(
+            leading: TranslationEngineIcon(item.type),
             title: TranslationEngineName(item),
-            value: !item.disabled,
-            onChanged: (newValue) {
-              localDb //
-                  .proEngine(item.identifier)
-                  .update(disabled: !item.disabled);
-            },
+            additionalInfo: CupertinoSwitch(
+              value: !item.disabled,
+              onChanged: (newValue) {
+                localDb //
+                    .proEngine(item.identifier)
+                    .update(disabled: !item.disabled);
+              },
+            ),
             onTap: () {
               context.push<String?>(
                 PageId.translationEngine(item.identifier),
@@ -98,7 +101,7 @@ class _TranslationEnginesSettingPageState
       }
     }
 
-    return PreferenceListSection(
+    return PreferenceListSection.insetGrouped(
       header: Text(
         LocaleKeys.app_settings_translation_engines_private_title.tr(),
       ),
@@ -117,15 +120,17 @@ class _TranslationEnginesSettingPageState
                 child: Builder(
                   builder: (_) {
                     final item = _privateEngineList[i];
-                    return PreferenceListSwitchItem(
-                      icon: TranslationEngineIcon(item.type),
+                    return PreferenceListTile(
+                      leading: TranslationEngineIcon(item.type),
                       title: TranslationEngineName(item),
-                      value: !item.disabled,
-                      onChanged: (newValue) {
-                        localDb //
-                            .privateEngine(item.identifier)
-                            .update(disabled: !item.disabled);
-                      },
+                      additionalInfo: CupertinoSwitch(
+                        value: !item.disabled,
+                        onChanged: (newValue) {
+                          localDb //
+                              .privateEngine(item.identifier)
+                              .update(disabled: !item.disabled);
+                        },
+                      ),
                       onTap: () {
                         context.push<String?>(
                           PageId.translationEngine(item.identifier),
@@ -141,14 +146,14 @@ class _TranslationEnginesSettingPageState
               ),
           ],
         ),
-        PreferenceListItem(
+        PreferenceListTile(
           title: Text(
             LocaleKeys.add.tr(),
             style: TextStyle(
               color: Theme.of(context).primaryColor,
             ),
           ),
-          accessoryView: Container(),
+          // accessoryView: Container(),
           onTap: _handleClickAdd,
         ),
       ],

@@ -3,6 +3,7 @@ import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ocr_engine_youdao/ocr_engine_youdao.dart';
@@ -92,21 +93,20 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
   Widget _buildBody(BuildContext context) {
     return ListView(
       children: [
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           header: Text(
             LocaleKeys.app_ocr_engines_new_engine_type_title.tr(),
           ),
           children: [
-            PreferenceListItem(
-              icon: _type == null ? null : OcrEngineIcon(_type!),
+            PreferenceListTile(
+              leading: _type == null ? null : OcrEngineIcon(_type!),
               title: _type == null
                   ? Text(LocaleKeys.please_choose.tr())
                   : Text('ocr_engine.$_type'.tr()),
-              accessoryView: widget.editable ? null : Container(),
               onTap: widget.editable
                   ? () async {
                       final newEngineType = await context.push<String?>(
-                        PageId.ocrEngineTypes,
+                        PageId.settingsOcrEngineTypes,
                         extra: {
                           'selectedEngineType': _type,
                         },
@@ -122,40 +122,39 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
           ],
         ),
         if (widget.editable && _type != null)
-          PreferenceListSection(
+          PreferenceListSection.insetGrouped(
             header: Text(
               LocaleKeys.app_ocr_engines_new_option_title.tr(),
             ),
             children: [
               for (var optionKey in _engineOptionKeys)
-                PreferenceListTextFieldItem(
-                  controller: _textEditingControllerMap[optionKey],
-                  placeholder: optionKey,
-                  accessoryView: Container(),
-                  onChanged: (value) {
-                    _option[optionKey] = value;
-                    setState(() {});
-                  },
+                PreferenceListTile(
+                  title: CupertinoTextField(
+                    controller: _textEditingControllerMap[optionKey],
+                    placeholder: optionKey,
+                    onChanged: (value) {
+                      _option[optionKey] = value;
+                      setState(() {});
+                    },
+                  ),
                 ),
               if (_engineOptionKeys.isEmpty)
-                PreferenceListItem(
-                  title: const Text('No options'),
-                  accessoryView: Container(),
+                const PreferenceListTile(
+                  title: Text('No options'),
                 ),
             ],
           ),
         if (widget.editable && widget.ocrEngineConfig != null)
-          PreferenceListSection(
+          PreferenceListSection.insetGrouped(
             header: const Text(''),
             children: [
-              PreferenceListItem(
+              PreferenceListTile(
                 title: Center(
                   child: Text(
                     LocaleKeys.delete.tr(),
                     style: const TextStyle(color: Colors.red),
                   ),
                 ),
-                accessoryView: Container(),
                 onTap: () async {
                   await localDb.privateOcrEngine(_identifier).delete();
                   // ignore: use_build_context_synchronously

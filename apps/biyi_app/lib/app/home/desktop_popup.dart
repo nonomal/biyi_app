@@ -154,9 +154,9 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   Future<void> _initWindow() async {
-    const size = Size(380, 185);
-    const minimunSize = Size(380, 185);
-    const maximumSize = Size(380, 600);
+    const size = Size(400, 185);
+    const minimunSize = Size(400, 185);
+    const maximumSize = Size(400, 600);
     await Future.any([
       windowManager.setSize(size),
       windowManager.setMinimumSize(minimunSize),
@@ -200,22 +200,6 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     await _initTrayIcon();
     await Future.delayed(const Duration(milliseconds: 400));
 
-    // 初始化窗口
-    const size = Size(380, 185);
-    const minimunSize = Size(380, 185);
-    const maximumSize = Size(380, 600);
-
-    await Future.any([
-      windowManager.setSize(size),
-      windowManager.setMinimumSize(minimunSize),
-      windowManager.setMaximumSize(maximumSize),
-      windowManager.setSkipTaskbar(true),
-      windowManager.setTitleBarStyle(
-        TitleBarStyle.hidden,
-        windowButtonVisibility: false,
-      ),
-      windowManager.setPreventClose(true),
-    ]);
     if (kIsLinux || kIsWindows) {
       Display primaryDisplay = await screenRetriever.getPrimaryDisplay();
       Size windowSize = await windowManager.getSize();

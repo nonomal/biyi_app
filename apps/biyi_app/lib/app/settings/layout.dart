@@ -109,7 +109,7 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
   Widget _buildSidebar(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceVariant,
+        color: Theme.of(context).colorScheme.background,
         border: Border(
           right: BorderSide(
             color: Theme.of(context).dividerColor,

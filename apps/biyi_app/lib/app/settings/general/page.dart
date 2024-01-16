@@ -7,7 +7,7 @@ import 'package:biyi_app/utilities/utilities.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Icons;
 import 'package:go_router/go_router.dart';
 import 'package:rise_ui/rise_ui.dart';
 
@@ -55,14 +55,14 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
   Widget _buildBody(BuildContext context) {
     return Column(
       children: [
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           header: Text(
             LocaleKeys.app_settings_general_default_detect_text_engine_title
                 .tr(),
           ),
           children: [
-            PreferenceListItem(
-              icon: _defaultOcrEngineConfig == null
+            PreferenceListTile(
+              leading: _defaultOcrEngineConfig == null
                   ? null
                   : OcrEngineIcon(_defaultOcrEngineConfig!.type),
               title: Builder(
@@ -86,28 +86,34 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
             ),
           ],
         ),
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           children: [
-            PreferenceListSwitchItem(
-              value: _configuration.autoCopyDetectedText,
+            PreferenceListTile(
               title: Text(
                 LocaleKeys
                     .app_settings_general_extract_text_auto_copy_detected_text_title
                     .tr(),
               ),
-              onChanged: (newValue) async {
-                _configuration.autoCopyDetectedText = newValue;
+              additionalInfo: _configuration.autoCopyDetectedText
+                  ? Icon(
+                      ExtendedIcons.square,
+                      color: Theme.of(context).colorScheme.primary,
+                    )
+                  : null,
+              onTap: () async {
+                _configuration.autoCopyDetectedText =
+                    !_configuration.autoCopyDetectedText;
               },
             ),
           ],
         ),
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           header: Text(
             LocaleKeys.app_settings_general_default_translate_engine_title.tr(),
           ),
           children: [
-            PreferenceListItem(
-              icon: _configuration.defaultTranslateEngineConfig == null
+            PreferenceListTile(
+              leading: _configuration.defaultTranslateEngineConfig == null
                   ? null
                   : TranslationEngineIcon(
                       _configuration.defaultTranslateEngineConfig!.type,
@@ -135,35 +141,46 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
             ),
           ],
         ),
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           header: Text(
             LocaleKeys.app_settings_general_translation_mode_title.tr(),
           ),
           children: [
-            PreferenceListRadioItem(
-              value: kTranslationModeManual,
-              groupValue: _configuration.translationMode,
-              onChanged: _handleTranslationModeChanged,
+            PreferenceListTile(
               title: Text(LocaleKeys.translation_mode_manual.tr()),
+              additionalInfo:
+                  _configuration.translationMode == kTranslationModeManual
+                      ? Icon(
+                          ExtendedIcons.square,
+                          color: Theme.of(context).colorScheme.primary,
+                        )
+                      : null,
+              onTap: () =>
+                  _handleTranslationModeChanged(kTranslationModeManual),
             ),
-            PreferenceListRadioItem(
-              value: kTranslationModeAuto,
-              groupValue: _configuration.translationMode,
-              onChanged: _handleTranslationModeChanged,
+            PreferenceListTile(
               title: Text(LocaleKeys.translation_mode_auto.tr()),
+              additionalInfo:
+                  _configuration.translationMode == kTranslationModeAuto
+                      ? Icon(
+                          ExtendedIcons.square,
+                          color: Theme.of(context).colorScheme.primary,
+                        )
+                      : null,
+              onTap: () => _handleTranslationModeChanged(kTranslationModeAuto),
             ),
           ],
         ),
         if (_configuration.translationMode == kTranslationModeAuto)
-          PreferenceListSection(
+          PreferenceListSection.insetGrouped(
             header: Text(
               LocaleKeys
                   .app_settings_general_default_detect_language_engine_title
                   .tr(),
             ),
             children: [
-              PreferenceListItem(
-                icon: _configuration.defaultEngineConfig == null
+              PreferenceListTile(
+                leading: _configuration.defaultEngineConfig == null
                     ? null
                     : TranslationEngineIcon(
                         _configuration.defaultEngineConfig!.type,
@@ -191,13 +208,13 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
             ],
           ),
         if (_configuration.translationMode == kTranslationModeAuto)
-          PreferenceListSection(
+          PreferenceListSection.insetGrouped(
             header: Text(
               LocaleKeys.app_settings_general_translation_target_title.tr(),
             ),
             children: [
               for (TranslationTarget translationTarget in _translationTargets)
-                PreferenceListItem(
+                PreferenceListTile(
                   title: Builder(
                     builder: (_) {
                       return Row(
@@ -225,14 +242,13 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                     );
                   },
                 ),
-              PreferenceListItem(
+              PreferenceListTile(
                 title: Text(
                   LocaleKeys.add.tr(),
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
-                accessoryView: Container(),
                 onTap: () async {
                   await context.push<TranslationEngineConfig?>(
                     PageId.translationTargetsNew,
@@ -241,41 +257,51 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               ),
             ],
           ),
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           children: [
-            PreferenceListSwitchItem(
-              value: _configuration.doubleClickCopyResult,
+            PreferenceListTile(
               title: Text(
                 LocaleKeys
                     .app_settings_general_translate_double_click_copy_result_title
                     .tr(),
               ),
-              onChanged: (newValue) async {
-                _configuration.doubleClickCopyResult = newValue;
+              additionalInfo: _configuration.doubleClickCopyResult
+                  ? Icon(
+                      ExtendedIcons.square,
+                      color: Theme.of(context).colorScheme.primary,
+                    )
+                  : null,
+              onTap: () async {
+                _configuration.doubleClickCopyResult =
+                    !_configuration.doubleClickCopyResult;
               },
             ),
           ],
         ),
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           header: Text(
             LocaleKeys.app_settings_general_input_settings_title.tr(),
           ),
+          hasLeading: false,
           children: [
-            PreferenceListRadioItem<String>(
-              value: kInputSettingSubmitWithEnter,
-              groupValue: _configuration.inputSetting,
+            PreferenceListTile(
               title: Text(
                 LocaleKeys
                     .app_settings_general_input_settings_submit_with_enter_title
                     .tr(),
               ),
-              onChanged: (newValue) {
-                _configuration.inputSetting = newValue;
+              additionalInfo:
+                  _configuration.inputSetting == kInputSettingSubmitWithEnter
+                      ? Icon(
+                          ExtendedIcons.square,
+                          color: Theme.of(context).colorScheme.primary,
+                        )
+                      : null,
+              onTap: () {
+                _configuration.inputSetting = kInputSettingSubmitWithEnter;
               },
             ),
-            PreferenceListRadioItem<String>(
-              value: kInputSettingSubmitWithMetaEnter,
-              groupValue: _configuration.inputSetting,
+            PreferenceListTile(
               title: Text(
                 kIsMacOS
                     ? LocaleKeys
@@ -285,8 +311,15 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                         .app_settings_general_input_settings_submit_with_meta_enter_title
                         .tr(),
               ),
-              onChanged: (newValue) {
-                _configuration.inputSetting = newValue;
+              additionalInfo: _configuration.inputSetting ==
+                      kInputSettingSubmitWithMetaEnter
+                  ? Icon(
+                      ExtendedIcons.square,
+                      color: Theme.of(context).colorScheme.primary,
+                    )
+                  : null,
+              onTap: () {
+                _configuration.inputSetting = kInputSettingSubmitWithMetaEnter;
               },
             ),
           ],

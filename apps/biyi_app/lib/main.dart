@@ -41,7 +41,7 @@ class TablerIconLibrary extends IconLibrary {
 Future<void> _ensureInitialized() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  Icons.iconLibrary = TablerIconLibrary();
+  ExtendedIcons.iconLibrary = TablerIconLibrary();
   if (kIsLinux || kIsMacOS || kIsWindows) {
     await windowManager.ensureInitialized();
   }

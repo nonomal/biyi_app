@@ -3,7 +3,7 @@ import 'package:biyi_app/providers/providers.dart';
 import 'package:biyi_app/utilities/language_util.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Icons;
 import 'package:provider/provider.dart';
 import 'package:rise_ui/rise_ui.dart';
 
@@ -20,17 +20,22 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
 
     return Column(
       children: [
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           children: [
             for (var appLanguage in kAppLanguages)
-              PreferenceListRadioItem<Locale>(
+              PreferenceListTile(
                 title: LanguageLabel(appLanguage),
-                accessoryView: Container(),
-                value: languageToLocale(appLanguage),
-                groupValue: appSettings.locale,
-                onChanged: (newGroupValue) async {
-                  context.read<AppSettings>().locale = newGroupValue;
-                  await context.setLocale(newGroupValue);
+                additionalInfo:
+                    languageToLocale(appLanguage) == appSettings.locale
+                        ? Icon(
+                            ExtendedIcons.square,
+                            color: Theme.of(context).colorScheme.primary,
+                          )
+                        : null,
+                onTap: () async {
+                  final newLocale = languageToLocale(appLanguage);
+                  context.read<AppSettings>().locale = newLocale;
+                  await context.setLocale(newLocale);
                   await WidgetsBinding.instance.performReassemble();
                 },
               ),

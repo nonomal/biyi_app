@@ -4,6 +4,7 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rise_ui/rise_ui.dart';
@@ -131,21 +132,20 @@ class _TranslationEnginesNewOrEditPageState
   Widget _buildBody(BuildContext context) {
     return ListView(
       children: [
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           header: Text(
             LocaleKeys.app_translation_engines_new_engine_type_title.tr(),
           ),
           children: [
-            PreferenceListItem(
-              icon: _type == null ? null : TranslationEngineIcon(_type!),
+            PreferenceListTile(
+              leading: _type == null ? null : TranslationEngineIcon(_type!),
               title: _type == null
                   ? Text(LocaleKeys.please_choose.tr())
                   : Text('engine.$_type'.tr()),
-              accessoryView: widget.editable ? null : Container(),
               onTap: widget.editable
                   ? () async {
                       final newEngineType = await context.push<String?>(
-                        PageId.translationEngineTypes,
+                        PageId.settingsTranslationEngineTypes,
                         extra: {
                           'selectedEngineType': _type,
                         },
@@ -161,14 +161,14 @@ class _TranslationEnginesNewOrEditPageState
           ],
         ),
         if (translationEngine != null)
-          PreferenceListSection(
+          PreferenceListSection.insetGrouped(
             header: Text(
               LocaleKeys.app_translation_engines_new_support_interface_title
                   .tr(),
             ),
             children: [
               for (var scope in _kAllScopes)
-                PreferenceListItem(
+                PreferenceListTile(
                   padding: const EdgeInsets.only(
                     top: 10,
                     bottom: 10,
@@ -178,8 +178,8 @@ class _TranslationEnginesNewOrEditPageState
                   title: Text(
                     'engine_scope.${scope.toLowerCase()}'.tr(),
                   ),
-                  summary: Text(scope),
-                  accessoryView: Container(
+                  subtitle: Text(scope),
+                  additionalInfo: Container(
                     margin: EdgeInsets.zero,
                     child: Builder(
                       builder: (_) {
@@ -201,40 +201,39 @@ class _TranslationEnginesNewOrEditPageState
             ],
           ),
         if (widget.editable && _type != null)
-          PreferenceListSection(
+          PreferenceListSection.insetGrouped(
             header: Text(
               LocaleKeys.app_translation_engines_new_option_title.tr(),
             ),
             children: [
               for (var optionKey in _engineOptionKeys)
-                PreferenceListTextFieldItem(
-                  controller: _textEditingControllerMap[optionKey],
-                  placeholder: optionKey,
-                  accessoryView: Container(),
-                  onChanged: (value) {
-                    _option[optionKey] = value;
-                    setState(() {});
-                  },
+                PreferenceListTile(
+                  title: CupertinoTextField(
+                    controller: _textEditingControllerMap[optionKey],
+                    placeholder: optionKey,
+                    onChanged: (value) {
+                      _option[optionKey] = value;
+                      setState(() {});
+                    },
+                  ),
                 ),
               if (_engineOptionKeys.isEmpty)
-                PreferenceListItem(
-                  title: const Text('No options'),
-                  accessoryView: Container(),
+                const PreferenceListTile(
+                  title: Text('No options'),
                 ),
             ],
           ),
         if (widget.editable && widget.engineConfig != null)
-          PreferenceListSection(
+          PreferenceListSection.insetGrouped(
             header: const Text(''),
             children: [
-              PreferenceListItem(
+              PreferenceListTile(
                 title: Center(
                   child: Text(
                     LocaleKeys.delete.tr(),
                     style: const TextStyle(color: Colors.red),
                   ),
                 ),
-                accessoryView: Container(),
                 onTap: () async {
                   await localDb.privateEngine(_identifier).delete();
 

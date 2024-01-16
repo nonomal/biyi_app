@@ -4,6 +4,7 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/services/services.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reorderables/reorderables.dart';
@@ -39,7 +40,7 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
 
   Future<void> _handleClickAdd() async {
     final ocrEngineType = await context.push<String?>(
-      PageId.ocrEngineTypes,
+      PageId.settingsOcrEngineTypes,
     );
     if (ocrEngineType != null) {
       // ignore: use_build_context_synchronously
@@ -54,18 +55,20 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
 
   Widget _buildListSectionProEngines(BuildContext context) {
     if (_proOcrEngineList.isEmpty) return Container();
-    return PreferenceListSection(
+    return PreferenceListSection.insetGrouped(
       children: [
         for (OcrEngineConfig item in _proOcrEngineList)
-          PreferenceListSwitchItem(
-            icon: OcrEngineIcon(item.type),
+          PreferenceListTile(
+            leading: OcrEngineIcon(item.type),
             title: OcrEngineName(item),
-            value: !item.disabled,
-            onChanged: (newValue) {
-              localDb //
-                  .proOcrEngine(item.identifier)
-                  .update(disabled: !item.disabled);
-            },
+            additionalInfo: CupertinoSwitch(
+              value: !item.disabled,
+              onChanged: (newValue) {
+                localDb //
+                    .proOcrEngine(item.identifier)
+                    .update(disabled: !item.disabled);
+              },
+            ),
             onTap: () {
               context.push<String?>(
                 PageId.ocrEngine(item.identifier),
@@ -95,7 +98,7 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
       }
     }
 
-    return PreferenceListSection(
+    return PreferenceListSection.insetGrouped(
       header: Text(
         LocaleKeys.app_settings_ocr_engines_private_title.tr(),
       ),
@@ -114,15 +117,17 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
                 child: Builder(
                   builder: (_) {
                     final item = _privateOcrEngineList[i];
-                    return PreferenceListSwitchItem(
-                      icon: OcrEngineIcon(item.type),
+                    return PreferenceListTile(
+                      leading: OcrEngineIcon(item.type),
                       title: OcrEngineName(item),
-                      value: !item.disabled,
-                      onChanged: (newValue) {
-                        localDb //
-                            .privateOcrEngine(item.identifier)
-                            .update(disabled: !item.disabled);
-                      },
+                      additionalInfo: CupertinoSwitch(
+                        value: !item.disabled,
+                        onChanged: (newValue) {
+                          localDb //
+                              .privateOcrEngine(item.identifier)
+                              .update(disabled: !item.disabled);
+                        },
+                      ),
                       onTap: () {
                         context.push<String?>(
                           PageId.ocrEngine(item.identifier),
@@ -138,14 +143,13 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
               ),
           ],
         ),
-        PreferenceListItem(
+        PreferenceListTile(
           title: Text(
             LocaleKeys.add.tr(),
             style: TextStyle(
               color: Theme.of(context).primaryColor,
             ),
           ),
-          accessoryView: Container(),
           onTap: _handleClickAdd,
         ),
       ],

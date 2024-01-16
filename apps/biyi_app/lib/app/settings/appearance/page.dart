@@ -1,14 +1,10 @@
-import 'dart:async';
-
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/providers/providers.dart';
 import 'package:biyi_app/services/services.dart';
-import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Icons;
 import 'package:provider/provider.dart';
 import 'package:rise_ui/rise_ui.dart';
-import 'package:window_manager/window_manager.dart';
 
 const List<double> _kMaxWindowHeightOptions = [700, 800, 900, 1000];
 
@@ -46,62 +42,83 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
   Widget _buildBody(BuildContext context) {
     return Column(
       children: [
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           children: [
-            PreferenceListRadioItem(
-              value: ThemeMode.light,
-              groupValue: _configuration.themeMode,
-              onChanged: _handleThemeModeChanged,
+            PreferenceListTile(
               title: Text(
                 LocaleKeys.theme_mode_light.tr(),
               ),
+              additionalInfo: _configuration.themeMode == ThemeMode.light
+                  ? Icon(
+                      ExtendedIcons.square,
+                      color: Theme.of(context).colorScheme.primary,
+                    )
+                  : null,
+              onTap: () => _handleThemeModeChanged(ThemeMode.light),
             ),
-            PreferenceListRadioItem(
-              value: ThemeMode.dark,
-              groupValue: _configuration.themeMode,
-              onChanged: _handleThemeModeChanged,
+            PreferenceListTile(
               title: Text(
                 LocaleKeys.theme_mode_dark.tr(),
               ),
+              additionalInfo: _configuration.themeMode == ThemeMode.dark
+                  ? Icon(
+                      ExtendedIcons.square,
+                      color: Theme.of(context).colorScheme.primary,
+                    )
+                  : null,
+              onTap: () => _handleThemeModeChanged(ThemeMode.dark),
             ),
-            PreferenceListRadioItem(
-              value: ThemeMode.system,
-              groupValue: _configuration.themeMode,
-              onChanged: _handleThemeModeChanged,
+            PreferenceListTile(
               title: Text(
                 LocaleKeys.theme_mode_system.tr(),
               ),
+              additionalInfo: _configuration.themeMode == ThemeMode.system
+                  ? Icon(
+                      ExtendedIcons.square,
+                      color: Theme.of(context).colorScheme.primary,
+                    )
+                  : null,
+              onTap: () => _handleThemeModeChanged(ThemeMode.system),
             ),
           ],
         ),
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           header: Text(
             LocaleKeys.app_settings_appearance_tray_icon_title.tr(),
           ),
           children: [
-            PreferenceListSwitchItem(
+            PreferenceListTile(
               title: Text(
                 LocaleKeys.app_settings_appearance_tray_icon_show_title.tr(),
               ),
-              value: _configuration.showTrayIcon,
-              onChanged: (newValue) {
-                _configuration.showTrayIcon = newValue;
+              additionalInfo: _configuration.showTrayIcon
+                  ? Icon(
+                      ExtendedIcons.square,
+                      color: Theme.of(context).colorScheme.primary,
+                    )
+                  : null,
+              onTap: () {
+                _configuration.showTrayIcon = !_configuration.showTrayIcon;
               },
             ),
           ],
         ),
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           header: Text(
             LocaleKeys.app_settings_appearance_max_window_height_title.tr(),
           ),
           children: [
             for (var option in _kMaxWindowHeightOptions)
-              PreferenceListRadioItem<double>(
+              PreferenceListTile(
                 title: Text('${option.toInt()}'),
-                value: option,
-                groupValue: _configuration.maxWindowHeight,
-                onChanged: (newValue) {
-                  _configuration.maxWindowHeight = newValue;
+                additionalInfo: _configuration.maxWindowHeight == option
+                    ? Icon(
+                        ExtendedIcons.square,
+                        color: Theme.of(context).colorScheme.primary,
+                      )
+                    : null,
+                onTap: () {
+                  _configuration.maxWindowHeight = option;
                 },
               ),
           ],

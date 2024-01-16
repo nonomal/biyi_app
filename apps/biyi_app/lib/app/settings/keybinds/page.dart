@@ -98,13 +98,13 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
   Widget _buildBody(BuildContext context) {
     return Column(
       children: [
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           children: [
-            PreferenceListItem(
+            PreferenceListTile(
               title: Text(
                 LocaleKeys.app_settings_keybinds_window_show_or_hide_title.tr(),
               ),
-              detailText: HotKeyDisplayView(
+              additionalInfo: HotKeyDisplayView(
                 _configuration.shortcutShowOrHide,
               ),
               onTap: () {
@@ -114,11 +114,11 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
                 );
               },
             ),
-            PreferenceListItem(
+            PreferenceListTile(
               title: Text(
                 LocaleKeys.app_settings_keybinds_window_hide_title.tr(),
               ),
-              detailText: HotKeyDisplayView(
+              additionalInfo: HotKeyDisplayView(
                 _configuration.shortcutHide,
               ),
               onTap: () {
@@ -131,18 +131,18 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
             ),
           ],
         ),
-        PreferenceListSection(
+        PreferenceListSection.insetGrouped(
           header: Text(
             LocaleKeys.app_settings_keybinds_extract_text_title.tr(),
           ),
           children: [
-            PreferenceListItem(
+            PreferenceListTile(
               title: Text(
                 LocaleKeys
                     .app_settings_keybinds_extract_text_from_selection_title
                     .tr(),
               ),
-              detailText: HotKeyDisplayView(
+              additionalInfo: HotKeyDisplayView(
                 _configuration.shortcutExtractFromScreenSelection,
               ),
               onTap: () {
@@ -153,13 +153,13 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
               },
             ),
             if (!kIsLinux)
-              PreferenceListItem(
+              PreferenceListTile(
                 title: Text(
                   LocaleKeys
                       .app_settings_keybinds_extract_text_from_capture_title
                       .tr(),
                 ),
-                detailText: HotKeyDisplayView(
+                additionalInfo: HotKeyDisplayView(
                   _configuration.shortcutExtractFromScreenCapture,
                 ),
                 onTap: () {
@@ -169,13 +169,13 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
                   );
                 },
               ),
-            PreferenceListItem(
+            PreferenceListTile(
               title: Text(
                 LocaleKeys
                     .app_settings_keybinds_extract_text_from_clipboard_title
                     .tr(),
               ),
-              detailText: HotKeyDisplayView(
+              additionalInfo: HotKeyDisplayView(
                 _configuration.shortcutExtractFromClipboard,
               ),
               onTap: () {
@@ -188,18 +188,18 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
           ],
         ),
         if (!kIsLinux)
-          PreferenceListSection(
+          PreferenceListSection.insetGrouped(
             header: Text(
               LocaleKeys.app_settings_keybinds_input_assist_function_title.tr(),
             ),
             children: [
-              PreferenceListItem(
+              PreferenceListTile(
                 title: Text(
                   LocaleKeys
                       .app_settings_keybinds_input_assist_function_translate_input_content_title
                       .tr(),
                 ),
-                detailText: HotKeyDisplayView(
+                additionalInfo: HotKeyDisplayView(
                   _configuration.shortcutTranslateInputContent,
                 ),
                 onTap: () {
