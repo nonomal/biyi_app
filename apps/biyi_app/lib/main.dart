@@ -114,8 +114,13 @@ class _MyAppState extends State<MyApp> {
 
     return MaterialApp.router(
       routerConfig: routerConfig,
-      theme: ThemeData.light().copyWith(
-        primaryColor: Colors.indigo,
+      theme: ThemeData(
+        colorScheme: ColorScheme.light(
+          primary: ExtendedColors.indigo,
+          background: ExtendedColors.gray.shade100,
+          surface: ExtendedColors.white,
+          outline: ExtendedColors.gray.shade200,
+        ),
         extensions: const [
           ExtendedThemeData(
             brightness: Brightness.light,

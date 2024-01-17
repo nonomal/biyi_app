@@ -77,21 +77,21 @@ final routerConfig = GoRouter(
       },
     ),
     GoRoute(
+      path: '/ocr-engines/new',
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>?;
+        return OcrEnginesNewOrEditPage(
+          ocrEngineType: extra?['ocrEngineType'],
+        );
+      },
+    ),
+    GoRoute(
       path: '/ocr-engines/:id',
       builder: (context, state) {
         final extra = state.extra as Map<String, dynamic>?;
         return OcrEnginesNewOrEditPage(
           ocrEngineConfig: extra?['ocrEngineConfig'],
           editable: extra?['editable'],
-        );
-      },
-    ),
-    GoRoute(
-      path: '/ocr-engines/new',
-      builder: (context, state) {
-        final extra = state.extra as Map<String, dynamic>?;
-        return OcrEnginesNewOrEditPage(
-          ocrEngineType: extra?['ocrEngineType'],
         );
       },
     ),
@@ -228,21 +228,22 @@ final routerConfig = GoRouter(
       },
     ),
     GoRoute(
+      path: '/translation-engines/new',
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>?;
+        return TranslationEnginesNewOrEditPage(
+          engineType: extra?['engineType'],
+          editable: extra?['editable'],
+        );
+      },
+    ),
+    GoRoute(
       path: '/translation-engines/:id',
       builder: (context, state) {
         final extra = state.extra as Map<String, dynamic>?;
         return TranslationEnginesNewOrEditPage(
           engineConfig: extra?['engineConfig'],
           editable: extra?['editable'],
-        );
-      },
-    ),
-    GoRoute(
-      path: '/translation-engines/new',
-      builder: (context, state) {
-        final extra = state.extra as Map<String, dynamic>?;
-        return TranslationEnginesNewOrEditPage(
-          engineType: extra?['engineType'],
         );
       },
     ),

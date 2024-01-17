@@ -2,6 +2,7 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/networking/translate_client/translate_client.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart' hide Icons;
 import 'package:go_router/go_router.dart';
 import 'package:rise_ui/rise_ui.dart';
@@ -56,7 +57,7 @@ class _TranslationEngineTypesPageState
                 title: Text('engine.$engineType'.tr()),
                 additionalInfo: _selectedEngineType == engineType
                     ? Icon(
-                        ExtendedIcons.square,
+                        FluentIcons.checkmark_circle_20_filled,
                         color: Theme.of(context).colorScheme.primary,
                       )
                     : null,

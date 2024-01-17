@@ -51,6 +51,7 @@ class _TranslationEnginesSettingPageState
         PageId.translationEnginesNew,
         extra: {
           'engineType': engineType,
+          'editable': true,
         },
       );
     }

@@ -96,7 +96,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               ),
               additionalInfo: _configuration.autoCopyDetectedText
                   ? Icon(
-                      ExtendedIcons.square,
+                      FluentIcons.checkmark_circle_20_filled,
                       color: Theme.of(context).colorScheme.primary,
                     )
                   : null,
@@ -151,7 +151,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               additionalInfo:
                   _configuration.translationMode == kTranslationModeManual
                       ? Icon(
-                          ExtendedIcons.square,
+                          FluentIcons.checkmark_circle_20_filled,
                           color: Theme.of(context).colorScheme.primary,
                         )
                       : null,
@@ -163,7 +163,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               additionalInfo:
                   _configuration.translationMode == kTranslationModeAuto
                       ? Icon(
-                          ExtendedIcons.square,
+                          FluentIcons.checkmark_circle_20_filled,
                           color: Theme.of(context).colorScheme.primary,
                         )
                       : null,
@@ -267,7 +267,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               ),
               additionalInfo: _configuration.doubleClickCopyResult
                   ? Icon(
-                      ExtendedIcons.square,
+                      FluentIcons.checkmark_circle_20_filled,
                       color: Theme.of(context).colorScheme.primary,
                     )
                   : null,
@@ -293,7 +293,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               additionalInfo:
                   _configuration.inputSetting == kInputSettingSubmitWithEnter
                       ? Icon(
-                          ExtendedIcons.square,
+                          FluentIcons.checkmark_circle_20_filled,
                           color: Theme.of(context).colorScheme.primary,
                         )
                       : null,
@@ -314,7 +314,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               additionalInfo: _configuration.inputSetting ==
                       kInputSettingSubmitWithMetaEnter
                   ? Icon(
-                      ExtendedIcons.square,
+                      FluentIcons.checkmark_circle_20_filled,
                       color: Theme.of(context).colorScheme.primary,
                     )
                   : null,

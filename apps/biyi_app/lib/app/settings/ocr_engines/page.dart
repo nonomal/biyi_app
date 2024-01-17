@@ -48,6 +48,7 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
         PageId.ocrEnginesNew,
         extra: {
           'ocrEngineType': ocrEngineType,
+          'editable': true,
         },
       );
     }

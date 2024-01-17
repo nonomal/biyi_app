@@ -900,7 +900,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => _windowResize());
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: _buildAppBar(context),
       body: _buildBody(context),
     );

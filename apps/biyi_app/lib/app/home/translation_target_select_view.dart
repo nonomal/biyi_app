@@ -120,7 +120,7 @@ class _TranslationTargetSelectViewState
       child: Container(
         padding: EdgeInsets.zero,
         decoration: BoxDecoration(
-          color: Theme.of(context).canvasColor,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(2),
           boxShadow: <BoxShadow>[
             BoxShadow(

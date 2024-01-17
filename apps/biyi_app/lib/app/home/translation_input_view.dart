@@ -6,8 +6,7 @@ import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart' as md;
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Divider;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:rise_ui/rise_ui.dart';
 import 'package:screen_capturer/screen_capturer.dart';
@@ -51,7 +50,7 @@ class TranslationInputView extends StatelessWidget {
   Widget _buildToolbarItems(BuildContext context) {
     return Row(
       children: [
-        md.Tooltip(
+        Tooltip(
           message: LocaleKeys.app_home_tip_translation_mode.tr(
             args: [
               'translation_mode.$translationMode'.tr(),
@@ -127,9 +126,10 @@ class TranslationInputView extends StatelessWidget {
           ),
         ),
         const SizedBox(
+          width: 8,
           height: 20,
-          child: md.VerticalDivider(
-            width: 8,
+          child: Divider(
+            direction: Axis.vertical,
           ),
         ),
         Tooltip(
@@ -214,7 +214,7 @@ class TranslationInputView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    md.TextTheme textTheme = md.Theme.of(context).textTheme;
+    final textTheme = Theme.of(context).textTheme;
     return Container(
       margin: const EdgeInsets.only(
         left: 12,
@@ -224,7 +224,7 @@ class TranslationInputView extends StatelessWidget {
       ),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: Theme.of(context).canvasColor,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(2),
           boxShadow: <BoxShadow>[
             BoxShadow(
@@ -305,10 +305,9 @@ class TranslationInputView extends StatelessWidget {
                 ],
               ),
             ),
-            const md.Divider(
-              height: 0,
-              indent: 12,
-              endIndent: 12,
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: Divider(),
             ),
             Container(
               padding: const EdgeInsets.only(

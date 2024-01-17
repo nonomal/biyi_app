@@ -24,7 +24,7 @@ class HotKeyDisplayView extends StatelessWidget {
         for (KeyModifier keyModifier in hotKey.modifiers ?? []) ...[
           Kbd(
             keyModifier.keyLabel,
-            size: NamedSize.tiny,
+            size: ExtendedSize.small,
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 4),
@@ -39,7 +39,7 @@ class HotKeyDisplayView extends StatelessWidget {
         ],
         Kbd(
           hotKey.keyCode.keyLabel,
-          size: NamedSize.tiny,
+          size: ExtendedSize.small,
         ),
       ],
     );
