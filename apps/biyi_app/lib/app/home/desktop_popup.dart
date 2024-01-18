@@ -14,6 +14,7 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/models.dart';
 import 'package:biyi_app/networking/networking.dart';
 import 'package:biyi_app/services/services.dart';
+import 'package:biyi_app/utilities/uni_platform.dart';
 import 'package:biyi_app/utilities/utilities.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:collection/collection.dart';
@@ -121,7 +122,10 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     }
     _loadData();
     super.initState();
-    unawaited(_initWindow());
+    UniPlatform.select(
+      desktop: () => _initWindow(),
+      otherwise: () => Future(() => null),
+    );
   }
 
   @override

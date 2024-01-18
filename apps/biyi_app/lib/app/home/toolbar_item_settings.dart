@@ -1,4 +1,5 @@
 import 'package:biyi_app/app/router_config.dart';
+import 'package:biyi_app/utilities/uni_platform.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -16,7 +17,12 @@ class ToolbarItemSettings extends StatefulWidget {
 
 class _ToolbarItemSettingsState extends State<ToolbarItemSettings> {
   Future<void> _handleClick() async {
-    await windowManager.hide();
+    UniPlatform.select(
+      desktop: () async {
+        await windowManager.hide();
+      },
+      otherwise: () => Future(() => null),
+    );
     // ignore: use_build_context_synchronously
     context.go(PageId.settingsGeneral);
   }

@@ -9,6 +9,7 @@ import 'package:biyi_app/services/local_db/local_db.dart';
 import 'package:biyi_app/utilities/env.dart';
 import 'package:biyi_app/utilities/language_util.dart';
 import 'package:biyi_app/utilities/platform_util.dart';
+import 'package:biyi_app/utilities/uni_platform.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -62,22 +63,25 @@ Future<void> _ensureInitialized() async {
 void main() async {
   await _ensureInitialized();
 
-  if (!kIsWeb) {
-    const WindowOptions windowOptions = WindowOptions(
-      alwaysOnTop: false,
-      skipTaskbar: false,
-      titleBarStyle: TitleBarStyle.hidden,
-      windowButtonVisibility: false,
-    );
-    windowManager.waitUntilReadyToShow(windowOptions, () async {
-      if (kIsMacOS) {
-        await windowManager.setVisibleOnAllWorkspaces(
-          true,
-          visibleOnFullScreen: true,
-        );
-      }
-    });
-  }
+  UniPlatform.select(
+    desktop: () {
+      const WindowOptions windowOptions = WindowOptions(
+        alwaysOnTop: false,
+        skipTaskbar: false,
+        titleBarStyle: TitleBarStyle.hidden,
+        windowButtonVisibility: false,
+      );
+      windowManager.waitUntilReadyToShow(windowOptions, () async {
+        if (kIsMacOS) {
+          await windowManager.setVisibleOnAllWorkspaces(
+            true,
+            visibleOnFullScreen: true,
+          );
+        }
+      });
+    },
+    otherwise: () => Future(() => null),
+  );
 
   runApp(
     MultiProvider(

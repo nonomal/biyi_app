@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/utilities/uni_platform.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/foundation.dart';
@@ -61,13 +62,18 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
   @override
   void initState() {
     super.initState();
-    windowManager.addListener(this);
-    unawaited(_initWindow());
+    UniPlatform.select(
+      desktop: () => _initWindow(),
+      otherwise: () => Future(() => null),
+    );
   }
 
   @override
   void dispose() {
-    windowManager.removeListener(this);
+    UniPlatform.select(
+      desktop: () => _uninitWindow(),
+      otherwise: () => Future(() => null),
+    );
     super.dispose();
   }
 
@@ -79,6 +85,7 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
   }
 
   Future<void> _initWindow() async {
+    windowManager.addListener(this);
     const size = Size(840, 600);
     const minimunSize = Size(840, 600);
     const maximumSize = Size(840, 600);
@@ -97,6 +104,11 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
 
     await Future<void>.delayed(const Duration(milliseconds: 200));
     await windowManager.show();
+  }
+
+  Future<void> _uninitWindow() {
+    windowManager.removeListener(this);
+    return Future<void>.value();
   }
 
   Future<void> _handleDestinationSelected(String value) async {
