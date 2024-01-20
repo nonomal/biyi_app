@@ -8,18 +8,16 @@ import 'package:biyi_app/providers/providers.dart';
 import 'package:biyi_app/services/local_db/local_db.dart';
 import 'package:biyi_app/utilities/env.dart';
 import 'package:biyi_app/utilities/language_util.dart';
-import 'package:biyi_app/utilities/platform_util.dart';
-import 'package:biyi_app/utilities/uni_platform.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Icons;
 import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:protocol_handler/protocol_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:rise_ui/rise_ui.dart';
+import 'package:uni_platform/uni_platform.dart';
 import 'package:window_manager/window_manager.dart';
 
 class TablerIconLibrary extends IconLibrary {
@@ -43,11 +41,11 @@ Future<void> _ensureInitialized() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   ExtendedIcons.iconLibrary = TablerIconLibrary();
-  if (kIsLinux || kIsMacOS || kIsWindows) {
+  if (UniPlatform.isLinux || UniPlatform.isMacOS || UniPlatform.isWindows) {
     await windowManager.ensureInitialized();
   }
 
-  if (kIsMacOS || kIsWindows) {
+  if (UniPlatform.isMacOS || UniPlatform.isWindows) {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     LaunchAtStartup.instance.setup(
       appName: packageInfo.appName,
@@ -63,8 +61,8 @@ Future<void> _ensureInitialized() async {
 void main() async {
   await _ensureInitialized();
 
-  UniPlatform.select(
-    desktop: () {
+  UniPlatform.call<Future<void>>(
+    desktop: () async {
       const WindowOptions windowOptions = WindowOptions(
         alwaysOnTop: false,
         skipTaskbar: false,
@@ -72,7 +70,7 @@ void main() async {
         windowButtonVisibility: false,
       );
       windowManager.waitUntilReadyToShow(windowOptions, () async {
-        if (kIsMacOS) {
+        if (UniPlatform.isMacOS) {
           await windowManager.setVisibleOnAllWorkspaces(
             true,
             visibleOnFullScreen: true,
@@ -141,7 +139,7 @@ class _MyAppState extends State<MyApp> {
       ),
       themeMode: appSettings.themeMode,
       builder: (context, child) {
-        if (kIsLinux || kIsWindows) {
+        if (UniPlatform.isLinux || UniPlatform.isWindows) {
           child = Stack(
             children: [
               ClipRRect(

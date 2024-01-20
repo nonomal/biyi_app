@@ -22,6 +22,7 @@ import 'package:biyi_app/includes.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uni_platform/uni_platform.dart';
 
 class PageId {
   static const String home = '/home';
@@ -108,7 +109,7 @@ final routerConfig = GoRouter(
           redirect: (context, state) {
             return null;
           },
-          builder: (kIsAndroid || kIsIOS)
+          builder: (UniPlatform.isAndroid || UniPlatform.isIOS)
               ? (context, state) {
                   return const SettingsPage();
                 }

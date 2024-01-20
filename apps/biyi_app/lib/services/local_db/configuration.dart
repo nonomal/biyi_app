@@ -4,6 +4,7 @@ import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:flutter/material.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
+import 'package:uni_platform/uni_platform.dart';
 
 class Configuration {
   String get translationMode {
@@ -189,7 +190,7 @@ class Configuration {
   }
 
   HotKey get shortcutInputSettingSubmitWithMetaEnter {
-    if (kIsMacOS) {
+    if (UniPlatform.isMacOS) {
       return HotKey(
         KeyCode.enter,
         modifiers: [KeyModifier.meta],

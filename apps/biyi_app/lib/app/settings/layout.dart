@@ -1,17 +1,15 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/utilities/uni_platform.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart'
     hide NavigationRail, NavigationRailDestination;
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rise_ui/rise_ui.dart';
+import 'package:uni_platform/uni_platform.dart';
 import 'package:window_manager/window_manager.dart';
 
 class _NavigationRailLeading extends StatelessWidget {
@@ -62,7 +60,7 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
   @override
   void initState() {
     super.initState();
-    UniPlatform.select(
+    UniPlatform.call<Future<void>>(
       desktop: () => _initWindow(),
       otherwise: () => Future(() => null),
     );
@@ -70,7 +68,7 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
 
   @override
   void dispose() {
-    UniPlatform.select(
+    UniPlatform.call<Future<void>>(
       desktop: () => _uninitWindow(),
       otherwise: () => Future(() => null),
     );
@@ -129,7 +127,7 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
         ),
       ),
       padding: EdgeInsets.only(
-        top: !kIsWeb && Platform.isMacOS ? 26 : 6,
+        top: !UniPlatform.isWeb && UniPlatform.isMacOS ? 26 : 6,
       ),
       width: 200,
       height: double.infinity,

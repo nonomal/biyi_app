@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:ocr_engine_builtin/ocr_engine_builtin.dart';
 import 'package:path/path.dart' as path;
+import 'package:uni_platform/uni_platform.dart';
 
 export 'configuration.dart';
 export 'local_db_listener.dart';
@@ -306,7 +307,7 @@ Future<void> _safeOpenBox(Directory userDataDirectory, String name) async {
 }
 
 Future<void> initLocalDb() async {
-  if (!kIsWeb) {
+  if (!UniPlatform.isWeb) {
     localDb.user = await getCurrentUser();
   }
 
@@ -319,7 +320,7 @@ Future<void> initLocalDb() async {
   await _safeOpenBox(userDataDirectory, 'ocr_engines');
   await _safeOpenBox(userDataDirectory, 'translation_targets');
   // await migrateOldDb();
-  if (!kIsWeb) {
+  if (!UniPlatform.isWeb) {
     await initDataIfNeed();
   }
 }

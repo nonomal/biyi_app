@@ -1,9 +1,9 @@
 import 'package:biyi_app/app/router_config.dart';
-import 'package:biyi_app/utilities/uni_platform.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rise_ui/rise_ui.dart' hide Switch;
+import 'package:uni_platform/uni_platform.dart';
 import 'package:window_manager/window_manager.dart';
 
 class ToolbarItemSettings extends StatefulWidget {
@@ -17,7 +17,7 @@ class ToolbarItemSettings extends StatefulWidget {
 
 class _ToolbarItemSettingsState extends State<ToolbarItemSettings> {
   Future<void> _handleClick() async {
-    UniPlatform.select(
+    UniPlatform.call<Future<void>>(
       desktop: () async {
         await windowManager.hide();
       },

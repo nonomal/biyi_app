@@ -14,7 +14,6 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/models.dart';
 import 'package:biyi_app/networking/networking.dart';
 import 'package:biyi_app/services/services.dart';
-import 'package:biyi_app/utilities/uni_platform.dart';
 import 'package:biyi_app/utilities/utilities.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:collection/collection.dart';
@@ -30,6 +29,7 @@ import 'package:screen_text_extractor/screen_text_extractor.dart';
 import 'package:shortid/shortid.dart';
 import 'package:tray_manager/tray_manager.dart';
 import 'package:uni_ocr_client/uni_ocr_client.dart';
+import 'package:uni_platform/uni_platform.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:window_manager/window_manager.dart';
@@ -113,7 +113,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   void initState() {
     localDb.preferences.addListener(_handleChanged);
     WidgetsBinding.instance.addObserver(this);
-    if (kIsLinux || kIsMacOS || kIsWindows) {
+    if (UniPlatform.isLinux || UniPlatform.isMacOS || UniPlatform.isWindows) {
       protocolHandler.addListener(this);
       ShortcutService.instance.setListener(this);
       trayManager.addListener(this);
@@ -122,7 +122,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     }
     _loadData();
     super.initState();
-    UniPlatform.select(
+    UniPlatform.call<Future<void>>(
       desktop: () => _initWindow(),
       otherwise: () => Future(() => null),
     );
@@ -132,7 +132,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   void dispose() {
     localDb.preferences.removeListener(_handleChanged);
     WidgetsBinding.instance.removeObserver(this);
-    if (kIsLinux || kIsMacOS || kIsWindows) {
+    if (UniPlatform.isLinux || UniPlatform.isMacOS || UniPlatform.isWindows) {
       protocolHandler.removeListener(this);
       ShortcutService.instance.setListener(null);
       trayManager.removeListener(this);
@@ -150,7 +150,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
 
     if (newBrightness != _brightness) {
       _brightness = newBrightness;
-      if (kIsWindows && _configuration.showTrayIcon) {
+      if (UniPlatform.isWindows && _configuration.showTrayIcon) {
         _initTrayIcon();
       }
       setState(() {});
@@ -191,7 +191,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   Future<void> _init() async {
-    if (kIsMacOS) {
+    if (UniPlatform.isMacOS) {
       _isAllowedScreenCaptureAccess =
           await ScreenCapturer.instance.isAccessAllowed();
       _isAllowedScreenSelectionAccess =
@@ -204,7 +204,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     await _initTrayIcon();
     await Future.delayed(const Duration(milliseconds: 400));
 
-    if (kIsLinux || kIsWindows) {
+    if (UniPlatform.isLinux || UniPlatform.isWindows) {
       Display primaryDisplay = await screenRetriever.getPrimaryDisplay();
       Size windowSize = await windowManager.getSize();
       _lastShownPosition = Offset(
@@ -214,23 +214,23 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       await windowManager.setPosition(_lastShownPosition);
     }
     await _windowShow(
-      isShowBelowTray: kIsMacOS,
+      isShowBelowTray: UniPlatform.isMacOS,
     );
     setState(() {});
   }
 
   Future<void> _initTrayIcon() async {
-    if (kIsWeb) return;
+    if (UniPlatform.isWeb) return;
 
-    String trayIconName = platformSelect<String>(
-      () => 'tray_icon_black.png',
-      windows: () => 'tray_icon_black.ico',
-      linux: () => 'tray_icon.ico',
+    String trayIconName = UniPlatform.select<String>(
+      windows: 'tray_icon_black.ico',
+      linux: 'tray_icon.ico',
+      otherwise: 'tray_icon_black.png',
     );
     if (_brightness == Brightness.dark) {
-      trayIconName = platformSelect<String>(
-        () => 'tray_icon.png',
-        windows: () => 'tray_icon.ico',
+      trayIconName = UniPlatform.select<String>(
+        windows: 'tray_icon.ico',
+        otherwise: 'tray_icon.png',
       );
     }
 
@@ -238,7 +238,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     if (_configuration.showTrayIcon) {
       await trayManager.setIcon(
         R.image(trayIconName),
-        isTemplate: kIsMacOS ? true : false,
+        isTemplate: UniPlatform.isMacOS ? true : false,
       );
       await Future.delayed(const Duration(milliseconds: 10));
       Menu menu = Menu(
@@ -249,7 +249,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
             disabled: true,
           ),
           MenuItem.separator(),
-          if (kIsLinux)
+          if (UniPlatform.isLinux)
             MenuItem(
               key: kMenuItemKeyShow,
               label: LocaleKeys.tray_context_menu_item_show.tr(),
@@ -298,11 +298,11 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     bool isAlwaysOnTop = await windowManager.isAlwaysOnTop();
     Size windowSize = await windowManager.getSize();
 
-    if (kIsLinux) {
+    if (UniPlatform.isLinux) {
       await windowManager.setPosition(_lastShownPosition);
     }
 
-    if (kIsMacOS && isShowBelowTray) {
+    if (UniPlatform.isMacOS && isShowBelowTray) {
       Rect? trayIconBounds = await trayManager.getBounds();
       if (trayIconBounds != null) {
         Size trayIconSize = trayIconBounds.size;
@@ -327,7 +327,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     }
 
     // Linux 下无法激活窗口临时解决方案
-    if (kIsLinux && !isAlwaysOnTop) {
+    if (UniPlatform.isLinux && !isAlwaysOnTop) {
       await windowManager.setAlwaysOnTop(true);
       await Future.delayed(const Duration(milliseconds: 10));
       await windowManager.setAlwaysOnTop(false);
@@ -347,7 +347,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       _resizeTimer?.cancel();
     }
     _resizeTimer = Timer.periodic(const Duration(milliseconds: 10), (_) async {
-      if (!kIsMacOS) {
+      if (!UniPlatform.isMacOS) {
         await Future.delayed(const Duration(milliseconds: 100));
       }
       RenderBox? rb1 =
@@ -367,7 +367,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
             bannersViewHeight +
             inputViewHeight +
             resultsViewHeight +
-            (kIsWindows ? 5 : 0);
+            (UniPlatform.isWindows ? 5 : 0);
         Size oldSize = await windowManager.getSize();
         Size newSize = Size(
           oldSize.width,
@@ -648,7 +648,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     await _windowHide();
 
     String? imagePath;
-    if (!kIsWeb) {
+    if (!UniPlatform.isWeb) {
       Directory userDataDirectory = await getUserDataDirectory();
       int timestamp = DateTime.now().millisecondsSinceEpoch;
       String fileName = 'Screenshot-$timestamp.png';
@@ -968,13 +968,17 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     await keyPressSimulator.simulateKeyPress(
       key: LogicalKeyboardKey.keyA,
       modifiers: [
-        kIsMacOS ? ModifierKey.metaModifier : ModifierKey.controlModifier,
+        UniPlatform.isMacOS
+            ? ModifierKey.metaModifier
+            : ModifierKey.controlModifier,
       ],
     );
     await keyPressSimulator.simulateKeyPress(
       key: LogicalKeyboardKey.keyA,
       modifiers: [
-        kIsMacOS ? ModifierKey.metaModifier : ModifierKey.controlModifier,
+        UniPlatform.isMacOS
+            ? ModifierKey.metaModifier
+            : ModifierKey.controlModifier,
       ],
       keyDown: false,
     );
@@ -1011,26 +1015,34 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     await keyPressSimulator.simulateKeyPress(
       key: LogicalKeyboardKey.keyA,
       modifiers: [
-        kIsMacOS ? ModifierKey.metaModifier : ModifierKey.controlModifier,
+        UniPlatform.isMacOS
+            ? ModifierKey.metaModifier
+            : ModifierKey.controlModifier,
       ],
     );
     await keyPressSimulator.simulateKeyPress(
       key: LogicalKeyboardKey.keyA,
       modifiers: [
-        kIsMacOS ? ModifierKey.metaModifier : ModifierKey.controlModifier,
+        UniPlatform.isMacOS
+            ? ModifierKey.metaModifier
+            : ModifierKey.controlModifier,
       ],
       keyDown: false,
     );
     await keyPressSimulator.simulateKeyPress(
       key: LogicalKeyboardKey.keyV,
       modifiers: [
-        kIsMacOS ? ModifierKey.metaModifier : ModifierKey.controlModifier,
+        UniPlatform.isMacOS
+            ? ModifierKey.metaModifier
+            : ModifierKey.controlModifier,
       ],
     );
     await keyPressSimulator.simulateKeyPress(
       key: LogicalKeyboardKey.keyV,
       modifiers: [
-        kIsMacOS ? ModifierKey.metaModifier : ModifierKey.controlModifier,
+        UniPlatform.isMacOS
+            ? ModifierKey.metaModifier
+            : ModifierKey.controlModifier,
       ],
       keyDown: false,
     );

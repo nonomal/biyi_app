@@ -1,12 +1,12 @@
 import 'package:biyi_advanced_features/models/models.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/services/services.dart';
-import 'package:biyi_app/utilities/utilities.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:rise_ui/rise_ui.dart';
+import 'package:uni_platform/uni_platform.dart';
 
 class HotKeyDisplayView extends StatelessWidget {
   const HotKeyDisplayView(
@@ -152,7 +152,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
                 );
               },
             ),
-            if (!kIsLinux)
+            if (!UniPlatform.isLinux)
               PreferenceListTile(
                 title: Text(
                   LocaleKeys
@@ -187,7 +187,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
             ),
           ],
         ),
-        if (!kIsLinux)
+        if (!UniPlatform.isLinux)
           PreferenceListSection.insetGrouped(
             header: Text(
               LocaleKeys.app_settings_keybinds_input_assist_function_title.tr(),

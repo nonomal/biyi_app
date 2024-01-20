@@ -8,6 +8,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:screen_capturer/screen_capturer.dart';
 import 'package:screen_text_extractor/screen_text_extractor.dart';
+import 'package:uni_platform/uni_platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AllowAccessListItem extends StatelessWidget {
@@ -117,7 +118,7 @@ class LimitedFunctionalityBanner extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (kIsMacOS)
+                  if (UniPlatform.isMacOS)
                     AllowAccessListItem(
                       title: LocaleKeys
                           .app_home_limited_banner_text_screen_capture
@@ -139,7 +140,7 @@ class LimitedFunctionalityBanner extends StatelessWidget {
                         );
                       },
                     ),
-                  if (kIsMacOS)
+                  if (UniPlatform.isMacOS)
                     AllowAccessListItem(
                       title: LocaleKeys
                           .app_home_limited_banner_text_screen_selection

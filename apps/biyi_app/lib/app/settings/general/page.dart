@@ -3,13 +3,13 @@ import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/models.dart';
 import 'package:biyi_app/services/services.dart';
-import 'package:biyi_app/utilities/utilities.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart' hide Icons;
 import 'package:go_router/go_router.dart';
 import 'package:rise_ui/rise_ui.dart';
+import 'package:uni_platform/uni_platform.dart';
 
 class GeneralSettingPage extends StatefulWidget {
   const GeneralSettingPage({super.key});
@@ -303,7 +303,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
             ),
             PreferenceListTile(
               title: Text(
-                kIsMacOS
+                UniPlatform.isMacOS
                     ? LocaleKeys
                         .app_settings_general_input_settings_submit_with_meta_enter_mac_title
                         .tr()

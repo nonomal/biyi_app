@@ -1,5 +1,6 @@
 import 'package:biyi_app/includes.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
+import 'package:uni_platform/uni_platform.dart';
 
 abstract mixin class ShortcutListener {
   void onShortcutKeyDownShowOrHide();
@@ -51,7 +52,7 @@ class ShortcutService {
         _listener?.onShortcutKeyDownExtractFromScreenSelection();
       },
     );
-    if (!kIsLinux) {
+    if (!UniPlatform.isLinux) {
       await hotKeyManager.register(
         _configuration.shortcutExtractFromScreenCapture,
         keyDownHandler: (_) {
@@ -65,7 +66,7 @@ class ShortcutService {
         _listener?.onShortcutKeyDownExtractFromClipboard();
       },
     );
-    if (!kIsLinux) {
+    if (!UniPlatform.isLinux) {
       await hotKeyManager.register(
         _configuration.shortcutTranslateInputContent,
         keyDownHandler: (_) {

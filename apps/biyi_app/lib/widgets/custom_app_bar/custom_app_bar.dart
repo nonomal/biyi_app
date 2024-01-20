@@ -1,6 +1,7 @@
 import 'package:biyi_app/includes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:uni_platform/uni_platform.dart';
 
 export './custom_app_bar_action_item.dart';
 export './custom_app_bar_back_button.dart';
@@ -65,7 +66,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize {
     return Size.fromHeight(
-      kIsAndroid ? kToolbarHeight : kMinInteractiveDimensionCupertino,
+      UniPlatform.isAndroid
+          ? kToolbarHeight
+          : kMinInteractiveDimensionCupertino,
     );
   }
 }

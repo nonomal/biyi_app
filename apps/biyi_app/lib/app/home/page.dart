@@ -2,11 +2,11 @@ import 'package:biyi_app/app/home/desktop_popup.dart';
 import 'package:biyi_app/app/home/tab_homepage.dart';
 import 'package:biyi_app/app/home/tab_settings.dart';
 import 'package:biyi_app/app/home/tab_vocabulary.dart';
-import 'package:biyi_app/utilities/platform_util.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:uni_platform/uni_platform.dart';
 
 const _kHomeTabHomepage = 0;
 
@@ -95,7 +95,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (kIsLinux || kIsMacOS || kIsWindows || kIsWeb) {
+    if (UniPlatform.isLinux ||
+        UniPlatform.isMacOS ||
+        UniPlatform.isWindows ||
+        UniPlatform.isWeb) {
       return const DesktopPopupPage();
     }
     return _build(context);
