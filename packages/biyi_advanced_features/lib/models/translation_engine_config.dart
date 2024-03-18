@@ -1,3 +1,5 @@
+import 'package:uni_translate_client/uni_translate_client.dart';
+
 class TranslationEngineConfig {
   TranslationEngineConfig({
     this.position = -1,
@@ -17,6 +19,11 @@ class TranslationEngineConfig {
       type: json['type'],
       supportedScopes: json['supportedScopes'] != null
           ? List<String>.from(json['supportedScopes'])
+              .map(
+                (e) => TranslationEngineScope.values
+                    .firstWhere((v) => e == v.name),
+              )
+              .toList()
           : [],
       option: Map<String, dynamic>.from(json['option'] ?? {}),
       disabled: json['disabled'] ?? false,
@@ -27,7 +34,7 @@ class TranslationEngineConfig {
   String? group;
   final String identifier;
   String type;
-  List<String> supportedScopes;
+  List<TranslationEngineScope> supportedScopes;
   Map<String, dynamic> option;
   bool disabled = false;
 

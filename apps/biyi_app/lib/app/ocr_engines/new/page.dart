@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ocr_engine_youdao/ocr_engine_youdao.dart';
-import 'package:rise_ui/rise_ui.dart';
+import 'package:influxui/influxui.dart';
 import 'package:shortid/shortid.dart';
 
 class OcrEnginesNewOrEditPage extends StatefulWidget {

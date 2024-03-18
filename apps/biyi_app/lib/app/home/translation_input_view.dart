@@ -8,7 +8,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Divider;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:rise_ui/rise_ui.dart';
+import 'package:influxui/influxui.dart';
 import 'package:screen_capturer/screen_capturer.dart';
 
 class TranslationInputView extends StatelessWidget {
@@ -175,35 +175,21 @@ class TranslationInputView extends StatelessWidget {
   Widget _buildActionButtons(BuildContext context) {
     return Row(
       children: [
-        Container(
-          height: 24,
-          constraints: const BoxConstraints(
-            minWidth: 56,
-          ),
+        ConstrainedBox(
+          constraints: const BoxConstraints(minWidth: 56),
           child: Button(
             variant: ButtonVariant.outline,
             label: LocaleKeys.app_home_btn_clear.tr(),
-            padding: const EdgeInsets.only(
-              left: 12,
-              right: 12,
-            ),
             size: ButtonSize.small,
             onPressed: onButtonTappedClear,
           ),
         ),
         const SizedBox(width: 10),
-        Container(
-          height: 24,
-          constraints: const BoxConstraints(
-            minWidth: 56,
-          ),
+        ConstrainedBox(
+          constraints: const BoxConstraints(minWidth: 56),
           child: Button(
             variant: ButtonVariant.filled,
             label: LocaleKeys.app_home_btn_trans.tr(),
-            padding: const EdgeInsets.only(
-              left: 12,
-              right: 12,
-            ),
             size: ButtonSize.small,
             onPressed: onButtonTappedTrans,
           ),

@@ -5,7 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart' hide Icons;
 import 'package:go_router/go_router.dart';
-import 'package:rise_ui/rise_ui.dart';
+import 'package:influxui/influxui.dart';
 
 class TranslationEnginesPage extends StatefulWidget {
   const TranslationEnginesPage({

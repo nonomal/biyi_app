@@ -2,6 +2,7 @@ import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shortid/shortid.dart';
+import 'package:uni_translate_client/uni_translate_client.dart';
 
 class EnginesModifier extends Listenable {
   Box? _boxInstance;
@@ -77,7 +78,11 @@ class EnginesModifier extends Listenable {
       identifier: _id ?? shortid.generate(),
       type: type,
       option: option,
-      supportedScopes: supportedScopes ?? [],
+      supportedScopes: (supportedScopes ?? [])
+          .map(
+            (e) => TranslationEngineScope.values.firstWhere((v) => e == v.name),
+          )
+          .toList(),
       disabled: disabled ?? false,
     );
     _box.put(value.identifier, value.toJson());
@@ -94,7 +99,11 @@ class EnginesModifier extends Listenable {
     value.position = position ?? value.position;
     value.type = type ?? value.type;
     value.option = option ?? value.option;
-    value.supportedScopes = supportedScopes ?? value.supportedScopes;
+    value.supportedScopes = (supportedScopes ?? value.supportedScopes)
+        .map(
+          (e) => TranslationEngineScope.values.firstWhere((v) => e == v.name),
+        )
+        .toList();
     value.disabled = disabled ?? value.disabled;
     _box.put(value.identifier, value.toJson());
   }

@@ -9,7 +9,7 @@ class ProTranslationEngine extends TranslationEngine {
   TranslationEngineConfig config;
 
   @override
-  List<String> get supportedScopes => config.supportedScopes;
+  List<TranslationEngineScope> get supportedScopes => config.supportedScopes;
 
   @override
   Future<DetectLanguageResponse> detectLanguage(DetectLanguageRequest request) {

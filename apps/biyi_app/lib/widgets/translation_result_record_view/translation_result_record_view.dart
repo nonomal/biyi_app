@@ -38,9 +38,11 @@ class TranslationResultRecordView extends StatelessWidget {
   bool get _isGenerating {
     if (_isErrorOccurred) return false;
     final record = translationResultRecord;
-    return record.lookUpResponse?.generating ??
-        record.translateResponse?.generating ??
-        false;
+    if (record.translateResponse != null &&
+        record.translateResponse is StreamTranslateResponse) {
+      return (record.translateResponse as StreamTranslateResponse).generating;
+    }
+    return false;
   }
 
   bool get _isErrorOccurred {

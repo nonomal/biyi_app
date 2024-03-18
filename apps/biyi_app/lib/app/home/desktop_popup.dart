@@ -18,7 +18,6 @@ import 'package:biyi_app/utilities/utilities.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:keypress_simulator/keypress_simulator.dart';
@@ -515,7 +514,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
           LookUpResponse? lookUpResponse;
           UniTranslateClientError? lookUpError;
           if ((translateClient.use(identifier).supportedScopes)
-              .contains(kScopeLookUp)) {
+              .contains(TranslationEngineScope.lookUp)) {
             try {
               lookUpRequest = LookUpRequest(
                 sourceLanguage: translationTarget!.sourceLanguage!,
@@ -537,7 +536,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
           UniTranslateClientError? translateError;
 
           if ((translateClient.use(identifier).supportedScopes)
-              .contains(kScopeTranslate)) {
+              .contains(TranslationEngineScope.translate)) {
             try {
               translateRequest = TranslateRequest(
                 sourceLanguage: translationTarget!.sourceLanguage,
@@ -547,12 +546,14 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
               translateResponse = await translateClient //
                   .use(identifier)
                   .translate(translateRequest);
-              translateResponse.stream.listen(
-                (event) {
-                  setState(() {});
-                },
-                onDone: () {},
-              );
+              if (translateResponse is StreamTranslateResponse) {
+                translateResponse.stream.listen(
+                  (event) {
+                    setState(() {});
+                  },
+                  onDone: () {},
+                );
+              }
             } on UniTranslateClientError catch (error) {
               translateError = error;
             } catch (error) {
@@ -654,7 +655,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       String fileName = 'Screenshot-$timestamp.png';
       imagePath = '${userDataDirectory.path}/Screenshots/$fileName';
     }
-    _capturedData = await ScreenCapturer.instance.capture(
+    _capturedData = await screenCapturer.capture(
       imagePath: imagePath,
     );
 

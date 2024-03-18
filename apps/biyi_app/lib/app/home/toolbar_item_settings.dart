@@ -2,7 +2,7 @@ import 'package:biyi_app/app/router_config.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rise_ui/rise_ui.dart' hide Switch;
+import 'package:influxui/influxui.dart' hide Switch;
 import 'package:uni_platform/uni_platform.dart';
 import 'package:window_manager/window_manager.dart';
 

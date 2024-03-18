@@ -7,15 +7,9 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rise_ui/rise_ui.dart';
+import 'package:influxui/influxui.dart';
 import 'package:shortid/shortid.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
-
-const List<String> _kAllScopes = [
-  kScopeDetectLanguage,
-  kScopeLookUp,
-  kScopeTranslate,
-];
 
 class TranslationEnginesNewOrEditPage extends StatefulWidget {
   const TranslationEnginesNewOrEditPage({
@@ -167,7 +161,7 @@ class _TranslationEnginesNewOrEditPageState
                   .tr(),
             ),
             children: [
-              for (var scope in _kAllScopes)
+              for (var scope in TranslationEngineScope.values)
                 PreferenceListTile(
                   padding: const EdgeInsets.only(
                     top: 10,
@@ -176,9 +170,9 @@ class _TranslationEnginesNewOrEditPageState
                     right: 12,
                   ),
                   title: Text(
-                    'engine_scope.${scope.toLowerCase()}'.tr(),
+                    'engine_scope.${scope.name.toLowerCase()}'.tr(),
                   ),
-                  subtitle: Text(scope),
+                  subtitle: Text(scope.name),
                   additionalInfo: Container(
                     margin: EdgeInsets.zero,
                     child: Builder(

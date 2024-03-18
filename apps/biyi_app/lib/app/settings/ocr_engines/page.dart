@@ -8,7 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reorderables/reorderables.dart';
-import 'package:rise_ui/rise_ui.dart';
+import 'package:influxui/influxui.dart';
 
 class OcrEnginesSettingPage extends StatefulWidget {
   const OcrEnginesSettingPage({super.key});

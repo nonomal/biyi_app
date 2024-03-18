@@ -119,7 +119,7 @@ class LocalDb {
             .updateOrCreate(
               type: item.type,
               option: item.option,
-              supportedScopes: item.supportedScopes,
+              supportedScopes: item.supportedScopes.map((e) => e.name).toList(),
               disabled: item.disabled,
             );
       }

@@ -4,7 +4,7 @@ import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rise_ui/rise_ui.dart';
+import 'package:influxui/influxui.dart';
 
 class TranslationTargetNewPage extends StatefulWidget {
   const TranslationTargetNewPage({
