@@ -4,6 +4,7 @@ import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart' show InfluxCard;
 
 class AvailableLanguageSelector extends StatelessWidget {
   const AvailableLanguageSelector({
@@ -117,19 +118,7 @@ class _TranslationTargetSelectViewState
         top: 0,
         bottom: 12,
       ),
-      child: Container(
-        padding: EdgeInsets.zero,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          borderRadius: BorderRadius.circular(2),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              offset: const Offset(0.0, 1.0),
-              blurRadius: 3.0,
-            ),
-          ],
-        ),
+      child: InfluxCard(
         child: Column(
           children: [
             Container(

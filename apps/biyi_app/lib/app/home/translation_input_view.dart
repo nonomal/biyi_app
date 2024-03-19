@@ -208,18 +208,7 @@ class TranslationInputView extends StatelessWidget {
         top: 0,
         bottom: 12,
       ),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          borderRadius: BorderRadius.circular(2),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              offset: const Offset(0.0, 1.0),
-              blurRadius: 3.0,
-            ),
-          ],
-        ),
+      child: InfluxCard(
         child: Column(
           children: [
             Container(

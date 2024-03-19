@@ -13,6 +13,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:influxui/influxui.dart' show InfluxCard;
 import 'package:uni_translate_client/uni_translate_client.dart';
 
 class TranslationResultRecordView extends StatelessWidget {
@@ -384,19 +385,7 @@ class TranslationResultRecordView extends StatelessWidget {
         top: 0,
         bottom: 12,
       ),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Theme.of(context).canvasColor,
-          borderRadius: BorderRadius.circular(2),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              offset: const Offset(0.0, 1.0),
-              blurRadius: 3.0,
-            ),
-          ],
-        ),
+      child: InfluxCard(
         child: Stack(
           children: [
             if (_isLoading)

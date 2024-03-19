@@ -1,6 +1,7 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
 class TranslationResultsView extends StatelessWidget {
@@ -34,26 +35,15 @@ class TranslationResultsView extends StatelessWidget {
         top: 0,
         bottom: 12,
       ),
-      child: Container(
-        constraints: const BoxConstraints(minHeight: 40),
-        decoration: BoxDecoration(
-          color: Theme.of(context).canvasColor,
-          borderRadius: BorderRadius.circular(2),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              offset: const Offset(0.0, 1.0),
-              blurRadius: 3.0,
-            ),
-          ],
-        ),
-        padding: const EdgeInsets.only(
-          left: 12,
-          right: 12,
-          top: 12,
-          bottom: 12,
-        ),
-        child: SizedBox(
+      child: InfluxCard(
+        child: Container(
+          constraints: const BoxConstraints(minHeight: 40),
+          padding: const EdgeInsets.only(
+            left: 12,
+            right: 12,
+            top: 12,
+            bottom: 12,
+          ),
           width: double.infinity,
           child: SelectableText.rich(
             TextSpan(
