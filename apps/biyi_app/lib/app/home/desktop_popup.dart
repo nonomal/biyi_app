@@ -18,6 +18,7 @@ import 'package:biyi_app/utilities/utilities.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:keypress_simulator/keypress_simulator.dart';
@@ -301,7 +302,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       await windowManager.setPosition(_lastShownPosition);
     }
 
-    if (UniPlatform.isMacOS && isShowBelowTray) {
+    if (kReleaseMode && UniPlatform.isMacOS && isShowBelowTray) {
       Rect? trayIconBounds = await trayManager.getBounds();
       if (trayIconBounds != null) {
         Size trayIconSize = trayIconBounds.size;
@@ -1090,7 +1091,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   Future<void> onWindowBlur() async {
     _focusNode.unfocus();
     bool isAlwaysOnTop = await windowManager.isAlwaysOnTop();
-    if (!isAlwaysOnTop) {
+    if (kReleaseMode && !isAlwaysOnTop) {
       windowManager.hide();
     }
   }

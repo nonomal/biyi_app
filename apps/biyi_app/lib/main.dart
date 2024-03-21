@@ -16,7 +16,7 @@ import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:protocol_handler/protocol_handler.dart';
 import 'package:provider/provider.dart';
-import 'package:influxui/influxui.dart';
+import 'package:influxui/influxui.dart' hide TextTheme;
 import 'package:uni_platform/uni_platform.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -118,10 +118,10 @@ class _MyAppState extends State<MyApp> {
       routerConfig: routerConfig,
       theme: ThemeData(
         colorScheme: ColorScheme.light(
-          primary: ExtendedColors.indigo,
-          background: ExtendedColors.gray.shade100,
-          surface: ExtendedColors.white,
-          outline: ExtendedColors.gray.shade200,
+          primary: InfluxColors.blue,
+          background: InfluxColors.gray.shade100,
+          surface: InfluxColors.white,
+          outline: InfluxColors.gray.shade200,
         ),
         extensions: const [
           ExtendedThemeData(
@@ -130,7 +130,7 @@ class _MyAppState extends State<MyApp> {
         ],
       ),
       darkTheme: ThemeData.dark().copyWith(
-        primaryColor: Colors.indigo,
+        primaryColor: InfluxColors.blue,
         extensions: const [
           ExtendedThemeData(
             brightness: Brightness.dark,

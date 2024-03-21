@@ -490,7 +490,7 @@ packages:
       path: "../../../../leanflutter/influxui/packages/influxui"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.0.1"
   intl:
     dependency: transitive
     description:

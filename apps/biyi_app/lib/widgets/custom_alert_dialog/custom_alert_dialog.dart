@@ -1,5 +1,5 @@
-import 'package:biyi_app/includes.dart';
 import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart' hide TextTheme;
 
 const kDialogActionTypePrimary = 'primary';
 const kDialogActionTypeSecondary = 'secondary';
@@ -26,12 +26,16 @@ class CustomDialogAction extends StatelessWidget {
     return Container(
       margin: EdgeInsets.zero,
       height: 38,
-      child: CustomButton.filled(
-        borderRadius: const BorderRadius.all(Radius.circular(2.0)),
+      child: Button(
         padding: EdgeInsets.zero,
-        processing: processing,
         onPressed: onPressed,
-        child: child,
+        labelBuilder: (context) {
+          if (processing) return const Loader();
+          return DefaultTextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!,
+            child: child,
+          );
+        },
       ),
     );
   }

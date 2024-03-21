@@ -89,6 +89,8 @@ class TranslationResultsView extends StatelessWidget {
                         : Container(),
                     content: Column(
                       children: [
+                        if (translationMode == kTranslationModeAuto)
+                          const SizedBox(height: 12),
                         for (var resultRecord
                             in result.translationResultRecordList ?? [])
                           TranslationResultRecordView(

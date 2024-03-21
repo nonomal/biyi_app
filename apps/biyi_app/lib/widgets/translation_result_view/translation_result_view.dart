@@ -19,53 +19,37 @@ class TranslationResultView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      padding: const EdgeInsets.only(
-        left: 12,
-        right: 12,
-        top: 0,
-        bottom: 12,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: InfluxCard(
-        child: SizedBox(
-          height: 40,
-          child: Row(
-            children: [
-              CustomButton(
-                padding: const EdgeInsets.only(left: 12, right: 12),
-                child: LanguageLabel(
-                  sourceLanguage,
-                  flagSize: 18,
-                ),
-                onPressed: () => {},
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: LanguageLabel(
+                sourceLanguage,
+                flagSize: 18,
               ),
-              SizedBox(
-                width: 20,
-                height: 38,
-                child: CustomButton(
-                  padding: EdgeInsets.zero,
-                  child: Container(
-                    margin: EdgeInsets.zero,
-                    child: Icon(
-                      FluentIcons.arrow_right_20_regular,
-                      size: 16,
-                      color: Theme.of(context).iconTheme.color,
-                    ),
-                  ),
-                  onPressed: () {},
+            ),
+            SizedBox(
+              width: 20,
+              height: 38,
+              child: Container(
+                margin: EdgeInsets.zero,
+                child: Icon(
+                  FluentIcons.arrow_right_20_regular,
+                  size: 16,
+                  color: Theme.of(context).iconTheme.color,
                 ),
               ),
-              CustomButton(
-                padding: const EdgeInsets.only(left: 12, right: 12),
-                child: LanguageLabel(
-                  targetLanguage,
-                  flagSize: 18,
-                ),
-                onPressed: () => {},
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: LanguageLabel(
+                targetLanguage,
+                flagSize: 18,
               ),
-              Expanded(child: Container()),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

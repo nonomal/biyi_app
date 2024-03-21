@@ -4,7 +4,7 @@ import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:influxui/influxui.dart' show InfluxCard;
+import 'package:influxui/influxui.dart' show Button, ButtonVariant, InfluxCard;
 
 class AvailableLanguageSelector extends StatelessWidget {
   const AvailableLanguageSelector({
@@ -42,20 +42,18 @@ class AvailableLanguageSelector extends StatelessWidget {
                       color: !isSelected ? null : Colors.white,
                     ),
                   );
-
                   return isSelected
-                      ? CustomButton.filled(
+                      ? Button(
+                          variant: ButtonVariant.filled,
                           padding: padding,
-                          borderRadius: BorderRadius.circular(2),
                           onPressed: () => onChanged(supportedLanguage),
-                          child: child,
+                          labelBuilder: (context) => child,
                         )
-                      : CustomButton.outlined(
+                      : Button(
+                          variant: ButtonVariant.outline,
                           padding: padding,
-                          color: Theme.of(context).dividerColor,
-                          borderRadius: BorderRadius.circular(2),
                           onPressed: () => onChanged(supportedLanguage),
-                          child: child,
+                          labelBuilder: (context) => child,
                         );
                 },
               ),
@@ -126,45 +124,47 @@ class _TranslationTargetSelectViewState
               height: 40,
               child: Row(
                 children: [
-                  CustomButton(
+                  Button(
+                    variant: ButtonVariant.transparent,
                     padding: const EdgeInsets.only(left: 12, right: 12),
-                    borderRadius: BorderRadius.zero,
-                    child: Row(
-                      children: [
-                        LanguageLabel(
-                          widget.sourceLanguage,
-                          flagSize: 18,
-                          flagBorderColor: widget.isShowSourceLanguageSelector
-                              ? Theme.of(context).primaryColor
-                              : null,
-                          style: textTheme.bodyMedium!.copyWith(
-                            color: widget.isShowSourceLanguageSelector
+                    labelBuilder: (context) {
+                      return Row(
+                        children: [
+                          LanguageLabel(
+                            widget.sourceLanguage,
+                            flagSize: 18,
+                            flagBorderColor: widget.isShowSourceLanguageSelector
                                 ? Theme.of(context).primaryColor
                                 : null,
-                          ),
-                        ),
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.fastOutSlowIn,
-                          transformAlignment: Alignment.center,
-                          transform: Matrix4.rotationZ(
-                            widget.isShowSourceLanguageSelector
-                                ? math.pi / 1
-                                : 0,
-                          ),
-                          child: Container(
-                            margin: EdgeInsets.zero,
-                            child: Icon(
-                              FluentIcons.chevron_down_20_regular,
-                              size: 14,
+                            style: textTheme.bodyMedium!.copyWith(
                               color: widget.isShowSourceLanguageSelector
                                   ? Theme.of(context).primaryColor
-                                  : textTheme.bodyMedium!.color,
+                                  : null,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.fastOutSlowIn,
+                            transformAlignment: Alignment.center,
+                            transform: Matrix4.rotationZ(
+                              widget.isShowSourceLanguageSelector
+                                  ? math.pi / 1
+                                  : 0,
+                            ),
+                            child: Container(
+                              margin: EdgeInsets.zero,
+                              child: Icon(
+                                FluentIcons.chevron_down_20_regular,
+                                size: 14,
+                                color: widget.isShowSourceLanguageSelector
+                                    ? Theme.of(context).primaryColor
+                                    : textTheme.bodyMedium!.color,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                     onPressed: () {
                       widget.onToggleShowSourceLanguageSelector(
                         !widget.isShowSourceLanguageSelector,
@@ -174,21 +174,24 @@ class _TranslationTargetSelectViewState
                   SizedBox(
                     width: 20,
                     height: 38,
-                    child: CustomButton(
+                    child: Button(
+                      variant: ButtonVariant.transparent,
                       padding: EdgeInsets.zero,
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.fastOutSlowIn,
-                        transformAlignment: Alignment.center,
-                        transform: Matrix4.rotationZ(
-                          _isRotated ? math.pi / 1 : 0,
-                        ),
-                        child: Icon(
-                          FluentIcons.arrow_swap_20_regular,
-                          size: 20,
-                          color: Theme.of(context).iconTheme.color,
-                        ),
-                      ),
+                      labelBuilder: (context) {
+                        return AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          curve: Curves.fastOutSlowIn,
+                          transformAlignment: Alignment.center,
+                          transform: Matrix4.rotationZ(
+                            _isRotated ? math.pi / 1 : 0,
+                          ),
+                          child: Icon(
+                            FluentIcons.arrow_swap_20_regular,
+                            size: 20,
+                            color: Theme.of(context).iconTheme.color,
+                          ),
+                        );
+                      },
                       onPressed: () {
                         setState(() {
                           _isRotated = !_isRotated;
@@ -200,45 +203,47 @@ class _TranslationTargetSelectViewState
                       },
                     ),
                   ),
-                  CustomButton(
+                  Button(
+                    variant: ButtonVariant.transparent,
                     padding: const EdgeInsets.only(left: 12, right: 12),
-                    borderRadius: BorderRadius.zero,
-                    child: Row(
-                      children: [
-                        LanguageLabel(
-                          widget.targetLanguage,
-                          flagSize: 18,
-                          flagBorderColor: widget.isShowTargetLanguageSelector
-                              ? Theme.of(context).primaryColor
-                              : null,
-                          style: textTheme.bodyMedium!.copyWith(
-                            color: widget.isShowTargetLanguageSelector
+                    labelBuilder: (context) {
+                      return Row(
+                        children: [
+                          LanguageLabel(
+                            widget.targetLanguage,
+                            flagSize: 18,
+                            flagBorderColor: widget.isShowTargetLanguageSelector
                                 ? Theme.of(context).primaryColor
                                 : null,
-                          ),
-                        ),
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.fastOutSlowIn,
-                          transformAlignment: Alignment.center,
-                          transform: Matrix4.rotationZ(
-                            widget.isShowTargetLanguageSelector
-                                ? math.pi / 1
-                                : 0,
-                          ),
-                          child: Container(
-                            margin: EdgeInsets.zero,
-                            child: Icon(
-                              FluentIcons.chevron_down_20_regular,
-                              size: 14,
+                            style: textTheme.bodyMedium!.copyWith(
                               color: widget.isShowTargetLanguageSelector
                                   ? Theme.of(context).primaryColor
-                                  : textTheme.bodyMedium!.color,
+                                  : null,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.fastOutSlowIn,
+                            transformAlignment: Alignment.center,
+                            transform: Matrix4.rotationZ(
+                              widget.isShowTargetLanguageSelector
+                                  ? math.pi / 1
+                                  : 0,
+                            ),
+                            child: Container(
+                              margin: EdgeInsets.zero,
+                              child: Icon(
+                                FluentIcons.chevron_down_20_regular,
+                                size: 14,
+                                color: widget.isShowTargetLanguageSelector
+                                    ? Theme.of(context).primaryColor
+                                    : textTheme.bodyMedium!.color,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                     onPressed: () {
                       widget.onToggleShowTargetLanguageSelector(
                         !widget.isShowTargetLanguageSelector,

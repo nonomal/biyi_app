@@ -78,8 +78,7 @@ class TranslationInputView extends StatelessWidget {
                         bottom: 0,
                         child: Container(
                           decoration: BoxDecoration(
-                            color:
-                                Theme.of(context).primaryColor.withOpacity(0.9),
+                            color: Theme.of(context).primaryColor,
                             borderRadius: BorderRadius.circular(2),
                           ),
                           padding: const EdgeInsets.only(
