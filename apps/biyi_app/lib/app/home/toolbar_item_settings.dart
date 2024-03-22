@@ -1,8 +1,7 @@
 import 'package:biyi_app/app/router_config.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:influxui/influxui.dart' hide Switch;
+import 'package:influxui/influxui.dart';
 import 'package:uni_platform/uni_platform.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -30,10 +29,12 @@ class _ToolbarItemSettingsState extends State<ToolbarItemSettings> {
   @override
   Widget build(BuildContext context) {
     Brightness brightness = Theme.of(context).brightness;
-    return ActionIcon(
+    return IconButton(
       FluentIcons.settings_20_regular,
-      variant: ActionIconVariant.transparent,
-      color: brightness == Brightness.light ? Colors.black : Colors.grey,
+      variant: IconButtonVariant.transparent,
+      color: brightness == Brightness.light
+          ? ExtendedColors.black
+          : ExtendedColors.gray,
       onPressed: _handleClick,
     );
   }

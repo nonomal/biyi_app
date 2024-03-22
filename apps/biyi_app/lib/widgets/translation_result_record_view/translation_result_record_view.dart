@@ -10,10 +10,9 @@ import 'package:biyi_app/widgets/widgets.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:influxui/influxui.dart' show InfluxCard;
+import 'package:influxui/influxui.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
 class TranslationResultRecordView extends StatelessWidget {
@@ -93,7 +92,7 @@ class TranslationResultRecordView extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: SelectableText(
         error.message,
-        style: const TextStyle(color: Colors.red),
+        style: const TextStyle(color: ExtendedColors.red),
       ),
     );
   }
@@ -191,7 +190,7 @@ class TranslationResultRecordView extends StatelessWidget {
           if ((translations ?? []).isNotEmpty)
             WordTranslationView(translations!.first),
           // 包含查词结果时显示分割线
-          if ((translations ?? []).isNotEmpty) const Divider(height: 0),
+          if ((translations ?? []).isNotEmpty) const Divider(),
           // 音标
           if ((pronunciations ?? []).isNotEmpty)
             Container(
@@ -385,7 +384,7 @@ class TranslationResultRecordView extends StatelessWidget {
         top: 0,
         bottom: 12,
       ),
-      child: InfluxCard(
+      child: Card(
         child: Stack(
           children: [
             if (_isLoading)

@@ -11,12 +11,11 @@ import 'package:biyi_app/utilities/language_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/material.dart' hide Icons;
+import 'package:influxui/influxui.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:protocol_handler/protocol_handler.dart';
 import 'package:provider/provider.dart';
-import 'package:influxui/influxui.dart' hide TextTheme;
 import 'package:uni_platform/uni_platform.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -118,10 +117,10 @@ class _MyAppState extends State<MyApp> {
       routerConfig: routerConfig,
       theme: ThemeData(
         colorScheme: ColorScheme.light(
-          primary: InfluxColors.blue,
-          background: InfluxColors.gray.shade100,
-          surface: InfluxColors.white,
-          outline: InfluxColors.gray.shade200,
+          primary: ExtendedColors.blue,
+          background: ExtendedColors.gray.shade100,
+          surface: ExtendedColors.white,
+          outline: ExtendedColors.gray.shade200,
         ),
         extensions: const [
           ExtendedThemeData(
@@ -130,7 +129,7 @@ class _MyAppState extends State<MyApp> {
         ],
       ),
       darkTheme: ThemeData.dark().copyWith(
-        primaryColor: InfluxColors.blue,
+        primaryColor: ExtendedColors.blue,
         extensions: const [
           ExtendedThemeData(
             brightness: Brightness.dark,

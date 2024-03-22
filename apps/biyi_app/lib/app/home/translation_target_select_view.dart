@@ -3,8 +3,7 @@ import 'dart:math' as math;
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/material.dart';
-import 'package:influxui/influxui.dart' show Button, ButtonVariant, InfluxCard;
+import 'package:influxui/influxui.dart';
 
 class AvailableLanguageSelector extends StatelessWidget {
   const AvailableLanguageSelector({
@@ -39,7 +38,7 @@ class AvailableLanguageSelector extends StatelessWidget {
                     supportedLanguage,
                     flagSize: 18,
                     style: TextStyle(
-                      color: !isSelected ? null : Colors.white,
+                      color: !isSelected ? null : ExtendedColors.white,
                     ),
                   );
                   return isSelected
@@ -116,7 +115,7 @@ class _TranslationTargetSelectViewState
         top: 0,
         bottom: 12,
       ),
-      child: InfluxCard(
+      child: Card(
         child: Column(
           children: [
             Container(
@@ -255,7 +254,11 @@ class _TranslationTargetSelectViewState
             ),
             if (widget.isShowSourceLanguageSelector ||
                 widget.isShowTargetLanguageSelector)
-              const Divider(height: 0, indent: 12, endIndent: 12),
+              const Divider(
+                // height: 0,
+                // indent: 12,
+                // endIndent: 12,
+              ),
             if (widget.isShowSourceLanguageSelector)
               AvailableLanguageSelector(
                 value: widget.sourceLanguage,

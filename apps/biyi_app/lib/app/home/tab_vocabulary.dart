@@ -1,5 +1,5 @@
 import 'package:biyi_app/includes.dart';
-import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart';
 
 class TabVocabularyScene extends StatelessWidget {
   const TabVocabularyScene({super.key});

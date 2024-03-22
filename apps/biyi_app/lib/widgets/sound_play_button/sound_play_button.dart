@@ -4,7 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart';
 
 const _kIconSize = 16.0;
 

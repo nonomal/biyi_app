@@ -1,5 +1,5 @@
 import 'package:biyi_app/includes.dart';
-import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart';
 
 class TranslationEngineIcon extends StatelessWidget {
   const TranslationEngineIcon(
@@ -34,7 +34,7 @@ class TranslationEngineIcon extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         border: border ??
             Border.all(
-              color: Colors.black.withOpacity(0.2),
+              color: ExtendedColors.black.withOpacity(0.2),
               width: 0.5,
             ),
       ),

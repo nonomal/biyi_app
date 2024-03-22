@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart';
 
 class GeneratingCursor extends StatefulWidget {
   const GeneratingCursor({super.key});

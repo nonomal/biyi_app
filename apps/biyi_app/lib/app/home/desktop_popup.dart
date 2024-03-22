@@ -19,8 +19,8 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:influxui/influxui.dart' hide Menu, MenuItem;
 import 'package:keypress_simulator/keypress_simulator.dart';
 import 'package:protocol_handler/protocol_handler.dart';
 import 'package:screen_capturer/screen_capturer.dart';
@@ -145,7 +145,6 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   @override
   void didChangePlatformBrightness() {
     Brightness newBrightness =
-        // ignore: deprecated_member_use
         WidgetsBinding.instance.window.platformBrightness;
 
     if (newBrightness != _brightness) {
@@ -1005,7 +1004,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
           );
 
       TextTranslation? textTranslation =
-          (translateResponse.translations ?? []).firstOrNull;
+          (translateResponse.translations).firstOrNull;
 
       if (textTranslation != null) {
         Clipboard.setData(ClipboardData(text: textTranslation.text));

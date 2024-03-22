@@ -6,7 +6,6 @@ import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart' hide Divider;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:influxui/influxui.dart';
 import 'package:screen_capturer/screen_capturer.dart';
@@ -59,9 +58,9 @@ class TranslationInputView extends StatelessWidget {
           child: SizedBox(
             width: 30,
             height: 26,
-            child: ActionIcon(
+            child: IconButton(
               FluentIcons.target_20_regular,
-              variant: ActionIconVariant.transparent,
+              variant: IconButtonVariant.transparent,
               iconBuilder: (context, icon) {
                 return Stack(
                   alignment: Alignment.center,
@@ -90,7 +89,7 @@ class TranslationInputView extends StatelessWidget {
                           child: const Text(
                             'AUTO',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: ExtendedColors.white,
                               fontSize: 5.4,
                               fontWeight: FontWeight.w500,
                             ),
@@ -100,7 +99,7 @@ class TranslationInputView extends StatelessWidget {
                   ],
                 );
               },
-              color: Colors.black,
+              color: ExtendedColors.black,
               onPressed: () {
                 String newTranslationMode =
                     translationMode == kTranslationModeAuto
@@ -137,10 +136,10 @@ class TranslationInputView extends StatelessWidget {
           child: SizedBox(
             width: 30,
             height: 26,
-            child: ActionIcon(
+            child: IconButton(
               FluentIcons.crop_20_regular,
-              variant: ActionIconVariant.transparent,
-              color: Colors.black,
+              variant: IconButtonVariant.transparent,
+              color: ExtendedColors.black,
               onPressed: onClickExtractTextFromScreenCapture,
             ),
           ),
@@ -150,10 +149,10 @@ class TranslationInputView extends StatelessWidget {
           child: SizedBox(
             width: 30,
             height: 26,
-            child: ActionIcon(
+            child: IconButton(
               FluentIcons.clipboard_text_ltr_20_regular,
-              variant: ActionIconVariant.transparent,
-              color: Colors.black,
+              variant: IconButtonVariant.transparent,
+              color: ExtendedColors.black,
               onPressed: onClickExtractTextFromClipboard,
             ),
           ),
@@ -207,7 +206,7 @@ class TranslationInputView extends StatelessWidget {
         top: 0,
         bottom: 12,
       ),
-      child: InfluxCard(
+      child: Card(
         child: Column(
           children: [
             Container(
@@ -217,7 +216,7 @@ class TranslationInputView extends StatelessWidget {
                   CupertinoTextField(
                     focusNode: focusNode,
                     decoration: const BoxDecoration(
-                      color: Colors.transparent,
+                      color: Color(0x00000000),
                     ),
                     selectionHeightStyle: BoxHeightStyle.max,
                     controller: controller,

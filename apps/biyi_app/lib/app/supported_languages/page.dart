@@ -4,7 +4,6 @@ import 'package:biyi_app/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:biyi_app/widgets/language_label/language_label.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/material.dart' hide Icons;
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
 

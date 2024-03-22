@@ -3,9 +3,8 @@ import 'package:biyi_app/includes.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart';
 import 'package:screen_capturer/screen_capturer.dart';
 import 'package:screen_text_extractor/screen_text_extractor.dart';
 import 'package:uni_platform/uni_platform.dart';
@@ -41,7 +40,7 @@ class AllowAccessListItem extends StatelessWidget {
               text: LocaleKeys.app_home_limited_banner_btn_allow.tr(),
               style: const TextStyle(
                 decoration: TextDecoration.underline,
-                decorationColor: Colors.white,
+                decorationColor: ExtendedColors.white,
               ),
               recognizer: TapGestureRecognizer()..onTap = onTappedTryAllow,
             ),
@@ -51,14 +50,14 @@ class AllowAccessListItem extends StatelessWidget {
               text: LocaleKeys.app_home_limited_banner_btn_go_settings.tr(),
               style: const TextStyle(
                 decoration: TextDecoration.underline,
-                decorationColor: Colors.white,
+                decorationColor: ExtendedColors.white,
               ),
               recognizer: TapGestureRecognizer()..onTap = onTappedGoSettings,
             ),
         ],
       ),
       style: textTheme.bodyMedium!.copyWith(
-        color: Colors.white,
+        color: ExtendedColors.white,
         fontSize: 13,
       ),
     );
@@ -86,7 +85,7 @@ class LimitedFunctionalityBanner extends StatelessWidget {
     if (_isAllowedAllAccess) return Container();
 
     return Container(
-      color: Colors.orange,
+      color: ExtendedColors.orange,
       width: double.infinity,
       child: Container(
         width: double.infinity,
@@ -108,7 +107,7 @@ class LimitedFunctionalityBanner extends StatelessWidget {
                 text: LocaleKeys.app_home_limited_banner_title.tr(),
               ),
               style: textTheme.bodyMedium!.copyWith(
-                color: Colors.white,
+                color: ExtendedColors.white,
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),
@@ -167,27 +166,21 @@ class LimitedFunctionalityBanner extends StatelessWidget {
             ),
             Row(
               children: [
-                SizedBox(
-                  width: 18,
-                  height: 18,
-                  child: Tooltip(
-                    message: LocaleKeys.app_home_limited_banner_tip_help.tr(),
-                    child: CupertinoButton(
-                      padding: EdgeInsets.zero,
-                      child: const Icon(
-                        FluentIcons.question_circle_20_regular,
-                        color: Colors.white,
-                        size: 18,
-                      ),
-                      onPressed: () async {
-                        Uri url = Uri.parse('${sharedEnv.webUrl}/docs');
-                        if (await canLaunchUrl(url)) {
-                          await launchUrl(url);
-                        } else {
-                          throw 'Could not launch $url';
-                        }
-                      },
-                    ),
+                Tooltip(
+                  message: LocaleKeys.app_home_limited_banner_tip_help.tr(),
+                  child: IconButton(
+                    FluentIcons.question_circle_20_regular,
+                    iconSize: 18,
+                    variant: IconButtonVariant.transparent,
+                    size: IconButtonSize.small,
+                    onPressed: () async {
+                      Uri url = Uri.parse('${sharedEnv.webUrl}/docs');
+                      if (await canLaunchUrl(url)) {
+                        await launchUrl(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
                   ),
                 ),
                 Expanded(
@@ -200,10 +193,10 @@ class LimitedFunctionalityBanner extends StatelessWidget {
                         text: LocaleKeys.app_home_limited_banner_btn_check_again
                             .tr(),
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: ExtendedColors.white,
                           height: 1.3,
                           decoration: TextDecoration.underline,
-                          decorationColor: Colors.white,
+                          decorationColor: ExtendedColors.white,
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = onTappedRecheckIsAllowedAllAccess,
@@ -211,7 +204,7 @@ class LimitedFunctionalityBanner extends StatelessWidget {
                     ],
                   ),
                   style: textTheme.bodyMedium!.copyWith(
-                    color: Colors.white,
+                    color: ExtendedColors.white,
                     fontSize: 14,
                   ),
                 ),

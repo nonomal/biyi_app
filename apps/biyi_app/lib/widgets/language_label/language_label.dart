@@ -1,5 +1,5 @@
 import 'package:biyi_app/includes.dart';
-import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart';
 
 class LanguageLabel extends StatelessWidget {
   const LanguageLabel(
@@ -18,7 +18,8 @@ class LanguageLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
-    return Row(
+    return GappedRow(
+      gap: 5,
       mainAxisSize: MainAxisSize.min,
       children: [
         LanguageFlagView(
@@ -26,7 +27,6 @@ class LanguageLabel extends StatelessWidget {
           size: flagSize,
           borderColor: flagBorderColor,
         ),
-        const SizedBox(width: 5),
         DefaultTextStyle(
           style: textTheme.bodyMedium!,
           child: Text(

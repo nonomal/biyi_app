@@ -3,7 +3,7 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewVersionFoundBanner extends StatelessWidget {
@@ -42,7 +42,7 @@ class NewVersionFoundBanner extends StatelessWidget {
                     .tr(args: [latestVersion.version]),
               ),
               style: textTheme.bodyMedium!.copyWith(
-                color: Colors.white,
+                color: ExtendedColors.white,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -53,10 +53,10 @@ class NewVersionFoundBanner extends StatelessWidget {
                   TextSpan(
                     text: LocaleKeys.app_home_newversion_banner_btn_update.tr(),
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: ExtendedColors.white,
                       height: 1.3,
                       decoration: TextDecoration.underline,
-                      decorationColor: Colors.white,
+                      decorationColor: ExtendedColors.white,
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
@@ -73,7 +73,7 @@ class NewVersionFoundBanner extends StatelessWidget {
                 ],
               ),
               style: textTheme.bodyMedium!.copyWith(
-                color: Colors.white,
+                color: ExtendedColors.white,
               ),
             ),
           ],

@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/includes.dart';
-import 'package:flutter/material.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
+import 'package:influxui/influxui.dart';
 import 'package:uni_platform/uni_platform.dart';
 
 class Configuration {

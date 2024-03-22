@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:influxui/influxui.dart' hide TextTheme;
+import 'package:influxui/influxui.dart';
 
 const kDialogActionTypePrimary = 'primary';
 const kDialogActionTypeSecondary = 'secondary';

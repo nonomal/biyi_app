@@ -1,6 +1,5 @@
 import 'package:biyi_app/includes.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/material.dart';
 import 'package:influxui/influxui.dart';
 
 class TranslationResultView extends StatelessWidget {
@@ -20,7 +19,7 @@ class TranslationResultView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: InfluxCard(
+      child: Card(
         child: Row(
           children: [
             Padding(

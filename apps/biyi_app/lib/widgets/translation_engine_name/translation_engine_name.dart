@@ -1,6 +1,6 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/models/ext_translation_engine_config.dart';
-import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart';
 
 class TranslationEngineName extends StatelessWidget {
   const TranslationEngineName(
@@ -20,7 +20,7 @@ class TranslationEngineName extends StatelessWidget {
             text: ' (${translationEngineConfig.identifier})',
             style: const TextStyle(
               fontSize: 12,
-              color: Colors.grey,
+              color: ExtendedColors.gray,
             ),
           ),
         ],

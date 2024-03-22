@@ -1,6 +1,6 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/models/ext_ocr_engine_config.dart';
-import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart';
 
 class OcrEngineName extends StatelessWidget {
   const OcrEngineName(
@@ -20,7 +20,7 @@ class OcrEngineName extends StatelessWidget {
             text: ' (${ocrEngineConfig.identifier})',
             style: const TextStyle(
               fontSize: 12,
-              color: Colors.grey,
+              color: ExtendedColors.gray,
             ),
           ),
         ],

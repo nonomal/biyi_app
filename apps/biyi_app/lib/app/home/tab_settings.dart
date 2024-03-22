@@ -1,5 +1,5 @@
 import 'package:biyi_app/app/settings/page.dart';
-import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart';
 
 class TabSettingsScene extends StatelessWidget {
   const TabSettingsScene({super.key});

@@ -4,8 +4,7 @@ import 'package:biyi_app/app/home/tab_settings.dart';
 import 'package:biyi_app/app/home/tab_vocabulary.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart';
 import 'package:uni_platform/uni_platform.dart';
 
 const _kHomeTabHomepage = 0;
@@ -45,7 +44,7 @@ class _HomePageState extends State<HomePage> {
         boxShadow: Theme.of(context).brightness == Brightness.light
             ? [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
+                  color: ExtendedColors.gray.withOpacity(0.2),
                   blurRadius: 16,
                 ),
               ]

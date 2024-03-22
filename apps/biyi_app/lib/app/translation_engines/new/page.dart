@@ -5,7 +5,6 @@ import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
 import 'package:shortid/shortid.dart';
@@ -181,12 +180,12 @@ class _TranslationEnginesNewOrEditPageState
                             .contains(scope)) {
                           return const Icon(
                             FluentIcons.dismiss_circle_20_filled,
-                            color: Colors.red,
+                            color: ExtendedColors.red,
                           );
                         }
                         return const Icon(
                           FluentIcons.checkmark_circle_20_filled,
-                          color: Colors.green,
+                          color: ExtendedColors.green,
                         );
                       },
                     ),
@@ -225,7 +224,7 @@ class _TranslationEnginesNewOrEditPageState
                 title: Center(
                   child: Text(
                     LocaleKeys.delete.tr(),
-                    style: const TextStyle(color: Colors.red),
+                    style: const TextStyle(color: ExtendedColors.red),
                   ),
                 ),
                 onTap: () async {

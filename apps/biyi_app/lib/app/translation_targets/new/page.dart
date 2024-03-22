@@ -2,7 +2,6 @@ import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
 
@@ -111,7 +110,7 @@ class _TranslationTargetNewPageState extends State<TranslationTargetNewPage> {
                 title: Center(
                   child: Text(
                     LocaleKeys.delete.tr(),
-                    style: const TextStyle(color: Colors.red),
+                    style: const TextStyle(color: ExtendedColors.red),
                   ),
                 ),
                 // accessoryView: Container(),

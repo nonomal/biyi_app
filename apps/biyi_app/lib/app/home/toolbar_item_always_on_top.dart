@@ -1,5 +1,4 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/material.dart';
 import 'package:influxui/influxui.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -33,9 +32,9 @@ class _ToolbarItemAlwaysOnTopState extends State<ToolbarItemAlwaysOnTop> {
       transform: Matrix4.rotationZ(
         _isAlwaysOnTop ? 0 : -0.8,
       ),
-      child: ActionIcon(
+      child: IconButton(
         _isAlwaysOnTop ? FluentIcons.pin_20_filled : FluentIcons.pin_20_regular,
-        variant: ActionIconVariant.transparent,
+        variant: IconButtonVariant.transparent,
         padding: EdgeInsets.zero,
         color: _isAlwaysOnTop
             ? Theme.of(context).primaryColor

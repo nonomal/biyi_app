@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
 const kWordImageSize = 74.0;

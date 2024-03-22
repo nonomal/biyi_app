@@ -1,6 +1,5 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/includes.dart';
-import 'package:flutter/material.dart';
 import 'package:influxui/influxui.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
@@ -35,7 +34,7 @@ class TranslationResultsView extends StatelessWidget {
         top: 0,
         bottom: 12,
       ),
-      child: InfluxCard(
+      child: Card(
         child: Container(
           constraints: const BoxConstraints(minHeight: 40),
           padding: const EdgeInsets.only(

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:influxui/influxui.dart';
 
 class AppSettings with ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.system;
