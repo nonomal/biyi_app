@@ -20,9 +20,9 @@ class HotKeyDisplayView extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        for (KeyModifier keyModifier in hotKey.modifiers ?? []) ...[
+        for (final HotKeyModifier modifier in hotKey.modifiers ?? []) ...[
           Kbd(
-            keyModifier.keyLabel,
+            modifier.physicalKeys.first.keyLabel,
             size: ExtendedSize.small,
           ),
           const Padding(
@@ -37,7 +37,7 @@ class HotKeyDisplayView extends StatelessWidget {
           ),
         ],
         Kbd(
-          hotKey.keyCode.keyLabel,
+          hotKey.physicalKey.keyLabel,
           size: ExtendedSize.small,
         ),
       ],
@@ -86,7 +86,11 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
           onHotKeyRecorded: (newHotKey) {
             _configuration.setShortcut(
               shortcutKey,
-              newHotKey..scope = shortcutScope,
+              HotKey(
+                key: newHotKey.key,
+                modifiers: newHotKey.modifiers,
+                scope: shortcutScope,
+              ),
             );
           },
         );
