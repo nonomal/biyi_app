@@ -38,8 +38,9 @@ class _WordTranslationViewState extends State<WordTranslationView> {
           bottom: 7,
         ),
         alignment: Alignment.centerLeft,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: GappedRow(
+          gap: 4,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
             SelectableText.rich(
@@ -52,22 +53,11 @@ class _WordTranslationViewState extends State<WordTranslationView> {
                 height: 1.4,
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 2, left: 4),
-              padding: const EdgeInsets.only(left: 2, right: 2),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: const Color(0xff80838a).withOpacity(0.6),
-                ),
-                borderRadius: BorderRadius.circular(2),
-              ),
-              child: const Text(
-                '常见释义',
-                style: TextStyle(
-                  color: Color(0xff80838a),
-                  fontSize: 10,
-                ),
-              ),
+            const Badge(
+              variant: BadgeVariant.outlined,
+              label: '常见释义',
+              color: ExtendedColors.gray,
+              size: BadgeSize.tiny,
             ),
             if ((widget.wordTranslation.audioUrl ?? '').isNotEmpty &&
                 _isHovered)

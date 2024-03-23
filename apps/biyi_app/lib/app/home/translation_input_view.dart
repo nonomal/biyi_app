@@ -55,72 +55,67 @@ class TranslationInputView extends StatelessWidget {
               'translation_mode.$translationMode'.tr(),
             ],
           ),
-          child: SizedBox(
-            width: 30,
-            height: 26,
-            child: IconButton(
-              FluentIcons.target_20_regular,
-              variant: IconButtonVariant.transparent,
-              iconBuilder: (context, icon) {
-                return Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Icon(
-                      icon,
-                      size: 22,
-                      color: translationMode == kTranslationModeAuto
-                          ? Theme.of(context).primaryColor
-                          : Theme.of(context).iconTheme.color,
-                    ),
-                    if (translationMode == kTranslationModeAuto)
-                      Positioned(
-                        bottom: 0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            borderRadius: BorderRadius.circular(2),
-                          ),
-                          padding: const EdgeInsets.only(
-                            left: 2,
-                            right: 2,
-                            top: 1.4,
-                            bottom: 1.4,
-                          ),
-                          child: const Text(
-                            'AUTO',
-                            style: TextStyle(
-                              color: ExtendedColors.white,
-                              fontSize: 5.4,
-                              fontWeight: FontWeight.w500,
-                            ),
+          child: IconButton(
+            FluentIcons.target_20_regular,
+            variant: IconButtonVariant.subtle,
+            iconBuilder: (context, icon) {
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  Icon(
+                    icon,
+                    color: translationMode == kTranslationModeAuto
+                        ? Theme.of(context).primaryColor
+                        : Theme.of(context).iconTheme.color,
+                  ),
+                  if (translationMode == kTranslationModeAuto)
+                    Positioned(
+                      bottom: 0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                        padding: const EdgeInsets.only(
+                          left: 2,
+                          right: 2,
+                          top: 1.4,
+                          bottom: 1.4,
+                        ),
+                        child: const Text(
+                          'AUTO',
+                          style: TextStyle(
+                            color: ExtendedColors.white,
+                            fontSize: 5.4,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
-                  ],
-                );
-              },
-              color: ExtendedColors.black,
-              onPressed: () {
-                String newTranslationMode =
-                    translationMode == kTranslationModeAuto
-                        ? kTranslationModeManual
-                        : kTranslationModeAuto;
+                    ),
+                ],
+              );
+            },
+            size: IconButtonSize.small,
+            onPressed: () {
+              String newTranslationMode =
+                  translationMode == kTranslationModeAuto
+                      ? kTranslationModeManual
+                      : kTranslationModeAuto;
 
-                UserPreference? userPreference =
-                    localDb.preference(kPrefTranslationMode).get();
-                if (userPreference != null) {
-                  localDb.preference(kPrefTranslationMode).update(
-                        value: newTranslationMode,
-                      );
-                } else {
-                  localDb.preferences.create(
-                    key: kPrefTranslationMode,
-                    value: newTranslationMode,
-                  );
-                }
-                onTranslationModeChanged(newTranslationMode);
-              },
-            ),
+              UserPreference? userPreference =
+                  localDb.preference(kPrefTranslationMode).get();
+              if (userPreference != null) {
+                localDb.preference(kPrefTranslationMode).update(
+                      value: newTranslationMode,
+                    );
+              } else {
+                localDb.preferences.create(
+                  key: kPrefTranslationMode,
+                  value: newTranslationMode,
+                );
+              }
+              onTranslationModeChanged(newTranslationMode);
+            },
           ),
         ),
         const SizedBox(
@@ -133,28 +128,33 @@ class TranslationInputView extends StatelessWidget {
         Tooltip(
           message:
               LocaleKeys.app_home_tip_extract_text_from_screen_capture.tr(),
-          child: SizedBox(
-            width: 30,
-            height: 26,
-            child: IconButton(
-              FluentIcons.crop_20_regular,
-              variant: IconButtonVariant.transparent,
-              color: ExtendedColors.black,
-              onPressed: onClickExtractTextFromScreenCapture,
-            ),
+          child: IconButton(
+            FluentIcons.crop_20_regular,
+            iconBuilder: (context, icon) {
+              return Icon(
+                icon,
+                color: Theme.of(context).iconTheme.color,
+              );
+            },
+            variant: IconButtonVariant.subtle,
+            size: IconButtonSize.small,
+            onPressed: onClickExtractTextFromScreenCapture,
           ),
         ),
+        const SizedBox(width: 4),
         Tooltip(
           message: LocaleKeys.app_home_tip_extract_text_from_clipboard.tr(),
-          child: SizedBox(
-            width: 30,
-            height: 26,
-            child: IconButton(
-              FluentIcons.clipboard_text_ltr_20_regular,
-              variant: IconButtonVariant.transparent,
-              color: ExtendedColors.black,
-              onPressed: onClickExtractTextFromClipboard,
-            ),
+          child: IconButton(
+            FluentIcons.clipboard_text_ltr_20_regular,
+            iconBuilder: (context, icon) {
+              return Icon(
+                icon,
+                color: Theme.of(context).iconTheme.color,
+              );
+            },
+            variant: IconButtonVariant.subtle,
+            size: ButtonSize.small,
+            onPressed: onClickExtractTextFromClipboard,
           ),
         ),
         // const SizedBox(
@@ -176,7 +176,7 @@ class TranslationInputView extends StatelessWidget {
         ConstrainedBox(
           constraints: const BoxConstraints(minWidth: 56),
           child: Button(
-            variant: ButtonVariant.outline,
+            variant: ButtonVariant.outlined,
             label: LocaleKeys.app_home_btn_clear.tr(),
             size: ButtonSize.small,
             onPressed: onButtonTappedClear,

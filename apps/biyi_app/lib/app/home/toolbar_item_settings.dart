@@ -35,6 +35,7 @@ class _ToolbarItemSettingsState extends State<ToolbarItemSettings> {
       color: brightness == Brightness.light
           ? ExtendedColors.black
           : ExtendedColors.gray,
+      size: IconButtonSize.small,
       onPressed: _handleClick,
     );
   }

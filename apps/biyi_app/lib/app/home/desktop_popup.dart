@@ -144,9 +144,8 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
 
   @override
   void didChangePlatformBrightness() {
-    Brightness newBrightness =
-        WidgetsBinding.instance.window.platformBrightness;
-
+    final newBrightness =
+        View.of(context).platformDispatcher.platformBrightness;
     if (newBrightness != _brightness) {
       _brightness = newBrightness;
       if (UniPlatform.isWindows && _configuration.showTrayIcon) {

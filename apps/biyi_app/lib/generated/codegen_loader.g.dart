@@ -463,7 +463,7 @@ class CodegenLoader extends AssetLoader {
         "newversion_banner_text_found_new_version": "New version found: {}",
         "newversion_banner_btn_update": "Update",
         "limited_banner_title":
-            "Functionality is limited, please follow the tips to check.",
+            "Functionality is limited, please perform a check according to the prompts.",
         "limited_banner_text_screen_capture": "Grant screen recording access",
         "limited_banner_text_screen_selection": "Grant accessibility access",
         "limited_banner_btn_allow": "Allow",

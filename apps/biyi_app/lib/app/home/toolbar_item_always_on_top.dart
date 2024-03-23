@@ -36,6 +36,7 @@ class _ToolbarItemAlwaysOnTopState extends State<ToolbarItemAlwaysOnTop> {
         _isAlwaysOnTop ? FluentIcons.pin_20_filled : FluentIcons.pin_20_regular,
         variant: IconButtonVariant.transparent,
         padding: EdgeInsets.zero,
+        size: IconButtonSize.small,
         color: _isAlwaysOnTop
             ? Theme.of(context).primaryColor
             : Theme.of(context).iconTheme.color,

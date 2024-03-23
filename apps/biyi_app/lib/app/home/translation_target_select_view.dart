@@ -49,7 +49,7 @@ class AvailableLanguageSelector extends StatelessWidget {
                           labelBuilder: (context) => child,
                         )
                       : Button(
-                          variant: ButtonVariant.outline,
+                          variant: ButtonVariant.outlined,
                           padding: padding,
                           onPressed: () => onChanged(supportedLanguage),
                           labelBuilder: (context) => child,
@@ -170,37 +170,33 @@ class _TranslationTargetSelectViewState
                       );
                     },
                   ),
-                  SizedBox(
-                    width: 20,
-                    height: 38,
-                    child: Button(
-                      variant: ButtonVariant.transparent,
-                      padding: EdgeInsets.zero,
-                      labelBuilder: (context) {
-                        return AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.fastOutSlowIn,
-                          transformAlignment: Alignment.center,
-                          transform: Matrix4.rotationZ(
-                            _isRotated ? math.pi / 1 : 0,
-                          ),
-                          child: Icon(
-                            FluentIcons.arrow_swap_20_regular,
-                            size: 20,
-                            color: Theme.of(context).iconTheme.color,
-                          ),
-                        );
-                      },
-                      onPressed: () {
-                        setState(() {
-                          _isRotated = !_isRotated;
-                        });
-                        _handleChanged(
-                          widget.targetLanguage,
-                          widget.sourceLanguage,
-                        );
-                      },
-                    ),
+                  Button(
+                    variant: ButtonVariant.transparent,
+                    padding: EdgeInsets.zero,
+                    labelBuilder: (context) {
+                      return AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.fastOutSlowIn,
+                        transformAlignment: Alignment.center,
+                        transform: Matrix4.rotationZ(
+                          _isRotated ? math.pi / 1 : 0,
+                        ),
+                        child: const Icon(
+                          FluentIcons.arrow_swap_20_regular,
+                          size: 20,
+                          color: ExtendedColors.black,
+                        ),
+                      );
+                    },
+                    onPressed: () {
+                      setState(() {
+                        _isRotated = !_isRotated;
+                      });
+                      _handleChanged(
+                        widget.targetLanguage,
+                        widget.sourceLanguage,
+                      );
+                    },
                   ),
                   Button(
                     variant: ButtonVariant.transparent,
@@ -255,10 +251,10 @@ class _TranslationTargetSelectViewState
             if (widget.isShowSourceLanguageSelector ||
                 widget.isShowTargetLanguageSelector)
               const Divider(
-                // height: 0,
-                // indent: 12,
-                // endIndent: 12,
-              ),
+                  // height: 0,
+                  // indent: 12,
+                  // endIndent: 12,
+                  ),
             if (widget.isShowSourceLanguageSelector)
               AvailableLanguageSelector(
                 value: widget.sourceLanguage,

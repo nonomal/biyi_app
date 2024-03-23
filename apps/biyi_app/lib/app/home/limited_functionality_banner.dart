@@ -7,7 +7,6 @@ import 'package:flutter/gestures.dart';
 import 'package:influxui/influxui.dart';
 import 'package:screen_capturer/screen_capturer.dart';
 import 'package:screen_text_extractor/screen_text_extractor.dart';
-import 'package:uni_platform/uni_platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AllowAccessListItem extends StatelessWidget {
@@ -26,40 +25,78 @@ class AllowAccessListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
-
-    return Text.rich(
-      TextSpan(
-        text: allowed ? '✅' : '❌',
-        children: [
-          const TextSpan(text: '  '),
-          TextSpan(text: title),
-          const TextSpan(text: '      '),
-          if (onTappedTryAllow != null)
-            TextSpan(
-              text: LocaleKeys.app_home_limited_banner_btn_allow.tr(),
-              style: const TextStyle(
-                decoration: TextDecoration.underline,
-                decorationColor: ExtendedColors.white,
+    final textStyle = Theme.of(context).textTheme.bodyMedium?.copyWith(
+          color: ExtendedColors.yellow.shade600,
+          height: 24 / 14,
+        );
+    return GappedRow(
+      gap: 4,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 2),
+          child: Icon(
+            allowed
+                ? FluentIcons.checkmark_20_filled
+                : FluentIcons.dismiss_circle_20_filled,
+            color: allowed
+                ? ExtendedColors.green.shade600
+                : ExtendedColors.red.shade600,
+            size: 20,
+          ),
+        ),
+        Expanded(
+          child: Wrap(
+            spacing: 30,
+            children: [
+              Text(
+                title,
+                style: textStyle,
               ),
-              recognizer: TapGestureRecognizer()..onTap = onTappedTryAllow,
-            ),
-          if (onTappedTryAllow != null) const TextSpan(text: ' / '),
-          if (onTappedGoSettings != null)
-            TextSpan(
-              text: LocaleKeys.app_home_limited_banner_btn_go_settings.tr(),
-              style: const TextStyle(
-                decoration: TextDecoration.underline,
-                decorationColor: ExtendedColors.white,
+              Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      children: [
+                        if (onTappedTryAllow != null)
+                          TextSpan(
+                            text: LocaleKeys.app_home_limited_banner_btn_allow
+                                .tr(),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = onTappedTryAllow,
+                          ),
+                        if (onTappedTryAllow != null)
+                          const TextSpan(
+                            text: ' / ',
+                            style: TextStyle(
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                        if (onTappedGoSettings != null)
+                          TextSpan(
+                            text: LocaleKeys
+                                .app_home_limited_banner_btn_go_settings
+                                .tr(),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = onTappedGoSettings,
+                          ),
+                      ],
+                      style: textStyle?.copyWith(
+                        color: ExtendedColors.yellow.shade600,
+                        decoration: TextDecoration.underline,
+                        decorationColor: ExtendedColors.yellow.shade600,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+                style: textStyle,
               ),
-              recognizer: TapGestureRecognizer()..onTap = onTappedGoSettings,
-            ),
-        ],
-      ),
-      style: textTheme.bodyMedium!.copyWith(
-        color: ExtendedColors.white,
-        fontSize: 13,
-      ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
@@ -78,141 +115,88 @@ class LimitedFunctionalityBanner extends StatelessWidget {
   bool get _isAllowedAllAccess =>
       isAllowedScreenCaptureAccess && isAllowedScreenSelectionAccess;
 
-  @override
-  Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
-
+  Widget _build(BuildContext context) {
     if (_isAllowedAllAccess) return Container();
-
-    return Container(
-      color: ExtendedColors.orange,
-      width: double.infinity,
-      child: Container(
-        width: double.infinity,
-        margin: const EdgeInsets.only(
-          left: 0,
-          right: 0,
-        ),
-        padding: const EdgeInsets.only(
-          top: 12,
-          bottom: 12,
-          left: 18,
-          right: 18,
-        ),
-        child: Column(
+    return Alert(
+      type: AlertType.warning,
+      icon: const Icon(FluentIcons.warning_20_regular),
+      title: LocaleKeys.app_home_limited_banner_title.tr(),
+      messageBuilder: (context) {
+        return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text.rich(
-              TextSpan(
-                text: LocaleKeys.app_home_limited_banner_title.tr(),
-              ),
-              style: textTheme.bodyMedium!.copyWith(
-                color: ExtendedColors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
+            AllowAccessListItem(
+              title:
+                  LocaleKeys.app_home_limited_banner_text_screen_capture.tr(),
+              allowed: isAllowedScreenCaptureAccess,
+              onTappedTryAllow: () {
+                ScreenCapturer.instance.requestAccess();
+                BotToast.showText(
+                  text: LocaleKeys.app_home_limited_banner_msg_allow_access_tip
+                      .tr(),
+                  align: Alignment.center,
+                  duration: const Duration(seconds: 5),
+                );
+              },
+              onTappedGoSettings: () {
+                ScreenCapturer.instance.requestAccess(
+                  onlyOpenPrefPane: true,
+                );
+              },
             ),
-            Container(
-              padding: const EdgeInsets.only(top: 6, bottom: 6),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (UniPlatform.isMacOS)
-                    AllowAccessListItem(
-                      title: LocaleKeys
-                          .app_home_limited_banner_text_screen_capture
-                          .tr(),
-                      allowed: isAllowedScreenCaptureAccess,
-                      onTappedTryAllow: () {
-                        ScreenCapturer.instance.requestAccess();
-                        BotToast.showText(
-                          text: LocaleKeys
-                              .app_home_limited_banner_msg_allow_access_tip
-                              .tr(),
-                          align: Alignment.center,
-                          duration: const Duration(seconds: 5),
-                        );
-                      },
-                      onTappedGoSettings: () {
-                        ScreenCapturer.instance.requestAccess(
-                          onlyOpenPrefPane: true,
-                        );
-                      },
-                    ),
-                  if (UniPlatform.isMacOS)
-                    AllowAccessListItem(
-                      title: LocaleKeys
-                          .app_home_limited_banner_text_screen_selection
-                          .tr(),
-                      allowed: isAllowedScreenSelectionAccess,
-                      onTappedTryAllow: () {
-                        screenTextExtractor.requestAccess();
-                        BotToast.showText(
-                          text: LocaleKeys
-                              .app_home_limited_banner_msg_allow_access_tip
-                              .tr(),
-                          align: Alignment.center,
-                          duration: const Duration(seconds: 5),
-                        );
-                      },
-                      onTappedGoSettings: () {
-                        screenTextExtractor.requestAccess(
-                          onlyOpenPrefPane: true,
-                        );
-                      },
-                    ),
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                Tooltip(
-                  message: LocaleKeys.app_home_limited_banner_tip_help.tr(),
-                  child: IconButton(
-                    FluentIcons.question_circle_20_regular,
-                    iconSize: 18,
-                    variant: IconButtonVariant.transparent,
-                    size: IconButtonSize.small,
-                    onPressed: () async {
-                      Uri url = Uri.parse('${sharedEnv.webUrl}/docs');
-                      if (await canLaunchUrl(url)) {
-                        await launchUrl(url);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: Container(),
-                ),
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: LocaleKeys.app_home_limited_banner_btn_check_again
-                            .tr(),
-                        style: const TextStyle(
-                          color: ExtendedColors.white,
-                          height: 1.3,
-                          decoration: TextDecoration.underline,
-                          decorationColor: ExtendedColors.white,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = onTappedRecheckIsAllowedAllAccess,
-                      ),
-                    ],
-                  ),
-                  style: textTheme.bodyMedium!.copyWith(
-                    color: ExtendedColors.white,
-                    fontSize: 14,
-                  ),
-                ),
-              ],
+            AllowAccessListItem(
+              title:
+                  LocaleKeys.app_home_limited_banner_text_screen_selection.tr(),
+              allowed: isAllowedScreenSelectionAccess,
+              onTappedTryAllow: () {
+                screenTextExtractor.requestAccess();
+                BotToast.showText(
+                  text: LocaleKeys.app_home_limited_banner_msg_allow_access_tip
+                      .tr(),
+                  align: Alignment.center,
+                  duration: const Duration(seconds: 5),
+                );
+              },
+              onTappedGoSettings: () {
+                screenTextExtractor.requestAccess(
+                  onlyOpenPrefPane: true,
+                );
+              },
             ),
           ],
+        );
+      },
+      actions: [
+        Button(
+          label: LocaleKeys.app_home_limited_banner_btn_check_again.tr(),
+          size: ButtonSize.small,
+          color: ExtendedColors.yellow,
+          onPressed: onTappedRecheckIsAllowedAllAccess,
         ),
-      ),
+        Expanded(child: Container()),
+        Tooltip(
+          message: LocaleKeys.app_home_limited_banner_tip_help.tr(),
+          child: IconButton(
+            FluentIcons.question_circle_20_regular,
+            variant: IconButtonVariant.light,
+            size: ButtonSize.small,
+            color: ExtendedColors.yellow,
+            onPressed: () async {
+              Uri url = Uri.parse('${sharedEnv.webUrl}/docs');
+              if (await canLaunchUrl(url)) {
+                await launchUrl(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
+          ),
+        ),
+      ],
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _build(context);
   }
 }
