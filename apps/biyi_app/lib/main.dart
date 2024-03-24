@@ -12,6 +12,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:influxui/influxui.dart';
+import 'package:influxui/themes.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:protocol_handler/protocol_handler.dart';
@@ -115,27 +116,8 @@ class _MyAppState extends State<MyApp> {
 
     return MaterialApp.router(
       routerConfig: routerConfig,
-      theme: ThemeData(
-        colorScheme: ColorScheme.light(
-          primary: ExtendedColors.blue,
-          background: ExtendedColors.gray.shade100,
-          surface: ExtendedColors.white,
-          outline: ExtendedColors.gray.shade200,
-        ),
-        extensions: const [
-          ExtendedThemeData(
-            brightness: Brightness.light,
-          ),
-        ],
-      ),
-      darkTheme: ThemeData.dark().copyWith(
-        primaryColor: ExtendedColors.blue,
-        extensions: const [
-          ExtendedThemeData(
-            brightness: Brightness.dark,
-          ),
-        ],
-      ),
+      theme: influxLight,
+      darkTheme: influxDark,
       themeMode: appSettings.themeMode,
       builder: (context, child) {
         if (UniPlatform.isLinux || UniPlatform.isWindows) {

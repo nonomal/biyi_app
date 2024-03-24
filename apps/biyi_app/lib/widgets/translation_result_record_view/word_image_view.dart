@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:influxui/influxui.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
@@ -24,18 +23,21 @@ class WordImageView extends StatelessWidget {
         border: Border.all(color: Theme.of(context).dividerColor),
         borderRadius: BorderRadius.circular(2),
       ),
-      child: CupertinoButton(
+      child: Button(
+        variant: ButtonVariant.transparent,
         padding: EdgeInsets.zero,
         onPressed: onPressed,
-        child: Hero(
-          tag: wordImage.url,
-          child: Image.network(
-            wordImage.url,
-            width: kWordImageSize,
-            height: kWordImageSize,
-            fit: BoxFit.cover,
-          ),
-        ),
+        labelBuilder: (context) {
+          return Hero(
+            tag: wordImage.url,
+            child: Image.network(
+              wordImage.url,
+              width: kWordImageSize - 2,
+              height: kWordImageSize - 2,
+              fit: BoxFit.cover,
+            ),
+          );
+        },
       ),
     );
   }

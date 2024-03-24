@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/includes.dart';
 import 'package:influxui/influxui.dart';
@@ -56,6 +58,7 @@ class TranslationResultsView extends StatelessWidget {
                 const TextSpan(text: '请添加该语种的翻译目标或切换至手动翻译模式。'),
               ],
             ),
+            selectionHeightStyle: ui.BoxHeightStyle.max,
           ),
         ),
       ),

@@ -56,7 +56,7 @@ class _OcrEnginesPageState extends State<OcrEnginesPage> {
                   additionalInfo:
                       ocrEngineConfig.identifier == _selectedEngineId
                           ? Icon(
-                              FluentIcons.checkmark_circle_20_filled,
+                              FluentIcons.checkmark_circle_16_filled,
                               color: Theme.of(context).colorScheme.primary,
                             )
                           : null,
@@ -79,7 +79,7 @@ class _OcrEnginesPageState extends State<OcrEnginesPage> {
                 title: OcrEngineName(ocrEngineConfig),
                 additionalInfo: ocrEngineConfig.identifier == _selectedEngineId
                     ? Icon(
-                        FluentIcons.checkmark_circle_20_filled,
+                        FluentIcons.checkmark_circle_16_filled,
                         color: Theme.of(context).colorScheme.primary,
                       )
                     : null,

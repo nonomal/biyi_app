@@ -35,15 +35,17 @@ class AllowAccessListItem extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 2),
-          child: Icon(
-            allowed
-                ? FluentIcons.checkmark_20_filled
-                : FluentIcons.dismiss_circle_20_filled,
-            color: allowed
-                ? ExtendedColors.green.shade600
-                : ExtendedColors.red.shade600,
-            size: 20,
-          ),
+          child: allowed
+              ? Icon(
+                  FluentIcons.checkmark_circle_12_filled,
+                  color: ExtendedColors.green.shade600,
+                  size: 20,
+                )
+              : Icon(
+                  FluentIcons.dismiss_circle_12_filled,
+                  color: ExtendedColors.red.shade600,
+                  size: 20,
+                ),
         ),
         Expanded(
           child: Wrap(

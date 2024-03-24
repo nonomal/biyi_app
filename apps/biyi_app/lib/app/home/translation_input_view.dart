@@ -284,7 +284,7 @@ class TranslationInputView extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.only(
-                left: 6,
+                left: 8,
                 right: 12,
                 top: 8,
                 bottom: 8,

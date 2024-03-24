@@ -93,12 +93,12 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                     .app_settings_general_extract_text_auto_copy_detected_text_title
                     .tr(),
               ),
-              additionalInfo: _configuration.autoCopyDetectedText
-                  ? Icon(
-                      FluentIcons.checkmark_circle_20_filled,
-                      color: Theme.of(context).colorScheme.primary,
-                    )
-                  : null,
+              additionalInfo: Switch(
+                value: _configuration.autoCopyDetectedText,
+                onChanged: (value) {
+                  _configuration.autoCopyDetectedText = value;
+                },
+              ),
               onTap: () async {
                 _configuration.autoCopyDetectedText =
                     !_configuration.autoCopyDetectedText;
@@ -150,7 +150,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               additionalInfo:
                   _configuration.translationMode == kTranslationModeManual
                       ? Icon(
-                          FluentIcons.checkmark_circle_20_filled,
+                          FluentIcons.checkmark_circle_16_filled,
                           color: Theme.of(context).colorScheme.primary,
                         )
                       : null,
@@ -162,7 +162,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               additionalInfo:
                   _configuration.translationMode == kTranslationModeAuto
                       ? Icon(
-                          FluentIcons.checkmark_circle_20_filled,
+                          FluentIcons.checkmark_circle_16_filled,
                           color: Theme.of(context).colorScheme.primary,
                         )
                       : null,
@@ -264,12 +264,12 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                     .app_settings_general_translate_double_click_copy_result_title
                     .tr(),
               ),
-              additionalInfo: _configuration.doubleClickCopyResult
-                  ? Icon(
-                      FluentIcons.checkmark_circle_20_filled,
-                      color: Theme.of(context).colorScheme.primary,
-                    )
-                  : null,
+              additionalInfo: Switch(
+                value: _configuration.doubleClickCopyResult,
+                onChanged: (value) {
+                  _configuration.doubleClickCopyResult = value;
+                },
+              ),
               onTap: () async {
                 _configuration.doubleClickCopyResult =
                     !_configuration.doubleClickCopyResult;
@@ -292,7 +292,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               additionalInfo:
                   _configuration.inputSetting == kInputSettingSubmitWithEnter
                       ? Icon(
-                          FluentIcons.checkmark_circle_20_filled,
+                          FluentIcons.checkmark_circle_16_filled,
                           color: Theme.of(context).colorScheme.primary,
                         )
                       : null,
@@ -313,7 +313,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               additionalInfo: _configuration.inputSetting ==
                       kInputSettingSubmitWithMetaEnter
                   ? Icon(
-                      FluentIcons.checkmark_circle_20_filled,
+                      FluentIcons.checkmark_circle_16_filled,
                       color: Theme.of(context).colorScheme.primary,
                     )
                   : null,

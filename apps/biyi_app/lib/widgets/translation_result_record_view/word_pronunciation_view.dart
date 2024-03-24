@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:biyi_app/models/ext_word_pronunciation.dart';
 import 'package:biyi_app/widgets/sound_play_button/sound_play_button.dart';
 import 'package:influxui/influxui.dart';
@@ -41,6 +43,7 @@ class WordPronunciationView extends StatelessWidget {
             style: textTheme.bodySmall!.copyWith(
               fontSize: 13,
             ),
+            selectionHeightStyle: ui.BoxHeightStyle.max,
           ),
           if ((wordPronunciation.audioUrl ?? '').isNotEmpty)
             Container(

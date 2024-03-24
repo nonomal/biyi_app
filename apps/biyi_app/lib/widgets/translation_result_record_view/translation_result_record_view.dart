@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/models.dart';
 import 'package:biyi_app/services/services.dart';
@@ -93,6 +95,7 @@ class TranslationResultRecordView extends StatelessWidget {
       child: SelectableText(
         error.message,
         style: const TextStyle(color: ExtendedColors.red),
+        selectionHeightStyle: ui.BoxHeightStyle.max,
       ),
     );
   }
@@ -169,6 +172,7 @@ class TranslationResultRecordView extends StatelessWidget {
             style: textTheme.bodyMedium!.copyWith(
               height: 1.4,
             ),
+            selectionHeightStyle: ui.BoxHeightStyle.max,
           ),
         ),
       );
@@ -234,6 +238,7 @@ class TranslationResultRecordView extends StatelessWidget {
                 style: textTheme.bodyMedium!.copyWith(
                   height: 1.5,
                 ),
+                selectionHeightStyle: ui.BoxHeightStyle.max,
               ),
             ),
           // 时态
@@ -269,6 +274,7 @@ class TranslationResultRecordView extends StatelessWidget {
                 style: textTheme.bodyMedium!.copyWith(
                   height: 1.5,
                 ),
+                selectionHeightStyle: ui.BoxHeightStyle.max,
               ),
             ),
           // 图片

@@ -19,21 +19,19 @@ class _NavigationRailLeading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        vertical: 6,
+        vertical: 2,
         horizontal: 8,
       ),
       margin: const EdgeInsets.only(
         left: 12,
         right: 12,
-        top: 2,
-        bottom: 2,
       ),
       child: Text(
         label,
         style: TextStyle(
-          color: ExtendedColors.gray.shade600,
-          fontSize: 11,
-          fontWeight: FontWeight.w500,
+          color: ExtendedColors.gray.shade500,
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );
@@ -125,12 +123,13 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
         ),
       ),
       padding: EdgeInsets.only(
-        top: !UniPlatform.isWeb && UniPlatform.isMacOS ? 26 : 6,
+        top: !UniPlatform.isWeb && UniPlatform.isMacOS ? 32 : 6,
       ),
-      width: 200,
+      width: 220,
       height: double.infinity,
       child: SingleChildScrollView(
-        child: Column(
+        child: GappedColumn(
+          gap: 12,
           children: [
             NavigationRail(
               leading: _NavigationRailLeading(
@@ -174,12 +173,12 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
               destinations: [
                 NavigationRailDestination(
                   value: PageId.settingsOcrEngines,
-                  icon: FluentIcons.translate_20_regular,
+                  icon: FluentIcons.scan_20_regular,
                   label: LocaleKeys.app_settings_ocr_engines_title.tr(),
                 ),
                 NavigationRailDestination(
                   value: PageId.settingsTranslationEngines,
-                  icon: FluentIcons.scan_20_regular,
+                  icon: FluentIcons.translate_20_regular,
                   label: LocaleKeys.app_settings_translation_engines_title.tr(),
                 ),
               ],

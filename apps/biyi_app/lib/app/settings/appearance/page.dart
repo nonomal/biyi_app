@@ -50,7 +50,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
               ),
               additionalInfo: _configuration.themeMode == ThemeMode.light
                   ? Icon(
-                      FluentIcons.checkmark_circle_20_filled,
+                      FluentIcons.checkmark_circle_16_filled,
                       color: Theme.of(context).colorScheme.primary,
                     )
                   : null,
@@ -62,7 +62,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
               ),
               additionalInfo: _configuration.themeMode == ThemeMode.dark
                   ? Icon(
-                      FluentIcons.checkmark_circle_20_filled,
+                      FluentIcons.checkmark_circle_16_filled,
                       color: Theme.of(context).colorScheme.primary,
                     )
                   : null,
@@ -74,7 +74,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
               ),
               additionalInfo: _configuration.themeMode == ThemeMode.system
                   ? Icon(
-                      FluentIcons.checkmark_circle_20_filled,
+                      FluentIcons.checkmark_circle_16_filled,
                       color: Theme.of(context).colorScheme.primary,
                     )
                   : null,
@@ -91,12 +91,12 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
               title: Text(
                 LocaleKeys.app_settings_appearance_tray_icon_show_title.tr(),
               ),
-              additionalInfo: _configuration.showTrayIcon
-                  ? Icon(
-                      FluentIcons.checkmark_circle_20_filled,
-                      color: Theme.of(context).colorScheme.primary,
-                    )
-                  : null,
+              additionalInfo: Switch(
+                value: _configuration.showTrayIcon,
+                onChanged: (value) {
+                  _configuration.showTrayIcon = value;
+                },
+              ),
               onTap: () {
                 _configuration.showTrayIcon = !_configuration.showTrayIcon;
               },
@@ -113,7 +113,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
                 title: Text('${option.toInt()}'),
                 additionalInfo: _configuration.maxWindowHeight == option
                     ? Icon(
-                        FluentIcons.checkmark_circle_20_filled,
+                        FluentIcons.checkmark_circle_16_filled,
                         color: Theme.of(context).colorScheme.primary,
                       )
                     : null,
