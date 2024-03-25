@@ -12,15 +12,15 @@ class TranslationEngineName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextTheme textTheme = Theme.of(context).textTheme;
     return Text.rich(
       TextSpan(
         text: translationEngineConfig.typeName,
         children: [
           TextSpan(
             text: ' (${translationEngineConfig.identifier})',
-            style: const TextStyle(
-              fontSize: 12,
-              color: ExtendedColors.gray,
+            style: textTheme.bodySmall?.copyWith(
+              color: ExtendedColors.gray.shade400,
             ),
           ),
         ],

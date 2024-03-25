@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
+import 'package:preference_list/preference_list.dart';
 
 class TranslationEnginesPage extends StatefulWidget {
   const TranslationEnginesPage({
@@ -47,8 +48,7 @@ class _TranslationEnginesPageState extends State<TranslationEnginesPage> {
     return ListView(
       children: [
         if (_proEngineList.isNotEmpty)
-          PreferenceListSection.insetGrouped(
-            hasLeading: false,
+          PreferenceListSection(
             children: [
               for (var engineConfig in _proEngineList)
                 PreferenceListTile(
@@ -68,7 +68,7 @@ class _TranslationEnginesPageState extends State<TranslationEnginesPage> {
                 ),
             ],
           ),
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           header: Text(
             LocaleKeys.app_translation_engines_private_title.tr(),
           ),

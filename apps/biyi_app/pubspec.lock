@@ -811,6 +811,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.1"
+  preference_list:
+    dependency: "direct main"
+    description:
+      path: "../../../../leanflutter/influxui/packages/preference_list"
+      relative: true
+    source: path
+    version: "0.1.0"
   protocol_handler:
     dependency: "direct main"
     description:

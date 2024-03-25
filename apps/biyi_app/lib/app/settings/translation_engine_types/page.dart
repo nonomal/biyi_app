@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
+import 'package:preference_list/preference_list.dart';
 
 class TranslationEngineTypesPage extends StatefulWidget {
   const TranslationEngineTypesPage({
@@ -48,7 +49,7 @@ class _TranslationEngineTypesPageState
   Widget _buildBody(BuildContext context) {
     return ListView(
       children: [
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           children: [
             for (final engineType in kSupportedEngineTypes)
               PreferenceListTile(

@@ -8,6 +8,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
+import 'package:preference_list/preference_list.dart';
 import 'package:uni_platform/uni_platform.dart';
 
 class GeneralSettingPage extends StatefulWidget {
@@ -54,7 +55,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
   Widget _buildBody(BuildContext context) {
     return Column(
       children: [
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           header: Text(
             LocaleKeys.app_settings_general_default_detect_text_engine_title
                 .tr(),
@@ -85,7 +86,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
             ),
           ],
         ),
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           children: [
             PreferenceListTile(
               title: Text(
@@ -106,7 +107,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
             ),
           ],
         ),
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           header: Text(
             LocaleKeys.app_settings_general_default_translate_engine_title.tr(),
           ),
@@ -140,7 +141,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
             ),
           ],
         ),
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           header: Text(
             LocaleKeys.app_settings_general_translation_mode_title.tr(),
           ),
@@ -171,7 +172,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           ],
         ),
         if (_configuration.translationMode == kTranslationModeAuto)
-          PreferenceListSection.insetGrouped(
+          PreferenceListSection(
             header: Text(
               LocaleKeys
                   .app_settings_general_default_detect_language_engine_title
@@ -207,7 +208,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
             ],
           ),
         if (_configuration.translationMode == kTranslationModeAuto)
-          PreferenceListSection.insetGrouped(
+          PreferenceListSection(
             header: Text(
               LocaleKeys.app_settings_general_translation_target_title.tr(),
             ),
@@ -256,7 +257,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               ),
             ],
           ),
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           children: [
             PreferenceListTile(
               title: Text(
@@ -277,11 +278,10 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
             ),
           ],
         ),
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           header: Text(
             LocaleKeys.app_settings_general_input_settings_title.tr(),
           ),
-          hasLeading: false,
           children: [
             PreferenceListTile(
               title: Text(

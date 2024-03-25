@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
 import 'package:ocr_engine_youdao/ocr_engine_youdao.dart';
+import 'package:preference_list/preference_list.dart';
 import 'package:shortid/shortid.dart';
 
 class OcrEnginesNewOrEditPage extends StatefulWidget {
@@ -92,7 +93,7 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
   Widget _buildBody(BuildContext context) {
     return ListView(
       children: [
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           header: Text(
             LocaleKeys.app_ocr_engines_new_engine_type_title.tr(),
           ),
@@ -121,7 +122,7 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
           ],
         ),
         if (widget.editable && _type != null)
-          PreferenceListSection.insetGrouped(
+          PreferenceListSection(
             header: Text(
               LocaleKeys.app_ocr_engines_new_option_title.tr(),
             ),
@@ -144,7 +145,7 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
             ],
           ),
         if (widget.editable && widget.ocrEngineConfig != null)
-          PreferenceListSection.insetGrouped(
+          PreferenceListSection(
             header: const Text(''),
             children: [
               PreferenceListTile(

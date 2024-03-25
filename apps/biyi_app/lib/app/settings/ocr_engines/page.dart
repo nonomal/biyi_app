@@ -6,6 +6,7 @@ import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
+import 'package:preference_list/preference_list.dart';
 import 'package:reorderables/reorderables.dart';
 
 class OcrEnginesSettingPage extends StatefulWidget {
@@ -54,7 +55,7 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
 
   Widget _buildListSectionProEngines(BuildContext context) {
     if (_proOcrEngineList.isEmpty) return Container();
-    return PreferenceListSection.insetGrouped(
+    return PreferenceListSection(
       children: [
         for (OcrEngineConfig item in _proOcrEngineList)
           PreferenceListTile(
@@ -97,7 +98,7 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
       }
     }
 
-    return PreferenceListSection.insetGrouped(
+    return PreferenceListSection(
       header: Text(
         LocaleKeys.app_settings_ocr_engines_private_title.tr(),
       ),

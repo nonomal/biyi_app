@@ -6,6 +6,7 @@ import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
+import 'package:preference_list/preference_list.dart';
 import 'package:reorderables/reorderables.dart';
 
 class TranslationEnginesSettingPage extends StatefulWidget {
@@ -57,7 +58,7 @@ class _TranslationEnginesSettingPageState
 
   Widget _buildListSectionProEngines(BuildContext context) {
     if (_proEngineList.isEmpty) return Container();
-    return PreferenceListSection.insetGrouped(
+    return PreferenceListSection(
       children: [
         for (TranslationEngineConfig item in _proEngineList)
           PreferenceListTile(
@@ -100,7 +101,7 @@ class _TranslationEnginesSettingPageState
       }
     }
 
-    return PreferenceListSection.insetGrouped(
+    return PreferenceListSection(
       header: Text(
         LocaleKeys.app_settings_translation_engines_private_title.tr(),
       ),

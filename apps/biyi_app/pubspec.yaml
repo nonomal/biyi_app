@@ -58,6 +58,7 @@ dependencies:
   url_launcher: ^6.2.2
   vclibs: ^0.1.0
   window_manager: ^0.3.7
+  preference_list: ^0.1.0
 
 dev_dependencies:
   build_runner: ^2.4.4
@@ -69,6 +70,8 @@ dev_dependencies:
 dependency_overrides:
   influxui:
     path: ../../../../leanflutter/influxui/packages/influxui
+  preference_list:
+    path: ../../../../leanflutter/influxui/packages/preference_list
   translation_engine_baidu:
     path: ../../../uni_translate/packages/translation_engine_baidu
   translation_engine_caiyun:

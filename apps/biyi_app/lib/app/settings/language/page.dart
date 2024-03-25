@@ -5,6 +5,7 @@ import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:influxui/influxui.dart';
+import 'package:preference_list/preference_list.dart';
 import 'package:provider/provider.dart';
 
 class LanguageSettingPage extends StatefulWidget {
@@ -20,7 +21,7 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
 
     return Column(
       children: [
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           children: [
             for (var appLanguage in kAppLanguages)
               PreferenceListTile(

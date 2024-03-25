@@ -4,6 +4,7 @@ import 'package:biyi_app/services/services.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:influxui/influxui.dart';
+import 'package:preference_list/preference_list.dart';
 import 'package:provider/provider.dart';
 
 const List<double> _kMaxWindowHeightOptions = [700, 800, 900, 1000];
@@ -42,7 +43,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
   Widget _buildBody(BuildContext context) {
     return Column(
       children: [
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           children: [
             PreferenceListTile(
               title: Text(
@@ -82,7 +83,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
             ),
           ],
         ),
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           header: Text(
             LocaleKeys.app_settings_appearance_tray_icon_title.tr(),
           ),
@@ -103,7 +104,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
             ),
           ],
         ),
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           header: Text(
             LocaleKeys.app_settings_appearance_max_window_height_title.tr(),
           ),

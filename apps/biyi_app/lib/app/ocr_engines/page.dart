@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
+import 'package:preference_list/preference_list.dart';
 
 class OcrEnginesPage extends StatefulWidget {
   const OcrEnginesPage({
@@ -47,7 +48,7 @@ class _OcrEnginesPageState extends State<OcrEnginesPage> {
     return ListView(
       children: [
         if (_proOcrEngineList.isNotEmpty)
-          PreferenceListSection.insetGrouped(
+          PreferenceListSection(
             children: [
               for (var ocrEngineConfig in _proOcrEngineList)
                 PreferenceListTile(
@@ -68,7 +69,7 @@ class _OcrEnginesPageState extends State<OcrEnginesPage> {
                 ),
             ],
           ),
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           header: Text(
             LocaleKeys.app_ocr_engines_private_title.tr(),
           ),

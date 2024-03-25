@@ -6,6 +6,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
+import 'package:preference_list/preference_list.dart';
 
 class SupportedLanguagesPage extends StatefulWidget {
   const SupportedLanguagesPage({
@@ -49,7 +50,7 @@ class _SupportedLanguagesPageState extends State<SupportedLanguagesPage> {
   Widget _buildBody(BuildContext context) {
     return ListView(
       children: [
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           header: Text(
             LocaleKeys.app_supported_languages_all_title.tr(),
           ),

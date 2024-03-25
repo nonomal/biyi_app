@@ -5,6 +5,7 @@ import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:influxui/influxui.dart';
+import 'package:preference_list/preference_list.dart';
 import 'package:uni_platform/uni_platform.dart';
 
 class HotKeyDisplayView extends StatelessWidget {
@@ -101,7 +102,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
   Widget _buildBody(BuildContext context) {
     return Column(
       children: [
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           children: [
             PreferenceListTile(
               title: Text(
@@ -134,7 +135,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
             ),
           ],
         ),
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           header: Text(
             LocaleKeys.app_settings_keybinds_extract_text_title.tr(),
           ),
@@ -191,7 +192,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
           ],
         ),
         if (!UniPlatform.isLinux)
-          PreferenceListSection.insetGrouped(
+          PreferenceListSection(
             header: Text(
               LocaleKeys.app_settings_keybinds_input_assist_function_title.tr(),
             ),

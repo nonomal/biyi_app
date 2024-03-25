@@ -7,6 +7,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
+import 'package:preference_list/preference_list.dart';
 import 'package:shortid/shortid.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
@@ -125,7 +126,7 @@ class _TranslationEnginesNewOrEditPageState
   Widget _buildBody(BuildContext context) {
     return ListView(
       children: [
-        PreferenceListSection.insetGrouped(
+        PreferenceListSection(
           header: Text(
             LocaleKeys.app_translation_engines_new_engine_type_title.tr(),
           ),
@@ -154,7 +155,7 @@ class _TranslationEnginesNewOrEditPageState
           ],
         ),
         if (translationEngine != null)
-          PreferenceListSection.insetGrouped(
+          PreferenceListSection(
             header: Text(
               LocaleKeys.app_translation_engines_new_support_interface_title
                   .tr(),
@@ -194,7 +195,7 @@ class _TranslationEnginesNewOrEditPageState
             ],
           ),
         if (widget.editable && _type != null)
-          PreferenceListSection.insetGrouped(
+          PreferenceListSection(
             header: Text(
               LocaleKeys.app_translation_engines_new_option_title.tr(),
             ),
@@ -217,7 +218,7 @@ class _TranslationEnginesNewOrEditPageState
             ],
           ),
         if (widget.editable && widget.engineConfig != null)
-          PreferenceListSection.insetGrouped(
+          PreferenceListSection(
             header: const Text(''),
             children: [
               PreferenceListTile(
