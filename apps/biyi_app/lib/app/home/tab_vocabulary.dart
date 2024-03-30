@@ -1,4 +1,4 @@
-import 'package:biyi_app/includes.dart';
+import 'package:biyi_app/widgets/widgets.dart';
 import 'package:influxui/influxui.dart';
 
 class TabVocabularyScene extends StatelessWidget {

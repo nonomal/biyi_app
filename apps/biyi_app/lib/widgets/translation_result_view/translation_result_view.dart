@@ -1,4 +1,5 @@
-import 'package:biyi_app/includes.dart';
+import 'package:biyi_app/models/translation_result.dart';
+import 'package:biyi_app/widgets/widgets.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:influxui/influxui.dart';
 

@@ -44,7 +44,7 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
     if (ocrEngineType != null) {
       // ignore: use_build_context_synchronously
       await context.push<String?>(
-        PageId.ocrEnginesNew,
+        PageId.settingsOcrEnginesNew,
         extra: {
           'ocrEngineType': ocrEngineType,
           'editable': true,
@@ -71,7 +71,7 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
             ),
             onTap: () {
               context.push<String?>(
-                PageId.ocrEngine(item.identifier),
+                PageId.settingsOcrEngine(item.identifier),
                 extra: {
                   'ocrEngineConfig': item,
                   'editable': false,
@@ -130,7 +130,7 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
                       ),
                       onTap: () {
                         context.push<String?>(
-                          PageId.ocrEngine(item.identifier),
+                          PageId.settingsOcrEngine(item.identifier),
                           extra: {
                             'ocrEngineConfig': item,
                             'editable': true,

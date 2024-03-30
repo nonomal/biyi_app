@@ -47,7 +47,7 @@ class _TranslationEnginesSettingPageState
     if (engineType != null) {
       // ignore: use_build_context_synchronously
       await context.push<String?>(
-        PageId.translationEnginesNew,
+        PageId.settingsTranslationEnginesNew,
         extra: {
           'engineType': engineType,
           'editable': true,
@@ -74,7 +74,7 @@ class _TranslationEnginesSettingPageState
             ),
             onTap: () {
               context.push<String?>(
-                PageId.translationEngine(item.identifier),
+                PageId.settingsTranslationEngine(item.identifier),
                 extra: {
                   'engineConfig': item,
                   'editable': false,
@@ -133,7 +133,7 @@ class _TranslationEnginesSettingPageState
                       ),
                       onTap: () {
                         context.push<String?>(
-                          PageId.translationEngine(item.identifier),
+                          PageId.settingsTranslationEngine(item.identifier),
                           extra: {
                             'engineConfig': item,
                             'editable': true,

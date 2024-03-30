@@ -1,6 +1,6 @@
+import 'package:biyi_app/app/available_ocr_engines/page.dart';
+import 'package:biyi_app/app/available_translation_engines/page.dart';
 import 'package:biyi_app/app/home/page.dart';
-import 'package:biyi_app/app/ocr_engines/new/page.dart';
-import 'package:biyi_app/app/ocr_engines/page.dart';
 import 'package:biyi_app/app/settings/about/page.dart';
 import 'package:biyi_app/app/settings/advanced/page.dart';
 import 'package:biyi_app/app/settings/appearance/page.dart';
@@ -10,23 +10,65 @@ import 'package:biyi_app/app/settings/keybinds/page.dart';
 import 'package:biyi_app/app/settings/language/page.dart';
 import 'package:biyi_app/app/settings/layout.dart';
 import 'package:biyi_app/app/settings/ocr_engine_types/page.dart';
+import 'package:biyi_app/app/settings/ocr_engines/new/page.dart';
 import 'package:biyi_app/app/settings/ocr_engines/page.dart';
 import 'package:biyi_app/app/settings/page.dart';
 import 'package:biyi_app/app/settings/translation_engine_types/page.dart';
+import 'package:biyi_app/app/settings/translation_engines/new/page.dart';
 import 'package:biyi_app/app/settings/translation_engines/page.dart';
+import 'package:biyi_app/app/settings/translation_targets/new/page.dart';
 import 'package:biyi_app/app/supported_languages/page.dart';
-import 'package:biyi_app/app/translation_engines/new/page.dart';
-import 'package:biyi_app/app/translation_engines/page.dart';
-import 'package:biyi_app/app/translation_targets/new/page.dart';
 import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart' show DialogRoute;
 import 'package:go_router/go_router.dart';
+import 'package:influxui/influxui.dart';
 import 'package:uni_platform/uni_platform.dart';
 
+class DialogPage<T> extends Page<T> {
+  const DialogPage({
+    required this.builder,
+    this.anchorPoint,
+    this.barrierColor,
+    this.barrierDismissible = true,
+    this.barrierLabel,
+    this.useSafeArea = true,
+    this.themes,
+    super.key,
+    super.name,
+    super.arguments,
+    super.restorationId,
+  });
+
+  final Offset? anchorPoint;
+  final Color? barrierColor;
+  final bool barrierDismissible;
+  final String? barrierLabel;
+  final bool useSafeArea;
+  final CapturedThemes? themes;
+  final WidgetBuilder builder;
+
+  @override
+  Route<T> createRoute(BuildContext context) {
+    return DialogRoute<T>(
+      context: context,
+      settings: this,
+      builder: builder,
+      anchorPoint: anchorPoint,
+      barrierColor: barrierColor,
+      barrierDismissible: barrierDismissible,
+      barrierLabel: barrierLabel,
+      useSafeArea: useSafeArea,
+      themes: themes,
+    );
+  }
+}
+
 class PageId {
+  static const String availableOcrEngines = '/available-ocr-engines';
+  static const String availableTranslationEngines =
+      '/available-translation-engines';
   static const String home = '/home';
-  static const String ocrEngines = '/ocr-engines';
-  static const String ocrEnginesNew = '/ocr-engines/new';
+  static const String settingsOcrEnginesNew = '/settings/ocr-engines/new';
   static const String settingsGeneral = '/settings/general';
   static const String settingsAppearance = '/settings/appearance';
   static const String settingsKeybinds = '/settings/keybinds';
@@ -41,12 +83,13 @@ class PageId {
   static const String settingsAbout = '/settings/about';
   static const String settingsChangelog = '/settings/changelog';
   static const String supportedLanguages = '/supported-languages';
-  static const String translationEngines = '/translation-engines';
-  static const String translationEnginesNew = '/translation-engines/new';
-  static const String translationTargetsNew = '/translation-targets/new';
-
-  static String ocrEngine(String id) => '/ocr-engines/$id';
-  static String translationEngine(String id) => '/translation-engines/$id';
+  static const String settingsTranslationEnginesNew =
+      '/settings/translation-engines/new';
+  static const String translationTargetsNew =
+      '/settings/translation-targets/new';
+  static String settingsOcrEngine(String id) => '/settings/ocr-engines/$id';
+  static String settingsTranslationEngine(String id) =>
+      '/settings/translation-engines/$id';
 }
 
 // GoRouter configuration
@@ -60,38 +103,51 @@ final routerConfig = GoRouter(
       },
     ),
     GoRoute(
+      path: '/available-ocr-engines',
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return DialogPage(
+          barrierColor: ExtendedColors.black.withOpacity(0.5),
+          builder: (_) => Center(
+            child: Container(
+              padding: const EdgeInsets.all(64),
+              constraints: const BoxConstraints(maxWidth: 800, maxHeight: 600),
+              child: Card(
+                child: AvailableOcrEnginesPage(
+                  selectedEngineId:
+                      state.uri.queryParameters['selectedEngineId'],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    ),
+    GoRoute(
+      path: '/available-translation-engines',
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return DialogPage(
+          barrierColor: ExtendedColors.black.withOpacity(0.5),
+          builder: (_) => Center(
+            child: Container(
+              padding: const EdgeInsets.all(64),
+              constraints: const BoxConstraints(maxWidth: 800, maxHeight: 600),
+              child: Card(
+                child: AvailableTranslationEnginesPage(
+                  selectedEngineId:
+                      state.uri.queryParameters['selectedEngineId'],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    ),
+    GoRoute(
       path: '/home',
       pageBuilder: (context, state) {
         return FadeTransitionPage(
           key: state.pageKey,
           child: const HomePage(),
-        );
-      },
-    ),
-    GoRoute(
-      path: '/ocr-engines',
-      builder: (context, state) {
-        return OcrEnginesPage(
-          selectedEngineId: state.uri.queryParameters['selectedEngineId'],
-        );
-      },
-    ),
-    GoRoute(
-      path: '/ocr-engines/new',
-      builder: (context, state) {
-        final extra = state.extra as Map<String, dynamic>?;
-        return OcrEnginesNewOrEditPage(
-          ocrEngineType: extra?['ocrEngineType'],
-        );
-      },
-    ),
-    GoRoute(
-      path: '/ocr-engines/:id',
-      builder: (context, state) {
-        final extra = state.extra as Map<String, dynamic>?;
-        return OcrEnginesNewOrEditPage(
-          ocrEngineConfig: extra?['ocrEngineConfig'],
-          editable: extra?['editable'],
         );
       },
     ),
@@ -193,6 +249,25 @@ final routerConfig = GoRouter(
               },
             ),
             GoRoute(
+              path: 'ocr-engines/new',
+              builder: (context, state) {
+                final extra = state.extra as Map<String, dynamic>?;
+                return OcrEnginesNewOrEditPage(
+                  ocrEngineType: extra?['ocrEngineType'],
+                );
+              },
+            ),
+            GoRoute(
+              path: 'ocr-engines/:id',
+              builder: (context, state) {
+                final extra = state.extra as Map<String, dynamic>?;
+                return OcrEnginesNewOrEditPage(
+                  ocrEngineConfig: extra?['ocrEngineConfig'],
+                  editable: extra?['editable'],
+                );
+              },
+            ),
+            GoRoute(
               path: 'translation-engine-types',
               builder: (context, state) {
                 return const TranslationEngineTypesPage();
@@ -207,50 +282,54 @@ final routerConfig = GoRouter(
                 );
               },
             ),
+            GoRoute(
+              path: 'translation-engines/new',
+              builder: (context, state) {
+                final extra = state.extra as Map<String, dynamic>?;
+                return TranslationEnginesNewOrEditPage(
+                  engineType: extra?['engineType'],
+                  editable: extra?['editable'],
+                );
+              },
+            ),
+            GoRoute(
+              path: 'translation-engines/:id',
+              builder: (context, state) {
+                final extra = state.extra as Map<String, dynamic>?;
+                return TranslationEnginesNewOrEditPage(
+                  engineConfig: extra?['engineConfig'],
+                  editable: extra?['editable'],
+                );
+              },
+            ),
+            GoRoute(
+              path: 'translation-targets/new',
+              builder: (context, state) {
+                return const TranslationTargetNewPage();
+              },
+            ),
           ],
         ),
       ],
     ),
     GoRoute(
       path: '/supported-languages',
-      builder: (context, state) {
-        return SupportedLanguagesPage(
-          selectedLanguage: state.uri.queryParameters['selectedLanguage'],
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return DialogPage(
+          barrierColor: ExtendedColors.black.withOpacity(0.5),
+          builder: (_) => Center(
+            child: Container(
+              padding: const EdgeInsets.all(64),
+              constraints: const BoxConstraints(maxWidth: 800, maxHeight: 600),
+              child: Card(
+                child: SupportedLanguagesPage(
+                  selectedLanguage:
+                      state.uri.queryParameters['selectedLanguage'],
+                ),
+              ),
+            ),
+          ),
         );
-      },
-    ),
-    GoRoute(
-      path: '/translation-engines',
-      builder: (context, state) {
-        return TranslationEnginesPage(
-          selectedEngineId: state.uri.queryParameters['selectedEngineId'],
-        );
-      },
-    ),
-    GoRoute(
-      path: '/translation-engines/new',
-      builder: (context, state) {
-        final extra = state.extra as Map<String, dynamic>?;
-        return TranslationEnginesNewOrEditPage(
-          engineType: extra?['engineType'],
-          editable: extra?['editable'],
-        );
-      },
-    ),
-    GoRoute(
-      path: '/translation-engines/:id',
-      builder: (context, state) {
-        final extra = state.extra as Map<String, dynamic>?;
-        return TranslationEnginesNewOrEditPage(
-          engineConfig: extra?['engineConfig'],
-          editable: extra?['editable'],
-        );
-      },
-    ),
-    GoRoute(
-      path: '/translation-targets/new',
-      builder: (context, state) {
-        return const TranslationTargetNewPage();
       },
     ),
   ],

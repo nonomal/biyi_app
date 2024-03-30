@@ -1,14 +1,15 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/includes.dart';
+import 'package:biyi_app/services/local_db/local_db.dart';
+import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
 import 'package:preference_list/preference_list.dart';
 
-class TranslationEnginesPage extends StatefulWidget {
-  const TranslationEnginesPage({
+class AvailableTranslationEnginesPage extends StatefulWidget {
+  const AvailableTranslationEnginesPage({
     super.key,
     this.selectedEngineId,
   });
@@ -16,10 +17,12 @@ class TranslationEnginesPage extends StatefulWidget {
   final String? selectedEngineId;
 
   @override
-  State<StatefulWidget> createState() => _TranslationEnginesPageState();
+  State<StatefulWidget> createState() =>
+      _AvailableTranslationEnginesPageState();
 }
 
-class _TranslationEnginesPageState extends State<TranslationEnginesPage> {
+class _AvailableTranslationEnginesPageState
+    extends State<AvailableTranslationEnginesPage> {
   List<TranslationEngineConfig> get _proEngineList {
     return localDb.proEngines.list(where: ((e) => !e.disabled));
   }

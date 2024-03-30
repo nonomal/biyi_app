@@ -1,4 +1,4 @@
-import 'package:biyi_app/includes.dart';
+import 'package:biyi_app/utilities/r.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:influxui/influxui.dart';
 
