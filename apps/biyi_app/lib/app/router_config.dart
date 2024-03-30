@@ -18,6 +18,7 @@ import 'package:biyi_app/app/settings/translation_engines/new/page.dart';
 import 'package:biyi_app/app/settings/translation_engines/page.dart';
 import 'package:biyi_app/app/settings/translation_targets/new/page.dart';
 import 'package:biyi_app/app/supported_languages/page.dart';
+import 'package:biyi_app/models/translation_target.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart' show DialogRoute;
 import 'package:go_router/go_router.dart';
@@ -90,6 +91,8 @@ class PageId {
   static String settingsOcrEngine(String id) => '/settings/ocr-engines/$id';
   static String settingsTranslationEngine(String id) =>
       '/settings/translation-engines/$id';
+  static String settingsTranslationTarget(String id) =>
+      '/settings/translation-targets/$id';
 }
 
 // GoRouter configuration
@@ -305,7 +308,20 @@ final routerConfig = GoRouter(
             GoRoute(
               path: 'translation-targets/new',
               builder: (context, state) {
-                return const TranslationTargetNewPage();
+                return const TranslationTargetNewOrEditPage();
+              },
+            ),
+            GoRoute(
+              path: 'translation-targets/:id',
+              builder: (context, state) {
+                final extra = state.extra as Map<String, dynamic>?;
+                return TranslationTargetNewOrEditPage(
+                  translationTarget: TranslationTarget(
+                    id: extra?['id'],
+                    sourceLanguage: extra?['sourceLanguage'],
+                    targetLanguage: extra?['targetLanguage'],
+                  ),
+                );
               },
             ),
           ],

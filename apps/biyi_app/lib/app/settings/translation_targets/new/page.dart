@@ -8,8 +8,8 @@ import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
 import 'package:preference_list/preference_list.dart';
 
-class TranslationTargetNewPage extends StatefulWidget {
-  const TranslationTargetNewPage({
+class TranslationTargetNewOrEditPage extends StatefulWidget {
+  const TranslationTargetNewOrEditPage({
     super.key,
     this.translationTarget,
   });
@@ -17,11 +17,12 @@ class TranslationTargetNewPage extends StatefulWidget {
   final TranslationTarget? translationTarget;
 
   @override
-  State<TranslationTargetNewPage> createState() =>
-      _TranslationTargetNewPageState();
+  State<TranslationTargetNewOrEditPage> createState() =>
+      _TranslationTargetNewOrEditPageState();
 }
 
-class _TranslationTargetNewPageState extends State<TranslationTargetNewPage> {
+class _TranslationTargetNewOrEditPageState
+    extends State<TranslationTargetNewOrEditPage> {
   String? _sourceLanguage;
   String? _targetLanguage;
 

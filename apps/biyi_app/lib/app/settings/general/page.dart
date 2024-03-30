@@ -237,8 +237,13 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                     },
                   ),
                   onTap: () async {
-                    await context.push<TranslationEngineConfig?>(
-                      PageId.translationTargetsNew,
+                    await context.push<String?>(
+                      PageId.settingsTranslationTarget(translationTarget.id!),
+                      extra: {
+                        'id': translationTarget.id,
+                        'sourceLanguage': translationTarget.sourceLanguage,
+                        'targetLanguage': translationTarget.targetLanguage,
+                      },
                     );
                   },
                 ),
