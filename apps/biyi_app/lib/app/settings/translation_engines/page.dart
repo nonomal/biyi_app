@@ -171,9 +171,11 @@ class _TranslationEnginesSettingPageState
 
   @override
   Widget build(BuildContext context) {
-    return PageScaffold(
-      title: LocaleKeys.app_settings_translation_engines_title.tr(),
-      child: _buildBody(context),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(LocaleKeys.app_settings_translation_engines_title.tr()),
+      ),
+      body: _buildBody(context),
     );
   }
 }

@@ -19,7 +19,8 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
   Widget _buildBody(BuildContext context) {
     final AppSettings appSettings = context.watch<AppSettings>();
 
-    return Column(
+    return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
         PreferenceListSection(
           children: [
@@ -48,9 +49,11 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageScaffold(
-      title: LocaleKeys.app_settings_language_title.tr(),
-      child: _buildBody(context),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(LocaleKeys.app_settings_language_title.tr()),
+      ),
+      body: _buildBody(context),
     );
   }
 }

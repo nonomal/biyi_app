@@ -195,11 +195,6 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
                   icon: FluentIcons.developer_board_20_regular,
                   label: LocaleKeys.app_settings_about_title.tr(),
                 ),
-                NavigationRailDestination(
-                  value: PageId.settingsChangelog,
-                  icon: FluentIcons.note_20_regular,
-                  label: LocaleKeys.app_settings_changelog_title.tr(),
-                ),
               ],
               selectedValue: _selectedDestination,
               onDestinationSelected: _handleDestinationSelected,

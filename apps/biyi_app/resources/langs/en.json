@@ -218,7 +218,11 @@
         }
       },
       "about": {
-        "title": "About"
+        "title": "About",
+        "package_info": {
+          "version": "Version",
+          "build_number": "Build Number"
+        }
       },
       "advanced": {
         "title": "Advanced"

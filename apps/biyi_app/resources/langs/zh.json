@@ -218,7 +218,11 @@
         }
       },
       "about": {
-        "title": "关于"
+        "title": "关于",
+        "package_info": {
+          "version": "版本号",
+          "build_number": "内部版本号"
+        }
       },
       "advanced": {
         "title": "高级设置"

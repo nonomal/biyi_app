@@ -2,7 +2,7 @@ name: biyi_app
 description: A convenient translation and dictionary app written in Flutter.
 homepage: https://github.com/biyidev/biyi
 publish_to: "none"
-version: 0.5.0+18
+version: 0.5.0+20
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -103,6 +103,26 @@ flutter:
     - resources/images/translation_engine_icons/
 
   fonts:
+    - family: Inter
+      fonts:
+        - asset: resources/fonts/Inter-Thin.ttf
+          weight: 100
+        - asset: resources/fonts/Inter-ExtraLight.ttf
+          weight: 200
+        - asset: resources/fonts/Inter-Light.ttf
+          weight: 300
+        - asset: resources/fonts/Inter-Regular.ttf
+          weight: 400
+        - asset: resources/fonts/Inter-Medium.ttf
+          weight: 500
+        - asset: resources/fonts/Inter-SemiBold.ttf
+          weight: 600
+        - asset: resources/fonts/Inter-Bold.ttf
+          weight: 700
+        - asset: resources/fonts/Inter-ExtraBold.ttf
+          weight: 800
+        - asset: resources/fonts/Inter-Black.ttf
+          weight: 900
     - family: Roboto Mono
       fonts:
         - asset: resources/fonts/RobotoMono-Regular.ttf

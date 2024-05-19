@@ -16,9 +16,11 @@ class _AdvancedSettingPageState extends State<AdvancedSettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageScaffold(
-      title: LocaleKeys.app_settings_advanced_title.tr(),
-      child: _buildBody(context),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(LocaleKeys.app_settings_advanced_title.tr()),
+      ),
+      body: _buildBody(context),
     );
   }
 }

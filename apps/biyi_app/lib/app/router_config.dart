@@ -4,7 +4,6 @@ import 'package:biyi_app/app/home/page.dart';
 import 'package:biyi_app/app/settings/about/page.dart';
 import 'package:biyi_app/app/settings/advanced/page.dart';
 import 'package:biyi_app/app/settings/appearance/page.dart';
-import 'package:biyi_app/app/settings/changelog/page.dart';
 import 'package:biyi_app/app/settings/general/page.dart';
 import 'package:biyi_app/app/settings/keybinds/page.dart';
 import 'package:biyi_app/app/settings/language/page.dart';
@@ -25,45 +24,6 @@ import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
 import 'package:uni_platform/uni_platform.dart';
 
-class DialogPage<T> extends Page<T> {
-  const DialogPage({
-    required this.builder,
-    this.anchorPoint,
-    this.barrierColor,
-    this.barrierDismissible = true,
-    this.barrierLabel,
-    this.useSafeArea = true,
-    this.themes,
-    super.key,
-    super.name,
-    super.arguments,
-    super.restorationId,
-  });
-
-  final Offset? anchorPoint;
-  final Color? barrierColor;
-  final bool barrierDismissible;
-  final String? barrierLabel;
-  final bool useSafeArea;
-  final CapturedThemes? themes;
-  final WidgetBuilder builder;
-
-  @override
-  Route<T> createRoute(BuildContext context) {
-    return DialogRoute<T>(
-      context: context,
-      settings: this,
-      builder: builder,
-      anchorPoint: anchorPoint,
-      barrierColor: barrierColor,
-      barrierDismissible: barrierDismissible,
-      barrierLabel: barrierLabel,
-      useSafeArea: useSafeArea,
-      themes: themes,
-    );
-  }
-}
-
 class PageId {
   static const String availableOcrEngines = '/available-ocr-engines';
   static const String availableTranslationEngines =
@@ -82,7 +42,6 @@ class PageId {
   static const String settingsOcrEngineTypes = '/settings/ocr-engine-types';
   static const String settingsOcrEngines = '/settings/ocr-engines';
   static const String settingsAbout = '/settings/about';
-  static const String settingsChangelog = '/settings/changelog';
   static const String supportedLanguages = '/supported-languages';
   static const String settingsTranslationEnginesNew =
       '/settings/translation-engines/new';
@@ -110,17 +69,8 @@ final routerConfig = GoRouter(
       pageBuilder: (BuildContext context, GoRouterState state) {
         return DialogPage(
           barrierColor: ExtendedColors.black.withOpacity(0.5),
-          builder: (_) => Center(
-            child: Container(
-              padding: const EdgeInsets.all(64),
-              constraints: const BoxConstraints(maxWidth: 800, maxHeight: 600),
-              child: Card(
-                child: AvailableOcrEnginesPage(
-                  selectedEngineId:
-                      state.uri.queryParameters['selectedEngineId'],
-                ),
-              ),
-            ),
+          builder: (_) => AvailableOcrEnginesPage(
+            selectedEngineId: state.uri.queryParameters['selectedEngineId'],
           ),
         );
       },
@@ -130,17 +80,8 @@ final routerConfig = GoRouter(
       pageBuilder: (BuildContext context, GoRouterState state) {
         return DialogPage(
           barrierColor: ExtendedColors.black.withOpacity(0.5),
-          builder: (_) => Center(
-            child: Container(
-              padding: const EdgeInsets.all(64),
-              constraints: const BoxConstraints(maxWidth: 800, maxHeight: 600),
-              child: Card(
-                child: AvailableTranslationEnginesPage(
-                  selectedEngineId:
-                      state.uri.queryParameters['selectedEngineId'],
-                ),
-              ),
-            ),
+          builder: (_) => AvailableTranslationEnginesPage(
+            selectedEngineId: state.uri.queryParameters['selectedEngineId'],
           ),
         );
       },
@@ -197,15 +138,6 @@ final routerConfig = GoRouter(
                 return FadeTransitionPage(
                   key: state.pageKey,
                   child: const AppearanceSettingPage(),
-                );
-              },
-            ),
-            GoRoute(
-              path: 'changelog',
-              pageBuilder: (context, state) {
-                return FadeTransitionPage(
-                  key: state.pageKey,
-                  child: const ChangelogSettingPage(),
                 );
               },
             ),
@@ -333,23 +265,69 @@ final routerConfig = GoRouter(
       pageBuilder: (BuildContext context, GoRouterState state) {
         return DialogPage(
           barrierColor: ExtendedColors.black.withOpacity(0.5),
-          builder: (_) => Center(
-            child: Container(
-              padding: const EdgeInsets.all(64),
-              constraints: const BoxConstraints(maxWidth: 800, maxHeight: 600),
-              child: Card(
-                child: SupportedLanguagesPage(
-                  selectedLanguage:
-                      state.uri.queryParameters['selectedLanguage'],
-                ),
-              ),
-            ),
+          builder: (_) => SupportedLanguagesPage(
+            selectedLanguage: state.uri.queryParameters['selectedLanguage'],
           ),
         );
       },
     ),
   ],
 );
+
+class DialogPage<T> extends Page<T> {
+  const DialogPage({
+    required this.builder,
+    this.anchorPoint,
+    this.barrierColor,
+    this.barrierDismissible = true,
+    this.barrierLabel,
+    this.useSafeArea = true,
+    this.themes,
+    super.key,
+    super.name,
+    super.arguments,
+    super.restorationId,
+  });
+
+  final Offset? anchorPoint;
+  final Color? barrierColor;
+  final bool barrierDismissible;
+  final String? barrierLabel;
+  final bool useSafeArea;
+  final CapturedThemes? themes;
+  final WidgetBuilder builder;
+
+  @override
+  Route<T> createRoute(BuildContext context) {
+    return DialogRoute<T>(
+      context: context,
+      settings: this,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            margin: const EdgeInsets.all(64),
+            constraints: const BoxConstraints(
+              maxWidth: 480,
+              maxHeight: 600,
+            ),
+            child: Card(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: builder(context),
+              ),
+            ),
+          ),
+        );
+      },
+      anchorPoint: anchorPoint,
+      barrierColor: barrierColor,
+      barrierDismissible: barrierDismissible,
+      barrierLabel: barrierLabel,
+      useSafeArea: useSafeArea,
+      themes: themes,
+    );
+  }
+}
 
 /// A page that fades in an out.
 class FadeTransitionPage extends CustomTransitionPage<void> {

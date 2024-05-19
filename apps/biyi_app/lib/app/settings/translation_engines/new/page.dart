@@ -129,6 +129,7 @@ class _TranslationEnginesNewOrEditPageState
 
   Widget _buildBody(BuildContext context) {
     return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
         PreferenceListSection(
           header: Text(

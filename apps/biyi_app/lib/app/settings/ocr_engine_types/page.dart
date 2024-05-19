@@ -47,6 +47,7 @@ class _OcrEngineTypesPageState extends State<OcrEngineTypesPage> {
 
   Widget _buildBody(BuildContext context) {
     return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
         PreferenceListSection(
           children: [

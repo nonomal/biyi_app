@@ -49,6 +49,7 @@ class _SupportedLanguagesPageState extends State<SupportedLanguagesPage> {
 
   Widget _buildBody(BuildContext context) {
     return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
         PreferenceListSection(
           header: Text(

@@ -105,7 +105,8 @@ class _AvailableTranslationEnginesPageState
     );
   }
 
-  Widget _build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
         title: Text(
@@ -120,10 +121,5 @@ class _AvailableTranslationEnginesPageState
       ),
       body: _buildBody(context),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _build(context);
   }
 }

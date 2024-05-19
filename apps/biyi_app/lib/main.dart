@@ -116,7 +116,58 @@ class _MyAppState extends State<MyApp> {
 
     return MaterialApp.router(
       routerConfig: routerConfig,
-      theme: influxLight,
+      theme: influxLight.copyWith(
+        textTheme: influxLight.textTheme.copyWith(
+          titleLarge: TextStyle(
+            fontFamily: 'Inter',
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            color: ExtendedColors.gray.shade950,
+          ),
+          titleMedium: TextStyle(
+            fontFamily: 'Inter',
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            color: ExtendedColors.gray.shade950,
+          ),
+          titleSmall: TextStyle(
+            fontFamily: 'Inter',
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+            color: ExtendedColors.gray.shade950,
+          ),
+          bodyLarge: TextStyle(
+            fontFamily: 'Inter',
+            fontSize: 16,
+            color: ExtendedColors.gray.shade950,
+          ),
+          bodyMedium: TextStyle(
+            fontFamily: 'Inter',
+            fontSize: 14,
+            color: ExtendedColors.gray.shade950,
+          ),
+          bodySmall: TextStyle(
+            fontFamily: 'Inter',
+            fontSize: 12,
+            color: ExtendedColors.gray.shade950,
+          ),
+          labelLarge: TextStyle(
+            fontFamily: 'Inter',
+            fontSize: 14,
+            color: ExtendedColors.gray.shade950,
+          ),
+          labelMedium: TextStyle(
+            fontFamily: 'Inter',
+            fontSize: 11,
+            color: ExtendedColors.gray.shade950,
+          ),
+          labelSmall: TextStyle(
+            fontFamily: 'Inter',
+            fontSize: 10,
+            color: ExtendedColors.gray.shade950,
+          ),
+        ),
+      ),
       darkTheme: influxDark,
       themeMode: appSettings.themeMode,
       builder: (context, child) {

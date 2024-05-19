@@ -41,7 +41,8 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Column(
+    return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
         PreferenceListSection(
           children: [
@@ -130,10 +131,11 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageScaffold(
-      title: LocaleKeys.app_settings_appearance_title.tr(),
-      subtitle: LocaleKeys.app_settings_appearance_subtitle.tr(),
-      child: _buildBody(context),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(LocaleKeys.app_settings_appearance_title.tr()),
+      ),
+      body: _buildBody(context),
     );
   }
 }

@@ -26,6 +26,7 @@ class CustomDialogAction extends StatelessWidget {
       margin: EdgeInsets.zero,
       height: 38,
       child: Button(
+        variant: ButtonVariant.filled,
         padding: EdgeInsets.zero,
         onPressed: onPressed,
         labelBuilder: (context) {

@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: prefer_single_quotes, require_trailing_commas
+// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters
 
 import 'dart:ui';
 
@@ -213,7 +213,10 @@ class CodegenLoader extends AssetLoader {
             "resources": "资源"
           }
         },
-        "about": {"title": "关于"},
+        "about": {
+          "title": "关于",
+          "package_info": {"version": "版本号", "build_number": "内部版本号"}
+        },
         "advanced": {"title": "高级设置"},
         "appearance": {
           "title": "外观",
@@ -510,7 +513,10 @@ class CodegenLoader extends AssetLoader {
             "resources": "Resources"
           }
         },
-        "about": {"title": "About"},
+        "about": {
+          "title": "About",
+          "package_info": {"version": "Version", "build_number": "Build Number"}
+        },
         "advanced": {"title": "Advanced"},
         "appearance": {
           "title": "Appearance",

@@ -106,14 +106,14 @@ SPEC CHECKSUMS:
   keypress_simulator: c9697f52dc29725ce0185dcd52b6731718e0b9ca
   ocr_engine_builtin: 99c65f8f4a156830ceaf0da86940610fefe50f50
   package_info_plus: 02d7a575e80f194102bef286361c6c326e4c29ce
-  path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
+  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   protocol_handler: 587e1caf6c0b92ce351ab14081968dae49cb8cc6
   screen_capturer_macos: e91a66e1eeefd5e4fe068bb1bffc053cc34b63b8
   screen_retriever: 59634572a57080243dd1bf715e55b6c54f241a38
   screen_text_extractor: 2c310f54af1dee881522e2b76bec9a668ebfe0cf
-  shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
+  shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   tray_manager: 9064e219c56d75c476e46b9a21182087930baf90
-  url_launcher_macos: d2691c7dd33ed713bf3544850a623080ec693d95
+  url_launcher_macos: 5f437abeda8c85500ceb03f5c1938a8c5a705399
   window_manager: 3a1844359a6295ab1e47659b1a777e36773cd6e8
 
 PODFILE CHECKSUM: 353c8bcc5d5b0994e508d035b5431cfe18c1dea7

@@ -100,7 +100,8 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Column(
+    return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
         PreferenceListSection(
           children: [
@@ -219,16 +220,13 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
     );
   }
 
-  Widget _build(BuildContext context) {
-    return PageScaffold(
-      title: LocaleKeys.app_settings_keybinds_title.tr(),
-      subtitle: LocaleKeys.app_settings_keybinds_subtitle.tr(),
-      child: _buildBody(context),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return _build(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(LocaleKeys.app_settings_keybinds_title.tr()),
+      ),
+      body: _buildBody(context),
+    );
   }
 }
