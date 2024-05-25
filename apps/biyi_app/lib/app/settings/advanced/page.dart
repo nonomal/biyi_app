@@ -23,6 +23,7 @@ class _AdvancedSettingPageState extends State<AdvancedSettingPage> {
 
   Future<void> _init() async {
     _launchAtLoginEnabled = await launchAtStartup.isEnabled();
+    setState(() {});
   }
 
   Future<void> _handleLaunchAtLoginChanged(bool value) async {

@@ -1,17 +1,41 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:influxui/influxui.dart';
 
 class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomizedAppBar({
     super.key,
+    this.leading,
     required this.title,
     this.actions,
   });
 
+  final Widget? leading;
   final Widget title;
   final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
+    final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
+
+    final bool canPop = parentRoute?.canPop ?? false;
+    final bool useCloseButton =
+        parentRoute is PageRoute<dynamic> && parentRoute.fullscreenDialog;
+
+    Widget? leadingWidget = leading;
+    if (leadingWidget == null) {
+      if (canPop) {
+        leadingWidget = IconButton(
+          useCloseButton
+              ? FluentIcons.dismiss_20_regular
+              : FluentIcons.chevron_left_20_regular,
+          variant: IconButtonVariant.transparent,
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        );
+      }
+    }
+
     return Container(
       height: double.infinity,
       padding: const EdgeInsets.only(
@@ -28,12 +52,11 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       child: Row(
         children: [
+          if (leadingWidget != null) leadingWidget,
           DefaultTextStyle(
-            style: TextStyle(
-              color: ExtendedColors.gray.shade950,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  fontSize: 16,
+                ),
             child: title,
           ),
           Expanded(child: Container()),
