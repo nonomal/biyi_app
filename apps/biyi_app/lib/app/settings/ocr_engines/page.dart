@@ -157,7 +157,8 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Column(
+    return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
         _buildListSectionProEngines(context),
         _buildListSectionPrivateEngines(context),

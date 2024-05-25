@@ -244,10 +244,10 @@ packages:
     dependency: transitive
     description:
       name: dart_openai
-      sha256: "963939b54e841ac7f663d958afd3d595f3e48b1887a367ff582b9f82220bee78"
+      sha256: "853bb57fed6a71c3ba0324af5cb40c16d196cf3aa55b91d244964ae4a241ccf1"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.0"
+    version: "5.1.0"
   dart_style:
     dependency: transitive
     description:
@@ -527,18 +527,20 @@ packages:
   influxui:
     dependency: "direct main"
     description:
-      path: "../../../../leanflutter/influxui/packages/influxui"
-      relative: true
-    source: path
+      path: "packages/influxui"
+      ref: HEAD
+      resolved-ref: "30ea962d4d58e0a43dfed7dd02171cd57e2c5d0a"
+      url: "https://github.com/leanflutter/influxui.git"
+    source: git
     version: "0.0.1"
   intl:
     dependency: transitive
     description:
       name: intl
-      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
       url: "https://pub.dev"
     source: hosted
-    version: "0.18.1"
+    version: "0.19.0"
   io:
     dependency: transitive
     description:
@@ -583,42 +585,42 @@ packages:
     dependency: "direct main"
     description:
       name: launch_at_startup
-      sha256: "93fc5638e088290004fae358bae691486673d469957d461d9dae5b12248593eb"
+      sha256: bbf85c2d051f35879377f58d158dbf516f0f41c1e89be0807ab513874ce6619a
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.2"
+    version: "0.3.0"
   leak_tracker:
     dependency: transitive
     description:
       name: leak_tracker
-      sha256: "78eb209deea09858f5269f5a5b02be4049535f568c07b275096836f01ea323fa"
+      sha256: "7f0df31977cb2c0b88585095d168e689669a2cc9b97c309665e3386f3e9d341a"
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.0"
+    version: "10.0.4"
   leak_tracker_flutter_testing:
     dependency: transitive
     description:
       name: leak_tracker_flutter_testing
-      sha256: b46c5e37c19120a8a01918cfaf293547f47269f7cb4b0058f21531c2465d6ef0
+      sha256: "06e98f569d004c1315b991ded39924b21af84cf14cc94791b8aea337d25b57f8"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "3.0.3"
   leak_tracker_testing:
     dependency: transitive
     description:
       name: leak_tracker_testing
-      sha256: a597f72a664dbd293f3bfc51f9ba69816f84dcd403cdac7066cb3f6003f3ab47
+      sha256: "6ba465d5d76e67ddf503e1161d1f4a6bc42306f9d66ca1e8f079a47290fb06d3"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "3.0.1"
   lints:
     dependency: transitive
     description:
       name: lints
-      sha256: cbf8d4b858bb0134ef3ef87841abdf8d63bfc255c266b7bf6b39daa1085c4290
+      sha256: "976c774dd944a42e83e2467f4cc670daef7eed6295b10b36ae8c85bcbf828235"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "4.0.0"
   logging:
     dependency: transitive
     description:
@@ -655,10 +657,10 @@ packages:
     dependency: transitive
     description:
       name: meta
-      sha256: d584fa6707a52763a52446f02cc621b077888fb63b93bbcb1143a7be5a0c0c04
+      sha256: "7687075e408b093f36e6bbf6c91878cc0d4cd10f409506f7bc996f68220b9136"
       url: "https://pub.dev"
     source: hosted
-    version: "1.11.0"
+    version: "1.12.0"
   mime:
     dependency: transitive
     description:
@@ -671,10 +673,10 @@ packages:
     dependency: "direct dev"
     description:
       name: mostly_reasonable_lints
-      sha256: c61cc6b211f54188eef15e0ad7c9b00e8c001478ac253a52036ef7391b532b7c
+      sha256: e19fec63536866ba307b3dfbc258b4bce9b3745129f038006b56b4067c6293d8
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.1"
+    version: "0.1.2"
   nested:
     dependency: transitive
     description:
@@ -822,9 +824,11 @@ packages:
   preference_list:
     dependency: "direct main"
     description:
-      path: "../../../../leanflutter/influxui/packages/preference_list"
-      relative: true
-    source: path
+      path: "packages/preference_list"
+      ref: HEAD
+      resolved-ref: "30ea962d4d58e0a43dfed7dd02171cd57e2c5d0a"
+      url: "https://github.com/leanflutter/influxui.git"
+    source: git
     version: "0.0.2"
   protocol_handler:
     dependency: "direct main"
@@ -1107,10 +1111,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: "5c2f730018264d276c20e4f1503fd1308dfbbae39ec8ee63c5236311ac06954b"
+      sha256: "9955ae474176f7ac8ee4e989dadfb411a58c30415bcfb648fa04b2b8a03afa7f"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.1"
+    version: "0.7.0"
   theme_tailor_annotation:
     dependency: transitive
     description:
@@ -1130,59 +1134,67 @@ packages:
   translation_engine_baidu:
     dependency: "direct main"
     description:
-      path: "../../../uni_translate/packages/translation_engine_baidu"
-      relative: true
-    source: path
-    version: "0.1.5"
+      name: translation_engine_baidu
+      sha256: "9fa8402764c231d2e063d8ae9d35fc41657ffeb9ff809745a11691b8f20d2420"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   translation_engine_caiyun:
     dependency: "direct main"
     description:
-      path: "../../../uni_translate/packages/translation_engine_caiyun"
-      relative: true
-    source: path
-    version: "0.1.5"
+      name: translation_engine_caiyun
+      sha256: "8f1d99c7444c3ae09a00459b88750282708505550d46f095fdb3c99d92485980"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   translation_engine_deepl:
     dependency: "direct main"
     description:
-      path: "../../../uni_translate/packages/translation_engine_deepl"
-      relative: true
-    source: path
-    version: "0.1.5"
+      name: translation_engine_deepl
+      sha256: aa4cb187b4349999bf2319fe329ebd31e4f75ab2016cc69d57711b09522c4ee4
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   translation_engine_google:
     dependency: "direct main"
     description:
-      path: "../../../uni_translate/packages/translation_engine_google"
-      relative: true
-    source: path
-    version: "0.1.5"
+      name: translation_engine_google
+      sha256: "5127c69d086a9738160d50ee00ddd95f1790d733b1156cfd0aaa155b209bc0c9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   translation_engine_iciba:
     dependency: "direct main"
     description:
-      path: "../../../uni_translate/packages/translation_engine_iciba"
-      relative: true
-    source: path
-    version: "0.1.5"
+      name: translation_engine_iciba
+      sha256: bd5229e36ca062e917df253e1be1802dccb256a1e0d895fc1aa962d8dceec3fc
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   translation_engine_openai:
     dependency: "direct main"
     description:
-      path: "../../../uni_translate/packages/translation_engine_openai"
-      relative: true
-    source: path
-    version: "0.1.5"
+      name: translation_engine_openai
+      sha256: "7db2d196562099f0d494475cc298a02ca905a6940442aca2963c19ed266391dd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   translation_engine_tencent:
     dependency: "direct main"
     description:
-      path: "../../../uni_translate/packages/translation_engine_tencent"
-      relative: true
-    source: path
-    version: "0.1.5"
+      name: translation_engine_tencent
+      sha256: d2aa85fc3209e485ec88672dd4c3864a0e2ed63c2030b2bccb4a8c6d474356df
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   translation_engine_youdao:
     dependency: "direct main"
     description:
-      path: "../../../uni_translate/packages/translation_engine_youdao"
-      relative: true
-    source: path
-    version: "0.1.5"
+      name: translation_engine_youdao
+      sha256: "849fc66134232b1c803366f773cce39c5b0ffc8e47b0ecef842ceb5c95afef2b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   tray_manager:
     dependency: "direct main"
     description:
@@ -1218,10 +1230,11 @@ packages:
   uni_translate_client:
     dependency: "direct main"
     description:
-      path: "../../../uni_translate/packages/uni_translate_client"
-      relative: true
-    source: path
-    version: "0.1.5"
+      name: uni_translate_client
+      sha256: "6db0b5b4023eb8568c7c01f636f9eaefcc784e856836467b1200eff8957490eb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   url_launcher:
     dependency: "direct main"
     description:
@@ -1338,10 +1351,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: b3d56ff4341b8f182b96aceb2fa20e3dcb336b9f867bc0eafc0de10f1048e957
+      sha256: "3923c89304b715fb1eb6423f017651664a03bf5f4b29983627c4da791f74a4ec"
       url: "https://pub.dev"
     source: hosted
-    version: "13.0.0"
+    version: "14.2.1"
   watcher:
     dependency: transitive
     description:
@@ -1416,4 +1429,4 @@ packages:
     version: "3.1.2"
 sdks:
   dart: ">=3.3.0 <4.0.0"
-  flutter: ">=3.16.6"
+  flutter: ">=3.18.0-18.0.pre.54"

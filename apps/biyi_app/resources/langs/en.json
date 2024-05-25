@@ -225,7 +225,10 @@
         }
       },
       "advanced": {
-        "title": "Advanced"
+        "title": "Advanced",
+        "launch_at_login": {
+          "title": "Launch at login"
+        }
       },
       "appearance": {
         "title": "Appearance",

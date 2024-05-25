@@ -141,6 +141,7 @@ class _TranslationEnginesNewOrEditPageState
               title: _type == null
                   ? Text(LocaleKeys.please_choose.tr())
                   : Text('engine.$_type'.tr()),
+              trailing: const PreferenceListTileChevron(),
               onTap: widget.editable
                   ? () async {
                       final newEngineType = await context.push<String?>(

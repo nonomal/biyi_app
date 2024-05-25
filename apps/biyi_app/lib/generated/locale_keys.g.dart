@@ -235,6 +235,10 @@ abstract class LocaleKeys {
       'app.settings.about.package_info';
   static const app_settings_about = 'app.settings.about';
   static const app_settings_advanced_title = 'app.settings.advanced.title';
+  static const app_settings_advanced_launch_at_login_title =
+      'app.settings.advanced.launch_at_login.title';
+  static const app_settings_advanced_launch_at_login =
+      'app.settings.advanced.launch_at_login';
   static const app_settings_advanced = 'app.settings.advanced';
   static const app_settings_appearance_title = 'app.settings.appearance.title';
   static const app_settings_appearance_subtitle =

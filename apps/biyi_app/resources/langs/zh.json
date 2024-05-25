@@ -225,7 +225,10 @@
         }
       },
       "advanced": {
-        "title": "高级设置"
+        "title": "高级",
+        "launch_at_login": {
+          "title": "开机自启动"
+        }
       },
       "appearance": {
         "title": "外观",

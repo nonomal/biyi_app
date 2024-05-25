@@ -1,5 +1,6 @@
 import Cocoa
 import FlutterMacOS
+import LaunchAtLogin
 import window_manager
 
 class MainFlutterWindow: NSPanel {
@@ -10,6 +11,23 @@ class MainFlutterWindow: NSPanel {
         self.setFrame(windowFrame, display: true)
         
         self.styleMask.insert(.nonactivatingPanel)
+        
+        FlutterMethodChannel(
+            name: "launch_at_startup", binaryMessenger: flutterViewController.engine.binaryMessenger
+        )
+        .setMethodCallHandler { (_ call: FlutterMethodCall, result: @escaping FlutterResult) in
+            switch call.method {
+            case "launchAtStartupIsEnabled":
+                result(LaunchAtLogin.isEnabled)
+            case "launchAtStartupSetEnabled":
+                if let arguments = call.arguments as? [String: Any] {
+                    LaunchAtLogin.isEnabled = arguments["setEnabledValue"] as! Bool
+                }
+                result(nil)
+            default:
+                result(FlutterMethodNotImplemented)
+            }
+        }
         
         RegisterGeneratedPlugins(registry: flutterViewController)
         

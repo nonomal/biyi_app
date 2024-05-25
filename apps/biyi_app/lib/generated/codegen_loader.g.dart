@@ -217,7 +217,10 @@ class CodegenLoader extends AssetLoader {
           "title": "关于",
           "package_info": {"version": "版本号", "build_number": "内部版本号"}
         },
-        "advanced": {"title": "高级设置"},
+        "advanced": {
+          "title": "高级",
+          "launch_at_login": {"title": "开机自启动"}
+        },
         "appearance": {
           "title": "外观",
           "subtitle": "改变你的客户端的外观。",
@@ -517,7 +520,10 @@ class CodegenLoader extends AssetLoader {
           "title": "About",
           "package_info": {"version": "Version", "build_number": "Build Number"}
         },
-        "advanced": {"title": "Advanced"},
+        "advanced": {
+          "title": "Advanced",
+          "launch_at_login": {"title": "Launch at login"}
+        },
         "appearance": {
           "title": "Appearance",
           "subtitle": "Change the look of your client.",

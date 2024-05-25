@@ -74,6 +74,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                   return OcrEngineName(_defaultOcrEngineConfig!);
                 },
               ),
+              trailing: const PreferenceListTileChevron(),
               onTap: () async {
                 final OcrEngineConfig? ocrEngineConfig =
                     await context.push<OcrEngineConfig?>(
@@ -129,6 +130,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                   );
                 },
               ),
+              trailing: const PreferenceListTileChevron(),
               onTap: () async {
                 final TranslationEngineConfig? engineConfig =
                     await context.push<TranslationEngineConfig?>(
