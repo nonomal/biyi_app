@@ -1,5 +1,6 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/networking/translate_client/translate_client.dart';
+import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -35,11 +36,12 @@ class _TranslationEngineTypesPageState
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar(
+    return CustomizedAppBar(
       title: Text(LocaleKeys.app_translation_engine_types_title.tr()),
       actions: [
-        CustomAppBarActionItem(
-          text: LocaleKeys.ok.tr(),
+        Button(
+          label: LocaleKeys.ok.tr(),
+          variant: ButtonVariant.subtle,
           onPressed: _handleClickOk,
         ),
       ],

@@ -1,6 +1,7 @@
 import 'package:biyi_app/app/available_ocr_engines/page.dart';
 import 'package:biyi_app/app/available_translation_engines/page.dart';
 import 'package:biyi_app/app/home/page.dart';
+import 'package:biyi_app/app/record_shortcut/page.dart';
 import 'package:biyi_app/app/settings/about/page.dart';
 import 'package:biyi_app/app/settings/advanced/page.dart';
 import 'package:biyi_app/app/settings/appearance/page.dart';
@@ -92,6 +93,15 @@ final routerConfig = GoRouter(
         return FadeTransitionPage(
           key: state.pageKey,
           child: const HomePage(),
+        );
+      },
+    ),
+    GoRoute(
+      path: '/record-shortcut',
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return DialogPage(
+          barrierColor: ExtendedColors.black.withOpacity(0.5),
+          builder: (_) => const RecordShortcutPage(),
         );
       },
     ),

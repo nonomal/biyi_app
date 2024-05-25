@@ -1,4 +1,4 @@
-import 'package:biyi_app/widgets/widgets.dart';
+import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:influxui/influxui.dart';
 
 class TabVocabularyScene extends StatelessWidget {
@@ -7,7 +7,7 @@ class TabVocabularyScene extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
+      appBar: const CustomizedAppBar(
         title: Text('Vocabulary'),
       ),
       body: Container(),

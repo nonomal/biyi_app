@@ -198,6 +198,8 @@ abstract class LocaleKeys {
   static const app_home_msg_capture_screen_area_canceled =
       'app.home.msg_capture_screen_area_canceled';
   static const app_home = 'app.home';
+  static const app_record_shortcut_title = 'app.record_shortcut.title';
+  static const app_record_shortcut = 'app.record_shortcut';
   static const app_ocr_engine_types_title = 'app.ocr_engine_types.title';
   static const app_ocr_engine_types = 'app.ocr_engine_types';
   static const app_ocr_engines_title = 'app.ocr_engines.title';

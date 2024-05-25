@@ -1,6 +1,7 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/services/local_db/local_db.dart';
+import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -49,6 +50,7 @@ class _AvailableTranslationEnginesPageState
 
   Widget _buildBody(BuildContext context) {
     return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
         if (_proEngineList.isNotEmpty)
           PreferenceListSection(
@@ -108,13 +110,14 @@ class _AvailableTranslationEnginesPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: CustomizedAppBar(
         title: Text(
           LocaleKeys.app_translation_engines_title.tr(),
         ),
         actions: [
-          CustomAppBarActionItem(
-            text: LocaleKeys.ok.tr(),
+          Button(
+            label: LocaleKeys.ok.tr(),
+            variant: ButtonVariant.subtle,
             onPressed: _handleClickOk,
           ),
         ],

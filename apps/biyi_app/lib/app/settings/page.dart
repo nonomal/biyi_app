@@ -1,6 +1,6 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/utilities/utilities.dart';
-import 'package:biyi_app/widgets/widgets.dart';
+import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:influxui/influxui.dart';
 
@@ -40,7 +40,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget _build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: CustomizedAppBar(
         title: Text(
           LocaleKeys.app_settings_title.tr(),
         ),

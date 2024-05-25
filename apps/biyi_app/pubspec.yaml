@@ -68,15 +68,15 @@ dev_dependencies:
 
 dependency_overrides:
   influxui:
-    git:
-      path: packages/influxui
-      url: https://github.com/leanflutter/influxui.git
-    # path: ../../../../leanflutter/influxui/packages/influxui
+    # git:
+    #   path: packages/influxui
+    #   url: https://github.com/leanflutter/influxui.git
+    path: ../../../../leanflutter/influxui/packages/influxui
   preference_list:
-    git:
-      path: packages/preference_list
-      url: https://github.com/leanflutter/influxui.git
-    # path: ../../../../leanflutter/influxui/packages/preference_list
+    # git:
+    #   path: packages/preference_list
+    #   url: https://github.com/leanflutter/influxui.git
+    path: ../../../../leanflutter/influxui/packages/preference_list
 
 flutter:
   uses-material-design: false

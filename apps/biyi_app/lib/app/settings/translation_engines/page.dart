@@ -2,6 +2,7 @@ import 'package:biyi_advanced_features/models/models.dart';
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/services/services.dart';
+import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
@@ -172,7 +173,7 @@ class _TranslationEnginesSettingPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: CustomizedAppBar(
         title: Text(LocaleKeys.app_settings_translation_engines_title.tr()),
       ),
       body: _buildBody(context),

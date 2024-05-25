@@ -1,8 +1,10 @@
 import 'package:biyi_advanced_features/models/models.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/services/services.dart';
+import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:influxui/influxui.dart';
 import 'package:preference_list/preference_list.dart';
@@ -79,24 +81,20 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
     required String shortcutKey,
     HotKeyScope shortcutScope = HotKeyScope.system,
   }) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext ctx) {
-        return RecordHotKeyDialog(
-          onHotKeyRecorded: (newHotKey) {
-            _configuration.setShortcut(
-              shortcutKey,
-              HotKey(
-                key: newHotKey.key,
-                modifiers: newHotKey.modifiers,
-                scope: shortcutScope,
-              ),
-            );
-          },
-        );
-      },
+    final HotKey? recordedShortcut = await context.push<HotKey?>(
+      '/record-shortcut',
+      extra: {},
     );
+    if (recordedShortcut != null) {
+      _configuration.setShortcut(
+        shortcutKey,
+        HotKey(
+          key: recordedShortcut.key,
+          modifiers: recordedShortcut.modifiers,
+          scope: shortcutScope,
+        ),
+      );
+    }
   }
 
   Widget _buildBody(BuildContext context) {
@@ -223,7 +221,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: CustomizedAppBar(
         title: Text(LocaleKeys.app_settings_keybinds_title.tr()),
       ),
       body: _buildBody(context),

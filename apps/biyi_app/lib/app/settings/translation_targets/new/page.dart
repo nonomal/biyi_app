@@ -2,6 +2,7 @@ import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/models.dart';
 import 'package:biyi_app/services/local_db/local_db.dart';
+import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
@@ -48,15 +49,16 @@ class _TranslationTargetNewOrEditPageState
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar(
+    return CustomizedAppBar(
       title: Text(
         widget.translationTarget != null
             ? LocaleKeys.app_translation_targets_new_title_with_edit.tr()
             : LocaleKeys.app_translation_targets_new_title.tr(),
       ),
       actions: [
-        CustomAppBarActionItem(
-          text: LocaleKeys.ok.tr(),
+        Button(
+          label: LocaleKeys.ok.tr(),
+          variant: ButtonVariant.subtle,
           onPressed: _handleClickOk,
         ),
       ],

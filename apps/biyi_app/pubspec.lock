@@ -527,11 +527,9 @@ packages:
   influxui:
     dependency: "direct main"
     description:
-      path: "packages/influxui"
-      ref: HEAD
-      resolved-ref: "30ea962d4d58e0a43dfed7dd02171cd57e2c5d0a"
-      url: "https://github.com/leanflutter/influxui.git"
-    source: git
+      path: "../../../../leanflutter/influxui/packages/influxui"
+      relative: true
+    source: path
     version: "0.0.1"
   intl:
     dependency: transitive
@@ -824,11 +822,9 @@ packages:
   preference_list:
     dependency: "direct main"
     description:
-      path: "packages/preference_list"
-      ref: HEAD
-      resolved-ref: "30ea962d4d58e0a43dfed7dd02171cd57e2c5d0a"
-      url: "https://github.com/leanflutter/influxui.git"
-    source: git
+      path: "../../../../leanflutter/influxui/packages/preference_list"
+      relative: true
+    source: path
     version: "0.0.2"
   protocol_handler:
     dependency: "direct main"

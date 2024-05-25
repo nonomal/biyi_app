@@ -186,6 +186,9 @@
       "msg_please_enter_word_or_text": "No text entered or text not extracted",
       "msg_capture_screen_area_canceled": "Capture screen area has been canceled"
     },
+    "record_shortcut": {
+      "title": "Record your shortcut"
+    },
     "ocr_engine_types": {
       "title": "Engine Type"
     },

@@ -3,7 +3,7 @@ import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/networking/ocr_client/ocr_client.dart';
 import 'package:biyi_app/services/local_db/local_db.dart';
-import 'package:biyi_app/widgets/custom_app_bar/custom_app_bar.dart';
+import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/ocr_engine_icon/ocr_engine_icon.dart';
 import 'package:biyi_app/widgets/ocr_engine_name/ocr_engine_name.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -80,14 +80,15 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar(
+    return CustomizedAppBar(
       title: widget.ocrEngineConfig != null
           ? OcrEngineName(widget.ocrEngineConfig!)
           : Text(LocaleKeys.app_ocr_engines_new_title.tr()),
       actions: [
         if (widget.editable)
-          CustomAppBarActionItem(
-            text: LocaleKeys.ok.tr(),
+          Button(
+            label: LocaleKeys.ok.tr(),
+            variant: ButtonVariant.subtle,
             onPressed: _handleClickOk,
           ),
       ],

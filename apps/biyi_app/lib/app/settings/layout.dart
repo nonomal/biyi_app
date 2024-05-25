@@ -115,7 +115,7 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
   Widget _buildSidebar(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         border: Border(
           right: BorderSide(
             color: Theme.of(context).dividerColor,
@@ -192,7 +192,7 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
               destinations: [
                 NavigationRailDestination(
                   value: PageId.settingsAbout,
-                  icon: FluentIcons.developer_board_20_regular,
+                  icon: FluentIcons.info_20_regular,
                   label: LocaleKeys.app_settings_about_title.tr(),
                 ),
               ],
