@@ -1,5 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
+part 'translation_result_record.g.dart';
+
+@JsonSerializable()
 class TranslationResultRecord {
   TranslationResultRecord({
     this.id,
@@ -11,17 +15,8 @@ class TranslationResultRecord {
     this.translateResponse,
   });
 
-  factory TranslationResultRecord.fromJson(Map<String, dynamic> json) {
-    return TranslationResultRecord(
-      id: json['id'],
-      translationTargetId: json['translationTargetId'],
-      translationEngineId: json['translationEngineId'],
-      lookUpRequest: LookUpRequest.fromJson(json['lookUpRequest']),
-      lookUpResponse: LookUpResponse.fromJson(json['lookUpResponse']),
-      translateRequest: TranslateRequest.fromJson(json['translateRequest']),
-      translateResponse: TranslateResponse.fromJson(json['translateResponse']),
-    );
-  }
+  factory TranslationResultRecord.fromJson(Map<String, dynamic> json) =>
+      _$TranslationResultRecordFromJson(json);
 
   String? id;
   String? translationTargetId;
@@ -33,17 +28,5 @@ class TranslationResultRecord {
   TranslateResponse? translateResponse;
   UniTranslateClientError? translateError;
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'translationTargetId': translationTargetId,
-      'translationEngineId': translationEngineId,
-      'lookUpRequest': lookUpRequest?.toJson(),
-      'lookUpResponse': lookUpResponse?.toJson(),
-      'lookUpError': lookUpError?.toJson(),
-      'translateRequest': translateRequest?.toJson(),
-      'translateResponse': translateResponse?.toJson(),
-      'translateError': translateError?.toJson(),
-    }..removeWhere((key, value) => value == null);
-  }
+  Map<String, dynamic> toJson() => _$TranslationResultRecordToJson(this);
 }

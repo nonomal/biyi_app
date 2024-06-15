@@ -1,5 +1,5 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/networking/translate_client/translate_client.dart';
+import 'package:biyi_app/services/translate_client/translate_client.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';

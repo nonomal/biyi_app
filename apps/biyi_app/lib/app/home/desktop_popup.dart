@@ -12,7 +12,6 @@ import 'package:biyi_app/app/home/translation_results_view.dart';
 import 'package:biyi_app/app/home/translation_target_select_view.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/models.dart';
-import 'package:biyi_app/networking/networking.dart';
 import 'package:biyi_app/services/services.dart';
 import 'package:biyi_app/utilities/utilities.dart';
 import 'package:bot_toast/bot_toast.dart';

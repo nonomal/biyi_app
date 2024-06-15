@@ -4,8 +4,8 @@ import 'dart:io';
 
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/codegen_loader.g.dart';
-import 'package:biyi_app/providers/providers.dart';
 import 'package:biyi_app/services/local_db/local_db.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/utilities/env.dart';
 import 'package:biyi_app/utilities/language_util.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -84,7 +84,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AppSettings()),
+        ChangeNotifierProvider(create: (_) => SettingsState()),
       ],
       child: EasyLocalization(
         supportedLocales: const [
@@ -108,12 +108,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final botToastBuilder = BotToastInit();
   @override
   Widget build(BuildContext context) {
-    final botToastBuilder = BotToastInit();
-
-    final AppSettings appSettings = context.watch<AppSettings>();
-
+    final settings = context.watch<SettingsState>();
     return MaterialApp.router(
       routerConfig: routerConfig,
       theme: influxLight.copyWith(
@@ -169,7 +167,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       darkTheme: influxDark,
-      themeMode: appSettings.themeMode,
+      themeMode: settings.themeMode,
       builder: (context, child) {
         if (UniPlatform.isLinux || UniPlatform.isWindows) {
           child = Stack(
@@ -193,7 +191,7 @@ class _MyAppState extends State<MyApp> {
         child = botToastBuilder(context, child);
         child = ExtendedTheme(
           data: ExtendedThemeData(
-            brightness: appSettings.themeMode == ThemeMode.dark
+            brightness: settings.themeMode == ThemeMode.dark
                 ? Brightness.dark
                 : Brightness.light,
           ),

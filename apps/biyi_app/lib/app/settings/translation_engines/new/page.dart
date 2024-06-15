@@ -1,8 +1,8 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/networking/translate_client/translate_client.dart';
 import 'package:biyi_app/services/local_db/local_db.dart';
+import 'package:biyi_app/services/translate_client/translate_client.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/translation_engine_icon/translation_engine_icon.dart';
 import 'package:biyi_app/widgets/translation_engine_name/translation_engine_name.dart';

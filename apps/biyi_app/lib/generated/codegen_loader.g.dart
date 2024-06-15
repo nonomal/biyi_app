@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters
+// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters, require_trailing_commas
 
 import 'dart:ui';
 

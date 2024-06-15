@@ -1,6 +1,5 @@
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
-import 'package:biyi_app/widgets/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
 

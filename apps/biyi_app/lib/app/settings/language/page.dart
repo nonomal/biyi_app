@@ -1,5 +1,5 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/providers/providers.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/utilities/language_util.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
@@ -18,8 +18,7 @@ class LanguageSettingPage extends StatefulWidget {
 
 class _LanguageSettingPageState extends State<LanguageSettingPage> {
   Widget _buildBody(BuildContext context) {
-    final AppSettings appSettings = context.watch<AppSettings>();
-
+    final settings = context.watch<SettingsState>();
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
@@ -28,16 +27,15 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
             for (var appLanguage in kAppLanguages)
               PreferenceListTile(
                 title: LanguageLabel(appLanguage),
-                additionalInfo:
-                    languageToLocale(appLanguage) == appSettings.locale
-                        ? Icon(
-                            FluentIcons.checkmark_circle_16_filled,
-                            color: Theme.of(context).colorScheme.primary,
-                          )
-                        : null,
+                additionalInfo: languageToLocale(appLanguage) == settings.locale
+                    ? Icon(
+                        FluentIcons.checkmark_circle_16_filled,
+                        color: Theme.of(context).colorScheme.primary,
+                      )
+                    : null,
                 onTap: () async {
                   final newLocale = languageToLocale(appLanguage);
-                  context.read<AppSettings>().locale = newLocale;
+                  context.read<SettingsState>().locale = newLocale;
                   await context.setLocale(newLocale);
                   await WidgetsBinding.instance.performReassemble();
                 },

@@ -583,10 +583,10 @@ packages:
     dependency: "direct main"
     description:
       name: launch_at_startup
-      sha256: bbf85c2d051f35879377f58d158dbf516f0f41c1e89be0807ab513874ce6619a
+      sha256: "1f8a75520913d1038630049e6c44a2575a23ffd28cc8b14fdf37401d1d21de84"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.0"
+    version: "0.3.1"
   leak_tracker:
     dependency: transitive
     description:
@@ -1227,10 +1227,10 @@ packages:
     dependency: "direct main"
     description:
       name: uni_translate_client
-      sha256: "6db0b5b4023eb8568c7c01f636f9eaefcc784e856836467b1200eff8957490eb"
+      sha256: ce963a7ca07715c6d0dca40cfcccc066bfa89c980ecb0e0a5d643d8db517b5e5
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.6"
+    version: "0.1.7"
   url_launcher:
     dependency: "direct main"
     description:
