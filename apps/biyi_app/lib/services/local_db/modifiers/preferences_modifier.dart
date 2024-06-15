@@ -2,6 +2,7 @@ import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+@Deprecated('No longer used.')
 class PreferencesModifier extends Listenable {
   Box? _boxInstance;
 

@@ -1,8 +1,8 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/services/local_db/local_db.dart';
 import 'package:biyi_app/services/translate_client/translate_client.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/translation_engine_icon/translation_engine_icon.dart';
 import 'package:biyi_app/widgets/translation_engine_name/translation_engine_name.dart';
@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
 import 'package:preference_list/preference_list.dart';
+import 'package:provider/provider.dart';
 import 'package:shortid/shortid.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
@@ -36,7 +37,7 @@ class _TranslationEnginesNewOrEditPageState
     extends State<TranslationEnginesNewOrEditPage> {
   final Map<String, TextEditingController> _textEditingControllerMap = {};
 
-  String? _identifier;
+  String? _id;
   String? _type;
   Map<String, dynamic> _option = {};
 
@@ -47,13 +48,13 @@ class _TranslationEnginesNewOrEditPageState
   TranslationEngine? get translationEngine {
     if (_type != null) {
       var engineConfig = TranslationEngineConfig(
-        identifier: '',
+        id: '',
         type: _type!,
         option: _option,
       );
       if (widget.engineConfig != null && widget.engineConfig?.option == null) {
         engineConfig = TranslationEngineConfig(
-          identifier: '',
+          id: '',
           type: _type!,
           option: {},
         );
@@ -66,7 +67,7 @@ class _TranslationEnginesNewOrEditPageState
   @override
   void initState() {
     if (widget.engineConfig != null) {
-      _identifier = widget.engineConfig?.identifier;
+      _id = widget.engineConfig?.id;
       _type = widget.engineConfig?.type;
       _option = widget.engineConfig?.option ?? {};
 
@@ -77,38 +78,31 @@ class _TranslationEnginesNewOrEditPageState
         _textEditingControllerMap[optionKey] = textEditingController;
       }
     } else {
-      _identifier = shortid.generate();
+      _id = shortid.generate();
       _type = widget.engineType;
     }
 
     super.initState();
   }
 
-  Future<void> _handleClickOk() async {
-    // try {
-    //   var resp = await translationEngine?.lookUp(
-    //     LookUpRequest(
-    //       sourceLanguage: kLanguageEN,
-    //       targetLanguage: kLanguageZH,
-    //       word: 'hello',
-    //     ),
-    //   );
-    //   print(resp?.toJson());
-    // } catch (error) {
-    //   print((error as UniTranslateClientError).message);
-    // }
+  void _handleClickOk() {
+    final settings = context.read<Settings>();
+    if (settings.getTranslationEngine(_id!) != null) {
+      settings.updateTranslationEngine(
+        _id!,
+        type: _type!,
+        option: _option,
+      );
+    } else {
+      settings.createTranslationEngine(
+        id: _id!,
+        type: _type!,
+        option: _option,
+      );
+    }
 
-    await localDb //
-        .privateEngine(_identifier)
-        .updateOrCreate(
-          type: _type,
-          option: _option,
-        );
+    (translateClient.adapter as AutoloadTranslateClientAdapter).renew(_id!);
 
-    (translateClient.adapter as AutoloadTranslateClientAdapter)
-        .renew(_identifier!);
-
-    // ignore: use_build_context_synchronously
     Navigator.of(context).pop();
   }
 
@@ -236,9 +230,7 @@ class _TranslationEnginesNewOrEditPageState
                   ),
                 ),
                 onTap: () async {
-                  await localDb.privateEngine(_identifier).delete();
-
-                  // ignore: use_build_context_synchronously
+                  context.read<Settings>().deleteTranslationEngine(_id!);
                   Navigator.of(context).pop();
                 },
               ),

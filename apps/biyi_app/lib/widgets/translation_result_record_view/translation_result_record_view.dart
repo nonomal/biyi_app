@@ -2,7 +2,6 @@ import 'dart:ui' as ui;
 
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/models.dart';
-import 'package:biyi_app/services/services.dart';
 import 'package:biyi_app/widgets/translation_result_record_view/translation_engine_tag.dart';
 import 'package:biyi_app/widgets/translation_result_record_view/word_image_view.dart';
 import 'package:biyi_app/widgets/translation_result_record_view/word_pronunciation_view.dart';
@@ -23,13 +22,13 @@ class TranslationResultRecordView extends StatelessWidget {
     required this.translationResult,
     required this.translationResultRecord,
     required this.onTextTapped,
+    required this.doubleClickCopyResult,
   });
 
   final TranslationResult translationResult;
   final TranslationResultRecord translationResultRecord;
   final ValueChanged<String> onTextTapped;
-
-  Configuration get _configuration => localDb.configuration;
+  final bool doubleClickCopyResult;
 
   bool get _isLoading {
     if (_isErrorOccurred) return false;
@@ -139,7 +138,7 @@ class TranslationResultRecordView extends StatelessWidget {
       return GestureDetector(
         behavior: HitTestBehavior.opaque,
         onDoubleTap: () {
-          if (_configuration.doubleClickCopyResult) {
+          if (doubleClickCopyResult) {
             Clipboard.setData(ClipboardData(text: textTranslation.text));
             BotToast.showText(
               text: LocaleKeys.copied.tr(),

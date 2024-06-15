@@ -1,5 +1,5 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
-import 'package:biyi_app/services/local_db/local_db.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:ocr_engine_builtin/ocr_engine_builtin.dart';
 import 'package:ocr_engine_youdao/ocr_engine_youdao.dart';
 import 'package:uni_ocr_client/uni_ocr_client.dart';
@@ -19,16 +19,17 @@ OcrEngine? createOcrEngine(
   OcrEngineConfig ocrEngineConfig,
 ) {
   OcrEngine? ocrEngine;
-  if (localDb.proOcrEngine(ocrEngineConfig.identifier).exists()) {
+  if (ocrEngineConfig.isProGroup &&
+      Settings.instance.getOcrEngine(ocrEngineConfig.id) != null) {
     ocrEngine = ProOcrEngine(ocrEngineConfig);
-    if (ocrEngineConfig.identifier == kDefaultBuiltInOcrEngine.identifier) {
+    if (ocrEngineConfig.id == kDefaultBuiltInOcrEngine.identifier) {
       ocrEngine = kDefaultBuiltInOcrEngine;
     }
   } else {
     switch (ocrEngineConfig.type) {
       case kOcrEngineTypeYoudao:
         ocrEngine = YoudaoOcrEngine(
-          identifier: ocrEngineConfig.identifier,
+          identifier: ocrEngineConfig.id,
           option: ocrEngineConfig.option,
         );
         break;
@@ -42,24 +43,25 @@ class AutoloadOcrClientAdapter extends UniOcrClientAdapter {
 
   @override
   OcrEngine get first {
-    OcrEngineConfig engineConfig = localDb.ocrEngines.list().first;
-    return use(engineConfig.identifier);
+    OcrEngineConfig engineConfig = Settings.instance.ocrEngines.first;
+    return use(engineConfig.id);
   }
 
   @override
   OcrEngine use(String identifier) {
-    OcrEngineConfig? engineConfig = localDb.ocrEngine(identifier).get();
+    String id = identifier;
+    OcrEngineConfig? engineConfig = Settings.instance.getOcrEngine(id);
 
     OcrEngine? ocrEngine;
-    if (_ocrEngineMap.containsKey(engineConfig?.identifier)) {
-      ocrEngine = _ocrEngineMap[engineConfig?.identifier];
+    if (_ocrEngineMap.containsKey(engineConfig?.id)) {
+      ocrEngine = _ocrEngineMap[engineConfig?.id];
     }
 
     if (ocrEngine == null) {
       ocrEngine = createOcrEngine(engineConfig!);
       if (ocrEngine != null) {
         _ocrEngineMap.update(
-          engineConfig.identifier,
+          engineConfig.id,
           (_) => ocrEngine!,
           ifAbsent: () => ocrEngine!,
         );
@@ -69,8 +71,8 @@ class AutoloadOcrClientAdapter extends UniOcrClientAdapter {
     return ocrEngine!;
   }
 
-  void renew(String identifier) {
-    _ocrEngineMap.remove(identifier);
+  void renew(String id) {
+    _ocrEngineMap.remove(id);
   }
 }
 

@@ -1,8 +1,7 @@
 import 'dart:ui';
 
-import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/services/services.dart';
+import 'package:biyi_app/models/settings_base.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,7 +19,7 @@ class TranslationInputView extends StatelessWidget {
     required this.isTextDetecting,
     required this.translationMode,
     required this.onTranslationModeChanged,
-    required this.inputSetting,
+    required this.inputSubmitMode,
     required this.onClickExtractTextFromScreenCapture,
     required this.onClickExtractTextFromClipboard,
     required this.onButtonTappedClear,
@@ -34,9 +33,9 @@ class TranslationInputView extends StatelessWidget {
   final CapturedData? capturedData;
   final bool isTextDetecting;
 
-  final String translationMode;
-  final ValueChanged<String> onTranslationModeChanged;
-  final String inputSetting;
+  final TranslationMode translationMode;
+  final ValueChanged<TranslationMode> onTranslationModeChanged;
+  final InputSubmitMode inputSubmitMode;
 
   final VoidCallback onClickExtractTextFromScreenCapture;
   final VoidCallback onClickExtractTextFromClipboard;
@@ -52,7 +51,7 @@ class TranslationInputView extends StatelessWidget {
         Tooltip(
           message: LocaleKeys.app_home_tip_translation_mode.tr(
             args: [
-              'translation_mode.$translationMode'.tr(),
+              'translation_mode.${translationMode.name}'.tr(),
             ],
           ),
           child: IconButton(
@@ -64,11 +63,11 @@ class TranslationInputView extends StatelessWidget {
                 children: [
                   Icon(
                     icon,
-                    color: translationMode == kTranslationModeAuto
+                    color: translationMode == TranslationMode.auto
                         ? Theme.of(context).primaryColor
                         : Theme.of(context).iconTheme.color,
                   ),
-                  if (translationMode == kTranslationModeAuto)
+                  if (translationMode == TranslationMode.auto)
                     Positioned(
                       bottom: 0,
                       child: Container(
@@ -97,23 +96,10 @@ class TranslationInputView extends StatelessWidget {
             },
             size: IconButtonSize.small,
             onPressed: () {
-              String newTranslationMode =
-                  translationMode == kTranslationModeAuto
-                      ? kTranslationModeManual
-                      : kTranslationModeAuto;
-
-              UserPreference? userPreference =
-                  localDb.preference(kPrefTranslationMode).get();
-              if (userPreference != null) {
-                localDb.preference(kPrefTranslationMode).update(
-                      value: newTranslationMode,
-                    );
-              } else {
-                localDb.preferences.create(
-                  key: kPrefTranslationMode,
-                  value: newTranslationMode,
-                );
-              }
+              TranslationMode newTranslationMode =
+                  translationMode == TranslationMode.auto
+                      ? TranslationMode.manual
+                      : TranslationMode.auto;
               onTranslationModeChanged(newTranslationMode);
             },
           ),
@@ -234,8 +220,7 @@ class TranslationInputView extends StatelessWidget {
                       color: textTheme.bodyMedium?.color?.withOpacity(0.5),
                       height: 1.2,
                     ),
-                    maxLines:
-                        inputSetting == kInputSettingSubmitWithEnter ? 1 : 6,
+                    maxLines: inputSubmitMode == InputSubmitMode.enter ? 1 : 6,
                     minLines: 1,
                     onChanged: onChanged,
                     onSubmitted: (newValue) {

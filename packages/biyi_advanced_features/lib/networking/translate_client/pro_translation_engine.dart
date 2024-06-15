@@ -4,7 +4,7 @@ import 'package:uni_translate_client/uni_translate_client.dart';
 class ProTranslationEngine extends TranslationEngine {
   ProTranslationEngine(
     this.config,
-  ) : super(identifier: config.identifier, option: config.option);
+  ) : super(identifier: config.id, option: config.option);
 
   TranslationEngineConfig config;
 

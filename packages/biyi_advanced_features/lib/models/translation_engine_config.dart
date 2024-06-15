@@ -4,7 +4,7 @@ class TranslationEngineConfig {
   TranslationEngineConfig({
     this.position = -1,
     this.group,
-    required this.identifier,
+    required this.id,
     required this.type,
     this.supportedScopes = const [],
     required this.option,
@@ -15,7 +15,7 @@ class TranslationEngineConfig {
     return TranslationEngineConfig(
       position: json['position'] ?? -1,
       group: json['group'],
-      identifier: json['identifier'],
+      id: json['identifier'] ?? json['id'],
       type: json['type'],
       supportedScopes: json['supportedScopes'] != null
           ? List<String>.from(json['supportedScopes'])
@@ -32,17 +32,22 @@ class TranslationEngineConfig {
 
   int position;
   String? group;
-  final String identifier;
+  final String id;
   String type;
   List<TranslationEngineScope> supportedScopes;
   Map<String, dynamic> option;
   bool disabled = false;
 
+  bool get isProGroup => group == 'pro';
+
+  @Deprecated('No longer used')
+  String get identifier => id;
+
   Map<String, dynamic> toJson() {
     return {
       'position': position,
       'group': group,
-      'identifier': identifier,
+      'id': id,
       'type': type,
       'supportedScopes': supportedScopes,
       'option': option,

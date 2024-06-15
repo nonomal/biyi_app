@@ -25,10 +25,12 @@ export 'modifiers/ocr_engines_modifier.dart';
 export 'modifiers/preferences_modifier.dart';
 export 'modifiers/translation_targets_modifier.dart';
 
+@Deprecated('No longer used.')
 Future<User> getCurrentUser() {
   return _getCurrentUser();
 }
 
+@Deprecated('No longer used.')
 Future<User> _getCurrentUser() async {
   try {
     final appDir = await getAppDirectory();
@@ -44,6 +46,7 @@ Future<User> _getCurrentUser() async {
   return User(id: -1);
 }
 
+@Deprecated('No longer used.')
 Future<void> _setCurrentUser(User user) async {
   final appDir = await getAppDirectory();
   final file = File('${appDir.path}/user.json');
@@ -54,6 +57,7 @@ Future<void> _setCurrentUser(User user) async {
   await file.writeAsString(jsonString);
 }
 
+@Deprecated('Use Settings instead.')
 class LocalDb {
   User user = User(id: -1);
   Configuration configuration = Configuration();
@@ -76,14 +80,17 @@ class LocalDb {
     return _listeners.isNotEmpty;
   }
 
+  @Deprecated('No longer used.')
   void addListener(LocalDbListener listener) {
     _listeners.add(listener);
   }
 
+  @Deprecated('No longer used.')
   void removeListener(LocalDbListener listener) {
     _listeners.remove(listener);
   }
 
+  @Deprecated('No longer used.')
   Future<void> setCurrentUser(User newUser) async {
     User oldUser = user;
 
@@ -155,7 +162,7 @@ class LocalDb {
           newProOcrEngineList.insert(
             0,
             OcrEngineConfig(
-              identifier: kDefaultBuiltInOcrEngine.identifier,
+              id: kDefaultBuiltInOcrEngine.identifier,
               type: kDefaultBuiltInOcrEngine.type,
               option: kDefaultBuiltInOcrEngine.option ?? {},
               disabled: true,
@@ -200,10 +207,12 @@ class LocalDb {
     }
   }
 
+  @Deprecated('No longer used.')
   EnginesModifier get engines {
     return engine(null);
   }
 
+  @Deprecated('No longer used.')
   EnginesModifier engine(String? id) {
     _enginesModifier ??= EnginesModifier();
     _enginesModifier?.setId(id);
@@ -211,10 +220,12 @@ class LocalDb {
     return _enginesModifier!;
   }
 
+  @Deprecated('No longer used.')
   OcrEnginesModifier get ocrEngines {
     return ocrEngine(null);
   }
 
+  @Deprecated('No longer used.')
   OcrEnginesModifier ocrEngine(String? id) {
     _ocrEnginesModifier ??= OcrEnginesModifier();
     _ocrEnginesModifier?.setId(id);
@@ -222,10 +233,12 @@ class LocalDb {
     return _ocrEnginesModifier!;
   }
 
+  @Deprecated('No longer used.')
   EnginesModifier get proEngines {
     return proEngine(null);
   }
 
+  @Deprecated('No longer used.')
   EnginesModifier proEngine(String? id) {
     _enginesModifier ??= EnginesModifier();
     _enginesModifier?.setId(id);
@@ -233,10 +246,12 @@ class LocalDb {
     return _enginesModifier!;
   }
 
+  @Deprecated('No longer used.')
   OcrEnginesModifier get proOcrEngines {
     return proOcrEngine(null);
   }
 
+  @Deprecated('No longer used.')
   OcrEnginesModifier proOcrEngine(String? id) {
     _ocrEnginesModifier ??= OcrEnginesModifier();
     _ocrEnginesModifier?.setId(id);
@@ -244,10 +259,12 @@ class LocalDb {
     return _ocrEnginesModifier!;
   }
 
+  @Deprecated('No longer used.')
   EnginesModifier get privateEngines {
     return privateEngine(null);
   }
 
+  @Deprecated('No longer used.')
   EnginesModifier privateEngine(String? id) {
     _enginesModifier ??= EnginesModifier();
     _enginesModifier?.setId(id);
@@ -255,10 +272,12 @@ class LocalDb {
     return _enginesModifier!;
   }
 
+  @Deprecated('No longer used.')
   OcrEnginesModifier get privateOcrEngines {
     return privateOcrEngine(null);
   }
 
+  @Deprecated('No longer used.')
   OcrEnginesModifier privateOcrEngine(String? id) {
     _ocrEnginesModifier ??= OcrEnginesModifier();
     _ocrEnginesModifier?.setId(id);
@@ -266,20 +285,24 @@ class LocalDb {
     return _ocrEnginesModifier!;
   }
 
+  @Deprecated('No longer used.')
   PreferencesModifier get preferences {
     return preference(null);
   }
 
+  @Deprecated('No longer used.')
   PreferencesModifier preference(String? key) {
     _preferencesModifier ??= PreferencesModifier();
     _preferencesModifier?.setKey(key);
     return _preferencesModifier!;
   }
 
+  @Deprecated('No longer used.')
   TranslationTargetsModifier get translationTargets {
     return translationTarget(null);
   }
 
+  @Deprecated('No longer used.')
   TranslationTargetsModifier translationTarget(String? id) {
     _translationTargetsModifier ??= TranslationTargetsModifier();
     _translationTargetsModifier?.setId(id);
@@ -287,6 +310,7 @@ class LocalDb {
   }
 }
 
+@Deprecated('No longer used.')
 final localDb = LocalDb();
 
 Future<void> _safeOpenBox(Directory userDataDirectory, String name) async {
@@ -312,6 +336,7 @@ Future<void> _safeOpenBox(Directory userDataDirectory, String name) async {
   }
 }
 
+@Deprecated('No longer used.')
 Future<void> initLocalDb() async {
   if (!UniPlatform.isWeb) {
     localDb.user = await getCurrentUser();

@@ -13,6 +13,7 @@ import 'package:biyi_app/app/home/translation_target_select_view.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/models.dart';
 import 'package:biyi_app/services/services.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/utilities/utilities.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:collection/collection.dart';
@@ -22,6 +23,7 @@ import 'package:flutter/services.dart';
 import 'package:influxui/influxui.dart';
 import 'package:keypress_simulator/keypress_simulator.dart';
 import 'package:protocol_handler/protocol_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:screen_capturer/screen_capturer.dart';
 import 'package:screen_retriever/screen_retriever.dart';
 import 'package:screen_text_extractor/screen_text_extractor.dart';
@@ -62,8 +64,6 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   final GlobalKey _inputViewKey = GlobalKey();
   final GlobalKey _resultsViewKey = GlobalKey();
 
-  Configuration get _configuration => localDb.configuration;
-
   Brightness _brightness = Brightness.light;
 
   bool? _lastShowTrayIcon;
@@ -91,13 +91,13 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   Timer? _resizeTimer;
 
   List<TranslationEngineConfig> get _translationEngineList {
-    return localDb.engines.list(
-      where: (e) => !e.disabled,
-    );
+    return Settings.instance.translationEngines
+        .where((e) => !e.disabled)
+        .toList();
   }
 
   List<TranslationTarget> get _translationTargetList {
-    if (_configuration.translationMode == kTranslationModeManual) {
+    if (Settings.instance.translationMode == TranslationMode.manual) {
       return [
         TranslationTarget(
           sourceLanguage: _sourceLanguage,
@@ -105,12 +105,12 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
         ),
       ];
     }
-    return localDb.translationTargets.list();
+    return Settings.instance.translationTargets;
   }
 
   @override
   void initState() {
-    localDb.preferences.addListener(_handleChanged);
+    Settings.instance.addListener(_handleChanged);
     WidgetsBinding.instance.addObserver(this);
     if (UniPlatform.isLinux || UniPlatform.isMacOS || UniPlatform.isWindows) {
       protocolHandler.addListener(this);
@@ -129,7 +129,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
 
   @override
   void dispose() {
-    localDb.preferences.removeListener(_handleChanged);
+    Settings.instance.removeListener(_handleChanged);
     WidgetsBinding.instance.removeObserver(this);
     if (UniPlatform.isLinux || UniPlatform.isMacOS || UniPlatform.isWindows) {
       protocolHandler.removeListener(this);
@@ -147,7 +147,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
         View.of(context).platformDispatcher.platformBrightness;
     if (newBrightness != _brightness) {
       _brightness = newBrightness;
-      if (UniPlatform.isWindows && _configuration.showTrayIcon) {
+      if (UniPlatform.isWindows && Settings.instance.trayIconEnabled) {
         _initTrayIcon();
       }
       setState(() {});
@@ -174,11 +174,12 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   void _handleChanged() {
-    bool trayIconUpdated = _lastShowTrayIcon != _configuration.showTrayIcon ||
-        _lastAppLanguage != _configuration.appLanguage;
+    bool trayIconUpdated =
+        _lastShowTrayIcon != Settings.instance.trayIconEnabled ||
+            _lastAppLanguage != Settings.instance.displayLanguage;
 
-    _lastShowTrayIcon = _configuration.showTrayIcon;
-    _lastAppLanguage = _configuration.appLanguage;
+    _lastShowTrayIcon = Settings.instance.trayIconEnabled;
+    _lastAppLanguage = Settings.instance.displayLanguage;
 
     if (trayIconUpdated) {
       _initTrayIcon();
@@ -232,7 +233,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     }
 
     await trayManager.destroy();
-    if (_configuration.showTrayIcon) {
+    if (Settings.instance.trayIconEnabled) {
       await trayManager.setIcon(
         R.image(trayIconName),
         isTemplate: UniPlatform.isMacOS ? true : false,
@@ -368,9 +369,9 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
         Size oldSize = await windowManager.getSize();
         Size newSize = Size(
           oldSize.width,
-          newWindowHeight < _configuration.maxWindowHeight
+          newWindowHeight < Settings.instance.maxWindowHeight
               ? newWindowHeight
-              : _configuration.maxWindowHeight,
+              : Settings.instance.maxWindowHeight,
         );
         if (oldSize.width != newSize.width ||
             oldSize.height != newSize.height) {
@@ -388,13 +389,6 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   Future<void> _loadData() async {
-    try {
-      await localDb.setCurrentUser(
-        localDb.user,
-      );
-    } catch (error) {
-      // skip
-    }
     try {
       _latestVersion = await apiClient.version('latest').get();
       setState(() {});
@@ -418,7 +412,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       _futureList = [];
     });
 
-    if (_configuration.translationMode == kTranslationModeManual) {
+    if (Settings.instance.translationMode == TranslationMode.manual) {
       TranslationResult translationResult = TranslationResult(
         translationTarget: _translationTargetList.first,
         translationResultRecordList: [],
@@ -431,7 +425,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
           texts: [_text],
         );
         DetectLanguageResponse detectLanguageResponse = await translateClient
-            .use(_configuration.defaultEngineId ?? '')
+            .use(Settings.instance.defaultTranslationEngineId ?? '')
             .detectLanguage(detectLanguageRequest);
 
         _textDetectedLanguage = detectLanguageResponse
@@ -465,14 +459,14 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       List<String> unsupportedEngineIdList = [];
 
       for (int j = 0; j < _translationEngineList.length; j++) {
-        String identifier = _translationEngineList[j].identifier;
+        String engineId = _translationEngineList[j].id;
 
         if (_translationEngineList[j].disabled) continue;
 
         try {
           List<LanguagePair> supportedLanguagePairList = [];
           supportedLanguagePairList =
-              await translateClient.use(identifier).getSupportedLanguagePairs();
+              await translateClient.use(engineId).getSupportedLanguagePairs();
 
           LanguagePair? languagePair =
               supportedLanguagePairList.firstWhereOrNull(
@@ -482,12 +476,12 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
             },
           );
           if (languagePair == null) {
-            unsupportedEngineIdList.add(identifier);
+            unsupportedEngineIdList.add(engineId);
           } else {
-            engineIdList.add(identifier);
+            engineIdList.add(engineId);
           }
         } catch (error) {
-          engineIdList.add(identifier);
+          engineIdList.add(engineId);
         }
       }
 
@@ -607,7 +601,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       // 移除前后多余的空格
       _text = (newValue ?? '').trim();
       // 当使用 Enter 键触发翻译时用空格替换换行符
-      if (_configuration.inputSetting == kInputSettingSubmitWithEnter) {
+      if (Settings.instance.inputSubmitMode == InputSubmitMode.enter) {
         _text = _text.replaceAll('\n', ' ');
       }
     });
@@ -673,7 +667,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
         String base64Image = base64Encode(_capturedData!.imageBytes!);
         await Future.delayed(const Duration(milliseconds: 10));
         RecognizeTextResponse recognizeTextResponse = await sharedOcrClient
-            .use(_configuration.defaultOcrEngineId ?? '')
+            .use(Settings.instance.defaultOcrEngineId ?? '')
             .recognizeText(
               RecognizeTextRequest(
                 imagePath: _capturedData?.imagePath,
@@ -682,7 +676,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
             );
         _isTextDetecting = false;
         setState(() {});
-        if (_configuration.autoCopyDetectedText) {
+        if (Settings.instance.autoCopyRecognizedText) {
           Clipboard.setData(ClipboardData(text: recognizeTextResponse.text));
         }
         _handleTextChanged(recognizeTextResponse.text, isRequery: true);
@@ -807,11 +801,13 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
             onChanged: (newValue) => _handleTextChanged(newValue),
             capturedData: _capturedData,
             isTextDetecting: _isTextDetecting,
-            translationMode: _configuration.translationMode,
+            translationMode: Settings.instance.translationMode,
             onTranslationModeChanged: (newTranslationMode) {
-              _configuration.translationMode = newTranslationMode;
+              context
+                  .read<Settings>()
+                  .update(translationMode: newTranslationMode);
             },
-            inputSetting: _configuration.inputSetting,
+            inputSubmitMode: Settings.instance.inputSubmitMode,
             onClickExtractTextFromScreenCapture:
                 _handleExtractTextFromScreenCapture,
             onClickExtractTextFromClipboard: _handleExtractTextFromClipboard,
@@ -819,7 +815,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
             onButtonTappedTrans: _handleButtonTappedTrans,
           ),
           TranslationTargetSelectView(
-            translationMode: _configuration.translationMode,
+            translationMode: Settings.instance.translationMode,
             isShowSourceLanguageSelector: _isShowSourceLanguageSelector,
             isShowTargetLanguageSelector: _isShowTargetLanguageSelector,
             onToggleShowSourceLanguageSelector: (newValue) {
@@ -854,10 +850,11 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   Widget _buildResultsView(BuildContext context) {
+    final settings = context.watch<Settings>();
     return TranslationResultsView(
       viewKey: _resultsViewKey,
       controller: _scrollController,
-      translationMode: _configuration.translationMode,
+      translationMode: settings.translationMode,
       querySubmitted: _querySubmitted,
       text: _text,
       textDetectedLanguage: _textDetectedLanguage,
@@ -865,6 +862,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       onTextTapped: (word) {
         _handleTextChanged(word, isRequery: true);
       },
+      doubleClickCopyResult: settings.doubleClickCopyResult,
     );
   }
 
@@ -956,7 +954,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
 
   @override
   void onShortcutKeyDownSubmitWithMateEnter() {
-    if (_configuration.inputSetting != kInputSettingSubmitWithMetaEnter) {
+    if (Settings.instance.inputSubmitMode != InputSubmitMode.metaEnter) {
       return;
     }
     _handleButtonTappedTrans();
@@ -992,7 +990,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       }
 
       TranslateResponse translateResponse = await translateClient
-          .use(_configuration.defaultTranslateEngineId!)
+          .use(Settings.instance.defaultTranslationEngineId!)
           .translate(
             TranslateRequest(
               text: extractedData?.text ?? '',

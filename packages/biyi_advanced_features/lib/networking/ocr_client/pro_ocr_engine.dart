@@ -4,7 +4,7 @@ import 'package:uni_ocr_client/uni_ocr_client.dart';
 class ProOcrEngine extends OcrEngine {
   ProOcrEngine(
     this.config,
-  ) : super(identifier: config.identifier, option: config.option);
+  ) : super(identifier: config.id, option: config.option);
 
   OcrEngineConfig config;
 

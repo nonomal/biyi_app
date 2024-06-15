@@ -1,5 +1,4 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/services/services.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -18,71 +17,46 @@ class AppearanceSettingPage extends StatefulWidget {
 }
 
 class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
-  Configuration get _configuration => localDb.configuration;
-
-  @override
-  void initState() {
-    localDb.preferences.addListener(_handleChanged);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    localDb.preferences.removeListener(_handleChanged);
-    super.dispose();
-  }
-
-  void _handleChanged() {
-    if (mounted) setState(() {});
-  }
-
   void _handleThemeModeChanged(newValue) {
-    _configuration.themeMode = newValue;
-    context.read<SettingsState>().themeMode = newValue;
+    context.read<Settings>().update(themeMode: newValue);
+  }
+
+  void _handleTrayIconEnabledChanged(newValue) {
+    context.read<Settings>().update(trayIconEnabled: newValue);
+  }
+
+  void _handleMaxWindowHeightChanged(newValue) {
+    context.read<Settings>().update(maxWindowHeight: newValue);
   }
 
   Widget _buildBody(BuildContext context) {
+    final settings = context.watch<Settings>();
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
         PreferenceListSection(
           children: [
-            PreferenceListTile(
-              title: Text(
-                LocaleKeys.theme_mode_light.tr(),
+            for (var themeMode in [
+              ThemeMode.light,
+              ThemeMode.dark,
+              ThemeMode.system,
+            ])
+              PreferenceListTile(
+                title: Text(
+                  themeMode == ThemeMode.light
+                      ? LocaleKeys.theme_mode_light.tr()
+                      : themeMode == ThemeMode.dark
+                          ? LocaleKeys.theme_mode_dark.tr()
+                          : LocaleKeys.theme_mode_system.tr(),
+                ),
+                additionalInfo: settings.themeMode == themeMode
+                    ? Icon(
+                        FluentIcons.checkmark_circle_16_filled,
+                        color: Theme.of(context).colorScheme.primary,
+                      )
+                    : null,
+                onTap: () => _handleThemeModeChanged(themeMode),
               ),
-              additionalInfo: _configuration.themeMode == ThemeMode.light
-                  ? Icon(
-                      FluentIcons.checkmark_circle_16_filled,
-                      color: Theme.of(context).colorScheme.primary,
-                    )
-                  : null,
-              onTap: () => _handleThemeModeChanged(ThemeMode.light),
-            ),
-            PreferenceListTile(
-              title: Text(
-                LocaleKeys.theme_mode_dark.tr(),
-              ),
-              additionalInfo: _configuration.themeMode == ThemeMode.dark
-                  ? Icon(
-                      FluentIcons.checkmark_circle_16_filled,
-                      color: Theme.of(context).colorScheme.primary,
-                    )
-                  : null,
-              onTap: () => _handleThemeModeChanged(ThemeMode.dark),
-            ),
-            PreferenceListTile(
-              title: Text(
-                LocaleKeys.theme_mode_system.tr(),
-              ),
-              additionalInfo: _configuration.themeMode == ThemeMode.system
-                  ? Icon(
-                      FluentIcons.checkmark_circle_16_filled,
-                      color: Theme.of(context).colorScheme.primary,
-                    )
-                  : null,
-              onTap: () => _handleThemeModeChanged(ThemeMode.system),
-            ),
           ],
         ),
         PreferenceListSection(
@@ -95,14 +69,11 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
                 LocaleKeys.app_settings_appearance_tray_icon_show_title.tr(),
               ),
               additionalInfo: Switch(
-                value: _configuration.showTrayIcon,
-                onChanged: (value) {
-                  _configuration.showTrayIcon = value;
-                },
+                value: settings.trayIconEnabled,
+                onChanged: _handleTrayIconEnabledChanged,
               ),
-              onTap: () {
-                _configuration.showTrayIcon = !_configuration.showTrayIcon;
-              },
+              onTap: () =>
+                  _handleTrayIconEnabledChanged(!settings.trayIconEnabled),
             ),
           ],
         ),
@@ -114,15 +85,13 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
             for (var option in _kMaxWindowHeightOptions)
               PreferenceListTile(
                 title: Text('${option.toInt()}'),
-                additionalInfo: _configuration.maxWindowHeight == option
+                additionalInfo: settings.maxWindowHeight == option
                     ? Icon(
                         FluentIcons.checkmark_circle_16_filled,
                         color: Theme.of(context).colorScheme.primary,
                       )
                     : null,
-                onTap: () {
-                  _configuration.maxWindowHeight = option;
-                },
+                onTap: () => _handleMaxWindowHeightChanged(option),
               ),
           ],
         ),

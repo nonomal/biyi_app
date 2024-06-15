@@ -1,7 +1,7 @@
 import 'dart:ui' as ui;
 
-import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/models/models.dart';
+import 'package:biyi_app/models/settings_base.dart';
 import 'package:biyi_app/utilities/language_util.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:influxui/influxui.dart';
@@ -18,16 +18,18 @@ class TranslationResultsView extends StatelessWidget {
     required this.textDetectedLanguage,
     required this.translationResultList,
     required this.onTextTapped,
+    required this.doubleClickCopyResult,
   });
 
   final Key viewKey;
   final ScrollController controller;
-  final String translationMode;
+  final TranslationMode translationMode;
   final bool querySubmitted;
   final String text;
   final String? textDetectedLanguage;
   final List<TranslationResult> translationResultList;
   final ValueChanged<String> onTextTapped;
+  final bool doubleClickCopyResult;
 
   Widget _buildNoMatchingTranslationTarget(BuildContext context) {
     return Container(
@@ -80,7 +82,7 @@ class TranslationResultsView extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               if (querySubmitted &&
-                  translationMode == kTranslationModeAuto &&
+                  translationMode == TranslationMode.auto &&
                   translationResultList.isEmpty &&
                   textDetectedLanguage != null)
                 _buildNoMatchingTranslationTarget(context),
@@ -88,12 +90,12 @@ class TranslationResultsView extends StatelessWidget {
                 SizedBox(
                   width: viewWidth,
                   child: StickyHeader(
-                    header: translationMode == kTranslationModeAuto
+                    header: translationMode == TranslationMode.auto
                         ? TranslationResultView(result)
                         : Container(),
                     content: Column(
                       children: [
-                        if (translationMode == kTranslationModeAuto)
+                        if (translationMode == TranslationMode.auto)
                           const SizedBox(height: 12),
                         for (var resultRecord
                             in result.translationResultRecordList ?? [])
@@ -101,6 +103,7 @@ class TranslationResultsView extends StatelessWidget {
                             translationResult: result,
                             translationResultRecord: resultRecord,
                             onTextTapped: onTextTapped,
+                            doubleClickCopyResult: doubleClickCopyResult,
                           ),
                       ],
                     ),

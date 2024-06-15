@@ -1,5 +1,5 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
-import 'package:biyi_app/services/local_db/local_db.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:translation_engine_baidu/translation_engine_baidu.dart';
 import 'package:translation_engine_caiyun/translation_engine_caiyun.dart';
 import 'package:translation_engine_deepl/translation_engine_deepl.dart';
@@ -35,48 +35,49 @@ final Map<String, List<String>> kKnownSupportedEngineOptionKeys = {
 TranslationEngine? createTranslationEngine(
   TranslationEngineConfig engineConfig,
 ) {
-  if (localDb.proEngine(engineConfig.identifier).exists()) {
+  if (engineConfig.isProGroup &&
+      Settings.instance.getTranslationEngine(engineConfig.id) != null) {
     return ProTranslationEngine(engineConfig);
   } else {
     switch (engineConfig.type) {
       case kEngineTypeBaidu:
         return BaiduTranslationEngine(
-          identifier: engineConfig.identifier,
+          identifier: engineConfig.id,
           option: engineConfig.option,
         );
       case kEngineTypeCaiyun:
         return CaiyunTranslationEngine(
-          identifier: engineConfig.identifier,
+          identifier: engineConfig.id,
           option: engineConfig.option,
         );
       case kEngineTypeDeepL:
         return DeepLTranslationEngine(
-          identifier: engineConfig.identifier,
+          identifier: engineConfig.id,
           option: engineConfig.option,
         );
       case kEngineTypeGoogle:
         return GoogleTranslationEngine(
-          identifier: engineConfig.identifier,
+          identifier: engineConfig.id,
           option: engineConfig.option,
         );
       case kEngineTypeIciba:
         return IcibaTranslationEngine(
-          identifier: engineConfig.identifier,
+          identifier: engineConfig.id,
           option: engineConfig.option,
         );
       case kEngineTypeOpenAI:
         return OpenAITranslationEngine(
-          identifier: engineConfig.identifier,
+          identifier: engineConfig.id,
           option: engineConfig.option,
         );
       case kEngineTypeTencent:
         return TencentTranslationEngine(
-          identifier: engineConfig.identifier,
+          identifier: engineConfig.id,
           option: engineConfig.option,
         );
       case kEngineTypeYoudao:
         return YoudaoTranslationEngine(
-          identifier: engineConfig.identifier,
+          identifier: engineConfig.id,
           option: engineConfig.option,
         );
       default:
@@ -91,17 +92,20 @@ class AutoloadTranslateClientAdapter extends UniTranslateClientAdapter {
 
   @override
   TranslationEngine get first {
-    TranslationEngineConfig engineConfig = localDb.engines.list().first;
-    return use(engineConfig.identifier);
+    TranslationEngineConfig engineConfig =
+        Settings.instance.translationEngines.first;
+    return use(engineConfig.id);
   }
 
   @override
   TranslationEngine use(String identifier) {
-    TranslationEngineConfig? engineConfig = localDb.engine(identifier).get();
+    String id = identifier;
+    TranslationEngineConfig? engineConfig =
+        Settings.instance.getTranslationEngine(id);
 
     TranslationEngine? translationEngine;
-    if (_translationEngineMap.containsKey(engineConfig?.identifier)) {
-      translationEngine = _translationEngineMap[engineConfig?.identifier];
+    if (_translationEngineMap.containsKey(engineConfig?.id)) {
+      translationEngine = _translationEngineMap[engineConfig?.id];
     }
 
     if (translationEngine == null) {
@@ -109,7 +113,7 @@ class AutoloadTranslateClientAdapter extends UniTranslateClientAdapter {
 
       if (translationEngine != null) {
         _translationEngineMap.update(
-          engineConfig.identifier,
+          engineConfig.id,
           (_) => translationEngine!,
           ifAbsent: () => translationEngine!,
         );

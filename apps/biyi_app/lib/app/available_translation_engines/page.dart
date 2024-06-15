@@ -1,6 +1,6 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/services/local_db/local_db.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -25,11 +25,15 @@ class AvailableTranslationEnginesPage extends StatefulWidget {
 class _AvailableTranslationEnginesPageState
     extends State<AvailableTranslationEnginesPage> {
   List<TranslationEngineConfig> get _proEngineList {
-    return localDb.proEngines.list(where: ((e) => !e.disabled));
+    return Settings.instance.proTranslationEngines
+        .where(((e) => !e.disabled))
+        .toList();
   }
 
   List<TranslationEngineConfig> get _privateEngineList {
-    return localDb.privateEngines.list(where: ((e) => !e.disabled));
+    return Settings.instance.privateTranslationEngines
+        .where((e) => !e.disabled)
+        .toList();
   }
 
   String? _selectedEngineId;
@@ -44,7 +48,7 @@ class _AvailableTranslationEnginesPageState
 
   Future<void> _handleClickOk() async {
     TranslationEngineConfig? engineConfig =
-        localDb.engine(_selectedEngineId).get();
+        Settings.instance.getTranslationEngine(_selectedEngineId);
     context.pop<TranslationEngineConfig?>(engineConfig);
   }
 
@@ -59,7 +63,7 @@ class _AvailableTranslationEnginesPageState
                 PreferenceListTile(
                   leading: TranslationEngineIcon(engineConfig.type),
                   title: TranslationEngineName(engineConfig),
-                  additionalInfo: engineConfig.identifier == _selectedEngineId
+                  additionalInfo: engineConfig.id == _selectedEngineId
                       ? Icon(
                           FluentIcons.checkmark_circle_16_filled,
                           color: Theme.of(context).colorScheme.primary,
@@ -67,7 +71,7 @@ class _AvailableTranslationEnginesPageState
                       : null,
                   onTap: () {
                     setState(() {
-                      _selectedEngineId = engineConfig.identifier;
+                      _selectedEngineId = engineConfig.id;
                     });
                   },
                 ),
@@ -82,7 +86,7 @@ class _AvailableTranslationEnginesPageState
               PreferenceListTile(
                 leading: TranslationEngineIcon(engineConfig.type),
                 title: TranslationEngineName(engineConfig),
-                additionalInfo: engineConfig.identifier == _selectedEngineId
+                additionalInfo: engineConfig.id == _selectedEngineId
                     ? Icon(
                         FluentIcons.checkmark_circle_16_filled,
                         color: Theme.of(context).colorScheme.primary,
@@ -90,7 +94,7 @@ class _AvailableTranslationEnginesPageState
                     : null,
                 onTap: () {
                   setState(() {
-                    _selectedEngineId = engineConfig.identifier;
+                    _selectedEngineId = engineConfig.id;
                   });
                 },
               ),

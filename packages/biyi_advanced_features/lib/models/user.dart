@@ -4,6 +4,7 @@ import 'package:biyi_advanced_features/models/user_preference.dart';
 import 'package:biyi_advanced_features/models/user_property.dart';
 import 'package:crypto/crypto.dart';
 
+@Deprecated('No longer used.')
 class User {
   User({
     required this.id,

@@ -1,6 +1,6 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/services/local_db/local_db.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -23,11 +23,13 @@ class AvailableOcrEnginesPage extends StatefulWidget {
 
 class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
   List<OcrEngineConfig> get _proOcrEngineList {
-    return localDb.proOcrEngines.list(where: ((e) => !e.disabled));
+    return Settings.instance.proOcrEngines.where((e) => !e.disabled).toList();
   }
 
   List<OcrEngineConfig> get _privateOcrEngineList {
-    return localDb.privateOcrEngines.list(where: ((e) => !e.disabled));
+    return Settings.instance.privateOcrEngines
+        .where((e) => !e.disabled)
+        .toList();
   }
 
   String? _selectedEngineId;
@@ -42,7 +44,7 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
 
   Future<void> _handleClickOk() async {
     OcrEngineConfig? ocrEngineConfig =
-        localDb.ocrEngine(_selectedEngineId).get();
+        Settings.instance.getOcrEngine(_selectedEngineId);
     context.pop<OcrEngineConfig?>(ocrEngineConfig);
   }
 
@@ -57,16 +59,15 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
                 PreferenceListTile(
                   leading: OcrEngineIcon(ocrEngineConfig.type),
                   title: OcrEngineName(ocrEngineConfig),
-                  additionalInfo:
-                      ocrEngineConfig.identifier == _selectedEngineId
-                          ? Icon(
-                              FluentIcons.checkmark_circle_16_filled,
-                              color: Theme.of(context).colorScheme.primary,
-                            )
-                          : null,
+                  additionalInfo: ocrEngineConfig.id == _selectedEngineId
+                      ? Icon(
+                          FluentIcons.checkmark_circle_16_filled,
+                          color: Theme.of(context).colorScheme.primary,
+                        )
+                      : null,
                   onTap: () {
                     setState(() {
-                      _selectedEngineId = ocrEngineConfig.identifier;
+                      _selectedEngineId = ocrEngineConfig.id;
                     });
                   },
                 ),
@@ -81,7 +82,7 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
               PreferenceListTile(
                 leading: OcrEngineIcon(ocrEngineConfig.type),
                 title: OcrEngineName(ocrEngineConfig),
-                additionalInfo: ocrEngineConfig.identifier == _selectedEngineId
+                additionalInfo: ocrEngineConfig.id == _selectedEngineId
                     ? Icon(
                         FluentIcons.checkmark_circle_16_filled,
                         color: Theme.of(context).colorScheme.primary,
@@ -89,7 +90,7 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
                     : null,
                 onTap: () {
                   setState(() {
-                    _selectedEngineId = ocrEngineConfig.identifier;
+                    _selectedEngineId = ocrEngineConfig.id;
                   });
                 },
               ),

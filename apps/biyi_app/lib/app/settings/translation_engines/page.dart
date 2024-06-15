@@ -1,13 +1,14 @@
 import 'package:biyi_advanced_features/models/models.dart';
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/services/services.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
 import 'package:preference_list/preference_list.dart';
+import 'package:provider/provider.dart';
 import 'package:reorderables/reorderables.dart';
 
 class TranslationEnginesSettingPage extends StatefulWidget {
@@ -20,27 +21,6 @@ class TranslationEnginesSettingPage extends StatefulWidget {
 
 class _TranslationEnginesSettingPageState
     extends State<TranslationEnginesSettingPage> {
-  List<TranslationEngineConfig> get _proEngineList =>
-      (localDb.proEngines.list());
-  List<TranslationEngineConfig> get _privateEngineList =>
-      (localDb.privateEngines.list());
-
-  @override
-  void initState() {
-    localDb.privateEngines.addListener(_handleChanged);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    localDb.privateEngines.removeListener(_handleChanged);
-    super.dispose();
-  }
-
-  void _handleChanged() {
-    if (mounted) setState(() {});
-  }
-
   Future<void> _handleClickAdd() async {
     final engineType = await context.push<String?>(
       PageId.settingsTranslationEngineTypes,
@@ -58,24 +38,27 @@ class _TranslationEnginesSettingPageState
   }
 
   Widget _buildListSectionProEngines(BuildContext context) {
-    if (_proEngineList.isEmpty) return Container();
+    final proTranslationEngineList =
+        context.watch<Settings>().proTranslationEngines;
+    if (proTranslationEngineList.isEmpty) return Container();
     return PreferenceListSection(
       children: [
-        for (TranslationEngineConfig item in _proEngineList)
+        for (TranslationEngineConfig item in proTranslationEngineList)
           PreferenceListTile(
             leading: TranslationEngineIcon(item.type),
             title: TranslationEngineName(item),
             additionalInfo: Switch(
               value: !item.disabled,
               onChanged: (newValue) {
-                localDb //
-                    .proEngine(item.identifier)
-                    .update(disabled: !item.disabled);
+                context.watch<Settings>().updateTranslationEngine(
+                      item.id,
+                      disabled: !item.disabled,
+                    );
               },
             ),
             onTap: () {
               context.push<String?>(
-                PageId.settingsTranslationEngine(item.identifier),
+                PageId.settingsTranslationEngine(item.id),
                 extra: {
                   'engineConfig': item,
                   'editable': false,
@@ -88,17 +71,21 @@ class _TranslationEnginesSettingPageState
   }
 
   Widget _buildListSectionPrivateEngines(BuildContext context) {
+    final privateTranslationEngineList =
+        context.watch<Settings>().privateTranslationEngines;
+
     void onReorder(int oldIndex, int newIndex) {
       List<String> idList =
-          _privateEngineList.map((e) => e.identifier).toList();
+          privateTranslationEngineList.map((e) => e.id).toList();
       String oldId = idList.removeAt(oldIndex);
       idList.insert(newIndex, oldId);
 
       for (var i = 0; i < idList.length; i++) {
-        final identifier = idList[i];
-        localDb //
-            .privateEngine(identifier)
-            .update(position: i + 1);
+        final id = idList[i];
+        context.read<Settings>().updateTranslationEngine(
+              id,
+              position: i + 1,
+            );
       }
     }
 
@@ -114,27 +101,28 @@ class _TranslationEnginesSettingPageState
           crossAxisAlignment: CrossAxisAlignment.start,
           onReorder: onReorder,
           children: [
-            for (var i = 0; i < _privateEngineList.length; i++)
+            for (var i = 0; i < privateTranslationEngineList.length; i++)
               ReorderableWidget(
                 reorderable: true,
                 key: ValueKey(i),
                 child: Builder(
                   builder: (_) {
-                    final item = _privateEngineList[i];
+                    final item = privateTranslationEngineList[i];
                     return PreferenceListTile(
                       leading: TranslationEngineIcon(item.type),
                       title: TranslationEngineName(item),
                       additionalInfo: Switch(
                         value: !item.disabled,
                         onChanged: (newValue) {
-                          localDb //
-                              .privateEngine(item.identifier)
-                              .update(disabled: !item.disabled);
+                          context.read<Settings>().updateTranslationEngine(
+                                item.id,
+                                disabled: !item.disabled,
+                              );
                         },
                       ),
                       onTap: () {
                         context.push<String?>(
-                          PageId.settingsTranslationEngine(item.identifier),
+                          PageId.settingsTranslationEngine(item.id),
                           extra: {
                             'engineConfig': item,
                             'editable': true,

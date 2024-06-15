@@ -5,6 +5,7 @@ import 'package:biyi_app/services/local_db/local_db.dart';
 import 'package:biyi_app/utilities/utilities.dart';
 import 'package:shortid/shortid.dart';
 
+@Deprecated('No longer used.')
 Future<void> initDataIfNeed() async {
   final userDataDir = await getUserDataDirectory();
   final file = File('${userDataDir.path}/init_data_completed.json');

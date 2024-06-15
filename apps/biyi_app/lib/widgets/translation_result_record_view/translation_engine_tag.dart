@@ -1,6 +1,7 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
-import 'package:biyi_app/models/models.dart';
-import 'package:biyi_app/services/local_db/local_db.dart';
+import 'package:biyi_app/models/ext_translation_engine_config.dart';
+import 'package:biyi_app/models/translation_result_record.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/translation_engine_icon/translation_engine_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:influxui/influxui.dart';
@@ -21,9 +22,9 @@ class _TranslationEngineTagState extends State<TranslationEngineTag> {
   bool _isHovered = false;
 
   TranslationEngineConfig get _translationEngineConfig {
-    return localDb
-        .engine(widget.translationResultRecord.translationEngineId!)
-        .get()!;
+    return Settings.instance.getTranslationEngine(
+      widget.translationResultRecord.translationEngineId!,
+    )!;
   }
 
   @override

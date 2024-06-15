@@ -55,7 +55,9 @@ Future<void> _ensureInitialized() async {
   }
 
   await initEnv();
+  // ignore: deprecated_member_use_from_same_package
   await initLocalDb();
+  await Settings.instance.loadFromLocalFile();
 }
 
 void main() async {
@@ -84,7 +86,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => SettingsState()),
+        ChangeNotifierProvider.value(value: Settings.instance),
       ],
       child: EasyLocalization(
         supportedLocales: const [
@@ -109,9 +111,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final botToastBuilder = BotToastInit();
+
   @override
   Widget build(BuildContext context) {
-    final settings = context.watch<SettingsState>();
+    final settings = context.watch<Settings>();
+    if (context.locale != settings.locale) {
+      context.setLocale(settings.locale);
+    }
     return MaterialApp.router(
       routerConfig: routerConfig,
       theme: influxLight.copyWith(

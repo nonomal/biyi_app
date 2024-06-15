@@ -1,8 +1,8 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/services/local_db/local_db.dart';
 import 'package:biyi_app/services/ocr_client/ocr_client.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/ocr_engine_icon/ocr_engine_icon.dart';
 import 'package:biyi_app/widgets/ocr_engine_name/ocr_engine_name.dart';
@@ -12,6 +12,7 @@ import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
 import 'package:ocr_engine_youdao/ocr_engine_youdao.dart';
 import 'package:preference_list/preference_list.dart';
+import 'package:provider/provider.dart';
 import 'package:shortid/shortid.dart';
 
 class OcrEnginesNewOrEditPage extends StatefulWidget {
@@ -34,7 +35,7 @@ class OcrEnginesNewOrEditPage extends StatefulWidget {
 class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
   final Map<String, TextEditingController> _textEditingControllerMap = {};
 
-  String? _identifier;
+  String? _id;
   String? _type;
   Map<String, dynamic> _option = {};
 
@@ -49,7 +50,7 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
   @override
   void initState() {
     if (widget.ocrEngineConfig != null) {
-      _identifier = widget.ocrEngineConfig?.identifier;
+      _id = widget.ocrEngineConfig?.id;
       _type = widget.ocrEngineConfig?.type;
       _option = widget.ocrEngineConfig?.option ?? {};
 
@@ -59,21 +60,20 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
         _textEditingControllerMap[optionKey] = textEditingController;
       }
     } else {
-      _identifier = shortid.generate();
+      _id = shortid.generate();
       _type = widget.ocrEngineType;
     }
     super.initState();
   }
 
-  Future<void> _handleClickOk() async {
-    await localDb //
-        .privateOcrEngine(_identifier)
-        .updateOrCreate(
+  void _handleClickOk() {
+    context.read<Settings>().updateOcrEngine(
+          _id!,
           type: _type,
           option: _option,
         );
 
-    (sharedOcrClient.adapter as AutoloadOcrClientAdapter).renew(_identifier!);
+    (sharedOcrClient.adapter as AutoloadOcrClientAdapter).renew(_id!);
 
     // ignore: use_build_context_synchronously
     Navigator.of(context).pop();
@@ -161,9 +161,10 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
                     style: const TextStyle(color: ExtendedColors.red),
                   ),
                 ),
-                onTap: () async {
-                  await localDb.privateOcrEngine(_identifier).delete();
-                  // ignore: use_build_context_synchronously
+                onTap: () {
+                  if (_id != null) {
+                    context.read<Settings>().deleteOcrEngine(_id!);
+                  }
                   Navigator.of(context).pop();
                 },
               ),

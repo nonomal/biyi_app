@@ -1,3 +1,4 @@
+@Deprecated('No longer used.')
 class UserProperty {
   UserProperty({
     this.key,

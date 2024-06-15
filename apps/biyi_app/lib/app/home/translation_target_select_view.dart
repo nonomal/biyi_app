@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:biyi_advanced_features/biyi_advanced_features.dart';
+import 'package:biyi_app/models/settings_base.dart';
 import 'package:biyi_app/utilities/language_util.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -78,7 +78,7 @@ class TranslationTargetSelectView extends StatefulWidget {
     required this.onChanged,
   });
   // final Key viewKey;
-  final String translationMode;
+  final TranslationMode translationMode;
   final bool isShowSourceLanguageSelector;
   final bool isShowTargetLanguageSelector;
   final ValueChanged<bool> onToggleShowSourceLanguageSelector;
@@ -106,7 +106,7 @@ class _TranslationTargetSelectViewState
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
-    if (widget.translationMode == kTranslationModeAuto) {
+    if (widget.translationMode == TranslationMode.auto) {
       return Container();
     }
     return Container(

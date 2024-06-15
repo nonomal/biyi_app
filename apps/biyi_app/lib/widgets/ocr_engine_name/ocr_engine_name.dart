@@ -18,7 +18,7 @@ class OcrEngineName extends StatelessWidget {
         text: ocrEngineConfig.typeName,
         children: [
           TextSpan(
-            text: ' (${ocrEngineConfig.identifier})',
+            text: ' (${ocrEngineConfig.id})',
             style: textTheme.bodySmall?.copyWith(
               color: ExtendedColors.gray.shade400,
             ),

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shortid/shortid.dart';
 
+@Deprecated('No longer used.')
 class OcrEnginesModifier extends Listenable {
   Box? _boxInstance;
 
@@ -72,7 +73,7 @@ class OcrEnginesModifier extends Listenable {
     final value = OcrEngineConfig(
       position: position,
       group: _group,
-      identifier: _id ?? shortid.generate(),
+      id: _id ?? shortid.generate(),
       type: type,
       option: option,
     );

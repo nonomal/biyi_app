@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shortid/shortid.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
+@Deprecated('No longer used.')
 class EnginesModifier extends Listenable {
   Box? _boxInstance;
 
@@ -75,7 +76,7 @@ class EnginesModifier extends Listenable {
     final value = TranslationEngineConfig(
       position: position,
       group: _group,
-      identifier: _id ?? shortid.generate(),
+      id: _id ?? shortid.generate(),
       type: type,
       option: option,
       supportedScopes: (supportedScopes ?? [])

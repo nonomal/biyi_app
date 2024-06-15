@@ -1,13 +1,14 @@
 import 'package:biyi_advanced_features/models/models.dart';
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/services/services.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
 import 'package:preference_list/preference_list.dart';
+import 'package:provider/provider.dart';
 import 'package:reorderables/reorderables.dart';
 
 class OcrEnginesSettingPage extends StatefulWidget {
@@ -18,26 +19,6 @@ class OcrEnginesSettingPage extends StatefulWidget {
 }
 
 class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
-  List<OcrEngineConfig> get _proOcrEngineList => (localDb.proOcrEngines.list());
-  List<OcrEngineConfig> get _privateOcrEngineList =>
-      (localDb.privateOcrEngines.list());
-
-  @override
-  void initState() {
-    localDb.privateOcrEngines.addListener(_handleChanged);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    localDb.privateOcrEngines.removeListener(_handleChanged);
-    super.dispose();
-  }
-
-  void _handleChanged() {
-    if (mounted) setState(() {});
-  }
-
   Future<void> _handleClickAdd() async {
     final ocrEngineType = await context.push<String?>(
       PageId.settingsOcrEngineTypes,
@@ -55,24 +36,26 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
   }
 
   Widget _buildListSectionProEngines(BuildContext context) {
-    if (_proOcrEngineList.isEmpty) return Container();
+    final proOcrEngineList = context.watch<Settings>().proOcrEngines;
+    if (proOcrEngineList.isEmpty) return Container();
     return PreferenceListSection(
       children: [
-        for (OcrEngineConfig item in _proOcrEngineList)
+        for (OcrEngineConfig item in proOcrEngineList)
           PreferenceListTile(
             leading: OcrEngineIcon(item.type),
             title: OcrEngineName(item),
             additionalInfo: Switch(
               value: !item.disabled,
               onChanged: (newValue) {
-                localDb //
-                    .proOcrEngine(item.identifier)
-                    .update(disabled: !item.disabled);
+                context.watch<Settings>().updateOcrEngine(
+                      item.id,
+                      disabled: !item.disabled,
+                    );
               },
             ),
             onTap: () {
               context.push<String?>(
-                PageId.settingsOcrEngine(item.identifier),
+                PageId.settingsOcrEngine(item.id),
                 extra: {
                   'ocrEngineConfig': item,
                   'editable': false,
@@ -85,17 +68,19 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
   }
 
   Widget _buildListSectionPrivateEngines(BuildContext context) {
+    final privateOcrEngineList = context.watch<Settings>().privateOcrEngines;
+
     void onReorder(int oldIndex, int newIndex) {
-      List<String> idList =
-          _privateOcrEngineList.map((e) => e.identifier).toList();
+      List<String> idList = privateOcrEngineList.map((e) => e.id).toList();
       String oldId = idList.removeAt(oldIndex);
       idList.insert(newIndex, oldId);
 
       for (var i = 0; i < idList.length; i++) {
-        final identifier = idList[i];
-        localDb //
-            .privateOcrEngine(identifier)
-            .update(position: i + 1);
+        final id = idList[i];
+        context.read<Settings>().updateOcrEngine(
+              id,
+              position: i + 1,
+            );
       }
     }
 
@@ -111,27 +96,28 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           onReorder: onReorder,
           children: [
-            for (var i = 0; i < _privateOcrEngineList.length; i++)
+            for (var i = 0; i < privateOcrEngineList.length; i++)
               ReorderableWidget(
                 reorderable: true,
                 key: ValueKey(i),
                 child: Builder(
                   builder: (_) {
-                    final item = _privateOcrEngineList[i];
+                    final item = privateOcrEngineList[i];
                     return PreferenceListTile(
                       leading: OcrEngineIcon(item.type),
                       title: OcrEngineName(item),
                       additionalInfo: Switch(
                         value: !item.disabled,
                         onChanged: (newValue) {
-                          localDb //
-                              .privateOcrEngine(item.identifier)
-                              .update(disabled: !item.disabled);
+                          context.read<Settings>().updateOcrEngine(
+                                item.id,
+                                disabled: !item.disabled,
+                              );
                         },
                       ),
                       onTap: () {
                         context.push<String?>(
-                          PageId.settingsOcrEngine(item.identifier),
+                          PageId.settingsOcrEngine(item.id),
                           extra: {
                             'ocrEngineConfig': item,
                             'editable': true,

@@ -1,13 +1,14 @@
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/models.dart';
-import 'package:biyi_app/services/local_db/local_db.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
 import 'package:preference_list/preference_list.dart';
+import 'package:provider/provider.dart';
 
 class TranslationTargetNewOrEditPage extends StatefulWidget {
   const TranslationTargetNewOrEditPage({
@@ -36,15 +37,11 @@ class _TranslationTargetNewOrEditPageState
     super.initState();
   }
 
-  Future<void> _handleClickOk() async {
-    await localDb //
-        .translationTarget(widget.translationTarget?.id)
-        .updateOrCreate(
-          sourceLanguage: _sourceLanguage,
-          targetLanguage: _targetLanguage,
+  void _handleClickOk() {
+    context.read<Settings>().updateOrCreateTranslationTarget(
+          sourceLanguage: _sourceLanguage!,
+          targetLanguage: _targetLanguage!,
         );
-
-    // ignore: use_build_context_synchronously
     Navigator.of(context).pop();
   }
 
@@ -120,9 +117,12 @@ class _TranslationTargetNewOrEditPageState
                 ),
                 // accessoryView: Container(),
                 onTap: () async {
-                  await localDb
-                      .translationTarget(widget.translationTarget?.id)
-                      .delete();
+                  context.read<Settings>().deleteTranslationTarget(
+                        sourceLanguage:
+                            widget.translationTarget!.sourceLanguage!,
+                        targetLanguage:
+                            widget.translationTarget!.targetLanguage!,
+                      );
 
                   // ignore: use_build_context_synchronously
                   Navigator.of(context).pop();

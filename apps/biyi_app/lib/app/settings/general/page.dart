@@ -1,8 +1,8 @@
 import 'package:biyi_advanced_features/models/models.dart';
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/models/models.dart';
-import 'package:biyi_app/services/services.dart';
+import 'package:biyi_app/models/translation_target.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -10,6 +10,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:influxui/influxui.dart';
 import 'package:preference_list/preference_list.dart';
+import 'package:provider/provider.dart';
 import 'package:uni_platform/uni_platform.dart';
 
 class GeneralSettingPage extends StatefulWidget {
@@ -20,40 +21,25 @@ class GeneralSettingPage extends StatefulWidget {
 }
 
 class _GeneralSettingPageState extends State<GeneralSettingPage> {
-  Configuration get _configuration => localDb.configuration;
-
-  OcrEngineConfig? get _defaultOcrEngineConfig {
-    if (_configuration.defaultOcrEngineId == null) return null;
-    return localDb.ocrEngine(_configuration.defaultOcrEngineId).get();
+  void _handleDefaultOcrEngineId(String? newValue) {
+    context.read<Settings>().update(defaultOcrEngineId: newValue);
   }
 
-  List<TranslationTarget> get _translationTargets {
-    return localDb.translationTargets.list();
+  void _handleDefaultTranslationEngineId(String? newValue) {
+    context.read<Settings>().update(defaultTranslationEngineId: newValue);
   }
 
-  @override
-  void initState() {
-    localDb.preferences.addListener(_handleChanged);
-    localDb.translationTargets.addListener(_handleChanged);
-    super.initState();
+  void _handleTranslationModeChanged(TranslationMode newValue) {
+    context.read<Settings>().update(translationMode: newValue);
   }
 
-  @override
-  void dispose() {
-    localDb.preferences.removeListener(_handleChanged);
-    localDb.translationTargets.removeListener(_handleChanged);
-    super.dispose();
-  }
-
-  void _handleChanged() {
-    if (mounted) setState(() {});
-  }
-
-  void _handleTranslationModeChanged(newValue) {
-    _configuration.translationMode = newValue;
+  void _handleDefaultDetectLanguageEngineId(String? newValue) {
+    context.read<Settings>().update(defaultDetectLanguageEngineId: newValue);
   }
 
   Widget _buildBody(BuildContext context) {
+    final settings = context.watch<Settings>();
+
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
@@ -64,26 +50,27 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           ),
           children: [
             PreferenceListTile(
-              leading: _defaultOcrEngineConfig == null
+              leading: settings.defaultOcrEngineConfig == null
                   ? null
-                  : OcrEngineIcon(_defaultOcrEngineConfig!.type),
+                  : OcrEngineIcon(settings.defaultOcrEngineConfig!.type),
               title: Builder(
                 builder: (_) {
-                  if (_defaultOcrEngineConfig == null) {
+                  if (settings.defaultOcrEngineConfig == null) {
                     return Text(LocaleKeys.please_choose.tr());
                   }
-                  return OcrEngineName(_defaultOcrEngineConfig!);
+                  return OcrEngineName(
+                    settings.defaultOcrEngineConfig!,
+                  );
                 },
               ),
               trailing: const PreferenceListTileChevron(),
               onTap: () async {
                 final OcrEngineConfig? ocrEngineConfig =
                     await context.push<OcrEngineConfig?>(
-                  '${PageId.availableOcrEngines}?selectedEngineId=${_configuration.defaultOcrEngineId}',
+                  '${PageId.availableOcrEngines}?selectedEngineId=${settings.defaultOcrEngineId}',
                 );
                 if (ocrEngineConfig != null) {
-                  _configuration.defaultOcrEngineId =
-                      ocrEngineConfig.identifier;
+                  _handleDefaultOcrEngineId(ocrEngineConfig.id);
                 }
               },
             ),
@@ -98,14 +85,14 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                     .tr(),
               ),
               additionalInfo: Switch(
-                value: _configuration.autoCopyDetectedText,
+                value: settings.autoCopyRecognizedText,
                 onChanged: (value) {
-                  _configuration.autoCopyDetectedText = value;
+                  context.read<Settings>().autoCopyRecognizedText = value;
                 },
               ),
               onTap: () async {
-                _configuration.autoCopyDetectedText =
-                    !_configuration.autoCopyDetectedText;
+                context.read<Settings>().autoCopyRecognizedText =
+                    !settings.autoCopyRecognizedText;
               },
             ),
           ],
@@ -116,18 +103,18 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           ),
           children: [
             PreferenceListTile(
-              leading: _configuration.defaultTranslateEngineConfig == null
+              leading: settings.defaultTranslationEngineConfig == null
                   ? null
                   : TranslationEngineIcon(
-                      _configuration.defaultTranslateEngineConfig!.type,
+                      settings.defaultTranslationEngineConfig!.type,
                     ),
               title: Builder(
                 builder: (_) {
-                  if (_configuration.defaultTranslateEngineConfig == null) {
+                  if (settings.defaultTranslationEngineConfig == null) {
                     return Text(LocaleKeys.please_choose.tr());
                   }
                   return TranslationEngineName(
-                    _configuration.defaultTranslateEngineConfig!,
+                    settings.defaultTranslationEngineConfig!,
                   );
                 },
               ),
@@ -135,11 +122,10 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               onTap: () async {
                 final TranslationEngineConfig? engineConfig =
                     await context.push<TranslationEngineConfig?>(
-                  '${PageId.availableTranslationEngines}?selectedEngineId=${_configuration.defaultTranslateEngineId}',
+                  '${PageId.availableTranslationEngines}?selectedEngineId=${settings.defaultTranslationEngineId}',
                 );
                 if (engineConfig != null) {
-                  _configuration.defaultTranslateEngineId =
-                      engineConfig.identifier;
+                  _handleDefaultTranslationEngineId(engineConfig.id);
                 }
               },
             ),
@@ -152,30 +138,28 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           children: [
             PreferenceListTile(
               title: Text(LocaleKeys.translation_mode_manual.tr()),
-              additionalInfo:
-                  _configuration.translationMode == kTranslationModeManual
-                      ? Icon(
-                          FluentIcons.checkmark_circle_16_filled,
-                          color: Theme.of(context).colorScheme.primary,
-                        )
-                      : null,
+              additionalInfo: settings.translationMode == TranslationMode.manual
+                  ? Icon(
+                      FluentIcons.checkmark_circle_16_filled,
+                      color: Theme.of(context).colorScheme.primary,
+                    )
+                  : null,
               onTap: () =>
-                  _handleTranslationModeChanged(kTranslationModeManual),
+                  _handleTranslationModeChanged(TranslationMode.manual),
             ),
             PreferenceListTile(
               title: Text(LocaleKeys.translation_mode_auto.tr()),
-              additionalInfo:
-                  _configuration.translationMode == kTranslationModeAuto
-                      ? Icon(
-                          FluentIcons.checkmark_circle_16_filled,
-                          color: Theme.of(context).colorScheme.primary,
-                        )
-                      : null,
-              onTap: () => _handleTranslationModeChanged(kTranslationModeAuto),
+              additionalInfo: settings.translationMode == TranslationMode.auto
+                  ? Icon(
+                      FluentIcons.checkmark_circle_16_filled,
+                      color: Theme.of(context).colorScheme.primary,
+                    )
+                  : null,
+              onTap: () => _handleTranslationModeChanged(TranslationMode.auto),
             ),
           ],
         ),
-        if (_configuration.translationMode == kTranslationModeAuto)
+        if (settings.translationMode == TranslationMode.auto)
           PreferenceListSection(
             header: Text(
               LocaleKeys
@@ -184,40 +168,41 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
             ),
             children: [
               PreferenceListTile(
-                leading: _configuration.defaultEngineConfig == null
+                leading: settings.defaultDetectLanguageEngineConfig == null
                     ? null
                     : TranslationEngineIcon(
-                        _configuration.defaultEngineConfig!.type,
+                        settings.defaultDetectLanguageEngineConfig!.type,
                       ),
                 title: Builder(
                   builder: (_) {
-                    if (_configuration.defaultEngineConfig == null) {
+                    if (settings.defaultDetectLanguageEngineConfig == null) {
                       return Text(LocaleKeys.please_choose.tr());
                     }
                     return TranslationEngineName(
-                      _configuration.defaultEngineConfig!,
+                      settings.defaultDetectLanguageEngineConfig!,
                     );
                   },
                 ),
                 onTap: () async {
                   final TranslationEngineConfig? engineConfig =
                       await context.push<TranslationEngineConfig?>(
-                    '${PageId.availableTranslationEngines}?selectedEngineId=${_configuration.defaultEngineId}',
+                    '${PageId.availableTranslationEngines}?selectedEngineId=${settings.defaultDetectLanguageEngineId}',
                   );
                   if (engineConfig != null) {
-                    _configuration.defaultEngineId = engineConfig.identifier;
+                    _handleDefaultDetectLanguageEngineId(engineConfig.id);
                   }
                 },
               ),
             ],
           ),
-        if (_configuration.translationMode == kTranslationModeAuto)
+        if (settings.translationMode == TranslationMode.auto)
           PreferenceListSection(
             header: Text(
               LocaleKeys.app_settings_general_translation_target_title.tr(),
             ),
             children: [
-              for (TranslationTarget translationTarget in _translationTargets)
+              for (TranslationTarget translationTarget
+                  in settings.translationTargets)
                 PreferenceListTile(
                   title: Builder(
                     builder: (_) {
@@ -275,14 +260,14 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                     .tr(),
               ),
               additionalInfo: Switch(
-                value: _configuration.doubleClickCopyResult,
+                value: settings.doubleClickCopyResult,
                 onChanged: (value) {
-                  _configuration.doubleClickCopyResult = value;
+                  context.read<Settings>().doubleClickCopyResult = value;
                 },
               ),
               onTap: () async {
-                _configuration.doubleClickCopyResult =
-                    !_configuration.doubleClickCopyResult;
+                context.read<Settings>().doubleClickCopyResult =
+                    !settings.doubleClickCopyResult;
               },
             ),
           ],
@@ -298,15 +283,15 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                     .app_settings_general_input_settings_submit_with_enter_title
                     .tr(),
               ),
-              additionalInfo:
-                  _configuration.inputSetting == kInputSettingSubmitWithEnter
-                      ? Icon(
-                          FluentIcons.checkmark_circle_16_filled,
-                          color: Theme.of(context).colorScheme.primary,
-                        )
-                      : null,
+              additionalInfo: settings.inputSubmitMode == InputSubmitMode.enter
+                  ? Icon(
+                      FluentIcons.checkmark_circle_16_filled,
+                      color: Theme.of(context).colorScheme.primary,
+                    )
+                  : null,
               onTap: () {
-                _configuration.inputSetting = kInputSettingSubmitWithEnter;
+                context.read<Settings>().inputSubmitMode =
+                    InputSubmitMode.enter;
               },
             ),
             PreferenceListTile(
@@ -319,15 +304,16 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                         .app_settings_general_input_settings_submit_with_meta_enter_title
                         .tr(),
               ),
-              additionalInfo: _configuration.inputSetting ==
-                      kInputSettingSubmitWithMetaEnter
-                  ? Icon(
-                      FluentIcons.checkmark_circle_16_filled,
-                      color: Theme.of(context).colorScheme.primary,
-                    )
-                  : null,
+              additionalInfo:
+                  settings.inputSubmitMode == InputSubmitMode.metaEnter
+                      ? Icon(
+                          FluentIcons.checkmark_circle_16_filled,
+                          color: Theme.of(context).colorScheme.primary,
+                        )
+                      : null,
               onTap: () {
-                _configuration.inputSetting = kInputSettingSubmitWithMetaEnter;
+                context.read<Settings>().inputSubmitMode =
+                    InputSubmitMode.metaEnter;
               },
             ),
           ],

@@ -18,7 +18,7 @@ class TranslationEngineName extends StatelessWidget {
         text: translationEngineConfig.typeName,
         children: [
           TextSpan(
-            text: ' (${translationEngineConfig.identifier})',
+            text: ' (${translationEngineConfig.id})',
             style: textTheme.bodySmall?.copyWith(
               color: ExtendedColors.gray.shade400,
             ),
