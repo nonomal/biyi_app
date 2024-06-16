@@ -19,8 +19,7 @@ OcrEngine? createOcrEngine(
   OcrEngineConfig ocrEngineConfig,
 ) {
   OcrEngine? ocrEngine;
-  if (ocrEngineConfig.isProGroup &&
-      Settings.instance.getOcrEngine(ocrEngineConfig.id) != null) {
+  if (Settings.instance.proOcrEngine(ocrEngineConfig.id).exists()) {
     ocrEngine = ProOcrEngine(ocrEngineConfig);
     if (ocrEngineConfig.id == kDefaultBuiltInOcrEngine.identifier) {
       ocrEngine = kDefaultBuiltInOcrEngine;
@@ -50,7 +49,9 @@ class AutoloadOcrClientAdapter extends UniOcrClientAdapter {
   @override
   OcrEngine use(String identifier) {
     String id = identifier;
-    OcrEngineConfig? engineConfig = Settings.instance.getOcrEngine(id);
+    OcrEngineConfig? engineConfig =
+        Settings.instance.privateOcrEngine(id).get() ??
+            Settings.instance.proOcrEngine(id).get();
 
     OcrEngine? ocrEngine;
     if (_ocrEngineMap.containsKey(engineConfig?.id)) {

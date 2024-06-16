@@ -67,8 +67,7 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
   }
 
   void _handleClickOk() {
-    context.read<Settings>().updateOcrEngine(
-          _id!,
+    context.read<Settings>().privateOcrEngine(_id!).updateOrCreate(
           type: _type,
           option: _option,
         );
@@ -163,7 +162,7 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
                 ),
                 onTap: () {
                   if (_id != null) {
-                    context.read<Settings>().deleteOcrEngine(_id!);
+                    context.read<Settings>().privateOcrEngine(_id!).delete();
                   }
                   Navigator.of(context).pop();
                 },

@@ -23,13 +23,12 @@ class AvailableOcrEnginesPage extends StatefulWidget {
 
 class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
   List<OcrEngineConfig> get _proOcrEngineList {
-    return Settings.instance.proOcrEngines.where((e) => !e.disabled).toList();
+    return Settings.instance.proOcrEngines.list(where: ((e) => !e.disabled));
   }
 
   List<OcrEngineConfig> get _privateOcrEngineList {
     return Settings.instance.privateOcrEngines
-        .where((e) => !e.disabled)
-        .toList();
+        .list(where: ((e) => !e.disabled));
   }
 
   String? _selectedEngineId;
@@ -44,7 +43,8 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
 
   Future<void> _handleClickOk() async {
     OcrEngineConfig? ocrEngineConfig =
-        Settings.instance.getOcrEngine(_selectedEngineId);
+        Settings.instance.privateOcrEngine(_selectedEngineId).get() ??
+            Settings.instance.proOcrEngine(_selectedEngineId).get();
     context.pop<OcrEngineConfig?>(ocrEngineConfig);
   }
 

@@ -35,8 +35,7 @@ final Map<String, List<String>> kKnownSupportedEngineOptionKeys = {
 TranslationEngine? createTranslationEngine(
   TranslationEngineConfig engineConfig,
 ) {
-  if (engineConfig.isProGroup &&
-      Settings.instance.getTranslationEngine(engineConfig.id) != null) {
+  if (Settings.instance.proTranslationEngine(engineConfig.id).exists()) {
     return ProTranslationEngine(engineConfig);
   } else {
     switch (engineConfig.type) {
@@ -101,7 +100,8 @@ class AutoloadTranslateClientAdapter extends UniTranslateClientAdapter {
   TranslationEngine use(String identifier) {
     String id = identifier;
     TranslationEngineConfig? engineConfig =
-        Settings.instance.getTranslationEngine(id);
+        Settings.instance.privateTranslationEngine(id).get() ??
+            Settings.instance.proTranslationEngine(id).get();
 
     TranslationEngine? translationEngine;
     if (_translationEngineMap.containsKey(engineConfig?.id)) {

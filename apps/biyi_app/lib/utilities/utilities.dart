@@ -38,6 +38,7 @@ Future<Directory> getAppDirectory() async {
   return _dataDirectory!;
 }
 
+@Deprecated('No longer used.')
 Future<Directory> getUserDataDirectory() async {
   final appDirectory = await getAppDirectory();
   final currentUser = await getCurrentUser();

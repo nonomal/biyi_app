@@ -130,37 +130,11 @@ class SettingsBase {
 
   List<OcrEngineConfig> ocrEngines;
 
-  List<OcrEngineConfig> get proOcrEngines {
-    return ocrEngines.where((e) => e.group == 'pro').toList();
-  }
-
-  List<OcrEngineConfig> get privateOcrEngines {
-    return ocrEngines.where((e) => e.group == 'private').toList();
-  }
-
-  /// Get OCR engine by id
-  OcrEngineConfig? getOcrEngine(String? id) {
-    return ocrEngines.firstWhereOrNull((e) => e.id == id);
-  }
-
   // #endregion
 
   // #region 文本翻译
 
   List<TranslationEngineConfig> translationEngines;
-
-  List<TranslationEngineConfig> get proTranslationEngines {
-    return translationEngines.where((e) => e.group == 'pro').toList();
-  }
-
-  List<TranslationEngineConfig> get privateTranslationEngines {
-    return translationEngines.where((e) => e.group == 'private').toList();
-  }
-
-  /// Get translation engine by id
-  TranslationEngineConfig? getTranslationEngine(String? id) {
-    return translationEngines.firstWhereOrNull((e) => e.id == id);
-  }
 
   // #endregion
 

@@ -4,14 +4,19 @@ import 'dart:io';
 
 import 'package:biyi_advanced_features/models/ocr_engine_config.dart';
 import 'package:biyi_advanced_features/models/translation_engine_config.dart';
+import 'package:biyi_advanced_features/networking/api_client/api_client.dart';
 import 'package:biyi_app/models/settings_base.dart';
 import 'package:biyi_app/models/translation_target.dart';
 import 'package:biyi_app/services/local_db/migrate_old_settings.dart';
+import 'package:biyi_app/services/ocr_client/ocr_client.dart';
+import 'package:biyi_app/states/modifiers/ocr_engines_modifier.dart';
+import 'package:biyi_app/states/modifiers/translation_engines_modifier.dart';
 import 'package:biyi_app/utilities/utilities.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart' show ThemeMode;
 import 'package:flutter/widgets.dart';
+import 'package:ocr_engine_builtin/ocr_engine_builtin.dart';
 import 'package:shortid/shortid.dart';
-import 'package:uni_translate_client/uni_translate_client.dart';
 
 export 'package:biyi_app/models/settings_base.dart';
 
@@ -31,7 +36,109 @@ class Settings extends SettingsBase with ChangeNotifier {
   /// The shared instance of [Settings].
   static final Settings instance = Settings._();
 
+  OcrEnginesModifier? _proOcrEnginesModifier;
+  OcrEnginesModifier? _privateOcrEnginesModifier;
+  TranslationEnginesModifier? _proTranslationEnginesModifier;
+  TranslationEnginesModifier? _privateTranslationEnginesModifier;
+
   Future<void> loadFromLocalFile() => _readFromLocalFile();
+
+  ///
+  Future<void> syncWithCloudServer() async {
+    var oldProEngineList = proTranslationEngines.list();
+    var oldProOcrEngineList = proOcrEngines.list();
+
+    List<TranslationEngineConfig> newProEngineList = [];
+    List<OcrEngineConfig> newProOcrEngineList = [];
+
+    try {
+      newProEngineList = await apiClient.engines.list();
+      newProEngineList = newProEngineList.map((engine) {
+        TranslationEngineConfig? oldEngine = oldProEngineList.firstWhereOrNull(
+          (e) => e.id == engine.id,
+        );
+        if (oldEngine != null) {
+          engine.disabled = oldEngine.disabled;
+        }
+        return engine;
+      }).toList();
+
+      proTranslationEngines.deleteAll();
+      for (var item in newProEngineList) {
+        proTranslationEngine(item.id).updateOrCreate(
+          type: item.type,
+          option: item.option,
+          supportedScopes: item.supportedScopes.map((e) => e.name).toList(),
+          disabled: item.disabled,
+        );
+      }
+    } catch (error) {
+      // skip error
+    }
+
+    try {
+      newProOcrEngineList = await apiClient.ocrEngines.list();
+      newProOcrEngineList = newProOcrEngineList.map((engine) {
+        var oldOrcEngine = oldProOcrEngineList.firstWhereOrNull(
+          (e) => e.id == engine.id,
+        );
+        if (oldOrcEngine != null) {
+          engine.disabled = oldOrcEngine.disabled;
+        }
+
+        return engine;
+      }).toList();
+
+      newProOcrEngineList.removeWhere(
+        (e) => e.type == kOcrEngineTypeBuiltIn,
+      );
+
+      try {
+        if (await kDefaultBuiltInOcrEngine.isSupportedOnCurrentPlatform()) {
+          newProOcrEngineList.insert(
+            0,
+            OcrEngineConfig(
+              id: kDefaultBuiltInOcrEngine.identifier,
+              type: kDefaultBuiltInOcrEngine.type,
+              option: kDefaultBuiltInOcrEngine.option ?? {},
+              disabled: true,
+            ),
+          );
+        }
+      } catch (error) {
+        // skip error
+      }
+
+      proOcrEngines.deleteAll();
+      for (var item in newProOcrEngineList) {
+        proOcrEngine(item.id).updateOrCreate(
+          type: item.type,
+          option: item.option,
+          disabled: item.disabled,
+        );
+      }
+    } catch (error) {
+      // skip error
+    }
+
+    if (defaultTranslationEngineId == null ||
+        defaultTranslationEngineConfig == null) {
+      defaultTranslationEngineId =
+          newProEngineList.firstWhere((e) => e.type == 'baidu').id;
+    }
+
+    if (defaultDetectLanguageEngineId == null ||
+        defaultDetectLanguageEngineConfig == null) {
+      defaultDetectLanguageEngineId =
+          newProEngineList.firstWhere((e) => e.type == 'baidu').id;
+    }
+
+    if (defaultOcrEngineId == null || defaultOcrEngineConfig == null) {
+      defaultOcrEngineId = newProOcrEngineList
+          .firstWhere((e) => e.type == 'built_in' || e.type == 'tesseract')
+          .id;
+    }
+  }
 
   Locale get locale => languageToLocale(displayLanguage ?? 'en');
 
@@ -39,116 +146,42 @@ class Settings extends SettingsBase with ChangeNotifier {
     update(displayLanguage: locale.toLanguageTag());
   }
 
-  Future<void> create({
-    String group = 'private',
-    required String type,
-    required Map<String, dynamic> option,
-  }) async {
-    int position = 1;
-    if (ocrEngines.isNotEmpty) {
-      position = ocrEngines.last.position + 1;
-    }
-    final value = OcrEngineConfig(
-      position: position,
-      group: group,
-      id: shortid.generate(),
-      type: type,
-      option: option,
-    );
-    ocrEngines.add(value);
-
-    notifyListeners();
-    unawaited(_writeToLocalFile());
+  OcrEnginesModifier get proOcrEngines {
+    _proOcrEnginesModifier ??= OcrEnginesModifier(this, group: 'pro');
+    return _proOcrEnginesModifier!;
   }
 
-  void updateOcrEngine(
-    String id, {
-    int? position,
-    String? type,
-    Map<String, dynamic>? option,
-    bool? disabled,
-  }) {
-    final index = ocrEngines.indexWhere((element) => element.id == id);
-    if (index == -1) return;
-
-    final ocrEngine = ocrEngines[index];
-    ocrEngines[index].position = position ?? ocrEngine.position;
-    ocrEngines[index].type = type ?? ocrEngine.type;
-    ocrEngines[index].option = option ?? ocrEngine.option;
-    ocrEngines[index].disabled = disabled ?? ocrEngine.disabled;
-
-    notifyListeners();
-    unawaited(_writeToLocalFile());
+  OcrEnginesModifier proOcrEngine(String? id) {
+    return OcrEnginesModifier(this, group: 'pro', id: id);
   }
 
-  void deleteOcrEngine(String id) {
-    ocrEngines.removeWhere((element) => element.id == id);
-    notifyListeners();
-    unawaited(_writeToLocalFile());
+  OcrEnginesModifier get privateOcrEngines {
+    _privateOcrEnginesModifier ??= OcrEnginesModifier(this, group: 'private');
+    return _privateOcrEnginesModifier!;
   }
 
-  void createTranslationEngine({
-    String? id,
-    String group = 'private',
-    required String type,
-    required Map<String, dynamic> option,
-    List<String>? supportedScopes,
-    bool? disabled,
-  }) {
-    int position = 1;
-    if (translationEngines.isNotEmpty) {
-      position = translationEngines.last.position + 1;
-    }
-    final value = TranslationEngineConfig(
-      position: position,
-      group: group,
-      id: id ?? shortid.generate(),
-      type: type,
-      option: option,
-      supportedScopes: (supportedScopes ?? [])
-          .map(
-            (e) => TranslationEngineScope.values.firstWhere((v) => e == v.name),
-          )
-          .toList(),
-      disabled: disabled ?? false,
-    );
-    translationEngines.add(value);
-
-    notifyListeners();
-    unawaited(_writeToLocalFile());
+  OcrEnginesModifier privateOcrEngine(String? id) {
+    return OcrEnginesModifier(this, group: 'private', id: id);
   }
 
-  void updateTranslationEngine(
-    String id, {
-    int? position,
-    String? type,
-    Map<String, dynamic>? option,
-    List<String>? supportedScopes,
-    bool? disabled,
-  }) {
-    final index = translationEngines.indexWhere((e) => e.id == id);
-    if (index == -1) return;
-
-    final translationEngine = translationEngines[index];
-    translationEngines[index].position = position ?? translationEngine.position;
-    translationEngines[index].type = type ?? translationEngine.type;
-    translationEngines[index].option = option ?? translationEngine.option;
-    translationEngines[index].supportedScopes =
-        (supportedScopes ?? translationEngine.supportedScopes)
-            .map(
-              (e) =>
-                  TranslationEngineScope.values.firstWhere((v) => e == v.name),
-            )
-            .toList();
-    translationEngines[index].disabled = disabled ?? translationEngine.disabled;
-    notifyListeners();
-    unawaited(_writeToLocalFile());
+  TranslationEnginesModifier get proTranslationEngines {
+    _proTranslationEnginesModifier ??=
+        TranslationEnginesModifier(this, group: 'pro');
+    return _proTranslationEnginesModifier!;
   }
 
-  void deleteTranslationEngine(String id) {
-    translationEngines.removeWhere((element) => element.id == id);
-    notifyListeners();
-    unawaited(_writeToLocalFile());
+  TranslationEnginesModifier proTranslationEngine(String? id) {
+    return TranslationEnginesModifier(this, group: 'pro', id: id);
+  }
+
+  TranslationEnginesModifier get privateTranslationEngines {
+    _privateTranslationEnginesModifier ??=
+        TranslationEnginesModifier(this, group: 'private');
+    return _privateTranslationEnginesModifier!;
+  }
+
+  TranslationEnginesModifier privateTranslationEngine(String? id) {
+    return TranslationEnginesModifier(this, group: 'private', id: id);
   }
 
   void updateOrCreateTranslationTarget({
@@ -174,7 +207,6 @@ class Settings extends SettingsBase with ChangeNotifier {
     }
 
     notifyListeners();
-    unawaited(_writeToLocalFile());
   }
 
   void deleteTranslationTarget({
@@ -187,7 +219,6 @@ class Settings extends SettingsBase with ChangeNotifier {
           e.targetLanguage == targetLanguage,
     );
     notifyListeners();
-    unawaited(_writeToLocalFile());
   }
 
   /// Update settings
@@ -243,6 +274,11 @@ class Settings extends SettingsBase with ChangeNotifier {
         this.translationEngines;
 
     notifyListeners();
+  }
+
+  @override
+  void notifyListeners() {
+    super.notifyListeners();
     unawaited(_writeToLocalFile());
   }
 

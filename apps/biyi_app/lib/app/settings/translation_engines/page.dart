@@ -39,7 +39,7 @@ class _TranslationEnginesSettingPageState
 
   Widget _buildListSectionProEngines(BuildContext context) {
     final proTranslationEngineList =
-        context.watch<Settings>().proTranslationEngines;
+        context.watch<Settings>().proTranslationEngines.list();
     if (proTranslationEngineList.isEmpty) return Container();
     return PreferenceListSection(
       children: [
@@ -50,8 +50,10 @@ class _TranslationEnginesSettingPageState
             additionalInfo: Switch(
               value: !item.disabled,
               onChanged: (newValue) {
-                context.watch<Settings>().updateTranslationEngine(
-                      item.id,
+                context
+                    .watch<Settings>() // Linewrap
+                    .proTranslationEngine(item.id)
+                    .update(
                       disabled: !item.disabled,
                     );
               },
@@ -72,7 +74,7 @@ class _TranslationEnginesSettingPageState
 
   Widget _buildListSectionPrivateEngines(BuildContext context) {
     final privateTranslationEngineList =
-        context.watch<Settings>().privateTranslationEngines;
+        context.watch<Settings>().privateTranslationEngines.list();
 
     void onReorder(int oldIndex, int newIndex) {
       List<String> idList =
@@ -82,8 +84,10 @@ class _TranslationEnginesSettingPageState
 
       for (var i = 0; i < idList.length; i++) {
         final id = idList[i];
-        context.read<Settings>().updateTranslationEngine(
-              id,
+        context
+            .read<Settings>() // Linewrap
+            .privateTranslationEngine(id)
+            .update(
               position: i + 1,
             );
       }
@@ -114,8 +118,10 @@ class _TranslationEnginesSettingPageState
                       additionalInfo: Switch(
                         value: !item.disabled,
                         onChanged: (newValue) {
-                          context.read<Settings>().updateTranslationEngine(
-                                item.id,
+                          context
+                              .read<Settings>() // Linewrap
+                              .privateTranslationEngine(item.id)
+                              .update(
                                 disabled: !item.disabled,
                               );
                         },

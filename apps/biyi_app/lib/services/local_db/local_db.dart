@@ -9,12 +9,9 @@ import 'package:biyi_app/services/local_db/modifiers/engines_modifier.dart';
 import 'package:biyi_app/services/local_db/modifiers/ocr_engines_modifier.dart';
 import 'package:biyi_app/services/local_db/modifiers/preferences_modifier.dart';
 import 'package:biyi_app/services/local_db/modifiers/translation_targets_modifier.dart';
-import 'package:biyi_app/services/ocr_client/ocr_client.dart';
 import 'package:biyi_app/utilities/utilities.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
-import 'package:ocr_engine_builtin/ocr_engine_builtin.dart';
 import 'package:path/path.dart' as path;
 import 'package:uni_platform/uni_platform.dart';
 
@@ -103,107 +100,6 @@ class LocalDb {
 
     for (final LocalDbListener listener in listeners) {
       listener.onUserChanged(oldUser, newUser);
-    }
-  }
-
-  Future<void> loadFromCloudServer() async {
-    var oldProEngineList = proEngines.list();
-    var oldProOcrEngineList = proOcrEngines.list();
-
-    List<TranslationEngineConfig> newProEngineList = [];
-    List<OcrEngineConfig> newProOcrEngineList = [];
-
-    try {
-      newProEngineList = await apiClient.engines.list();
-      newProEngineList = newProEngineList.map((engine) {
-        TranslationEngineConfig? oldEngine = oldProEngineList.firstWhereOrNull(
-          (e) => e.identifier == engine.identifier,
-        );
-        if (oldEngine != null) {
-          engine.disabled = oldEngine.disabled;
-        }
-        return engine;
-      }).toList();
-
-      await localDb.proEngines.deleteAll();
-      for (var item in newProEngineList) {
-        await localDb //
-            .proEngine(item.identifier)
-            .updateOrCreate(
-              type: item.type,
-              option: item.option,
-              supportedScopes: item.supportedScopes.map((e) => e.name).toList(),
-              disabled: item.disabled,
-            );
-      }
-    } catch (error) {
-      // skip error
-    }
-
-    try {
-      newProOcrEngineList = await apiClient.ocrEngines.list();
-      newProOcrEngineList = newProOcrEngineList.map((engine) {
-        var oldOrcEngine = oldProOcrEngineList.firstWhereOrNull(
-          (e) => e.identifier == engine.identifier,
-        );
-        if (oldOrcEngine != null) {
-          engine.disabled = oldOrcEngine.disabled;
-        }
-
-        return engine;
-      }).toList();
-
-      newProOcrEngineList.removeWhere(
-        (e) => e.type == kOcrEngineTypeBuiltIn,
-      );
-
-      try {
-        if (await kDefaultBuiltInOcrEngine.isSupportedOnCurrentPlatform()) {
-          newProOcrEngineList.insert(
-            0,
-            OcrEngineConfig(
-              id: kDefaultBuiltInOcrEngine.identifier,
-              type: kDefaultBuiltInOcrEngine.type,
-              option: kDefaultBuiltInOcrEngine.option ?? {},
-              disabled: true,
-            ),
-          );
-        }
-      } catch (error) {
-        // skip error
-      }
-
-      await localDb.proOcrEngines.deleteAll();
-      for (var item in newProOcrEngineList) {
-        await localDb //
-            .proOcrEngine(item.identifier)
-            .updateOrCreate(
-              type: item.type,
-              option: item.option,
-              disabled: item.disabled,
-            );
-      }
-    } catch (error) {
-      // skip error
-    }
-
-    if (configuration.defaultTranslateEngineId == null ||
-        !engine(configuration.defaultTranslateEngineId).exists()) {
-      configuration.defaultTranslateEngineId =
-          newProEngineList.firstWhere((e) => e.type == 'baidu').identifier;
-    }
-
-    if (configuration.defaultEngineId == null ||
-        !engine(configuration.defaultEngineId).exists()) {
-      configuration.defaultEngineId =
-          newProEngineList.firstWhere((e) => e.type == 'baidu').identifier;
-    }
-
-    if (configuration.defaultOcrEngineId == null ||
-        !ocrEngine(configuration.defaultOcrEngineId).exists()) {
-      configuration.defaultOcrEngineId = newProOcrEngineList
-          .firstWhere((e) => e.type == 'built_in' || e.type == 'tesseract')
-          .identifier;
     }
   }
 

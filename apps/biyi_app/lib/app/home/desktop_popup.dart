@@ -396,7 +396,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       // skip
     }
     try {
-      await localDb.loadFromCloudServer();
+      await Settings.instance.syncWithCloudServer();
     } catch (error) {
       // skip
     }
@@ -642,10 +642,10 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
 
     String? imagePath;
     if (!UniPlatform.isWeb) {
-      Directory userDataDirectory = await getUserDataDirectory();
+      Directory appDataDirectory = await getAppDirectory();
       int timestamp = DateTime.now().millisecondsSinceEpoch;
       String fileName = 'Screenshot-$timestamp.png';
-      imagePath = '${userDataDirectory.path}/Screenshots/$fileName';
+      imagePath = '${appDataDirectory.path}/Screenshots/$fileName';
     }
     _capturedData = await screenCapturer.capture(
       imagePath: imagePath,

@@ -21,14 +21,18 @@ class TranslationEngineTag extends StatefulWidget {
 class _TranslationEngineTagState extends State<TranslationEngineTag> {
   bool _isHovered = false;
 
-  TranslationEngineConfig get _translationEngineConfig {
-    return Settings.instance.getTranslationEngine(
-      widget.translationResultRecord.translationEngineId!,
-    )!;
+  TranslationEngineConfig? get _translationEngineConfig {
+    String id = widget.translationResultRecord.translationEngineId!;
+    Settings settings = Settings.instance;
+    return settings.proTranslationEngine(id).get() ??
+        settings.privateTranslationEngine(id).get();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_translationEngineConfig == null) {
+      return const SizedBox();
+    }
     return MouseRegion(
       onEnter: (event) {
         _isHovered = true;
@@ -74,7 +78,7 @@ class _TranslationEngineTagState extends State<TranslationEngineTag> {
               firstChild: Row(
                 children: [
                   TranslationEngineIcon(
-                    _translationEngineConfig.type,
+                    _translationEngineConfig!.type,
                     size: 12,
                   ),
                 ],
@@ -82,13 +86,13 @@ class _TranslationEngineTagState extends State<TranslationEngineTag> {
               secondChild: Row(
                 children: [
                   TranslationEngineIcon(
-                    _translationEngineConfig.type,
+                    _translationEngineConfig!.type,
                     size: 12,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 4, right: 2),
                     child: Text(
-                      _translationEngineConfig.typeName,
+                      _translationEngineConfig!.typeName,
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             fontSize: 10,
                           ),

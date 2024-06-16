@@ -86,20 +86,13 @@ class _TranslationEnginesNewOrEditPageState
   }
 
   void _handleClickOk() {
-    final settings = context.read<Settings>();
-    if (settings.getTranslationEngine(_id!) != null) {
-      settings.updateTranslationEngine(
-        _id!,
-        type: _type!,
-        option: _option,
-      );
-    } else {
-      settings.createTranslationEngine(
-        id: _id!,
-        type: _type!,
-        option: _option,
-      );
-    }
+    context
+        .read<Settings>() // Linewrap
+        .privateTranslationEngine(_id!)
+        .updateOrCreate(
+          type: _type!,
+          option: _option,
+        );
 
     (translateClient.adapter as AutoloadTranslateClientAdapter).renew(_id!);
 
@@ -230,7 +223,10 @@ class _TranslationEnginesNewOrEditPageState
                   ),
                 ),
                 onTap: () async {
-                  context.read<Settings>().deleteTranslationEngine(_id!);
+                  context
+                      .read<Settings>() // Linewrap
+                      .privateTranslationEngine(_id!)
+                      .delete();
                   Navigator.of(context).pop();
                 },
               ),

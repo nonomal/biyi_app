@@ -36,7 +36,7 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
   }
 
   Widget _buildListSectionProEngines(BuildContext context) {
-    final proOcrEngineList = context.watch<Settings>().proOcrEngines;
+    final proOcrEngineList = context.watch<Settings>().proOcrEngines.list();
     if (proOcrEngineList.isEmpty) return Container();
     return PreferenceListSection(
       children: [
@@ -47,8 +47,7 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
             additionalInfo: Switch(
               value: !item.disabled,
               onChanged: (newValue) {
-                context.watch<Settings>().updateOcrEngine(
-                      item.id,
+                context.watch<Settings>().privateOcrEngine(item.id).update(
                       disabled: !item.disabled,
                     );
               },
@@ -68,7 +67,8 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
   }
 
   Widget _buildListSectionPrivateEngines(BuildContext context) {
-    final privateOcrEngineList = context.watch<Settings>().privateOcrEngines;
+    final privateOcrEngineList =
+        context.watch<Settings>().privateOcrEngines.list();
 
     void onReorder(int oldIndex, int newIndex) {
       List<String> idList = privateOcrEngineList.map((e) => e.id).toList();
@@ -77,8 +77,7 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
 
       for (var i = 0; i < idList.length; i++) {
         final id = idList[i];
-        context.read<Settings>().updateOcrEngine(
-              id,
+        context.read<Settings>().privateOcrEngine(id).update(
               position: i + 1,
             );
       }
@@ -109,8 +108,10 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
                       additionalInfo: Switch(
                         value: !item.disabled,
                         onChanged: (newValue) {
-                          context.read<Settings>().updateOcrEngine(
-                                item.id,
+                          context
+                              .read<Settings>()
+                              .privateOcrEngine(item.id)
+                              .update(
                                 disabled: !item.disabled,
                               );
                         },
