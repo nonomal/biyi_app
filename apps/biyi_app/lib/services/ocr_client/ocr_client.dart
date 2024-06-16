@@ -42,8 +42,7 @@ class AutoloadOcrClientAdapter extends UniOcrClientAdapter {
 
   @override
   OcrEngine get first {
-    OcrEngineConfig engineConfig = Settings.instance.ocrEngines.first;
-    return use(engineConfig.id);
+    throw UnimplementedError();
   }
 
   @override

@@ -21,20 +21,25 @@ class GeneralSettingPage extends StatefulWidget {
 }
 
 class _GeneralSettingPageState extends State<GeneralSettingPage> {
-  void _handleDefaultOcrEngineId(String? newValue) {
-    context.read<Settings>().update(defaultOcrEngineId: newValue);
-  }
-
-  void _handleDefaultTranslationEngineId(String? newValue) {
-    context.read<Settings>().update(defaultTranslationEngineId: newValue);
-  }
-
-  void _handleTranslationModeChanged(TranslationMode newValue) {
-    context.read<Settings>().update(translationMode: newValue);
-  }
-
-  void _handleDefaultDetectLanguageEngineId(String? newValue) {
-    context.read<Settings>().update(defaultDetectLanguageEngineId: newValue);
+  void _handleUpdateSettings({
+    String? defaultOcrEngineId,
+    bool? autoCopyRecognizedText,
+    String? defaultTranslationEngineId,
+    TranslationMode? translationMode,
+    String? defaultDetectLanguageEngineId,
+    bool? doubleClickCopyResult,
+    InputSubmitMode? inputSubmitMode,
+  }) {
+    final settings = context.read<Settings>();
+    settings.update(
+      defaultOcrEngineId: defaultOcrEngineId,
+      autoCopyRecognizedText: autoCopyRecognizedText,
+      defaultTranslationEngineId: defaultTranslationEngineId,
+      translationMode: translationMode,
+      defaultDetectLanguageEngineId: defaultDetectLanguageEngineId,
+      doubleClickCopyResult: doubleClickCopyResult,
+      inputSubmitMode: inputSubmitMode,
+    );
   }
 
   Widget _buildBody(BuildContext context) {
@@ -70,7 +75,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                   '${PageId.availableOcrEngines}?selectedEngineId=${settings.defaultOcrEngineId}',
                 );
                 if (ocrEngineConfig != null) {
-                  _handleDefaultOcrEngineId(ocrEngineConfig.id);
+                  _handleUpdateSettings(defaultOcrEngineId: ocrEngineConfig.id);
                 }
               },
             ),
@@ -87,12 +92,13 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               additionalInfo: Switch(
                 value: settings.autoCopyRecognizedText,
                 onChanged: (value) {
-                  context.read<Settings>().autoCopyRecognizedText = value;
+                  _handleUpdateSettings(autoCopyRecognizedText: value);
                 },
               ),
               onTap: () async {
-                context.read<Settings>().autoCopyRecognizedText =
-                    !settings.autoCopyRecognizedText;
+                _handleUpdateSettings(
+                  autoCopyRecognizedText: !settings.autoCopyRecognizedText,
+                );
               },
             ),
           ],
@@ -125,7 +131,9 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                   '${PageId.availableTranslationEngines}?selectedEngineId=${settings.defaultTranslationEngineId}',
                 );
                 if (engineConfig != null) {
-                  _handleDefaultTranslationEngineId(engineConfig.id);
+                  _handleUpdateSettings(
+                    defaultTranslationEngineId: engineConfig.id,
+                  );
                 }
               },
             ),
@@ -144,8 +152,9 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                       color: Theme.of(context).colorScheme.primary,
                     )
                   : null,
-              onTap: () =>
-                  _handleTranslationModeChanged(TranslationMode.manual),
+              onTap: () => _handleUpdateSettings(
+                translationMode: TranslationMode.manual,
+              ),
             ),
             PreferenceListTile(
               title: Text(LocaleKeys.translation_mode_auto.tr()),
@@ -155,7 +164,8 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                       color: Theme.of(context).colorScheme.primary,
                     )
                   : null,
-              onTap: () => _handleTranslationModeChanged(TranslationMode.auto),
+              onTap: () =>
+                  _handleUpdateSettings(translationMode: TranslationMode.auto),
             ),
           ],
         ),
@@ -189,7 +199,9 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                     '${PageId.availableTranslationEngines}?selectedEngineId=${settings.defaultDetectLanguageEngineId}',
                   );
                   if (engineConfig != null) {
-                    _handleDefaultDetectLanguageEngineId(engineConfig.id);
+                    _handleUpdateSettings(
+                      defaultDetectLanguageEngineId: engineConfig.id,
+                    );
                   }
                 },
               ),
@@ -262,12 +274,15 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               additionalInfo: Switch(
                 value: settings.doubleClickCopyResult,
                 onChanged: (value) {
-                  context.read<Settings>().doubleClickCopyResult = value;
+                  _handleUpdateSettings(
+                    doubleClickCopyResult: value,
+                  );
                 },
               ),
               onTap: () async {
-                context.read<Settings>().doubleClickCopyResult =
-                    !settings.doubleClickCopyResult;
+                _handleUpdateSettings(
+                  doubleClickCopyResult: !settings.doubleClickCopyResult,
+                );
               },
             ),
           ],
@@ -290,8 +305,9 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                     )
                   : null,
               onTap: () {
-                context.read<Settings>().inputSubmitMode =
-                    InputSubmitMode.enter;
+                _handleUpdateSettings(
+                  inputSubmitMode: InputSubmitMode.enter,
+                );
               },
             ),
             PreferenceListTile(
@@ -312,8 +328,9 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                         )
                       : null,
               onTap: () {
-                context.read<Settings>().inputSubmitMode =
-                    InputSubmitMode.metaEnter;
+                _handleUpdateSettings(
+                  inputSubmitMode: InputSubmitMode.metaEnter,
+                );
               },
             ),
           ],

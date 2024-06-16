@@ -1,12 +1,12 @@
-import 'package:biyi_advanced_features/models/models.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/services/services.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:influxui/influxui.dart';
 import 'package:preference_list/preference_list.dart';
+import 'package:provider/provider.dart';
 import 'package:uni_platform/uni_platform.dart';
 
 class HotKeyDisplayView extends StatelessWidget {
@@ -55,38 +55,17 @@ class KeybindsSettingPage extends StatefulWidget {
 }
 
 class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
-  Configuration get _configuration => localDb.configuration;
-
-  @override
-  void initState() {
-    ShortcutService.instance.stop();
-    localDb.preferences.addListener(_handleChanged);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    ShortcutService.instance.start();
-    localDb.preferences.removeListener(_handleChanged);
-    super.dispose();
-  }
-
-  void _handleChanged() {
-    if (mounted) setState(() {});
-  }
-
   Future<void> _handleClickRegisterNewHotKey(
     BuildContext context, {
-    required String shortcutKey,
     HotKeyScope shortcutScope = HotKeyScope.system,
+    ValueChanged<HotKey?>? onHotKeyRecorded,
   }) async {
     final HotKey? recordedShortcut = await context.push<HotKey?>(
       '/record-shortcut',
       extra: {},
     );
     if (recordedShortcut != null) {
-      _configuration.setShortcut(
-        shortcutKey,
+      onHotKeyRecorded?.call(
         HotKey(
           key: recordedShortcut.key,
           modifiers: recordedShortcut.modifiers,
@@ -97,6 +76,9 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
   }
 
   Widget _buildBody(BuildContext context) {
+    final BoundShortcuts boundShortcuts = context
+        .select<Settings, BoundShortcuts>((Settings s) => s.boundShortcuts);
+
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
@@ -106,13 +88,13 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
               title: Text(
                 LocaleKeys.app_settings_keybinds_window_show_or_hide_title.tr(),
               ),
-              additionalInfo: HotKeyDisplayView(
-                _configuration.shortcutShowOrHide,
-              ),
+              additionalInfo: HotKeyDisplayView(boundShortcuts.showOrHide),
               onTap: () {
                 _handleClickRegisterNewHotKey(
                   context,
-                  shortcutKey: kShortcutShowOrHide,
+                  onHotKeyRecorded: (value) => context
+                      .read<Settings>()
+                      .updateShortcuts(showOrHide: value),
                 );
               },
             ),
@@ -120,14 +102,13 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
               title: Text(
                 LocaleKeys.app_settings_keybinds_window_hide_title.tr(),
               ),
-              additionalInfo: HotKeyDisplayView(
-                _configuration.shortcutHide,
-              ),
+              additionalInfo: HotKeyDisplayView(boundShortcuts.hide),
               onTap: () {
                 _handleClickRegisterNewHotKey(
                   context,
-                  shortcutKey: kShortcutHide,
                   shortcutScope: HotKeyScope.inapp,
+                  onHotKeyRecorded: (value) =>
+                      context.read<Settings>().updateShortcuts(hide: value),
                 );
               },
             ),
@@ -145,12 +126,14 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
                     .tr(),
               ),
               additionalInfo: HotKeyDisplayView(
-                _configuration.shortcutExtractFromScreenSelection,
+                boundShortcuts.extractFromScreenSelection,
               ),
               onTap: () {
                 _handleClickRegisterNewHotKey(
                   context,
-                  shortcutKey: kShortcutExtractFromScreenSelection,
+                  onHotKeyRecorded: (value) => context
+                      .read<Settings>()
+                      .updateShortcuts(extractFromScreenSelection: value),
                 );
               },
             ),
@@ -162,12 +145,14 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
                       .tr(),
                 ),
                 additionalInfo: HotKeyDisplayView(
-                  _configuration.shortcutExtractFromScreenCapture,
+                  boundShortcuts.extractFromScreenCapture,
                 ),
                 onTap: () {
                   _handleClickRegisterNewHotKey(
                     context,
-                    shortcutKey: kShortcutExtractFromScreenCapture,
+                    onHotKeyRecorded: (value) => context
+                        .read<Settings>()
+                        .updateShortcuts(extractFromScreenCapture: value),
                   );
                 },
               ),
@@ -178,12 +163,14 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
                     .tr(),
               ),
               additionalInfo: HotKeyDisplayView(
-                _configuration.shortcutExtractFromClipboard,
+                boundShortcuts.extractFromClipboard,
               ),
               onTap: () {
                 _handleClickRegisterNewHotKey(
                   context,
-                  shortcutKey: kShortcutExtractFromClipboard,
+                  onHotKeyRecorded: (value) => context
+                      .read<Settings>()
+                      .updateShortcuts(extractFromClipboard: value),
                 );
               },
             ),
@@ -202,12 +189,14 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
                       .tr(),
                 ),
                 additionalInfo: HotKeyDisplayView(
-                  _configuration.shortcutTranslateInputContent,
+                  boundShortcuts.translateInputContent,
                 ),
                 onTap: () {
                   _handleClickRegisterNewHotKey(
                     context,
-                    shortcutKey: kShortcutTranslateInputContent,
+                    onHotKeyRecorded: (value) => context
+                        .read<Settings>()
+                        .updateShortcuts(translateInputContent: value),
                   );
                 },
               ),

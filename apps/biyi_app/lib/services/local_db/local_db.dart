@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
@@ -21,38 +20,6 @@ export 'modifiers/engines_modifier.dart';
 export 'modifiers/ocr_engines_modifier.dart';
 export 'modifiers/preferences_modifier.dart';
 export 'modifiers/translation_targets_modifier.dart';
-
-@Deprecated('No longer used.')
-Future<User> getCurrentUser() {
-  return _getCurrentUser();
-}
-
-@Deprecated('No longer used.')
-Future<User> _getCurrentUser() async {
-  try {
-    final appDir = await getAppDirectory();
-    final file = File('${appDir.path}/user.json');
-
-    if (file.existsSync()) {
-      String jsonString = await file.readAsString();
-      return User.fromJson(json.decode(jsonString));
-    }
-  } catch (e) {
-    // 忽略异常
-  }
-  return User(id: -1);
-}
-
-@Deprecated('No longer used.')
-Future<void> _setCurrentUser(User user) async {
-  final appDir = await getAppDirectory();
-  final file = File('${appDir.path}/user.json');
-
-  final String jsonString = prettyJsonString(
-    user.toJson().removeNulls(),
-  );
-  await file.writeAsString(jsonString);
-}
 
 @Deprecated('Use Settings instead.')
 class LocalDb {
@@ -85,22 +52,6 @@ class LocalDb {
   @Deprecated('No longer used.')
   void removeListener(LocalDbListener listener) {
     _listeners.remove(listener);
-  }
-
-  @Deprecated('No longer used.')
-  Future<void> setCurrentUser(User newUser) async {
-    User oldUser = user;
-
-    await _setCurrentUser(newUser);
-    user = newUser;
-
-    if (oldUser.id != newUser.id) {
-      await initLocalDb();
-    }
-
-    for (final LocalDbListener listener in listeners) {
-      listener.onUserChanged(oldUser, newUser);
-    }
   }
 
   @Deprecated('No longer used.')
@@ -234,10 +185,6 @@ Future<void> _safeOpenBox(Directory userDataDirectory, String name) async {
 
 @Deprecated('No longer used.')
 Future<void> initLocalDb() async {
-  if (!UniPlatform.isWeb) {
-    localDb.user = await getCurrentUser();
-  }
-
   Directory userDataDirectory = await getUserDataDirectory();
 
   await Hive.close();

@@ -11,12 +11,13 @@ import 'package:biyi_app/services/local_db/migrate_old_settings.dart';
 import 'package:biyi_app/services/ocr_client/ocr_client.dart';
 import 'package:biyi_app/states/modifiers/ocr_engines_modifier.dart';
 import 'package:biyi_app/states/modifiers/translation_engines_modifier.dart';
+import 'package:biyi_app/states/modifiers/translation_targets_modifier.dart';
 import 'package:biyi_app/utilities/utilities.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart' show ThemeMode;
 import 'package:flutter/widgets.dart';
+import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:ocr_engine_builtin/ocr_engine_builtin.dart';
-import 'package:shortid/shortid.dart';
 
 export 'package:biyi_app/models/settings_base.dart';
 
@@ -36,6 +37,7 @@ class Settings extends SettingsBase with ChangeNotifier {
   /// The shared instance of [Settings].
   static final Settings instance = Settings._();
 
+  TranslationTargetsModifier? _translationTargetsModifier;
   OcrEnginesModifier? _proOcrEnginesModifier;
   OcrEnginesModifier? _privateOcrEnginesModifier;
   TranslationEnginesModifier? _proTranslationEnginesModifier;
@@ -43,7 +45,7 @@ class Settings extends SettingsBase with ChangeNotifier {
 
   Future<void> loadFromLocalFile() => _readFromLocalFile();
 
-  ///
+  /// Sync pro translation engines and ocr engines with cloud server
   Future<void> syncWithCloudServer() async {
     var oldProEngineList = proTranslationEngines.list();
     var oldProOcrEngineList = proOcrEngines.list();
@@ -146,6 +148,15 @@ class Settings extends SettingsBase with ChangeNotifier {
     update(displayLanguage: locale.toLanguageTag());
   }
 
+  TranslationTargetsModifier get transTargets {
+    _translationTargetsModifier ??= TranslationTargetsModifier(this);
+    return _translationTargetsModifier!;
+  }
+
+  TranslationTargetsModifier transTarget(String? id) {
+    return TranslationTargetsModifier(this, id: id);
+  }
+
   OcrEnginesModifier get proOcrEngines {
     _proOcrEnginesModifier ??= OcrEnginesModifier(this, group: 'pro');
     return _proOcrEnginesModifier!;
@@ -184,43 +195,6 @@ class Settings extends SettingsBase with ChangeNotifier {
     return TranslationEnginesModifier(this, group: 'private', id: id);
   }
 
-  void updateOrCreateTranslationTarget({
-    required String sourceLanguage,
-    required String targetLanguage,
-  }) {
-    final index = translationTargets.indexWhere(
-      (e) =>
-          e.sourceLanguage == sourceLanguage &&
-          e.targetLanguage == targetLanguage,
-    );
-    if (index != -1) {
-      translationTargets[index].sourceLanguage = sourceLanguage;
-      translationTargets[index].targetLanguage = targetLanguage;
-    } else {
-      translationTargets.add(
-        TranslationTarget(
-          id: shortid.generate(),
-          sourceLanguage: sourceLanguage,
-          targetLanguage: targetLanguage,
-        ),
-      );
-    }
-
-    notifyListeners();
-  }
-
-  void deleteTranslationTarget({
-    required String sourceLanguage,
-    required String targetLanguage,
-  }) {
-    translationTargets.removeWhere(
-      (e) =>
-          e.sourceLanguage == sourceLanguage &&
-          e.targetLanguage == targetLanguage,
-    );
-    notifyListeners();
-  }
-
   /// Update settings
   void update({
     String? defaultOcrEngineId,
@@ -228,11 +202,13 @@ class Settings extends SettingsBase with ChangeNotifier {
     String? defaultTranslationEngineId,
     TranslationMode? translationMode,
     String? defaultDetectLanguageEngineId,
+    List<TranslationTarget>? translationTargets,
     bool? doubleClickCopyResult,
     InputSubmitMode? inputSubmitMode,
     ThemeMode? themeMode,
     bool? trayIconEnabled,
     double? maxWindowHeight,
+    BoundShortcuts? boundShortcuts,
     String? displayLanguage,
     bool? autoStartEnabled,
     List<OcrEngineConfig>? ocrEngines,
@@ -254,6 +230,9 @@ class Settings extends SettingsBase with ChangeNotifier {
     this.defaultDetectLanguageEngineId = defaultDetectLanguageEngineId ??
         settings?.defaultDetectLanguageEngineId ??
         this.defaultDetectLanguageEngineId;
+    this.translationTargets = translationTargets ??
+        settings?.translationTargets ??
+        this.translationTargets;
     this.doubleClickCopyResult = doubleClickCopyResult ??
         settings?.doubleClickCopyResult ??
         this.doubleClickCopyResult;
@@ -264,6 +243,8 @@ class Settings extends SettingsBase with ChangeNotifier {
         trayIconEnabled ?? settings?.trayIconEnabled ?? this.trayIconEnabled;
     this.maxWindowHeight =
         maxWindowHeight ?? settings?.maxWindowHeight ?? this.maxWindowHeight;
+    this.boundShortcuts =
+        boundShortcuts ?? settings?.boundShortcuts ?? this.boundShortcuts;
     this.displayLanguage =
         displayLanguage ?? settings?.displayLanguage ?? this.displayLanguage;
     this.autoStartEnabled =
@@ -273,6 +254,25 @@ class Settings extends SettingsBase with ChangeNotifier {
         settings?.translationEngines ??
         this.translationEngines;
 
+    notifyListeners();
+  }
+
+  void updateShortcuts({
+    HotKey? showOrHide,
+    HotKey? hide,
+    HotKey? extractFromScreenSelection,
+    HotKey? extractFromScreenCapture,
+    HotKey? extractFromClipboard,
+    HotKey? translateInputContent,
+  }) {
+    boundShortcuts.showOrHide = showOrHide ?? boundShortcuts.showOrHide;
+    boundShortcuts.hide = hide ?? boundShortcuts.hide;
+    boundShortcuts.extractFromScreenSelection =
+        extractFromScreenSelection ?? boundShortcuts.extractFromScreenSelection;
+    boundShortcuts.extractFromScreenCapture =
+        extractFromScreenCapture ?? boundShortcuts.extractFromScreenCapture;
+    boundShortcuts.extractFromClipboard =
+        extractFromClipboard ?? boundShortcuts.extractFromClipboard;
     notifyListeners();
   }
 
@@ -301,13 +301,15 @@ class Settings extends SettingsBase with ChangeNotifier {
       defaultOcrEngineId = settings.defaultOcrEngineId;
       autoCopyRecognizedText = settings.autoCopyRecognizedText;
       defaultTranslationEngineId = settings.defaultTranslationEngineId;
-      translationMode = instance.translationMode;
+      translationMode = settings.translationMode;
       defaultDetectLanguageEngineId = settings.defaultDetectLanguageEngineId;
+      translationTargets = settings.translationTargets;
       doubleClickCopyResult = settings.doubleClickCopyResult;
       inputSubmitMode = settings.inputSubmitMode;
       themeMode = settings.themeMode;
       trayIconEnabled = settings.trayIconEnabled;
       maxWindowHeight = settings.maxWindowHeight;
+      boundShortcuts = settings.boundShortcuts;
       displayLanguage = settings.displayLanguage;
       autoStartEnabled = settings.autoStartEnabled;
       ocrEngines = settings.ocrEngines;

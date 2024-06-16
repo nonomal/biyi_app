@@ -17,16 +17,17 @@ class AppearanceSettingPage extends StatefulWidget {
 }
 
 class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
-  void _handleThemeModeChanged(newValue) {
-    context.read<Settings>().update(themeMode: newValue);
-  }
-
-  void _handleTrayIconEnabledChanged(newValue) {
-    context.read<Settings>().update(trayIconEnabled: newValue);
-  }
-
-  void _handleMaxWindowHeightChanged(newValue) {
-    context.read<Settings>().update(maxWindowHeight: newValue);
+  void _handleUpdateSettings({
+    ThemeMode? themeMode,
+    bool? trayIconEnabled,
+    double? maxWindowHeight,
+  }) {
+    final settings = context.read<Settings>();
+    settings.update(
+      themeMode: themeMode,
+      trayIconEnabled: trayIconEnabled,
+      maxWindowHeight: maxWindowHeight,
+    );
   }
 
   Widget _buildBody(BuildContext context) {
@@ -55,7 +56,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
                         color: Theme.of(context).colorScheme.primary,
                       )
                     : null,
-                onTap: () => _handleThemeModeChanged(themeMode),
+                onTap: () => _handleUpdateSettings(themeMode: themeMode),
               ),
           ],
         ),
@@ -70,10 +71,12 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
               ),
               additionalInfo: Switch(
                 value: settings.trayIconEnabled,
-                onChanged: _handleTrayIconEnabledChanged,
+                onChanged: (newValue) =>
+                    _handleUpdateSettings(trayIconEnabled: newValue),
               ),
-              onTap: () =>
-                  _handleTrayIconEnabledChanged(!settings.trayIconEnabled),
+              onTap: () => _handleUpdateSettings(
+                trayIconEnabled: !settings.trayIconEnabled,
+              ),
             ),
           ],
         ),
@@ -91,7 +94,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
                         color: Theme.of(context).colorScheme.primary,
                       )
                     : null,
-                onTap: () => _handleMaxWindowHeightChanged(option),
+                onTap: () => _handleUpdateSettings(maxWindowHeight: option),
               ),
           ],
         ),

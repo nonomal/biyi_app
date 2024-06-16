@@ -91,9 +91,7 @@ class AutoloadTranslateClientAdapter extends UniTranslateClientAdapter {
 
   @override
   TranslationEngine get first {
-    TranslationEngineConfig engineConfig =
-        Settings.instance.translationEngines.first;
-    return use(engineConfig.id);
+    throw UnimplementedError();
   }
 
   @override

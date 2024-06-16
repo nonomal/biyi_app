@@ -1,19 +1,16 @@
 import 'dart:io';
 
-import 'package:biyi_app/services/local_db/local_db.dart';
 import 'package:biyi_app/utilities/env.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:uni_platform/uni_platform.dart';
 
-// 请按文件名排序放置
 export './env.dart';
 export './global_audio_player.dart';
 export './global_key_ex.dart';
 export './language_util.dart';
 export './pretty_json.dart';
 export './r.dart';
-export './remove_nulls.dart';
 
 final sharedEnv = Env.instance;
 
@@ -41,12 +38,11 @@ Future<Directory> getAppDirectory() async {
 @Deprecated('No longer used.')
 Future<Directory> getUserDataDirectory() async {
   final appDirectory = await getAppDirectory();
-  final currentUser = await getCurrentUser();
 
   final userDataDirectory = Directory(
     path.join(
       appDirectory.path,
-      currentUser.id == -1 ? 'local' : currentUser.email,
+      'local',
     ),
   );
 

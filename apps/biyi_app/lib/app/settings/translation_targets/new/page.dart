@@ -38,7 +38,7 @@ class _TranslationTargetNewOrEditPageState
   }
 
   void _handleClickOk() {
-    context.read<Settings>().updateOrCreateTranslationTarget(
+    context.read<Settings>().transTargets.updateOrCreate(
           sourceLanguage: _sourceLanguage!,
           targetLanguage: _targetLanguage!,
         );
@@ -116,15 +116,11 @@ class _TranslationTargetNewOrEditPageState
                   ),
                 ),
                 // accessoryView: Container(),
-                onTap: () async {
-                  context.read<Settings>().deleteTranslationTarget(
-                        sourceLanguage:
-                            widget.translationTarget!.sourceLanguage!,
-                        targetLanguage:
-                            widget.translationTarget!.targetLanguage!,
-                      );
-
-                  // ignore: use_build_context_synchronously
+                onTap: () {
+                  context
+                      .read<Settings>()
+                      .transTarget(widget.translationTarget!.id!)
+                      .delete();
                   Navigator.of(context).pop();
                 },
               ),

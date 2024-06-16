@@ -1,4 +1,4 @@
-import 'package:biyi_app/services/local_db/local_db.dart';
+import 'package:biyi_app/states/settings.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:uni_platform/uni_platform.dart';
 
@@ -20,55 +20,55 @@ class ShortcutService {
 
   ShortcutListener? _listener;
 
-  Configuration get _configuration => localDb.configuration;
-
   void setListener(ShortcutListener? listener) {
     _listener = listener;
   }
 
   Future<void> start() async {
+    final boundShortcuts = Settings.instance.boundShortcuts;
+
     await hotKeyManager.unregisterAll();
     await hotKeyManager.register(
-      _configuration.shortcutInputSettingSubmitWithMetaEnter,
+      boundShortcuts.inputSubmitWithMetaEnter,
       keyDownHandler: (_) {
         _listener?.onShortcutKeyDownSubmitWithMateEnter();
       },
     );
     await hotKeyManager.register(
-      _configuration.shortcutShowOrHide,
+      boundShortcuts.showOrHide,
       keyDownHandler: (_) {
         _listener?.onShortcutKeyDownShowOrHide();
       },
     );
     await hotKeyManager.register(
-      _configuration.shortcutHide,
+      boundShortcuts.hide,
       keyDownHandler: (_) {
         _listener?.onShortcutKeyDownHide();
       },
     );
     await hotKeyManager.register(
-      _configuration.shortcutExtractFromScreenSelection,
+      boundShortcuts.extractFromScreenSelection,
       keyDownHandler: (_) {
         _listener?.onShortcutKeyDownExtractFromScreenSelection();
       },
     );
     if (!UniPlatform.isLinux) {
       await hotKeyManager.register(
-        _configuration.shortcutExtractFromScreenCapture,
+        boundShortcuts.extractFromScreenCapture,
         keyDownHandler: (_) {
           _listener?.onShortcutKeyDownExtractFromScreenCapture();
         },
       );
     }
     await hotKeyManager.register(
-      _configuration.shortcutExtractFromClipboard,
+      boundShortcuts.extractFromClipboard,
       keyDownHandler: (_) {
         _listener?.onShortcutKeyDownExtractFromClipboard();
       },
     );
     if (!UniPlatform.isLinux) {
       await hotKeyManager.register(
-        _configuration.shortcutTranslateInputContent,
+        boundShortcuts.translateInputContent,
         keyDownHandler: (_) {
           _listener?.onShortcutKeyDownTranslateInputContent();
         },

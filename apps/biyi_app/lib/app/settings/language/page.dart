@@ -17,6 +17,15 @@ class LanguageSettingPage extends StatefulWidget {
 }
 
 class _LanguageSettingPageState extends State<LanguageSettingPage> {
+  void _handleUpdateSettings({
+    String? displayLanguage,
+  }) {
+    final settings = context.read<Settings>();
+    if (displayLanguage != null) {
+      settings.locale = languageToLocale(displayLanguage);
+    }
+  }
+
   Widget _buildBody(BuildContext context) {
     final settings = context.watch<Settings>();
     return ListView(
@@ -34,9 +43,8 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
                       )
                     : null,
                 onTap: () async {
-                  final newLocale = languageToLocale(appLanguage);
-                  context.read<Settings>().locale = newLocale;
-                  await context.setLocale(newLocale);
+                  _handleUpdateSettings(displayLanguage: appLanguage);
+                  await context.setLocale(languageToLocale(appLanguage));
                   await WidgetsBinding.instance.performReassemble();
                 },
               ),
