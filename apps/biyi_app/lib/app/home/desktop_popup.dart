@@ -14,7 +14,7 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/models.dart';
 import 'package:biyi_app/services/services.dart';
 import 'package:biyi_app/states/settings.dart';
-import 'package:biyi_app/utilities/utilities.dart';
+import 'package:biyi_app/utils/utils.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';

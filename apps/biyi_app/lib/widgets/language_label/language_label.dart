@@ -1,4 +1,4 @@
-import 'package:biyi_app/utilities/language_util.dart';
+import 'package:biyi_app/utils/language_util.dart';
 import 'package:biyi_app/widgets/language_flag_view/language_flag_view.dart';
 import 'package:influxui/influxui.dart';
 

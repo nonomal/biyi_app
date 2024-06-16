@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:biyi_app/models/settings_base.dart';
-import 'package:biyi_app/utilities/language_util.dart';
+import 'package:biyi_app/utils/language_util.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:influxui/influxui.dart';

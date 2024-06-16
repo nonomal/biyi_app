@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:biyi_app/models/models.dart';
 import 'package:biyi_app/services/local_db/local_db.dart';
-import 'package:biyi_app/utilities/utilities.dart';
+import 'package:biyi_app/utils/utils.dart';
 import 'package:shortid/shortid.dart';
 
 @Deprecated('No longer used.')

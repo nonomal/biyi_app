@@ -1,2 +1,4 @@
 ignore:
+  - influxui
+  - preference_list
   - vclibs

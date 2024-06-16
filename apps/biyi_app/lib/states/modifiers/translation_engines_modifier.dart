@@ -25,9 +25,7 @@ class TranslationEnginesModifier {
           .toList()
         ..sort((a, b) => a.position.compareTo(b.position));
     }
-    return settings.translationEngines
-        .where((e) => e.group == group)
-        .toList()
+    return settings.translationEngines.where((e) => e.group == group).toList()
       ..sort((a, b) => a.position.compareTo(b.position));
   }
 
@@ -71,15 +69,14 @@ class TranslationEnginesModifier {
     List<String>? supportedScopes,
     bool? disabled,
   }) async {
-    final index = settings.translationEngines
-        .indexWhere((element) => element.id == id);
+    final index =
+        settings.translationEngines.indexWhere((element) => element.id == id);
     if (index == -1) return;
 
     final oldTranslationEngine = settings.translationEngines[index];
     settings.translationEngines[index].position =
         position ?? oldTranslationEngine.position;
-    settings.translationEngines[index].type =
-        type ?? oldTranslationEngine.type;
+    settings.translationEngines[index].type = type ?? oldTranslationEngine.type;
     settings.translationEngines[index].option =
         option ?? oldTranslationEngine.option;
     settings.translationEngines[index].supportedScopes =

@@ -1,4 +1,4 @@
-import 'package:biyi_app/utilities/language_util.dart';
+import 'package:biyi_app/utils/language_util.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:influxui/influxui.dart';
 

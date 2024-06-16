@@ -8,7 +8,7 @@ import 'package:biyi_app/services/local_db/modifiers/engines_modifier.dart';
 import 'package:biyi_app/services/local_db/modifiers/ocr_engines_modifier.dart';
 import 'package:biyi_app/services/local_db/modifiers/preferences_modifier.dart';
 import 'package:biyi_app/services/local_db/modifiers/translation_targets_modifier.dart';
-import 'package:biyi_app/utilities/utilities.dart';
+import 'package:biyi_app/utils/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:path/path.dart' as path;

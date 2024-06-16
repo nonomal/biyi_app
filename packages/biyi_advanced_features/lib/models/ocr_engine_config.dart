@@ -30,7 +30,6 @@ class OcrEngineConfig {
 
   @Deprecated('No longer used')
   String get identifier => id;
-  
 
   Map<String, dynamic> toJson() {
     return {

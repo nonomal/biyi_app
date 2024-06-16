@@ -1,16 +1,16 @@
 import 'dart:io';
 
-import 'package:biyi_app/utilities/env.dart';
+import 'package:biyi_app/utils/env.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:uni_platform/uni_platform.dart';
 
-export './env.dart';
-export './global_audio_player.dart';
-export './global_key_ex.dart';
-export './language_util.dart';
-export './pretty_json.dart';
-export './r.dart';
+export 'env.dart';
+export 'global_audio_player.dart';
+export 'global_key_ex.dart';
+export 'language_util.dart';
+export 'pretty_json.dart';
+export 'r.dart';
 
 final sharedEnv = Env.instance;
 

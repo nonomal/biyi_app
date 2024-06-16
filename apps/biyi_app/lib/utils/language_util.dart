@@ -1,4 +1,4 @@
-import 'package:biyi_app/utilities/r.dart';
+import 'package:biyi_app/utils/r.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:influxui/influxui.dart';
 
@@ -55,8 +55,8 @@ String getLanguageFlag(String language) {
 Locale languageToLocale(String language) {
   if (language.contains('-')) {
     return Locale(
-      language.substring(0, 1).toUpperCase(),
-      language.substring(1),
+      language.split('-').first.toLowerCase(),
+      language.split('-').last,
     );
   }
   return Locale(language);

@@ -1,6 +1,6 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/states/settings.dart';
-import 'package:biyi_app/utilities/language_util.dart';
+import 'package:biyi_app/utils/language_util.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
