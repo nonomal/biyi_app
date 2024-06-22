@@ -5,7 +5,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/app/home/limited_functionality_banner.dart';
 import 'package:biyi_app/app/home/new_version_found_banner.dart';
 import 'package:biyi_app/app/home/toolbar_item_always_on_top.dart';
@@ -15,6 +14,7 @@ import 'package:biyi_app/app/home/translation_results_view.dart';
 import 'package:biyi_app/app/home/translation_target_select_view.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/models.dart';
+import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/services/services.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/utils/utils.dart';
@@ -904,7 +904,6 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => _windowResize());
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: _buildAppBar(context),
       body: _buildBody(context),
     );

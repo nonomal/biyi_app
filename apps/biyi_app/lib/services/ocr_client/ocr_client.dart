@@ -1,4 +1,5 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
+import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:ocr_engine_builtin/ocr_engine_builtin.dart';
 import 'package:ocr_engine_youdao/ocr_engine_youdao.dart';
@@ -20,7 +21,7 @@ OcrEngine? createOcrEngine(
 ) {
   OcrEngine? ocrEngine;
   if (Settings.instance.proOcrEngine(ocrEngineConfig.id).exists()) {
-    ocrEngine = ProOcrEngine(ocrEngineConfig);
+    ocrEngine = ProOcrEngine(ocrEngineConfig, apiClient: apiClient);
     if (ocrEngineConfig.id == kDefaultBuiltInOcrEngine.identifier) {
       ocrEngine = kDefaultBuiltInOcrEngine;
     }

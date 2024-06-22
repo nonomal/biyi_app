@@ -1,6 +1,5 @@
-// ignore_for_file: deprecated_member_use_from_same_package, deprecated_member_use
+// ignore_for_file: deprecated_member_use_from_same_package
 
-import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/models/settings_base.dart';
 import 'package:biyi_app/services/local_db/local_db.dart';
 
@@ -14,7 +13,7 @@ Future<SettingsBase> migrateOldSettings(SettingsBase settings) async {
   settings.defaultDetectLanguageEngineId = c.defaultEngineId;
   settings.translationTargets = localDb.translationTargets.list();
   settings.doubleClickCopyResult = c.doubleClickCopyResult;
-  settings.inputSubmitMode = c.inputSetting == kInputSettingSubmitWithEnter
+  settings.inputSubmitMode = c.inputSetting == 'submit-with-enter'
       ? InputSubmitMode.enter
       : InputSubmitMode.metaEnter;
   settings.themeMode = c.themeMode;

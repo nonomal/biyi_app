@@ -1,21 +1,17 @@
 import 'dart:io';
 
-import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/services/local_db/configuration.dart';
 import 'package:biyi_app/services/local_db/init_data_if_need.dart';
-import 'package:biyi_app/services/local_db/local_db_listener.dart';
 import 'package:biyi_app/services/local_db/modifiers/engines_modifier.dart';
 import 'package:biyi_app/services/local_db/modifiers/ocr_engines_modifier.dart';
 import 'package:biyi_app/services/local_db/modifiers/preferences_modifier.dart';
 import 'package:biyi_app/services/local_db/modifiers/translation_targets_modifier.dart';
 import 'package:biyi_app/utils/utils.dart';
-import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:path/path.dart' as path;
 import 'package:uni_platform/uni_platform.dart';
 
 export 'configuration.dart';
-export 'local_db_listener.dart';
 export 'modifiers/engines_modifier.dart';
 export 'modifiers/ocr_engines_modifier.dart';
 export 'modifiers/preferences_modifier.dart';
@@ -23,36 +19,12 @@ export 'modifiers/translation_targets_modifier.dart';
 
 @Deprecated('Use Settings instead.')
 class LocalDb {
-  User user = User(id: -1);
   Configuration configuration = Configuration();
 
   EnginesModifier? _enginesModifier;
   OcrEnginesModifier? _ocrEnginesModifier;
   PreferencesModifier? _preferencesModifier;
   TranslationTargetsModifier? _translationTargetsModifier;
-
-  final ObserverList<LocalDbListener> _listeners =
-      ObserverList<LocalDbListener>();
-
-  List<LocalDbListener> get listeners {
-    final List<LocalDbListener> localListeners =
-        List<LocalDbListener>.from(_listeners);
-    return localListeners;
-  }
-
-  bool get hasListeners {
-    return _listeners.isNotEmpty;
-  }
-
-  @Deprecated('No longer used.')
-  void addListener(LocalDbListener listener) {
-    _listeners.add(listener);
-  }
-
-  @Deprecated('No longer used.')
-  void removeListener(LocalDbListener listener) {
-    _listeners.remove(listener);
-  }
 
   @Deprecated('No longer used.')
   EnginesModifier get engines {

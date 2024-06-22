@@ -1,5 +1,7 @@
-import 'package:biyi_advanced_features/biyi_advanced_features.dart';
+import 'package:biyi_app/services/api_client.dart' show TranslationEngineConfig;
 import 'package:easy_localization/easy_localization.dart';
+
+export 'package:biyi_app/services/api_client.dart' show TranslationEngineConfig;
 
 extension ExtTranslationEngineConfig on TranslationEngineConfig {
   String get typeName {

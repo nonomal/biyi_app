@@ -8,6 +8,8 @@ environment:
   flutter: ">=3.3.0"
 
 dependencies:
+  biyi_api_client:
+    path: ../biyi_api_client
   crypto: ^3.0.3
   device_info_plus: ^9.0.1
   dio: ^5.1.2

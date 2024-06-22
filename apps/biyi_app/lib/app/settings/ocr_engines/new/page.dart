@@ -1,6 +1,6 @@
-import 'package:biyi_advanced_features/biyi_advanced_features.dart';
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/services/ocr_client/ocr_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';

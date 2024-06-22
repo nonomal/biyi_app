@@ -2,11 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:biyi_advanced_features/models/ocr_engine_config.dart';
-import 'package:biyi_advanced_features/models/translation_engine_config.dart';
-import 'package:biyi_advanced_features/networking/api_client/api_client.dart';
 import 'package:biyi_app/models/settings_base.dart';
 import 'package:biyi_app/models/translation_target.dart';
+import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/services/local_db/migrate_old_settings.dart';
 import 'package:biyi_app/services/ocr_client/ocr_client.dart';
 import 'package:biyi_app/states/modifiers/ocr_engines_modifier.dart';
@@ -140,6 +138,7 @@ class Settings extends SettingsBase with ChangeNotifier {
           .firstWhere((e) => e.type == 'built_in' || e.type == 'tesseract')
           .id;
     }
+    await _writeToLocalFile();
   }
 
   Locale get locale => languageToLocale(displayLanguage ?? 'en');

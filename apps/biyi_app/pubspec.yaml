@@ -11,6 +11,8 @@ dependencies:
   audioplayers: ^5.2.1
   biyi_advanced_features:
     path: ../../packages/biyi_advanced_features
+  biyi_api_client:
+    path: ../../packages/biyi_api_client
   bot_toast: ^4.1.3
   collection: ^1.18.0
   easy_localization: ^3.0.3

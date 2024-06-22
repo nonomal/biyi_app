@@ -1,4 +1,4 @@
-import 'package:biyi_advanced_features/biyi_advanced_features.dart';
+import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:collection/collection.dart';
 import 'package:shortid/shortid.dart';

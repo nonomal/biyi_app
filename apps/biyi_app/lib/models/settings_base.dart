@@ -1,5 +1,4 @@
-import 'package:biyi_advanced_features/models/ocr_engine_config.dart';
-import 'package:biyi_advanced_features/models/translation_engine_config.dart';
+import 'package:biyi_api_client/biyi_api_client.dart';
 import 'package:biyi_app/models/translation_target.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart' show ThemeMode;

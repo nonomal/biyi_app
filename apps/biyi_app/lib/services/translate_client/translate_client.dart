@@ -1,4 +1,5 @@
 import 'package:biyi_advanced_features/biyi_advanced_features.dart';
+import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:translation_engine_baidu/translation_engine_baidu.dart';
 import 'package:translation_engine_caiyun/translation_engine_caiyun.dart';
@@ -36,7 +37,7 @@ TranslationEngine? createTranslationEngine(
   TranslationEngineConfig engineConfig,
 ) {
   if (Settings.instance.proTranslationEngine(engineConfig.id).exists()) {
-    return ProTranslationEngine(engineConfig);
+    return ProTranslationEngine(engineConfig, apiClient: apiClient);
   } else {
     switch (engineConfig.type) {
       case kEngineTypeBaidu:
