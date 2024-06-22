@@ -43,6 +43,10 @@ class ApiClient {
 
   OcrEnginesApi get ocrEngines => _ocrEnginesApi;
 
+  OcrEnginesApi ocrEngine(String engineId) {
+    return OcrEnginesApi(_dio, engineId: engineId);
+  }
+
   VersionsApi get versions => _versionsApi;
 
   VersionsApi version(String id) {

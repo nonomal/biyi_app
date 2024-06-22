@@ -12,6 +12,6 @@ class ProOcrEngine extends OcrEngine {
 
   @override
   Future<RecognizeTextResponse> recognizeText(RecognizeTextRequest request) {
-    throw UnsupportedError('recognizeText');
+    return apiClient.ocrEngine(identifier).recognizeText(request);
   }
 }
