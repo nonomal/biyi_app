@@ -27,7 +27,7 @@ class ShortcutService {
   Future<void> start() async {
     final boundShortcuts = Settings.instance.boundShortcuts;
 
-    await hotKeyManager.unregisterAll();
+    // await hotKeyManager.unregisterAll();
     await hotKeyManager.register(
       boundShortcuts.inputSubmitWithMetaEnter,
       keyDownHandler: (_) {
@@ -66,14 +66,14 @@ class ShortcutService {
         _listener?.onShortcutKeyDownExtractFromClipboard();
       },
     );
-    if (!UniPlatform.isLinux) {
-      await hotKeyManager.register(
-        boundShortcuts.translateInputContent,
-        keyDownHandler: (_) {
-          _listener?.onShortcutKeyDownTranslateInputContent();
-        },
-      );
-    }
+    // if (!UniPlatform.isLinux) {
+    //   await hotKeyManager.register(
+    //     boundShortcuts.translateInputContent,
+    //     keyDownHandler: (_) {
+    //       _listener?.onShortcutKeyDownTranslateInputContent();
+    //     },
+    //   );
+    // }
   }
 
   void stop() {

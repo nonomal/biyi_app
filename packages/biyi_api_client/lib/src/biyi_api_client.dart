@@ -19,7 +19,7 @@ class ApiClient {
       responseType: ResponseType.json,
     );
     _dio = Dio(options);
-    if (!debug) {
+    if (debug) {
       _dio.interceptors.add(
         LogInterceptor(requestBody: true, responseBody: true),
       );

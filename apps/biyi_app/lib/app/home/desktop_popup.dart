@@ -1,6 +1,3 @@
-// TODO(lijy91): ModifierKey is deprecated, fix it later.
-// ignore_for_file: deprecated_member_use
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -24,7 +21,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:influxui/influxui.dart';
-import 'package:keypress_simulator/keypress_simulator.dart';
 import 'package:protocol_handler/protocol_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:screen_capturer/screen_capturer.dart';
@@ -963,89 +959,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   @override
-  Future<void> onShortcutKeyDownTranslateInputContent() async {
-    await keyPressSimulator.simulateKeyPress(
-      key: LogicalKeyboardKey.keyA,
-      modifiers: [
-        UniPlatform.isMacOS
-            ? ModifierKey.metaModifier
-            : ModifierKey.controlModifier,
-      ],
-    );
-    await keyPressSimulator.simulateKeyPress(
-      key: LogicalKeyboardKey.keyA,
-      modifiers: [
-        UniPlatform.isMacOS
-            ? ModifierKey.metaModifier
-            : ModifierKey.controlModifier,
-      ],
-      keyDown: false,
-    );
-
-    try {
-      ExtractedData? extractedData = await screenTextExtractor.extract(
-        mode: ExtractMode.screenSelection,
-      );
-
-      if ((extractedData?.text ?? '').isEmpty) {
-        throw Exception('Extracted text is empty');
-      }
-
-      TranslateResponse translateResponse = await translateClient
-          .use(Settings.instance.defaultTranslationEngineId!)
-          .translate(
-            TranslateRequest(
-              text: extractedData?.text ?? '',
-              sourceLanguage: kLanguageZH,
-              targetLanguage: kLanguageEN,
-            ),
-          );
-
-      TextTranslation? textTranslation =
-          (translateResponse.translations).firstOrNull;
-
-      if (textTranslation != null) {
-        Clipboard.setData(ClipboardData(text: textTranslation.text));
-      }
-    } catch (error) {
-      return;
-    }
-
-    await keyPressSimulator.simulateKeyPress(
-      key: LogicalKeyboardKey.keyA,
-      modifiers: [
-        UniPlatform.isMacOS
-            ? ModifierKey.metaModifier
-            : ModifierKey.controlModifier,
-      ],
-    );
-    await keyPressSimulator.simulateKeyPress(
-      key: LogicalKeyboardKey.keyA,
-      modifiers: [
-        UniPlatform.isMacOS
-            ? ModifierKey.metaModifier
-            : ModifierKey.controlModifier,
-      ],
-      keyDown: false,
-    );
-    await keyPressSimulator.simulateKeyPress(
-      key: LogicalKeyboardKey.keyV,
-      modifiers: [
-        UniPlatform.isMacOS
-            ? ModifierKey.metaModifier
-            : ModifierKey.controlModifier,
-      ],
-    );
-    await keyPressSimulator.simulateKeyPress(
-      key: LogicalKeyboardKey.keyV,
-      modifiers: [
-        UniPlatform.isMacOS
-            ? ModifierKey.metaModifier
-            : ModifierKey.controlModifier,
-      ],
-      keyDown: false,
-    );
-  }
+  Future<void> onShortcutKeyDownTranslateInputContent() async {}
 
   @override
   Future<void> onTrayIconMouseDown() async {

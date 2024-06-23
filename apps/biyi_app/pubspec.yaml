@@ -28,7 +28,7 @@ dependencies:
   hotkey_manager: ^0.2.2
   influxui: 0.0.0
   json_annotation: ^4.8.0
-  keypress_simulator: ^0.1.0
+  keypress_simulator: ^0.2.0
   launch_at_startup: ^0.3.1
   ocr_engine_builtin: ^0.1.1
   ocr_engine_youdao: ^0.1.1

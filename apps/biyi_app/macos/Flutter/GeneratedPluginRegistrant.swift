@@ -9,7 +9,7 @@ import audioplayers_darwin
 import clipboard_watcher
 import device_info_plus
 import hotkey_manager_macos
-import keypress_simulator
+import keypress_simulator_macos
 import ocr_engine_builtin
 import package_info_plus
 import path_provider_foundation
@@ -27,7 +27,7 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   ClipboardWatcherPlugin.register(with: registry.registrar(forPlugin: "ClipboardWatcherPlugin"))
   DeviceInfoPlusMacosPlugin.register(with: registry.registrar(forPlugin: "DeviceInfoPlusMacosPlugin"))
   HotkeyManagerMacosPlugin.register(with: registry.registrar(forPlugin: "HotkeyManagerMacosPlugin"))
-  KeypressSimulatorPlugin.register(with: registry.registrar(forPlugin: "KeypressSimulatorPlugin"))
+  KeypressSimulatorMacosPlugin.register(with: registry.registrar(forPlugin: "KeypressSimulatorMacosPlugin"))
   OcrEngineBuiltinPlugin.register(with: registry.registrar(forPlugin: "OcrEngineBuiltinPlugin"))
   FPPPackageInfoPlusPlugin.register(with: registry.registrar(forPlugin: "FPPPackageInfoPlusPlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))

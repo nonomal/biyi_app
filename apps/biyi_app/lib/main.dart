@@ -3,14 +3,17 @@
 import 'dart:io';
 
 import 'package:biyi_app/app/router_config.dart';
+import 'package:biyi_app/extension/hotkey.dart';
 import 'package:biyi_app/generated/codegen_loader.g.dart';
 import 'package:biyi_app/services/local_db/local_db.dart';
+import 'package:biyi_app/states/actions/translate_input_content.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/utils/env.dart';
 import 'package:biyi_app/utils/language_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:influxui/influxui.dart';
 import 'package:influxui/themes.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
@@ -42,6 +45,7 @@ Future<void> _ensureInitialized() async {
   await EasyLocalization.ensureInitialized();
   ExtendedIcons.iconLibrary = TablerIconLibrary();
   if (UniPlatform.isLinux || UniPlatform.isMacOS || UniPlatform.isWindows) {
+    await hotKeyManager.unregisterAll();
     await windowManager.ensureInitialized();
   }
 
@@ -112,8 +116,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final botToastBuilder = BotToastInit();
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildApp(BuildContext context) {
     final settings = context.watch<Settings>();
     if (context.locale != settings.locale) {
       context.setLocale(settings.locale);
@@ -208,6 +211,25 @@ class _MyAppState extends State<MyApp> {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final boundShortcuts = Settings.instance.boundShortcuts;
+
+    final translateInputContentSingleActivator =
+        boundShortcuts.translateInputContent.singleActivator;
+    return Actions(
+      actions: <Type, Action<Intent>>{
+        TranslateInputContentIntent: TranslateInputContentAction(),
+      },
+      child: GlobalShortcuts(
+        shortcuts: {
+          translateInputContentSingleActivator: TranslateInputContentIntent(),
+        },
+        child: _buildApp(context),
+      ),
     );
   }
 }

@@ -10,7 +10,7 @@ PODS:
   - hotkey_manager_macos (0.0.1):
     - FlutterMacOS
     - HotKey
-  - keypress_simulator (0.0.1):
+  - keypress_simulator_macos (0.0.1):
     - FlutterMacOS
   - ocr_engine_builtin (0.0.1):
     - FlutterMacOS
@@ -43,7 +43,7 @@ DEPENDENCIES:
   - device_info_plus (from `Flutter/ephemeral/.symlinks/plugins/device_info_plus/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
   - hotkey_manager_macos (from `Flutter/ephemeral/.symlinks/plugins/hotkey_manager_macos/macos`)
-  - keypress_simulator (from `Flutter/ephemeral/.symlinks/plugins/keypress_simulator/macos`)
+  - keypress_simulator_macos (from `Flutter/ephemeral/.symlinks/plugins/keypress_simulator_macos/macos`)
   - ocr_engine_builtin (from `Flutter/ephemeral/.symlinks/plugins/ocr_engine_builtin/macos`)
   - package_info_plus (from `Flutter/ephemeral/.symlinks/plugins/package_info_plus/macos`)
   - path_provider_foundation (from `Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin`)
@@ -71,8 +71,8 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral
   hotkey_manager_macos:
     :path: Flutter/ephemeral/.symlinks/plugins/hotkey_manager_macos/macos
-  keypress_simulator:
-    :path: Flutter/ephemeral/.symlinks/plugins/keypress_simulator/macos
+  keypress_simulator_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/keypress_simulator_macos/macos
   ocr_engine_builtin:
     :path: Flutter/ephemeral/.symlinks/plugins/ocr_engine_builtin/macos
   package_info_plus:
@@ -103,7 +103,7 @@ SPEC CHECKSUMS:
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
   HotKey: e96d8a2ddbf4591131e2bb3f54e69554d90cdca6
   hotkey_manager_macos: 1e2edb0c7ae4fe67108af44a9d3445de41404160
-  keypress_simulator: c9697f52dc29725ce0185dcd52b6731718e0b9ca
+  keypress_simulator_macos: f8556f9101f9f2f175652e0bceddf0fe82a4c6b2
   ocr_engine_builtin: 99c65f8f4a156830ceaf0da86940610fefe50f50
   package_info_plus: 02d7a575e80f194102bef286361c6c326e4c29ce
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
