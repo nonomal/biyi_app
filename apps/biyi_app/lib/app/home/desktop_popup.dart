@@ -544,7 +544,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
               if (translateResponse is StreamTranslateResponse) {
                 translateResponse.stream.listen(
                   (event) {
-                    setState(() {});
+                    if (mounted) setState(() {});
                   },
                   onDone: () {},
                 );
@@ -585,7 +585,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
                 .translateError = translateError;
           }
 
-          setState(() {});
+          if (mounted) setState(() {});
 
           return true;
         });

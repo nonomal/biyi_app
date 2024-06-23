@@ -15,6 +15,7 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
 
     final bool canPop = parentRoute?.canPop ?? false;
@@ -29,6 +30,7 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
               ? FluentIcons.dismiss_20_regular
               : FluentIcons.chevron_left_20_regular,
           variant: IconButtonVariant.transparent,
+          color: ExtendedColors.neutral.shade900,
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -38,12 +40,12 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
 
     return Container(
       height: double.infinity,
-      padding: const EdgeInsets.only(
-        left: 16,
+      padding: EdgeInsets.only(
+        left: leadingWidget == null ? 16 : 4,
         right: 16,
       ),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerLow,
+        color: theme.colorScheme.surfaceContainerLow,
         border: Border(
           bottom: BorderSide(
             color: Theme.of(context).dividerColor,
@@ -53,11 +55,15 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       child: Row(
         children: [
-          if (leadingWidget != null) leadingWidget,
+          if (leadingWidget != null)
+            Container(
+              margin: const EdgeInsets.only(right: 4),
+              child: leadingWidget,
+            ),
           DefaultTextStyle(
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  fontSize: 16,
-                ),
+            style: theme.textTheme.titleMedium!.copyWith(
+              fontSize: 16,
+            ),
             child: title,
           ),
           Expanded(child: Container()),
@@ -72,5 +78,5 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(48);
+  Size get preferredSize => const Size.fromHeight(44);
 }
