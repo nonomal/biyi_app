@@ -71,7 +71,7 @@ void main() async {
     desktop: () async {
       const WindowOptions windowOptions = WindowOptions(
         alwaysOnTop: false,
-        skipTaskbar: false,
+        skipTaskbar: true,
         titleBarStyle: TitleBarStyle.hidden,
         windowButtonVisibility: false,
       );

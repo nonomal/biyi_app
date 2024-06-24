@@ -67,7 +67,7 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: title,
           ),
           Expanded(child: Container()),
-          if (actions != null)
+          if ((actions ?? []).isNotEmpty)
             GappedRow(
               gap: 4,
               children: actions!,

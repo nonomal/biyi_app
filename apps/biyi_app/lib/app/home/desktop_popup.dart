@@ -161,7 +161,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       windowManager.setSize(size),
       windowManager.setMinimumSize(minimunSize),
       windowManager.setMaximumSize(maximumSize),
-      windowManager.setSkipTaskbar(false),
+      windowManager.setSkipTaskbar(true),
       windowManager.setTitleBarStyle(
         TitleBarStyle.hidden,
         windowButtonVisibility: false,

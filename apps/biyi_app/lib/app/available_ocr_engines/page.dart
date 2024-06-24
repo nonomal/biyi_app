@@ -111,7 +111,7 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
     return Scaffold(
       appBar: CustomizedAppBar(
         title: Text(
-          LocaleKeys.app_ocr_engines_private_title.tr(),
+          LocaleKeys.app_ocr_engines_title.tr(),
         ),
         actions: [
           Button(
