@@ -14,61 +14,19 @@ import 'package:uni_translate_client/uni_translate_client.dart';
 class TranslateInputContentIntent extends Intent {}
 
 class TranslateInputContentAction extends Action<TranslateInputContentIntent> {
-  Future<void> _simulateSelectAll() async {
-    await keyPressSimulator.simulateKeyDown(
-      PhysicalKeyboardKey.keyA,
-      UniPlatform.select<List<ModifierKey>>(
-        macos: [ModifierKey.metaModifier],
-        otherwise: [ModifierKey.controlModifier],
-      ),
+  Future<void> _simulateEditingShortcutKeyPress(PhysicalKeyboardKey key) async {
+    List<ModifierKey> modifiers = UniPlatform.select<List<ModifierKey>>(
+      macos: [ModifierKey.metaModifier],
+      otherwise: [ModifierKey.controlModifier],
     );
-    await keyPressSimulator.simulateKeyUp(
-      PhysicalKeyboardKey.keyA,
-      UniPlatform.select<List<ModifierKey>>(
-        macos: [ModifierKey.metaModifier],
-        otherwise: [ModifierKey.controlModifier],
-      ),
-    );
-  }
-
-  Future<void> _simulateCopy() async {
-    await keyPressSimulator.simulateKeyDown(
-      PhysicalKeyboardKey.keyC,
-      UniPlatform.select<List<ModifierKey>>(
-        macos: [ModifierKey.metaModifier],
-        otherwise: [ModifierKey.controlModifier],
-      ),
-    );
-    await keyPressSimulator.simulateKeyUp(
-      PhysicalKeyboardKey.keyC,
-      UniPlatform.select<List<ModifierKey>>(
-        macos: [ModifierKey.metaModifier],
-        otherwise: [ModifierKey.controlModifier],
-      ),
-    );
-  }
-
-  Future<void> _simulatePaste() async {
-    await keyPressSimulator.simulateKeyDown(
-      PhysicalKeyboardKey.keyC,
-      UniPlatform.select<List<ModifierKey>>(
-        macos: [ModifierKey.metaModifier],
-        otherwise: [ModifierKey.controlModifier],
-      ),
-    );
-    await keyPressSimulator.simulateKeyUp(
-      PhysicalKeyboardKey.keyC,
-      UniPlatform.select<List<ModifierKey>>(
-        macos: [ModifierKey.metaModifier],
-        otherwise: [ModifierKey.controlModifier],
-      ),
-    );
+    await keyPressSimulator.simulateKeyDown(key, modifiers);
+    await keyPressSimulator.simulateKeyUp(key, modifiers);
   }
 
   @override
   Future<void> invoke(covariant TranslateInputContentIntent intent) async {
-    await _simulateSelectAll();
-    await _simulateCopy();
+    await _simulateEditingShortcutKeyPress(PhysicalKeyboardKey.keyA);
+    await _simulateEditingShortcutKeyPress(PhysicalKeyboardKey.keyC);
 
     try {
       ExtractedData? extractedData = await screenTextExtractor.extract(
@@ -99,7 +57,7 @@ class TranslateInputContentAction extends Action<TranslateInputContentIntent> {
       return;
     }
 
-    await _simulateSelectAll();
-    await _simulatePaste();
+    await _simulateEditingShortcutKeyPress(PhysicalKeyboardKey.keyA);
+    await _simulateEditingShortcutKeyPress(PhysicalKeyboardKey.keyV);
   }
 }
