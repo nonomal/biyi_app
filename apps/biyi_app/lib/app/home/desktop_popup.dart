@@ -9,6 +9,7 @@ import 'package:biyi_app/app/home/toolbar_item_settings.dart';
 import 'package:biyi_app/app/home/translation_input_view.dart';
 import 'package:biyi_app/app/home/translation_results_view.dart';
 import 'package:biyi_app/app/home/translation_target_select_view.dart';
+import 'package:biyi_app/extension/hotkey.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/models.dart';
 import 'package:biyi_app/services/api_client.dart';
@@ -20,6 +21,7 @@ import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:influxui/influxui.dart';
 import 'package:protocol_handler/protocol_handler.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +54,6 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     with
         WidgetsBindingObserver,
         ProtocolListener,
-        ShortcutListener,
         TrayListener,
         WindowListener {
   final FocusNode _focusNode = FocusNode();
@@ -113,7 +114,6 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     WidgetsBinding.instance.addObserver(this);
     if (UniPlatform.isLinux || UniPlatform.isMacOS || UniPlatform.isWindows) {
       protocolHandler.addListener(this);
-      ShortcutService.instance.setListener(this);
       trayManager.addListener(this);
       windowManager.addListener(this);
       _init();
@@ -132,10 +132,8 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     WidgetsBinding.instance.removeObserver(this);
     if (UniPlatform.isLinux || UniPlatform.isMacOS || UniPlatform.isWindows) {
       protocolHandler.removeListener(this);
-      ShortcutService.instance.setListener(null);
       trayManager.removeListener(this);
       windowManager.removeListener(this);
-      _uninit();
     }
     super.dispose();
   }
@@ -194,8 +192,6 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       _isAllowedScreenSelectionAccess =
           await screenTextExtractor.isAccessAllowed();
     }
-
-    ShortcutService.instance.start();
 
     // 初始化托盘图标
     await _initTrayIcon();
@@ -283,10 +279,6 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       );
       await trayManager.setContextMenu(menu);
     }
-  }
-
-  void _uninit() {
-    ShortcutService.instance.stop();
   }
 
   Future<void> _windowShow({
@@ -899,9 +891,35 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => _windowResize());
-    return Scaffold(
-      appBar: _buildAppBar(context),
-      body: _buildBody(context),
+    final shortcuts = context.watch<Settings>().boundShortcuts;
+    return CallbackGlobalShortcuts(
+      bindings: {
+        shortcuts.showOrHide.singleActivator: () async {
+          bool isVisible = await windowManager.isVisible();
+          if (isVisible) {
+            _windowHide();
+          } else {
+            _windowShow();
+          }
+        },
+        shortcuts.hide.singleActivator: () => _windowHide(),
+        shortcuts.extractFromScreenSelection.singleActivator: () =>
+            _handleExtractTextFromScreenSelection(),
+        shortcuts.extractFromScreenCapture.singleActivator: () =>
+            _handleExtractTextFromScreenCapture(),
+        shortcuts.extractFromClipboard.singleActivator: () =>
+            _handleExtractTextFromClipboard(),
+        shortcuts.inputSubmitWithMetaEnter.singleActivator: () {
+          if (Settings.instance.inputSubmitMode != InputSubmitMode.metaEnter) {
+            return;
+          }
+          _handleButtonTappedTrans();
+        },
+      },
+      child: Scaffold(
+        appBar: _buildAppBar(context),
+        body: _buildBody(context),
+      ),
     );
   }
 
@@ -919,47 +937,6 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     }
     await _windowShow();
   }
-
-  @override
-  Future<void> onShortcutKeyDownShowOrHide() async {
-    bool isVisible = await windowManager.isVisible();
-    if (isVisible) {
-      _windowHide();
-    } else {
-      _windowShow();
-    }
-  }
-
-  @override
-  Future<void> onShortcutKeyDownHide() async {
-    _windowHide();
-  }
-
-  @override
-  void onShortcutKeyDownExtractFromScreenSelection() {
-    _handleExtractTextFromScreenSelection();
-  }
-
-  @override
-  void onShortcutKeyDownExtractFromScreenCapture() {
-    _handleExtractTextFromScreenCapture();
-  }
-
-  @override
-  void onShortcutKeyDownExtractFromClipboard() {
-    _handleExtractTextFromClipboard();
-  }
-
-  @override
-  void onShortcutKeyDownSubmitWithMateEnter() {
-    if (Settings.instance.inputSubmitMode != InputSubmitMode.metaEnter) {
-      return;
-    }
-    _handleButtonTappedTrans();
-  }
-
-  @override
-  Future<void> onShortcutKeyDownTranslateInputContent() async {}
 
   @override
   Future<void> onTrayIconMouseDown() async {

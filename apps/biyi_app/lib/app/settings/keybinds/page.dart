@@ -76,8 +76,8 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    final BoundShortcuts boundShortcuts = context
-        .select<Settings, BoundShortcuts>((Settings s) => s.boundShortcuts);
+    final Settings settings = context.watch<Settings>();
+    final BoundShortcuts boundShortcuts = settings.boundShortcuts;
 
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: 8),

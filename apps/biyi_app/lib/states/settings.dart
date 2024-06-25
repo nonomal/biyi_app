@@ -272,6 +272,8 @@ class Settings extends SettingsBase with ChangeNotifier {
         extractFromScreenCapture ?? boundShortcuts.extractFromScreenCapture;
     boundShortcuts.extractFromClipboard =
         extractFromClipboard ?? boundShortcuts.extractFromClipboard;
+    boundShortcuts.translateInputContent =
+        translateInputContent ?? boundShortcuts.translateInputContent;
     notifyListeners();
   }
 
