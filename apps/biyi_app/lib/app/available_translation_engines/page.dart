@@ -6,8 +6,8 @@ import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
-import 'package:influxui/influxui.dart';
-import 'package:preference_list/preference_list.dart';
+import 'package:harmonic/noprefix/harmonic.dart';
+import 'package:influxui/influxui.dart' show Button, ButtonVariant;
 
 class AvailableTranslationEnginesPage extends StatefulWidget {
   const AvailableTranslationEnginesPage({
@@ -56,16 +56,15 @@ class _AvailableTranslationEnginesPageState
       padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
         if (_proEngineList.isNotEmpty)
-          PreferenceListSection(
+          ListSection(
             children: [
               for (var engineConfig in _proEngineList)
-                PreferenceListTile(
+                ListTile(
                   leading: TranslationEngineIcon(engineConfig.type),
                   title: TranslationEngineName(engineConfig),
                   additionalInfo: engineConfig.id == _selectedEngineId
-                      ? Icon(
+                      ? const Icon(
                           FluentIcons.checkmark_circle_16_filled,
-                          color: Theme.of(context).colorScheme.primary,
                         )
                       : null,
                   onTap: () {
@@ -76,19 +75,18 @@ class _AvailableTranslationEnginesPageState
                 ),
             ],
           ),
-        PreferenceListSection(
+        ListSection(
           header: Text(
             LocaleKeys.app_translation_engines_private_title.tr(),
           ),
           children: [
             for (var engineConfig in _privateEngineList)
-              PreferenceListTile(
+              ListTile(
                 leading: TranslationEngineIcon(engineConfig.type),
                 title: TranslationEngineName(engineConfig),
                 additionalInfo: engineConfig.id == _selectedEngineId
-                    ? Icon(
+                    ? const Icon(
                         FluentIcons.checkmark_circle_16_filled,
-                        color: Theme.of(context).colorScheme.primary,
                       )
                     : null,
                 onTap: () {
@@ -98,7 +96,7 @@ class _AvailableTranslationEnginesPageState
                 },
               ),
             if (_privateEngineList.isEmpty)
-              PreferenceListTile(
+              ListTile(
                 title: Text(
                   LocaleKeys.app_translation_engines__msg_no_available_engines
                       .tr(),

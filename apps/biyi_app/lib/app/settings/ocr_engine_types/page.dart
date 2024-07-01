@@ -5,8 +5,8 @@ import 'package:biyi_app/widgets/ocr_engine_icon/ocr_engine_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
-import 'package:influxui/influxui.dart';
-import 'package:preference_list/preference_list.dart';
+import 'package:harmonic/noprefix/harmonic.dart';
+import 'package:influxui/influxui.dart' show Button, ButtonVariant;
 
 class OcrEngineTypesPage extends StatefulWidget {
   const OcrEngineTypesPage({
@@ -50,16 +50,15 @@ class _OcrEngineTypesPageState extends State<OcrEngineTypesPage> {
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
-        PreferenceListSection(
+        ListSection(
           children: [
             for (var engineType in kSupportedOcrEngineTypes)
-              PreferenceListTile(
+              ListTile(
                 leading: OcrEngineIcon(engineType),
                 title: Text('ocr_engine.$engineType'.tr()),
                 additionalInfo: _selectedEngineType == engineType
-                    ? Icon(
+                    ? const Icon(
                         FluentIcons.checkmark_circle_16_filled,
-                        color: Theme.of(context).colorScheme.primary,
                       )
                     : null,
                 onTap: () {

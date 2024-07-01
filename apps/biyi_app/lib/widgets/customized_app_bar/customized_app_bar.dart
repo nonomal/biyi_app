@@ -16,6 +16,8 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+    TextTheme textTheme = theme.textTheme;
+
     final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
 
     final bool canPop = parentRoute?.canPop ?? false;
@@ -31,6 +33,7 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
               : FluentIcons.chevron_left_20_regular,
           variant: IconButtonVariant.transparent,
           color: ExtendedColors.neutral.shade900,
+          size: const Size.square(24),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -38,45 +41,47 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
       }
     }
 
-    return Container(
-      height: double.infinity,
-      padding: EdgeInsets.only(
-        left: leadingWidget == null ? 16 : 4,
-        right: 16,
-      ),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerLow,
-        border: Border(
-          bottom: BorderSide(
-            color: Theme.of(context).dividerColor,
-            width: 1,
-          ),
+    return SafeArea(
+      child: Container(
+        height: double.infinity,
+        padding: const EdgeInsets.only(
+          left: 12,
+          right: 24,
         ),
-      ),
-      child: Row(
-        children: [
-          if (leadingWidget != null)
-            Container(
-              margin: const EdgeInsets.only(right: 4),
-              child: leadingWidget,
+        decoration: BoxDecoration(
+          color: ExtendedColors.cyan.withOpacity(0.1),
+        ),
+        child: Row(
+          children: [
+            if (leadingWidget != null)
+              Container(
+                color: ExtendedColors.cyan.withOpacity(0.2),
+                padding: const EdgeInsets.all(12),
+                child: ColoredBox(
+                  color: ExtendedColors.cyan.withOpacity(0.3),
+                  child: leadingWidget,
+                ),
+              ),
+            const SizedBox(width: 4),
+            DefaultTextStyle(
+              style: textTheme.titleMedium!.copyWith(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+              child: title,
             ),
-          DefaultTextStyle(
-            style: theme.textTheme.titleMedium!.copyWith(
-              fontSize: 16,
-            ),
-            child: title,
-          ),
-          Expanded(child: Container()),
-          if ((actions ?? []).isNotEmpty)
-            GappedRow(
-              gap: 4,
-              children: actions!,
-            ),
-        ],
+            Expanded(child: Container()),
+            if ((actions ?? []).isNotEmpty)
+              GappedRow(
+                gap: 4,
+                children: actions!,
+              ),
+          ],
+        ),
       ),
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(44);
+  Size get preferredSize => const Size.fromHeight(56);
 }

@@ -6,8 +6,7 @@ import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
-import 'package:influxui/influxui.dart';
-import 'package:preference_list/preference_list.dart';
+import 'package:harmonic/noprefix/harmonic.dart';
 import 'package:provider/provider.dart';
 import 'package:reorderables/reorderables.dart';
 
@@ -41,10 +40,10 @@ class _TranslationEnginesSettingPageState
     final proTranslationEngineList =
         context.watch<Settings>().proTranslationEngines.list();
     if (proTranslationEngineList.isEmpty) return Container();
-    return PreferenceListSection(
+    return ListSection(
       children: [
         for (TranslationEngineConfig item in proTranslationEngineList)
-          PreferenceListTile(
+          ListTile(
             leading: TranslationEngineIcon(item.type),
             title: TranslationEngineName(item),
             additionalInfo: Switch(
@@ -93,7 +92,7 @@ class _TranslationEnginesSettingPageState
       }
     }
 
-    return PreferenceListSection(
+    return ListSection(
       header: Text(
         LocaleKeys.app_settings_translation_engines_private_title.tr(),
       ),
@@ -112,7 +111,7 @@ class _TranslationEnginesSettingPageState
                 child: Builder(
                   builder: (_) {
                     final item = privateTranslationEngineList[i];
-                    return PreferenceListTile(
+                    return ListTile(
                       leading: TranslationEngineIcon(item.type),
                       title: TranslationEngineName(item),
                       additionalInfo: Switch(
@@ -141,12 +140,10 @@ class _TranslationEnginesSettingPageState
               ),
           ],
         ),
-        PreferenceListTile(
+        ListTile(
           title: Text(
             LocaleKeys.add.tr(),
-            style: TextStyle(
-              color: Theme.of(context).primaryColor,
-            ),
+            style: const TextStyle(),
           ),
           onTap: _handleClickAdd,
         ),

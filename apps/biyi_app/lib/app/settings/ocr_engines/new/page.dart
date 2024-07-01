@@ -9,9 +9,9 @@ import 'package:biyi_app/widgets/ocr_engine_name/ocr_engine_name.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:harmonic/noprefix/harmonic.dart';
 import 'package:influxui/influxui.dart';
 import 'package:ocr_engine_youdao/ocr_engine_youdao.dart';
-import 'package:preference_list/preference_list.dart';
 import 'package:provider/provider.dart';
 import 'package:shortid/shortid.dart';
 
@@ -97,17 +97,17 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
   Widget _buildBody(BuildContext context) {
     return ListView(
       children: [
-        PreferenceListSection(
+        ListSection(
           header: Text(
             LocaleKeys.app_ocr_engines_new_engine_type_title.tr(),
           ),
           children: [
-            PreferenceListTile(
+            ListTile(
               leading: _type == null ? null : OcrEngineIcon(_type!),
               title: _type == null
                   ? Text(LocaleKeys.please_choose.tr())
                   : Text('ocr_engine.$_type'.tr()),
-              trailing: const PreferenceListTileChevron(),
+              trailing: const ListTileChevron(),
               onTap: widget.editable
                   ? () async {
                       final newEngineType = await context.push<String?>(
@@ -127,13 +127,13 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
           ],
         ),
         if (widget.editable && _type != null)
-          PreferenceListSection(
+          ListSection(
             header: Text(
               LocaleKeys.app_ocr_engines_new_option_title.tr(),
             ),
             children: [
               for (var optionKey in _engineOptionKeys)
-                PreferenceListTile(
+                ListTile(
                   title: CupertinoTextField(
                     controller: _textEditingControllerMap[optionKey],
                     placeholder: optionKey,
@@ -144,16 +144,16 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
                   ),
                 ),
               if (_engineOptionKeys.isEmpty)
-                const PreferenceListTile(
+                const ListTile(
                   title: Text('No options'),
                 ),
             ],
           ),
         if (widget.editable && widget.ocrEngineConfig != null)
-          PreferenceListSection(
+          ListSection(
             header: const Text(''),
             children: [
-              PreferenceListTile(
+              ListTile(
                 title: Center(
                   child: Text(
                     LocaleKeys.delete.tr(),

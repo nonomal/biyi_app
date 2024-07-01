@@ -6,8 +6,7 @@ import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
-import 'package:influxui/influxui.dart';
-import 'package:preference_list/preference_list.dart';
+import 'package:harmonic/noprefix/harmonic.dart';
 import 'package:provider/provider.dart';
 import 'package:reorderables/reorderables.dart';
 
@@ -38,10 +37,10 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
   Widget _buildListSectionProEngines(BuildContext context) {
     final proOcrEngineList = context.watch<Settings>().proOcrEngines.list();
     if (proOcrEngineList.isEmpty) return Container();
-    return PreferenceListSection(
+    return ListSection(
       children: [
         for (OcrEngineConfig item in proOcrEngineList)
-          PreferenceListTile(
+          ListTile(
             leading: OcrEngineIcon(item.type),
             title: OcrEngineName(item),
             additionalInfo: Switch(
@@ -83,7 +82,7 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
       }
     }
 
-    return PreferenceListSection(
+    return ListSection(
       header: Text(
         LocaleKeys.app_settings_ocr_engines_private_title.tr(),
       ),
@@ -102,7 +101,7 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
                 child: Builder(
                   builder: (_) {
                     final item = privateOcrEngineList[i];
-                    return PreferenceListTile(
+                    return ListTile(
                       leading: OcrEngineIcon(item.type),
                       title: OcrEngineName(item),
                       additionalInfo: Switch(
@@ -131,12 +130,10 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
               ),
           ],
         ),
-        PreferenceListTile(
+        ListTile(
           title: Text(
             LocaleKeys.add.tr(),
-            style: TextStyle(
-              color: Theme.of(context).primaryColor,
-            ),
+            style: const TextStyle(),
           ),
           onTap: _handleClickAdd,
         ),

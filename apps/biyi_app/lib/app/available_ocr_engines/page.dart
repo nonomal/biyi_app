@@ -6,8 +6,8 @@ import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
-import 'package:influxui/influxui.dart';
-import 'package:preference_list/preference_list.dart';
+import 'package:harmonic/noprefix/harmonic.dart';
+import 'package:influxui/influxui.dart' show Button, ButtonVariant;
 
 class AvailableOcrEnginesPage extends StatefulWidget {
   const AvailableOcrEnginesPage({
@@ -53,16 +53,15 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
       padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
         if (_proOcrEngineList.isNotEmpty)
-          PreferenceListSection(
+          ListSection(
             children: [
               for (var ocrEngineConfig in _proOcrEngineList)
-                PreferenceListTile(
+                ListTile(
                   leading: OcrEngineIcon(ocrEngineConfig.type),
                   title: OcrEngineName(ocrEngineConfig),
                   additionalInfo: ocrEngineConfig.id == _selectedEngineId
-                      ? Icon(
+                      ? const Icon(
                           FluentIcons.checkmark_circle_16_filled,
-                          color: Theme.of(context).colorScheme.primary,
                         )
                       : null,
                   onTap: () {
@@ -73,19 +72,18 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
                 ),
             ],
           ),
-        PreferenceListSection(
+        ListSection(
           header: Text(
             LocaleKeys.app_ocr_engines_private_title.tr(),
           ),
           children: [
             for (var ocrEngineConfig in _privateOcrEngineList)
-              PreferenceListTile(
+              ListTile(
                 leading: OcrEngineIcon(ocrEngineConfig.type),
                 title: OcrEngineName(ocrEngineConfig),
                 additionalInfo: ocrEngineConfig.id == _selectedEngineId
-                    ? Icon(
+                    ? const Icon(
                         FluentIcons.checkmark_circle_16_filled,
-                        color: Theme.of(context).colorScheme.primary,
                       )
                     : null,
                 onTap: () {
@@ -95,7 +93,7 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
                 },
               ),
             if (_privateOcrEngineList.isEmpty)
-              PreferenceListTile(
+              ListTile(
                 title: Text(
                   LocaleKeys.app_ocr_engines__msg_no_available_engines.tr(),
                 ),

@@ -5,8 +5,8 @@ import 'package:biyi_app/widgets/language_label/language_label.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
+import 'package:harmonic/noprefix/harmonic.dart';
 import 'package:influxui/influxui.dart';
-import 'package:preference_list/preference_list.dart';
 
 class SupportedLanguagesPage extends StatefulWidget {
   const SupportedLanguagesPage({
@@ -52,13 +52,13 @@ class _SupportedLanguagesPageState extends State<SupportedLanguagesPage> {
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
-        PreferenceListSection(
+        ListSection(
           header: Text(
             LocaleKeys.app_supported_languages_all_title.tr(),
           ),
           children: [
             for (var supportedLanguage in kSupportedLanguages)
-              PreferenceListTile(
+              ListTile(
                 title: LanguageLabel(supportedLanguage),
                 additionalInfo: _selectedLanguage == supportedLanguage
                     ? Icon(

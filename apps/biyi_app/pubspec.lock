@@ -451,6 +451,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
+  harmonic:
+    dependency: "direct main"
+    description:
+      path: "../../../../leanflutter/harmonic/packages/harmonic"
+      relative: true
+    source: path
+    version: "0.0.1"
   hive:
     dependency: "direct main"
     description:
@@ -852,15 +859,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.1"
-  preference_list:
-    dependency: "direct main"
-    description:
-      path: "packages/preference_list"
-      ref: HEAD
-      resolved-ref: "2243a6289219d7d1ef3499c45976780dceee3e23"
-      url: "https://github.com/leanflutter/influxui.git"
-    source: git
-    version: "0.0.2"
   protocol_handler:
     dependency: "direct main"
     description:

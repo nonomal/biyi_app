@@ -10,8 +10,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:influxui/influxui.dart';
-import 'package:preference_list/preference_list.dart';
+import 'package:harmonic/noprefix/harmonic.dart';
+import 'package:influxui/influxui.dart' show Button, ButtonVariant;
 import 'package:provider/provider.dart';
 import 'package:shortid/shortid.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
@@ -119,17 +119,17 @@ class _TranslationEnginesNewOrEditPageState
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
-        PreferenceListSection(
+        ListSection(
           header: Text(
             LocaleKeys.app_translation_engines_new_engine_type_title.tr(),
           ),
           children: [
-            PreferenceListTile(
+            ListTile(
               leading: _type == null ? null : TranslationEngineIcon(_type!),
               title: _type == null
                   ? Text(LocaleKeys.please_choose.tr())
                   : Text('engine.$_type'.tr()),
-              trailing: const PreferenceListTileChevron(),
+              trailing: const ListTileChevron(),
               onTap: widget.editable
                   ? () async {
                       final newEngineType = await context.push<String?>(
@@ -149,14 +149,14 @@ class _TranslationEnginesNewOrEditPageState
           ],
         ),
         if (translationEngine != null)
-          PreferenceListSection(
+          ListSection(
             header: Text(
               LocaleKeys.app_translation_engines_new_support_interface_title
                   .tr(),
             ),
             children: [
               for (var scope in TranslationEngineScope.values)
-                PreferenceListTile(
+                ListTile(
                   padding: const EdgeInsets.only(
                     top: 10,
                     bottom: 10,
@@ -175,12 +175,12 @@ class _TranslationEnginesNewOrEditPageState
                             .contains(scope)) {
                           return const Icon(
                             FluentIcons.dismiss_circle_20_filled,
-                            color: ExtendedColors.red,
+                            // color: ExtendedColors.red,
                           );
                         }
                         return const Icon(
                           FluentIcons.checkmark_circle_16_filled,
-                          color: ExtendedColors.green,
+                          // color: ExtendedColors.green,
                         );
                       },
                     ),
@@ -189,13 +189,13 @@ class _TranslationEnginesNewOrEditPageState
             ],
           ),
         if (widget.editable && _type != null)
-          PreferenceListSection(
+          ListSection(
             header: Text(
               LocaleKeys.app_translation_engines_new_option_title.tr(),
             ),
             children: [
               for (var optionKey in _engineOptionKeys)
-                PreferenceListTile(
+                ListTile(
                   title: CupertinoTextField(
                     controller: _textEditingControllerMap[optionKey],
                     placeholder: optionKey,
@@ -206,20 +206,20 @@ class _TranslationEnginesNewOrEditPageState
                   ),
                 ),
               if (_engineOptionKeys.isEmpty)
-                const PreferenceListTile(
+                const ListTile(
                   title: Text('No options'),
                 ),
             ],
           ),
         if (widget.editable && widget.engineConfig != null)
-          PreferenceListSection(
+          ListSection(
             header: const Text(''),
             children: [
-              PreferenceListTile(
+              ListTile(
                 title: Center(
                   child: Text(
                     LocaleKeys.delete.tr(),
-                    style: const TextStyle(color: ExtendedColors.red),
+                    // style: const TextStyle(color: ExtendedColors.red),
                   ),
                 ),
                 onTap: () async {

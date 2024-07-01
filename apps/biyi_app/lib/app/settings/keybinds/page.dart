@@ -3,9 +3,9 @@ import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
+import 'package:harmonic/noprefix/harmonic.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
-import 'package:influxui/influxui.dart';
-import 'package:preference_list/preference_list.dart';
+import 'package:influxui/influxui.dart' show ExtendedSize, Kbd;
 import 'package:provider/provider.dart';
 import 'package:uni_platform/uni_platform.dart';
 
@@ -82,9 +82,9 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
-        PreferenceListSection(
+        ListSection(
           children: [
-            PreferenceListTile(
+            ListTile(
               title: Text(
                 LocaleKeys.app_settings_keybinds_window_show_or_hide_title.tr(),
               ),
@@ -98,7 +98,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
                 );
               },
             ),
-            PreferenceListTile(
+            ListTile(
               title: Text(
                 LocaleKeys.app_settings_keybinds_window_hide_title.tr(),
               ),
@@ -114,12 +114,12 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
             ),
           ],
         ),
-        PreferenceListSection(
+        ListSection(
           header: Text(
             LocaleKeys.app_settings_keybinds_extract_text_title.tr(),
           ),
           children: [
-            PreferenceListTile(
+            ListTile(
               title: Text(
                 LocaleKeys
                     .app_settings_keybinds_extract_text_from_selection_title
@@ -138,7 +138,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
               },
             ),
             if (!UniPlatform.isLinux)
-              PreferenceListTile(
+              ListTile(
                 title: Text(
                   LocaleKeys
                       .app_settings_keybinds_extract_text_from_capture_title
@@ -156,7 +156,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
                   );
                 },
               ),
-            PreferenceListTile(
+            ListTile(
               title: Text(
                 LocaleKeys
                     .app_settings_keybinds_extract_text_from_clipboard_title
@@ -177,12 +177,12 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
           ],
         ),
         if (!UniPlatform.isLinux)
-          PreferenceListSection(
+          ListSection(
             header: Text(
               LocaleKeys.app_settings_keybinds_input_assist_function_title.tr(),
             ),
             children: [
-              PreferenceListTile(
+              ListTile(
                 title: Text(
                   LocaleKeys
                       .app_settings_keybinds_input_assist_function_translate_input_content_title

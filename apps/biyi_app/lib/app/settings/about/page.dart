@@ -1,9 +1,8 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:influxui/influxui.dart';
+import 'package:harmonic/noprefix/harmonic.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:preference_list/preference_list.dart';
 
 class AboutSettingPage extends StatefulWidget {
   const AboutSettingPage({super.key});
@@ -38,17 +37,16 @@ class _AboutSettingPageState extends State<AboutSettingPage> {
 
   Widget _buildBody(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
-        PreferenceListSection(
+        ListSection(
           children: [
-            PreferenceListTile(
+            ListTile(
               title: Text(
                 LocaleKeys.app_settings_about_package_info_version.tr(),
               ),
               additionalInfo: Text(_packageInfo?.version ?? 'Unknown'),
             ),
-            PreferenceListTile(
+            ListTile(
               title: Text(
                 LocaleKeys.app_settings_about_package_info_build_number.tr(),
               ),

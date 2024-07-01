@@ -6,8 +6,8 @@ import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
-import 'package:influxui/influxui.dart';
-import 'package:preference_list/preference_list.dart';
+import 'package:harmonic/noprefix/harmonic.dart';
+import 'package:influxui/influxui.dart' show Button, ButtonVariant;
 import 'package:provider/provider.dart';
 
 class TranslationTargetNewOrEditPage extends StatefulWidget {
@@ -66,9 +66,9 @@ class _TranslationTargetNewOrEditPageState
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
-        PreferenceListSection(
+        ListSection(
           children: [
-            PreferenceListTile(
+            ListTile(
               title: Text(
                 LocaleKeys.app_translation_targets_new_source_language.tr(),
               ),
@@ -85,7 +85,7 @@ class _TranslationTargetNewOrEditPageState
                 }
               },
             ),
-            PreferenceListTile(
+            ListTile(
               title: Text(
                 LocaleKeys.app_translation_targets_new_target_language.tr(),
               ),
@@ -105,14 +105,14 @@ class _TranslationTargetNewOrEditPageState
           ],
         ),
         if (widget.translationTarget != null)
-          PreferenceListSection(
+          ListSection(
             header: const Text(''),
             children: [
-              PreferenceListTile(
+              ListTile(
                 title: Center(
                   child: Text(
                     LocaleKeys.delete.tr(),
-                    style: const TextStyle(color: ExtendedColors.red),
+                    // style: const TextStyle(color: ExtendedColors.red),
                   ),
                 ),
                 // accessoryView: Container(),
