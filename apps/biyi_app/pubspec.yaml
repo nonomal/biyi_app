@@ -26,7 +26,6 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   hotkey_manager: ^0.2.2
-  influxui: 0.0.0
   json_annotation: ^4.8.0
   keypress_simulator: ^0.2.0
   launch_at_startup: ^0.3.1
@@ -70,11 +69,6 @@ dev_dependencies:
   mostly_reasonable_lints: ^0.1.2
 
 dependency_overrides:
-  influxui:
-    git:
-      path: packages/influxui
-      url: https://github.com/leanflutter/influxui.git
-    # path: ../../../../leanflutter/influxui/packages/influxui
   reflect_ui:
     # git:
     #   path: packages/reflect_ui
