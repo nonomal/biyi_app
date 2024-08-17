@@ -1,7 +1,8 @@
 import 'dart:ui' as ui;
 
+import 'package:biyi_app/utils/extended_colors.dart';
 import 'package:biyi_app/widgets/sound_play_button/sound_play_button.dart';
-import 'package:influxui/influxui.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
 class WordTranslationView extends StatefulWidget {
@@ -58,9 +59,8 @@ class _WordTranslationViewState extends State<WordTranslationView> {
             ),
             const Badge(
               variant: BadgeVariant.outlined,
-              label: '常见释义',
               color: ExtendedColors.gray,
-              size: BadgeSize.tiny,
+              child: Text('常见释义'),
             ),
             if ((widget.wordTranslation.audioUrl ?? '').isNotEmpty &&
                 _isHovered)

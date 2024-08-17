@@ -1,5 +1,6 @@
 import 'package:biyi_app/models/ext_ocr_engine_config.dart';
-import 'package:influxui/influxui.dart';
+import 'package:biyi_app/utils/extended_colors.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 class OcrEngineName extends StatelessWidget {
   const OcrEngineName(

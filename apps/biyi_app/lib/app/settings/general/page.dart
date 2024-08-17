@@ -4,12 +4,14 @@ import 'package:biyi_app/models/translation_target.dart';
 import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
+import 'package:biyi_app/widgets/list_section.dart';
+import 'package:biyi_app/widgets/list_tile.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
-import 'package:harmonic/noprefix/harmonic.dart';
 import 'package:provider/provider.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_platform/uni_platform.dart';
 
 class GeneralSettingPage extends StatefulWidget {
@@ -45,7 +47,6 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
     final settings = context.watch<Settings>();
 
     return ListView(
-      padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
         ListSection(
           header: Text(

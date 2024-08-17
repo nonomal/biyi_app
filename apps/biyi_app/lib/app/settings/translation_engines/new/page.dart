@@ -4,15 +4,16 @@ import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/services/translate_client/translate_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
+import 'package:biyi_app/widgets/list_section.dart';
+import 'package:biyi_app/widgets/list_tile.dart';
 import 'package:biyi_app/widgets/translation_engine_icon/translation_engine_icon.dart';
 import 'package:biyi_app/widgets/translation_engine_name/translation_engine_name.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:harmonic/noprefix/harmonic.dart';
-import 'package:influxui/influxui.dart' show Button, ButtonVariant;
 import 'package:provider/provider.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 import 'package:shortid/shortid.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
@@ -107,9 +108,9 @@ class _TranslationEnginesNewOrEditPageState
       actions: [
         if (widget.editable)
           Button(
-            label: LocaleKeys.ok.tr(),
-            variant: ButtonVariant.subtle,
+            variant: ButtonVariant.filled,
             onPressed: _handleClickOk,
+            child: Text(LocaleKeys.ok.tr()),
           ),
       ],
     );
@@ -117,7 +118,6 @@ class _TranslationEnginesNewOrEditPageState
 
   Widget _buildBody(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
         ListSection(
           header: Text(

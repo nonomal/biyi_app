@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 
-import 'package:influxui/influxui.dart';
+import 'package:flutter/material.dart' show SelectableText, TextTheme, Theme;
+import 'package:flutter/widgets.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
 class WordSentenceView extends StatelessWidget {

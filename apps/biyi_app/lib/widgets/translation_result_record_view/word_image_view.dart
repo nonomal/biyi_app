@@ -1,4 +1,4 @@
-import 'package:influxui/influxui.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
 const kWordImageSize = 74.0;
@@ -24,20 +24,18 @@ class WordImageView extends StatelessWidget {
         borderRadius: BorderRadius.circular(2),
       ),
       child: Button(
-        variant: ButtonVariant.transparent,
+        variant: ButtonVariant.filled,
         padding: EdgeInsets.zero,
         onPressed: onPressed,
-        labelBuilder: (context) {
-          return Hero(
-            tag: wordImage.url,
-            child: Image.network(
-              wordImage.url,
-              width: kWordImageSize - 2,
-              height: kWordImageSize - 2,
-              fit: BoxFit.cover,
-            ),
-          );
-        },
+        child: Hero(
+          tag: wordImage.url,
+          child: Image.network(
+            wordImage.url,
+            width: kWordImageSize - 2,
+            height: kWordImageSize - 2,
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
     );
   }

@@ -4,7 +4,7 @@ import 'package:biyi_app/models/models.dart';
 import 'package:biyi_app/models/settings_base.dart';
 import 'package:biyi_app/utils/language_util.dart';
 import 'package:biyi_app/widgets/widgets.dart';
-import 'package:influxui/influxui.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
 class TranslationResultsView extends StatelessWidget {
@@ -32,8 +32,9 @@ class TranslationResultsView extends StatelessWidget {
   final bool doubleClickCopyResult;
 
   Widget _buildNoMatchingTranslationTarget(BuildContext context) {
+    ThemeData themeData = Theme.of(context);
     return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
+      color: themeData.scaffoldBackgroundColor,
       padding: const EdgeInsets.only(
         left: 12,
         right: 12,

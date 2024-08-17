@@ -1,4 +1,5 @@
-import 'package:influxui/influxui.dart';
+import 'package:biyi_app/utils/extended_colors.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
 class WordTagView extends StatelessWidget {
@@ -13,8 +14,8 @@ class WordTagView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Badge(
       variant: BadgeVariant.outlined,
-      label: wordTag.name,
       color: ExtendedColors.gray,
+      child: Text(wordTag.name),
     );
   }
 }

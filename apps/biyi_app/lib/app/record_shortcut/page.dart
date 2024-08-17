@@ -3,7 +3,7 @@ import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
-import 'package:influxui/influxui.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 class RecordShortcutPage extends StatefulWidget {
   const RecordShortcutPage({
@@ -70,9 +70,9 @@ class _RecordShortcutPageState extends State<RecordShortcutPage> {
         ),
         actions: [
           Button(
-            label: LocaleKeys.ok.tr(),
-            variant: ButtonVariant.subtle,
+            variant: ButtonVariant.filled,
             onPressed: _handleClickOk,
+            child: Text(LocaleKeys.ok.tr()),
           ),
         ],
       ),

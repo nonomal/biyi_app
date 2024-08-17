@@ -4,7 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:biyi_app/utils/global_audio_player.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:influxui/influxui.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 const _kIconSize = 16.0;
 
@@ -81,6 +81,7 @@ class _SoundPlayButtonState extends State<SoundPlayButton>
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
     return SizedBox(
       width: 20,
       height: 20,
@@ -97,7 +98,7 @@ class _SoundPlayButtonState extends State<SoundPlayButton>
                 child: Icon(
                   FluentIcons.speaker_2_20_regular,
                   size: _kIconSize,
-                  color: Theme.of(context).textTheme.bodySmall!.color,
+                  color: themeData.textTheme.bodySmall!.color,
                 ),
               ),
               SizedBox(
@@ -106,7 +107,7 @@ class _SoundPlayButtonState extends State<SoundPlayButton>
                 child: Icon(
                   FluentIcons.speaker_1_20_regular,
                   size: _kIconSize,
-                  color: Theme.of(context).textTheme.bodySmall!.color,
+                  color: themeData.textTheme.bodySmall!.color,
                 ),
               ),
               SizedBox(
@@ -115,7 +116,7 @@ class _SoundPlayButtonState extends State<SoundPlayButton>
                 child: Icon(
                   FluentIcons.speaker_0_20_regular,
                   size: _kIconSize,
-                  color: Theme.of(context).textTheme.bodySmall!.color,
+                  color: themeData.textTheme.bodySmall!.color,
                 ),
               ),
             ],

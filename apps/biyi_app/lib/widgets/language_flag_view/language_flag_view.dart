@@ -1,6 +1,7 @@
+import 'package:biyi_app/utils/extended_colors.dart';
 import 'package:biyi_app/utils/language_util.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:influxui/influxui.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 class LanguageFlagView extends StatelessWidget {
   const LanguageFlagView(

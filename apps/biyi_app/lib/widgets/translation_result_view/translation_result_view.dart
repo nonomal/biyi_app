@@ -1,7 +1,7 @@
 import 'package:biyi_app/models/translation_result.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:influxui/influxui.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 class TranslationResultView extends StatelessWidget {
   const TranslationResultView(
@@ -18,6 +18,7 @@ class TranslationResultView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData themeData = Theme.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Card(
@@ -38,7 +39,7 @@ class TranslationResultView extends StatelessWidget {
                 child: Icon(
                   FluentIcons.arrow_right_20_regular,
                   size: 16,
-                  color: Theme.of(context).iconTheme.color,
+                  color: themeData.iconTheme.color,
                 ),
               ),
             ),

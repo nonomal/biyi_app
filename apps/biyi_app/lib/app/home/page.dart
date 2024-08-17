@@ -2,9 +2,10 @@ import 'package:biyi_app/app/home/desktop_popup.dart';
 import 'package:biyi_app/app/home/tab_homepage.dart';
 import 'package:biyi_app/app/home/tab_settings.dart';
 import 'package:biyi_app/app/home/tab_vocabulary.dart';
+import 'package:biyi_app/utils/extended_colors.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:influxui/influxui.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_platform/uni_platform.dart';
 
 const _kHomeTabHomepage = 0;

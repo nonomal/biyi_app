@@ -4,7 +4,8 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/gestures.dart';
-import 'package:influxui/influxui.dart';
+import 'package:influxui/influxui.dart' show Alert, AlertType, ExtendedColors;
+import 'package:reflect_ui/reflect_ui.dart' hide Alert;
 import 'package:screen_capturer/screen_capturer.dart';
 import 'package:screen_text_extractor/screen_text_extractor.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,10 +26,11 @@ class AllowAccessListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.bodyMedium?.copyWith(
-          color: ExtendedColors.yellow.shade600,
-          height: 24 / 14,
-        );
+    final ThemeData themeData = Theme.of(context);
+    final textStyle = themeData.textTheme.bodyMedium?.copyWith(
+      color: ExtendedColors.yellow.shade600,
+      height: 24 / 14,
+    );
     return GappedRow(
       gap: 4,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,18 +172,16 @@ class LimitedFunctionalityBanner extends StatelessWidget {
       },
       actions: [
         Button(
-          label: LocaleKeys.app_home_limited_banner_btn_check_again.tr(),
-          size: ButtonSize.small,
           color: ExtendedColors.yellow,
           onPressed: onTappedRecheckIsAllowedAllAccess,
+          child: Text(LocaleKeys.app_home_limited_banner_btn_check_again.tr()),
         ),
         Expanded(child: Container()),
         Tooltip(
           message: LocaleKeys.app_home_limited_banner_tip_help.tr(),
           child: IconButton(
             FluentIcons.question_circle_20_regular,
-            variant: IconButtonVariant.light,
-            size: ButtonSize.small,
+            variant: IconButtonVariant.filled,
             color: ExtendedColors.yellow,
             onPressed: () async {
               Uri url = Uri.parse('${sharedEnv.webUrl}/docs');

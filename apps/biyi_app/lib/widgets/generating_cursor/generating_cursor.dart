@@ -1,4 +1,4 @@
-import 'package:influxui/influxui.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 class GeneratingCursor extends StatefulWidget {
   const GeneratingCursor({super.key});

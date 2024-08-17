@@ -2,8 +2,9 @@ import 'package:biyi_app/models/ext_translation_engine_config.dart';
 import 'package:biyi_app/models/translation_result_record.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/translation_engine_icon/translation_engine_icon.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:influxui/influxui.dart';
+import 'package:flutter/cupertino.dart' show CupertinoButton;
+import 'package:flutter/material.dart' show Theme;
+import 'package:flutter/widgets.dart';
 
 class TranslationEngineTag extends StatefulWidget {
   const TranslationEngineTag({

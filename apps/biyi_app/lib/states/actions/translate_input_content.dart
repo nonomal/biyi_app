@@ -1,4 +1,3 @@
-// TODO(lijy91): ModifierKey is deprecated, fix it later.
 // ignore_for_file: deprecated_member_use
 
 import 'package:biyi_app/services/translate_client/translate_client.dart';

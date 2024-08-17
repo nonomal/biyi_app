@@ -1,5 +1,5 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:influxui/influxui.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 import 'package:window_manager/window_manager.dart';
 
 class ToolbarItemAlwaysOnTop extends StatefulWidget {
@@ -34,9 +34,9 @@ class _ToolbarItemAlwaysOnTopState extends State<ToolbarItemAlwaysOnTop> {
       ),
       child: IconButton(
         _isAlwaysOnTop ? FluentIcons.pin_20_filled : FluentIcons.pin_20_regular,
-        variant: IconButtonVariant.transparent,
+        variant: IconButtonVariant.filled,
         padding: EdgeInsets.zero,
-        size: IconButtonSize.small,
+        // size: IconButtonSize.small,
         color: _isAlwaysOnTop
             ? Theme.of(context).primaryColor
             : Theme.of(context).iconTheme.color,

@@ -1,5 +1,6 @@
+import 'package:biyi_app/utils/extended_colors.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:influxui/influxui.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomizedAppBar({
@@ -31,9 +32,9 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
           useCloseButton
               ? FluentIcons.dismiss_20_regular
               : FluentIcons.chevron_left_20_regular,
-          variant: IconButtonVariant.transparent,
+          variant: IconButtonVariant.filled,
           color: ExtendedColors.neutral.shade900,
-          size: const Size.square(24),
+          // size: const Size.square(24),
           onPressed: () {
             Navigator.of(context).pop();
           },

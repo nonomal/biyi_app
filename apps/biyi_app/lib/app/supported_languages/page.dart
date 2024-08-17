@@ -2,11 +2,12 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/utils/language_util.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/language_label/language_label.dart';
+import 'package:biyi_app/widgets/list_section.dart';
+import 'package:biyi_app/widgets/list_tile.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
-import 'package:harmonic/noprefix/harmonic.dart';
-import 'package:influxui/influxui.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 class SupportedLanguagesPage extends StatefulWidget {
   const SupportedLanguagesPage({
@@ -40,9 +41,9 @@ class _SupportedLanguagesPageState extends State<SupportedLanguagesPage> {
       ),
       actions: [
         Button(
-          label: LocaleKeys.ok.tr(),
-          variant: ButtonVariant.subtle,
+          variant: ButtonVariant.filled,
           onPressed: _handleClickOk,
+          child: Text(LocaleKeys.ok.tr()),
         ),
       ],
     );
@@ -50,7 +51,6 @@ class _SupportedLanguagesPageState extends State<SupportedLanguagesPage> {
 
   Widget _buildBody(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
         ListSection(
           header: Text(

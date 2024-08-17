@@ -1,5 +1,6 @@
 import 'package:biyi_app/utils/r.dart';
-import 'package:influxui/influxui.dart';
+import 'package:flutter/material.dart' show Colors;
+import 'package:flutter/widgets.dart';
 
 class OcrEngineIcon extends StatelessWidget {
   const OcrEngineIcon(
@@ -23,7 +24,7 @@ class OcrEngineIcon extends StatelessWidget {
         ),
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         border: Border.all(
-          color: ExtendedColors.black.withOpacity(0.2),
+          color: Colors.black.withOpacity(0.2),
           width: 0.5,
         ),
       ),

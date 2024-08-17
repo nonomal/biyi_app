@@ -1,6 +1,6 @@
 import 'package:biyi_app/utils/r.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:influxui/influxui.dart';
+import 'package:flutter/widgets.dart';
 
 const kLanguageDE = 'de';
 const kLanguageEN = 'en';
