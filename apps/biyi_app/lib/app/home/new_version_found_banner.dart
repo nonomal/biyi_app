@@ -1,9 +1,9 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/services/api_client.dart';
-import 'package:biyi_app/utils/extended_colors.dart';
 import 'package:biyi_app/utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
+import 'package:open_colors/open_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -43,7 +43,7 @@ class NewVersionFoundBanner extends StatelessWidget {
                     .tr(args: [latestVersion.version]),
               ),
               style: textTheme.bodyMedium!.copyWith(
-                color: ExtendedColors.white,
+                color: OpenColors.white,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -54,10 +54,10 @@ class NewVersionFoundBanner extends StatelessWidget {
                   TextSpan(
                     text: LocaleKeys.app_home_newversion_banner_btn_update.tr(),
                     style: const TextStyle(
-                      color: ExtendedColors.white,
+                      color: OpenColors.white,
                       height: 1.3,
                       decoration: TextDecoration.underline,
-                      decorationColor: ExtendedColors.white,
+                      decorationColor: OpenColors.white,
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
@@ -74,7 +74,7 @@ class NewVersionFoundBanner extends StatelessWidget {
                 ],
               ),
               style: textTheme.bodyMedium!.copyWith(
-                color: ExtendedColors.white,
+                color: OpenColors.white,
               ),
             ),
           ],

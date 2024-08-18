@@ -1,7 +1,7 @@
-import 'package:biyi_app/utils/extended_colors.dart';
 import 'package:biyi_app/widgets/kbd/kbd_style.dart';
 import 'package:biyi_app/widgets/kbd/kbd_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:open_colors/open_colors.dart';
 
 export 'kbd_theme.dart';
 
@@ -31,17 +31,19 @@ class _KbdState extends State<Kbd> {
     KbdStyle mergedStyle =
         widget.style ?? themeData?.mediumStyle ?? const KbdStyle();
 
-    final TextStyle? textStyle = mergedStyle.labelStyle?.copyWith(
+    final TextStyle textStyle =
+        (mergedStyle.labelStyle ?? const TextStyle()).copyWith(
       color: themeData?.labelColor ?? defaults.labelColor,
       fontWeight: FontWeight.w700,
       fontFamily: 'Roboto Mono',
       fontFamilyFallback: ['Roboto'],
+      fontSize: 12,
     );
 
     return Container(
       constraints: BoxConstraints(
-        minWidth: mergedStyle.size!.width,
-        minHeight: mergedStyle.size!.height,
+        minWidth: mergedStyle.size?.width ?? 0,
+        minHeight: mergedStyle.size?.height ?? 22,
       ),
       decoration: BoxDecoration(
         color: themeData?.color ?? defaults.color,
@@ -68,9 +70,13 @@ class _KbdState extends State<Kbd> {
             BorderRadius.zero,
       ),
       child: Padding(
-        padding: mergedStyle.padding ?? EdgeInsets.zero,
+        padding: mergedStyle.padding ??
+            const EdgeInsets.only(
+              left: 4,
+              right: 4,
+            ),
         child: DefaultTextStyle(
-          style: textStyle!,
+          style: textStyle,
           child: Text(widget.label),
         ),
       ),
@@ -88,15 +94,15 @@ class _KbdDefaults extends KbdThemeData {
 
   @override
   get color =>
-      _isDark ? ExtendedColors.gray.shade500 : ExtendedColors.gray.shade50;
+      _isDark ? OpenColors.gray.shade500 : OpenColors.gray.shade50;
 
   @override
   get borderColor =>
-      _isDark ? ExtendedColors.gray.shade300 : ExtendedColors.gray.shade300;
+      _isDark ? OpenColors.gray.shade300 : OpenColors.gray.shade300;
 
   @override
   get labelColor =>
-      _isDark ? ExtendedColors.gray.shade50 : ExtendedColors.gray.shade700;
+      _isDark ? OpenColors.gray.shade50 : OpenColors.gray.shade700;
 
   @override
   get smallStyle {

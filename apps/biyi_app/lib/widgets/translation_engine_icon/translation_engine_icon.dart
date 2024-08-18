@@ -1,5 +1,5 @@
-import 'package:biyi_app/utils/extended_colors.dart';
 import 'package:biyi_app/utils/r.dart';
+import 'package:open_colors/open_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
 class TranslationEngineIcon extends StatelessWidget {
@@ -35,7 +35,7 @@ class TranslationEngineIcon extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         border: border ??
             Border.all(
-              color: ExtendedColors.black.withOpacity(0.2),
+              color: OpenColors.black.withOpacity(0.2),
               width: 0.5,
             ),
       ),

@@ -1,5 +1,5 @@
 import 'package:biyi_app/models/ext_translation_engine_config.dart';
-import 'package:biyi_app/utils/extended_colors.dart';
+import 'package:open_colors/open_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
 class TranslationEngineName extends StatelessWidget {
@@ -20,7 +20,7 @@ class TranslationEngineName extends StatelessWidget {
           TextSpan(
             text: ' (${translationEngineConfig.id})',
             style: textTheme.bodySmall?.copyWith(
-              color: ExtendedColors.gray.shade400,
+              color: OpenColors.gray.shade400,
             ),
           ),
         ],

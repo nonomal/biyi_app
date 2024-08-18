@@ -1,6 +1,6 @@
-import 'package:biyi_app/utils/extended_colors.dart';
 import 'package:biyi_app/widgets/alert/alert_style.dart';
 import 'package:biyi_app/widgets/alert/alert_theme.dart';
+import 'package:open_colors/open_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
 enum AlertType {
@@ -149,21 +149,21 @@ class _AlertDefaults extends AlertThemeData {
 
   @override
   AlertStyle? get successStyle {
-    return AlertStyle.fromColor(_theme, ExtendedColors.green);
+    return AlertStyle.fromColor(_theme, OpenColors.green);
   }
 
   @override
   AlertStyle? get infoStyle {
-    return AlertStyle.fromColor(_theme, ExtendedColors.blue);
+    return AlertStyle.fromColor(_theme, OpenColors.blue);
   }
 
   @override
   AlertStyle? get warningStyle {
-    return AlertStyle.fromColor(_theme, ExtendedColors.yellow);
+    return AlertStyle.fromColor(_theme, OpenColors.yellow);
   }
 
   @override
   AlertStyle? get dangerStyle {
-    return AlertStyle.fromColor(_theme, ExtendedColors.red);
+    return AlertStyle.fromColor(_theme, OpenColors.red);
   }
 }

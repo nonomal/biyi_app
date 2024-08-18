@@ -19,10 +19,10 @@ import 'package:biyi_app/app/settings/translation_engines/page.dart';
 import 'package:biyi_app/app/settings/translation_targets/new/page.dart';
 import 'package:biyi_app/app/supported_languages/page.dart';
 import 'package:biyi_app/models/translation_target.dart';
-import 'package:biyi_app/utils/extended_colors.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart' show DialogRoute;
 import 'package:go_router/go_router.dart';
+import 'package:open_colors/open_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_platform/uni_platform.dart';
 
@@ -70,7 +70,7 @@ final routerConfig = GoRouter(
       path: '/available-ocr-engines',
       pageBuilder: (BuildContext context, GoRouterState state) {
         return DialogPage(
-          barrierColor: ExtendedColors.black.withOpacity(0.5),
+          barrierColor: OpenColors.black.withOpacity(0.5),
           builder: (_) => AvailableOcrEnginesPage(
             selectedEngineId: state.uri.queryParameters['selectedEngineId'],
           ),
@@ -81,7 +81,7 @@ final routerConfig = GoRouter(
       path: '/available-translation-engines',
       pageBuilder: (BuildContext context, GoRouterState state) {
         return DialogPage(
-          barrierColor: ExtendedColors.black.withOpacity(0.5),
+          barrierColor: OpenColors.black.withOpacity(0.5),
           builder: (_) => AvailableTranslationEnginesPage(
             selectedEngineId: state.uri.queryParameters['selectedEngineId'],
           ),
@@ -101,7 +101,7 @@ final routerConfig = GoRouter(
       path: '/record-shortcut',
       pageBuilder: (BuildContext context, GoRouterState state) {
         return DialogPage(
-          barrierColor: ExtendedColors.black.withOpacity(0.5),
+          barrierColor: OpenColors.black.withOpacity(0.5),
           builder: (_) => const RecordShortcutPage(),
         );
       },
@@ -275,7 +275,7 @@ final routerConfig = GoRouter(
       path: '/supported-languages',
       pageBuilder: (BuildContext context, GoRouterState state) {
         return DialogPage(
-          barrierColor: ExtendedColors.black.withOpacity(0.5),
+          barrierColor: OpenColors.black.withOpacity(0.5),
           builder: (_) => SupportedLanguagesPage(
             selectedLanguage: state.uri.queryParameters['selectedLanguage'],
           ),

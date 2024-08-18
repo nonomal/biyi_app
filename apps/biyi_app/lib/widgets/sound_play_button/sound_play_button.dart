@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:biyi_app/utils/global_audio_player.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
 const _kIconSize = 16.0;
@@ -85,7 +84,7 @@ class _SoundPlayButtonState extends State<SoundPlayButton>
     return SizedBox(
       width: 20,
       height: 20,
-      child: CupertinoButton(
+      child: Button(
         padding: EdgeInsets.zero,
         child: Center(
           child: IndexedStack(

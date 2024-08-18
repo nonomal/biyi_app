@@ -1,10 +1,10 @@
 import 'dart:math' as math;
 
 import 'package:biyi_app/models/settings_base.dart';
-import 'package:biyi_app/utils/extended_colors.dart';
 import 'package:biyi_app/utils/language_util.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:open_colors/open_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
 class AvailableLanguageSelector extends StatelessWidget {
@@ -40,7 +40,7 @@ class AvailableLanguageSelector extends StatelessWidget {
                     supportedLanguage,
                     flagSize: 18,
                     style: TextStyle(
-                      color: !isSelected ? null : ExtendedColors.white,
+                      color: !isSelected ? null : OpenColors.white,
                     ),
                   );
                   return isSelected
@@ -183,7 +183,7 @@ class _TranslationTargetSelectViewState
                       child: const Icon(
                         FluentIcons.arrow_swap_20_regular,
                         size: 20,
-                        color: ExtendedColors.black,
+                        color: OpenColors.black,
                       ),
                     ),
                     onPressed: () {

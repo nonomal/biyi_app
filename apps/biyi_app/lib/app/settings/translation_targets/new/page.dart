@@ -112,7 +112,7 @@ class _TranslationTargetNewOrEditPageState
                 title: Center(
                   child: Text(
                     LocaleKeys.delete.tr(),
-                    // style: const TextStyle(color: ExtendedColors.red),
+                    // style: const TextStyle(color: OpenColors),
                   ),
                 ),
                 // accessoryView: Container(),

@@ -1,5 +1,5 @@
 import 'package:biyi_app/models/ext_ocr_engine_config.dart';
-import 'package:biyi_app/utils/extended_colors.dart';
+import 'package:open_colors/open_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
 class OcrEngineName extends StatelessWidget {
@@ -20,7 +20,7 @@ class OcrEngineName extends StatelessWidget {
           TextSpan(
             text: ' (${ocrEngineConfig.id})',
             style: textTheme.bodySmall?.copyWith(
-              color: ExtendedColors.gray.shade400,
+              color: OpenColors.gray.shade400,
             ),
           ),
         ],

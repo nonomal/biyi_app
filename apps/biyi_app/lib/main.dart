@@ -15,6 +15,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
+import 'package:open_colors/open_colors.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:protocol_handler/protocol_handler.dart';
 import 'package:provider/provider.dart';
@@ -71,6 +72,9 @@ const TextStyle _kLabelSmallTextStyle = TextStyle(
 final _lightThemeBase = ThemeData.light();
 
 final _lightTheme = _lightThemeBase.copyWith(
+  colorScheme: _lightThemeBase.colorScheme.copyWith(
+    primary: OpenColors.indigo,
+  ),
   textTheme: _lightThemeBase.textTheme.copyWith(
     bodyLarge: _kBodyLargeTextStyle,
     bodyMedium: _kBodyMediumTextStyle,
@@ -84,6 +88,9 @@ final _lightTheme = _lightThemeBase.copyWith(
 final _darkThemeBase = ThemeData.dark();
 
 final _darkTheme = _darkThemeBase.copyWith(
+  colorScheme: _lightThemeBase.colorScheme.copyWith(
+    primary: OpenColors.indigo,
+  ),
   textTheme: _darkThemeBase.textTheme.copyWith(
     bodyLarge: _kBodyLargeTextStyle,
     bodyMedium: _kBodyMediumTextStyle,

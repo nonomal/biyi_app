@@ -2,9 +2,9 @@ import 'package:biyi_app/app/home/desktop_popup.dart';
 import 'package:biyi_app/app/home/tab_homepage.dart';
 import 'package:biyi_app/app/home/tab_settings.dart';
 import 'package:biyi_app/app/home/tab_vocabulary.dart';
-import 'package:biyi_app/utils/extended_colors.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:open_colors/open_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_platform/uni_platform.dart';
 
@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
         boxShadow: Theme.of(context).brightness == Brightness.light
             ? [
                 BoxShadow(
-                  color: ExtendedColors.gray.withOpacity(0.2),
+                  color: OpenColors.gray.withOpacity(0.2),
                   blurRadius: 16,
                 ),
               ]

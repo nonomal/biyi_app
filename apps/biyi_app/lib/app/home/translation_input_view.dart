@@ -2,11 +2,10 @@ import 'dart:ui';
 
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/models/settings_base.dart';
-import 'package:biyi_app/utils/extended_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:open_colors/open_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:screen_capturer/screen_capturer.dart';
 
@@ -86,7 +85,7 @@ class TranslationInputView extends StatelessWidget {
                         child: const Text(
                           'AUTO',
                           style: TextStyle(
-                            color: ExtendedColors.white,
+                            color: OpenColors.white,
                             fontSize: 5.4,
                             fontWeight: FontWeight.w500,
                           ),
@@ -197,7 +196,7 @@ class TranslationInputView extends StatelessWidget {
               margin: EdgeInsets.zero,
               child: Stack(
                 children: [
-                  CupertinoTextField(
+                  TextField(
                     focusNode: focusNode,
                     decoration: const BoxDecoration(
                       color: Color(0x00000000),

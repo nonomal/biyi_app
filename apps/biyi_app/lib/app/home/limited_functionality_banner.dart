@@ -1,11 +1,11 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/utils/extended_colors.dart';
 import 'package:biyi_app/utils/utils.dart';
 import 'package:biyi_app/widgets/alert/alert.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/gestures.dart';
+import 'package:open_colors/open_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart' hide Alert;
 import 'package:screen_capturer/screen_capturer.dart';
 import 'package:screen_text_extractor/screen_text_extractor.dart';
@@ -29,7 +29,7 @@ class AllowAccessListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     final textStyle = themeData.textTheme.bodyMedium?.copyWith(
-      color: ExtendedColors.yellow.shade600,
+      color: OpenColors.yellow.shade600,
       height: 24 / 14,
     );
     return GappedRow(
@@ -41,12 +41,12 @@ class AllowAccessListItem extends StatelessWidget {
           child: allowed
               ? Icon(
                   FluentIcons.checkmark_circle_12_filled,
-                  color: ExtendedColors.green.shade600,
+                  color: OpenColors.green.shade600,
                   size: 20,
                 )
               : Icon(
                   FluentIcons.dismiss_circle_12_filled,
-                  color: ExtendedColors.red.shade600,
+                  color: OpenColors.red.shade600,
                   size: 20,
                 ),
         ),
@@ -87,9 +87,9 @@ class AllowAccessListItem extends StatelessWidget {
                           ),
                       ],
                       style: textStyle?.copyWith(
-                        color: ExtendedColors.yellow.shade600,
+                        color: OpenColors.yellow.shade600,
                         decoration: TextDecoration.underline,
-                        decorationColor: ExtendedColors.yellow.shade600,
+                        decorationColor: OpenColors.yellow.shade600,
                         fontWeight: FontWeight.w700,
                         fontSize: 13,
                       ),
@@ -173,7 +173,7 @@ class LimitedFunctionalityBanner extends StatelessWidget {
       },
       actions: [
         Button(
-          color: ExtendedColors.yellow,
+          color: OpenColors.yellow,
           onPressed: onTappedRecheckIsAllowedAllAccess,
           child: Text(LocaleKeys.app_home_limited_banner_btn_check_again.tr()),
         ),
@@ -183,7 +183,7 @@ class LimitedFunctionalityBanner extends StatelessWidget {
           child: IconButton(
             FluentIcons.question_circle_20_regular,
             variant: IconButtonVariant.filled,
-            color: ExtendedColors.yellow,
+            color: OpenColors.yellow,
             onPressed: () async {
               Uri url = Uri.parse('${sharedEnv.webUrl}/docs');
               if (await canLaunchUrl(url)) {

@@ -10,7 +10,6 @@ import 'package:biyi_app/widgets/translation_engine_icon/translation_engine_icon
 import 'package:biyi_app/widgets/translation_engine_name/translation_engine_name.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:reflect_ui/reflect_ui.dart';
@@ -175,12 +174,12 @@ class _TranslationEnginesNewOrEditPageState
                             .contains(scope)) {
                           return const Icon(
                             FluentIcons.dismiss_circle_20_filled,
-                            // color: ExtendedColors.red,
+                            // color: OpenColors.red,
                           );
                         }
                         return const Icon(
                           FluentIcons.checkmark_circle_16_filled,
-                          // color: ExtendedColors.green,
+                          // color: OpenColors.green,
                         );
                       },
                     ),
@@ -196,7 +195,7 @@ class _TranslationEnginesNewOrEditPageState
             children: [
               for (var optionKey in _engineOptionKeys)
                 ListTile(
-                  title: CupertinoTextField(
+                  title: TextField(
                     controller: _textEditingControllerMap[optionKey],
                     placeholder: optionKey,
                     onChanged: (value) {
@@ -219,7 +218,7 @@ class _TranslationEnginesNewOrEditPageState
                 title: Center(
                   child: Text(
                     LocaleKeys.delete.tr(),
-                    // style: const TextStyle(color: ExtendedColors.red),
+                    // style: const TextStyle(color: OpenColors.red),
                   ),
                 ),
                 onTap: () async {

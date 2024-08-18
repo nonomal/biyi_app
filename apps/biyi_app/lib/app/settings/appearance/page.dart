@@ -5,7 +5,6 @@ import 'package:biyi_app/widgets/list_section.dart';
 import 'package:biyi_app/widgets/list_tile.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/material.dart' show ThemeMode;
 import 'package:provider/provider.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 

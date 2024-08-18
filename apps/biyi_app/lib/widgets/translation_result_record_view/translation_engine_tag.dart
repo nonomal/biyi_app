@@ -2,9 +2,7 @@ import 'package:biyi_app/models/ext_translation_engine_config.dart';
 import 'package:biyi_app/models/translation_result_record.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/translation_engine_icon/translation_engine_icon.dart';
-import 'package:flutter/cupertino.dart' show CupertinoButton;
-import 'package:flutter/material.dart' show Theme;
-import 'package:flutter/widgets.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 class TranslationEngineTag extends StatefulWidget {
   const TranslationEngineTag({
@@ -63,7 +61,7 @@ class _TranslationEngineTagState extends State<TranslationEngineTag> {
             left: 4,
             right: 2,
           ),
-          child: CupertinoButton(
+          child: Button(
             minSize: 0,
             padding: EdgeInsets.zero,
             onPressed: () {},

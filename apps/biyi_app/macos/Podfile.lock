@@ -23,7 +23,7 @@ PODS:
     - FlutterMacOS
   - screen_capturer_macos (0.0.1):
     - FlutterMacOS
-  - screen_retriever (0.0.1):
+  - screen_retriever_macos (0.0.1):
     - FlutterMacOS
   - screen_text_extractor (0.1.0):
     - FlutterMacOS
@@ -49,7 +49,7 @@ DEPENDENCIES:
   - path_provider_foundation (from `Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin`)
   - protocol_handler (from `Flutter/ephemeral/.symlinks/plugins/protocol_handler/macos`)
   - screen_capturer_macos (from `Flutter/ephemeral/.symlinks/plugins/screen_capturer_macos/macos`)
-  - screen_retriever (from `Flutter/ephemeral/.symlinks/plugins/screen_retriever/macos`)
+  - screen_retriever_macos (from `Flutter/ephemeral/.symlinks/plugins/screen_retriever_macos/macos`)
   - screen_text_extractor (from `Flutter/ephemeral/.symlinks/plugins/screen_text_extractor/macos`)
   - shared_preferences_foundation (from `Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin`)
   - tray_manager (from `Flutter/ephemeral/.symlinks/plugins/tray_manager/macos`)
@@ -83,8 +83,8 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/protocol_handler/macos
   screen_capturer_macos:
     :path: Flutter/ephemeral/.symlinks/plugins/screen_capturer_macos/macos
-  screen_retriever:
-    :path: Flutter/ephemeral/.symlinks/plugins/screen_retriever/macos
+  screen_retriever_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/screen_retriever_macos/macos
   screen_text_extractor:
     :path: Flutter/ephemeral/.symlinks/plugins/screen_text_extractor/macos
   shared_preferences_foundation:
@@ -109,7 +109,7 @@ SPEC CHECKSUMS:
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   protocol_handler: 587e1caf6c0b92ce351ab14081968dae49cb8cc6
   screen_capturer_macos: e91a66e1eeefd5e4fe068bb1bffc053cc34b63b8
-  screen_retriever: 59634572a57080243dd1bf715e55b6c54f241a38
+  screen_retriever_macos: 776e0fa5d42c6163d2bf772d22478df4b302b161
   screen_text_extractor: 2c310f54af1dee881522e2b76bec9a668ebfe0cf
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   tray_manager: 9064e219c56d75c476e46b9a21182087930baf90

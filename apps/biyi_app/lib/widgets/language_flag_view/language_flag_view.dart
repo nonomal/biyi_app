@@ -1,6 +1,6 @@
-import 'package:biyi_app/utils/extended_colors.dart';
 import 'package:biyi_app/utils/language_util.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:open_colors/open_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
 class LanguageFlagView extends StatelessWidget {
@@ -26,7 +26,7 @@ class LanguageFlagView extends StatelessWidget {
           Radius.circular(size / 2),
         ),
         border: Border.all(
-          color: borderColor ?? ExtendedColors.black.withOpacity(0.1),
+          color: borderColor ?? OpenColors.black.withOpacity(0.1),
           width: 0.8,
         ),
       ),
