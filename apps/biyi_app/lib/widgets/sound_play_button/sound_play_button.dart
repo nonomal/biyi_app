@@ -80,24 +80,23 @@ class _SoundPlayButtonState extends State<SoundPlayButton>
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeData = Theme.of(context);
     return SizedBox(
       width: 20,
       height: 20,
       child: Button(
+        variant: ButtonVariant.subtle,
         padding: EdgeInsets.zero,
         child: Center(
           child: IndexedStack(
             index: _playingAnimImageIndex,
             alignment: Alignment.center,
-            children: <Widget>[
+            children: const <Widget>[
               SizedBox(
                 width: _kIconSize,
                 height: _kIconSize,
                 child: Icon(
                   FluentIcons.speaker_2_20_regular,
                   size: _kIconSize,
-                  color: themeData.textTheme.bodySmall!.color,
                 ),
               ),
               SizedBox(
@@ -106,7 +105,6 @@ class _SoundPlayButtonState extends State<SoundPlayButton>
                 child: Icon(
                   FluentIcons.speaker_1_20_regular,
                   size: _kIconSize,
-                  color: themeData.textTheme.bodySmall!.color,
                 ),
               ),
               SizedBox(
@@ -115,7 +113,6 @@ class _SoundPlayButtonState extends State<SoundPlayButton>
                 child: Icon(
                   FluentIcons.speaker_0_20_regular,
                   size: _kIconSize,
-                  color: themeData.textTheme.bodySmall!.color,
                 ),
               ),
             ],

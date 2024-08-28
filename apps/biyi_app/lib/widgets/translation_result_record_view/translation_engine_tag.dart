@@ -51,8 +51,8 @@ class _TranslationEngineTagState extends State<TranslationEngineTag> {
               width: 0.5,
             ),
             borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(12),
-              bottomLeft: Radius.circular(12),
+              topLeft: Radius.circular(20),
+              bottomLeft: Radius.circular(20),
             ),
           ),
           padding: const EdgeInsets.only(
@@ -62,8 +62,9 @@ class _TranslationEngineTagState extends State<TranslationEngineTag> {
             right: 2,
           ),
           child: Button(
-            minSize: 0,
+            variant: ButtonVariant.transparent,
             padding: EdgeInsets.zero,
+            minSize: 0,
             onPressed: () {},
             child: AnimatedCrossFade(
               crossFadeState: !_isHovered

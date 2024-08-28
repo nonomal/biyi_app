@@ -48,7 +48,7 @@ class WordPronunciationView extends StatelessWidget {
           ),
           if ((wordPronunciation.audioUrl ?? '').isNotEmpty)
             Container(
-              margin: const EdgeInsets.only(left: 10, top: 2),
+              margin: const EdgeInsets.only(left: 10, top: 0),
               child: SoundPlayButton(
                 audioUrl: wordPronunciation.audioUrl!,
               ),

@@ -74,7 +74,7 @@ final _lightThemeBase = ThemeData.light();
 
 final _lightTheme = _lightThemeBase.copyWith(
   colorScheme: _lightThemeBase.colorScheme.copyWith(
-    primary: ReflectColors.indigo,
+    primary: ReflectColors.blue,
     // onPrimary,
     // primaryContainer,
     // onPrimaryContainer,

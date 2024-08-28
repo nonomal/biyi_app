@@ -389,22 +389,25 @@ class TranslationResultRecordView extends StatelessWidget {
         top: 0,
         bottom: 12,
       ),
-      child: Stack(
-        children: [
-          if (_isLoading)
-            _buildRequestLoading(context)
-          else if (_isErrorOccurred)
-            _buildRequestError(context)
-          else
-            _buildBody(context),
-          Positioned(
-            right: 0,
-            top: 0,
-            child: TranslationEngineTag(
-              translationResultRecord: translationResultRecord,
+      child: SizedBox(
+        width: double.infinity,
+        child: Stack(
+          children: [
+            if (_isLoading)
+              _buildRequestLoading(context)
+            else if (_isErrorOccurred)
+              _buildRequestError(context)
+            else
+              _buildBody(context),
+            Positioned(
+              right: 0,
+              top: 0,
+              child: TranslationEngineTag(
+                translationResultRecord: translationResultRecord,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
