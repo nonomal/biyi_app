@@ -886,9 +886,11 @@ packages:
   reflect_ui:
     dependency: "direct main"
     description:
-      path: "../../../../leanflutter/reflect_ui/packages/reflect_ui"
-      relative: true
-    source: path
+      path: "packages/reflect_ui"
+      ref: HEAD
+      resolved-ref: "844717324f3c9388bc79dc648382b23e074a3a19"
+      url: "https://github.com/leanflutter/reflect_ui.git"
+    source: git
     version: "0.0.1"
   reorderables:
     dependency: "direct main"

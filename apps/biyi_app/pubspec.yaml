@@ -71,10 +71,10 @@ dev_dependencies:
 
 dependency_overrides:
   reflect_ui:
-    # git:
-    #   path: packages/reflect_ui
-    #   url: https://github.com/leanflutter/reflect_ui.git
-    path: ../../../../leanflutter/reflect_ui/packages/reflect_ui
+    git:
+      path: packages/reflect_ui
+      url: https://github.com/leanflutter/reflect_ui.git
+    # path: ../../../../leanflutter/reflect_ui/packages/reflect_ui
   screen_retriever: 0.2.0
 
 flutter:
