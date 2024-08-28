@@ -13,7 +13,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:open_colors/open_colors.dart';
+import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
@@ -94,7 +94,7 @@ class TranslationResultRecordView extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: SelectableText(
         error.message,
-        style: const TextStyle(color: OpenColors.red),
+        style: const TextStyle(color: ReflectColors.red),
         selectionHeightStyle: ui.BoxHeightStyle.max,
       ),
     );
@@ -382,32 +382,29 @@ class TranslationResultRecordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
+    return Card(
       margin: const EdgeInsets.only(
         left: 12,
         right: 12,
         top: 0,
         bottom: 12,
       ),
-      child: Card(
-        child: Stack(
-          children: [
-            if (_isLoading)
-              _buildRequestLoading(context)
-            else if (_isErrorOccurred)
-              _buildRequestError(context)
-            else
-              _buildBody(context),
-            Positioned(
-              right: 0,
-              top: 0,
-              child: TranslationEngineTag(
-                translationResultRecord: translationResultRecord,
-              ),
+      child: Stack(
+        children: [
+          if (_isLoading)
+            _buildRequestLoading(context)
+          else if (_isErrorOccurred)
+            _buildRequestError(context)
+          else
+            _buildBody(context),
+          Positioned(
+            right: 0,
+            top: 0,
+            child: TranslationEngineTag(
+              translationResultRecord: translationResultRecord,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

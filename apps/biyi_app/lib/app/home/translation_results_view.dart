@@ -32,39 +32,35 @@ class TranslationResultsView extends StatelessWidget {
   final bool doubleClickCopyResult;
 
   Widget _buildNoMatchingTranslationTarget(BuildContext context) {
-    ThemeData themeData = Theme.of(context);
-    return Container(
-      color: themeData.scaffoldBackgroundColor,
-      padding: const EdgeInsets.only(
+    return Card(
+      margin: const EdgeInsets.only(
         left: 12,
         right: 12,
         top: 0,
         bottom: 12,
       ),
-      child: Card(
-        child: Container(
-          constraints: const BoxConstraints(minHeight: 40),
-          padding: const EdgeInsets.only(
-            left: 12,
-            right: 12,
-            top: 12,
-            bottom: 12,
+      child: Container(
+        constraints: const BoxConstraints(minHeight: 40),
+        padding: const EdgeInsets.only(
+          left: 12,
+          right: 12,
+          top: 12,
+          bottom: 12,
+        ),
+        width: double.infinity,
+        child: SelectableText.rich(
+          TextSpan(
+            children: [
+              const TextSpan(text: '没有与'),
+              TextSpan(
+                text: getLanguageName(textDetectedLanguage!),
+                style: TextStyle(color: Theme.of(context).primaryColor),
+              ),
+              const TextSpan(text: '匹配的翻译目标，'),
+              const TextSpan(text: '请添加该语种的翻译目标或切换至手动翻译模式。'),
+            ],
           ),
-          width: double.infinity,
-          child: SelectableText.rich(
-            TextSpan(
-              children: [
-                const TextSpan(text: '没有与'),
-                TextSpan(
-                  text: getLanguageName(textDetectedLanguage!),
-                  style: TextStyle(color: Theme.of(context).primaryColor),
-                ),
-                const TextSpan(text: '匹配的翻译目标，'),
-                const TextSpan(text: '请添加该语种的翻译目标或切换至手动翻译模式。'),
-              ],
-            ),
-            selectionHeightStyle: ui.BoxHeightStyle.max,
-          ),
+          selectionHeightStyle: ui.BoxHeightStyle.max,
         ),
       ),
     );

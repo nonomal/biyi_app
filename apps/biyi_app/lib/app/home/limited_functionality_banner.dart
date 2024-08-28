@@ -1,12 +1,11 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/utils/utils.dart';
-import 'package:biyi_app/widgets/alert/alert.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/gestures.dart';
-import 'package:open_colors/open_colors.dart';
-import 'package:reflect_ui/reflect_ui.dart' hide Alert;
+import 'package:reflect_colors/reflect_colors.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 import 'package:screen_capturer/screen_capturer.dart';
 import 'package:screen_text_extractor/screen_text_extractor.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,28 +26,27 @@ class AllowAccessListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeData = Theme.of(context);
-    final textStyle = themeData.textTheme.bodyMedium?.copyWith(
-      color: OpenColors.yellow.shade600,
-      height: 24 / 14,
-    );
     return GappedRow(
-      gap: 4,
+      gap: 6,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 2),
-          child: allowed
-              ? Icon(
-                  FluentIcons.checkmark_circle_12_filled,
-                  color: OpenColors.green.shade600,
-                  size: 20,
-                )
-              : Icon(
-                  FluentIcons.dismiss_circle_12_filled,
-                  color: OpenColors.red.shade600,
-                  size: 20,
-                ),
+        Container(
+          width: 16,
+          height: 16,
+          padding: const EdgeInsets.all(2),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: allowed ? ReflectColors.green : ReflectColors.red,
+          ),
+          child: Center(
+            child: Icon(
+              allowed
+                  ? FluentIcons.checkmark_12_regular
+                  : FluentIcons.dismiss_12_regular,
+              color: Colors.white,
+              size: 12,
+            ),
+          ),
         ),
         Expanded(
           child: Wrap(
@@ -56,7 +54,6 @@ class AllowAccessListItem extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: textStyle,
               ),
               Text.rich(
                 TextSpan(
@@ -86,17 +83,17 @@ class AllowAccessListItem extends StatelessWidget {
                               ..onTap = onTappedGoSettings,
                           ),
                       ],
-                      style: textStyle?.copyWith(
-                        color: OpenColors.yellow.shade600,
+                      style: TextStyle(
+                        color: ReflectColors.amber.shade900,
                         decoration: TextDecoration.underline,
-                        decorationColor: OpenColors.yellow.shade600,
+                        decorationColor: ReflectColors.amber.shade900,
                         fontWeight: FontWeight.w700,
                         fontSize: 13,
+                        height: 18 / 13,
                       ),
                     ),
                   ],
                 ),
-                style: textStyle,
               ),
             ],
           ),
@@ -123,11 +120,54 @@ class LimitedFunctionalityBanner extends StatelessWidget {
   Widget _build(BuildContext context) {
     if (_isAllowedAllAccess) return Container();
     return Alert(
-      type: AlertType.warning,
+      kind: AlertKind.warning,
+      variant: AlertVariant.filled,
       icon: const Icon(FluentIcons.warning_20_regular),
-      title: LocaleKeys.app_home_limited_banner_title.tr(),
-      messageBuilder: (context) {
-        return Column(
+      title: Text.rich(
+        TextSpan(
+          children: [
+            TextSpan(text: LocaleKeys.app_home_limited_banner_title.tr()),
+            WidgetSpan(
+              child: Tooltip(
+                message: LocaleKeys.app_home_limited_banner_tip_help.tr(),
+                child: GestureDetector(
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 4),
+                    width: 16,
+                    height: 16,
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: HoverableArea(
+                        builder: (context, hovered) {
+                          return Center(
+                            child: Icon(
+                              FluentIcons.question_circle_20_regular,
+                              size: 14,
+                              color: hovered ? Colors.white70 : Colors.white,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  onTap: () async {
+                    Uri url = Uri.parse('${sharedEnv.webUrl}/docs');
+                    if (await canLaunchUrl(url)) {
+                      await launchUrl(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      message: Padding(
+        padding: const EdgeInsets.only(top: 4, bottom: 2),
+        child: GappedColumn(
+          gap: 6,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AllowAccessListItem(
@@ -169,31 +209,16 @@ class LimitedFunctionalityBanner extends StatelessWidget {
               },
             ),
           ],
-        );
-      },
+        ),
+      ),
       actions: [
         Button(
-          color: OpenColors.yellow,
+          kind: ButtonKind.secondary,
+          variant: ButtonVariant.tinted,
           onPressed: onTappedRecheckIsAllowedAllAccess,
           child: Text(LocaleKeys.app_home_limited_banner_btn_check_again.tr()),
         ),
         Expanded(child: Container()),
-        Tooltip(
-          message: LocaleKeys.app_home_limited_banner_tip_help.tr(),
-          child: IconButton(
-            FluentIcons.question_circle_20_regular,
-            variant: IconButtonVariant.filled,
-            color: OpenColors.yellow,
-            onPressed: () async {
-              Uri url = Uri.parse('${sharedEnv.webUrl}/docs');
-              if (await canLaunchUrl(url)) {
-                await launchUrl(url);
-              } else {
-                throw 'Could not launch $url';
-              }
-            },
-          ),
-        ),
       ],
     );
   }

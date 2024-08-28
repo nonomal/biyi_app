@@ -174,12 +174,12 @@ class _TranslationEnginesNewOrEditPageState
                             .contains(scope)) {
                           return const Icon(
                             FluentIcons.dismiss_circle_20_filled,
-                            // color: OpenColors.red,
+                            // color: ReflectColors.red,
                           );
                         }
                         return const Icon(
                           FluentIcons.checkmark_circle_16_filled,
-                          // color: OpenColors.green,
+                          // color: ReflectColors.green,
                         );
                       },
                     ),
@@ -218,7 +218,7 @@ class _TranslationEnginesNewOrEditPageState
                 title: Center(
                   child: Text(
                     LocaleKeys.delete.tr(),
-                    // style: const TextStyle(color: OpenColors.red),
+                    // style: const TextStyle(color: ReflectColors.red),
                   ),
                 ),
                 onTap: () async {

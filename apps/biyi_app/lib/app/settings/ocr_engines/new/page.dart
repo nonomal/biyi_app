@@ -11,8 +11,8 @@ import 'package:biyi_app/widgets/ocr_engine_name/ocr_engine_name.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ocr_engine_youdao/ocr_engine_youdao.dart';
-import 'package:open_colors/open_colors.dart';
 import 'package:provider/provider.dart';
+import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:shortid/shortid.dart';
 
@@ -158,7 +158,7 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
                 title: Center(
                   child: Text(
                     LocaleKeys.delete.tr(),
-                    style: const TextStyle(color: OpenColors.red),
+                    style: const TextStyle(color: ReflectColors.red),
                   ),
                 ),
                 onTap: () {

@@ -15,10 +15,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
-import 'package:open_colors/open_colors.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:protocol_handler/protocol_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:reflect_colors/reflect_colors.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_platform/uni_platform.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -73,8 +74,54 @@ final _lightThemeBase = ThemeData.light();
 
 final _lightTheme = _lightThemeBase.copyWith(
   colorScheme: _lightThemeBase.colorScheme.copyWith(
-    primary: OpenColors.indigo,
+    primary: ReflectColors.indigo,
+    // onPrimary,
+    // primaryContainer,
+    // onPrimaryContainer,
+    // primaryFixed,
+    // primaryFixedDim,
+    // onPrimaryFixed,
+    // onPrimaryFixedVariant,
+    // secondary,
+    // onSecondary,
+    // secondaryContainer,
+    // onSecondaryContainer,
+    // secondaryFixed,
+    // secondaryFixedDim,
+    // onSecondaryFixed,
+    // onSecondaryFixedVariant,
+    // tertiary,
+    // onTertiary,
+    // tertiaryContainer,
+    // onTertiaryContainer,
+    // tertiaryFixed,
+    // tertiaryFixedDim,
+    // onTertiaryFixed,
+    // onTertiaryFixedVariant,
+    // error,
+    // onError,
+    // errorContainer,
+    // onErrorContainer,
+    // surface,
+    // onSurface,
+    // surfaceDim,
+    // surfaceBright,
+    // surfaceContainerLowest,
+    surfaceContainerLow: Colors.white,
+    // surfaceContainer,
+    // surfaceContainerHigh,
+    // surfaceContainerHighest,
+    // onSurfaceVariant,
+    outline: ReflectColors.gray.shade300,
+    outlineVariant: ReflectColors.gray.shade300,
+    // shadow,
+    // scrim,
+    // inverseSurface,
+    // onInverseSurface,
+    // inversePrimary,
+    // surfaceTint,
   ),
+  scaffoldBackgroundColor: ReflectColors.gray.shade100,
   textTheme: _lightThemeBase.textTheme.copyWith(
     bodyLarge: _kBodyLargeTextStyle,
     bodyMedium: _kBodyMediumTextStyle,
@@ -89,7 +136,7 @@ final _darkThemeBase = ThemeData.dark();
 
 final _darkTheme = _darkThemeBase.copyWith(
   colorScheme: _lightThemeBase.colorScheme.copyWith(
-    primary: OpenColors.indigo,
+    primary: ReflectColors.indigo,
   ),
   textTheme: _darkThemeBase.textTheme.copyWith(
     bodyLarge: _kBodyLargeTextStyle,
@@ -206,12 +253,30 @@ class _MyAppState extends State<MyApp> {
             ],
           );
         }
+        child = ExtendedTheme(
+          data: ExtendedThemeData(
+            colors: ThemeBaseColors(
+              primary: ReflectColors.blue,
+              secondary: ReflectColors.neutral,
+              success: ReflectColors.green,
+              danger: ReflectColors.red,
+              warning: ReflectColors.amber,
+              info: ReflectColors.sky,
+            ),
+            corners: const ThemeBaseCorners(),
+            shadows: const ThemeBaseShadows(),
+            spacing: const ThemeBaseSpacing(),
+            baseStyleResolver: WidgetBaseStyleResolver(),
+          ),
+          child: child!,
+        );
         child = botToastBuilder(context, child);
         return child;
       },
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
+      debugShowCheckedModeBanner: false,
     );
   }
 

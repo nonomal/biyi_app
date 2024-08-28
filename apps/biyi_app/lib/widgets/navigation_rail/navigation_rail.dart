@@ -1,8 +1,6 @@
 import 'package:biyi_app/widgets/navigation_rail/navigation_rail_destination.dart';
 import 'package:biyi_app/widgets/navigation_rail/navigation_rail_theme.dart';
-import 'package:flutter/material.dart'
-    show Brightness, Colors, Theme, ThemeData;
-import 'package:open_colors/open_colors.dart';
+import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
 export 'navigation_rail_destination.dart';
@@ -186,7 +184,7 @@ class _NavigationRailDefaults extends NavigationRailThemeData {
   @override
   IconThemeData? get unselectedIconTheme {
     return IconThemeData(
-      color: _isDark ? OpenColors.white : OpenColors.gray.shade600,
+      color: _isDark ? Colors.white : ReflectColors.gray.shade600,
       size: 22,
     );
   }
@@ -194,7 +192,7 @@ class _NavigationRailDefaults extends NavigationRailThemeData {
   @override
   TextStyle? get unselectedLabelStyle {
     return _theme.textTheme.bodyMedium?.copyWith(
-      color: _isDark ? OpenColors.white : OpenColors.gray.shade900,
+      color: _isDark ? Colors.white : ReflectColors.gray.shade900,
       fontWeight: FontWeight.w500,
     );
   }
@@ -202,7 +200,7 @@ class _NavigationRailDefaults extends NavigationRailThemeData {
   @override
   IconThemeData? get selectedIconTheme {
     return IconThemeData(
-      color: _isDark ? OpenColors.white : OpenColors.gray.shade600,
+      color: _isDark ? Colors.white : ReflectColors.gray.shade600,
       size: 22,
     );
   }
@@ -210,7 +208,7 @@ class _NavigationRailDefaults extends NavigationRailThemeData {
   @override
   TextStyle? get selectedLabelStyle {
     return _theme.textTheme.bodyMedium?.copyWith(
-      color: _isDark ? OpenColors.white : OpenColors.gray.shade900,
+      color: _isDark ? Colors.white : ReflectColors.gray.shade900,
       fontWeight: FontWeight.w500,
     );
   }
@@ -218,8 +216,8 @@ class _NavigationRailDefaults extends NavigationRailThemeData {
   @override
   Color? get indicatorColor {
     return _isDark
-        ? OpenColors.gray.shade900
-        : OpenColors.gray.shade100;
+        ? ReflectColors.gray.shade900
+        : ReflectColors.gray.shade100;
   }
 
   @override

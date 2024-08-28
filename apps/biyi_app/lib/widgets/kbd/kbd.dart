@@ -1,7 +1,7 @@
 import 'package:biyi_app/widgets/kbd/kbd_style.dart';
 import 'package:biyi_app/widgets/kbd/kbd_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:open_colors/open_colors.dart';
+import 'package:reflect_colors/reflect_colors.dart';
 
 export 'kbd_theme.dart';
 
@@ -94,15 +94,15 @@ class _KbdDefaults extends KbdThemeData {
 
   @override
   get color =>
-      _isDark ? OpenColors.gray.shade500 : OpenColors.gray.shade50;
+      _isDark ? ReflectColors.gray.shade500 : ReflectColors.gray.shade50;
 
   @override
   get borderColor =>
-      _isDark ? OpenColors.gray.shade300 : OpenColors.gray.shade300;
+      _isDark ? ReflectColors.gray.shade300 : ReflectColors.gray.shade300;
 
   @override
   get labelColor =>
-      _isDark ? OpenColors.gray.shade50 : OpenColors.gray.shade700;
+      _isDark ? ReflectColors.gray.shade50 : ReflectColors.gray.shade700;
 
   @override
   get smallStyle {

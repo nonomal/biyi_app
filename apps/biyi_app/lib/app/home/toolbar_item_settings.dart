@@ -1,7 +1,7 @@
 import 'package:biyi_app/app/router_config.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
-import 'package:open_colors/open_colors.dart';
+import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_platform/uni_platform.dart';
 import 'package:window_manager/window_manager.dart';
@@ -32,11 +32,9 @@ class _ToolbarItemSettingsState extends State<ToolbarItemSettings> {
     Brightness brightness = Theme.of(context).brightness;
     return IconButton(
       FluentIcons.settings_20_regular,
-      variant: IconButtonVariant.filled,
-      color: brightness == Brightness.light
-          ? OpenColors.black
-          : OpenColors.gray,
-      // size: IconButtonSize.small,
+      variant: IconButtonVariant.transparent,
+      color:
+          brightness == Brightness.light ? Colors.black : ReflectColors.gray,
       onPressed: _handleClick,
     );
   }

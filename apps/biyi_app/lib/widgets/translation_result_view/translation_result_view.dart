@@ -19,39 +19,37 @@ class TranslationResultView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Card(
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: LanguageLabel(
-                sourceLanguage,
-                flagSize: 18,
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 12),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: LanguageLabel(
+              sourceLanguage,
+              flagSize: 18,
+            ),
+          ),
+          SizedBox(
+            width: 20,
+            height: 38,
+            child: Container(
+              margin: EdgeInsets.zero,
+              child: Icon(
+                FluentIcons.arrow_right_20_regular,
+                size: 16,
+                color: themeData.iconTheme.color,
               ),
             ),
-            SizedBox(
-              width: 20,
-              height: 38,
-              child: Container(
-                margin: EdgeInsets.zero,
-                child: Icon(
-                  FluentIcons.arrow_right_20_regular,
-                  size: 16,
-                  color: themeData.iconTheme.color,
-                ),
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: LanguageLabel(
+              targetLanguage,
+              flagSize: 18,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: LanguageLabel(
-                targetLanguage,
-                flagSize: 18,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
