@@ -45,11 +45,7 @@ class _TranslationEngineTagState extends State<TranslationEngineTag> {
         alignment: Alignment.centerRight,
         child: Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            border: Border.all(
-              color: Theme.of(context).dividerColor,
-              width: 0.5,
-            ),
+            color: Theme.of(context).colorScheme.outlineVariant,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20),
               bottomLeft: Radius.circular(20),

@@ -53,6 +53,7 @@ class TranslationResultRecordView extends StatelessWidget {
   }
 
   Widget _buildRequestLoading(BuildContext context) {
+    IconThemeData iconThemeData = Theme.of(context).iconTheme;
     return Container(
       constraints: const BoxConstraints(
         minHeight: 40,
@@ -66,7 +67,7 @@ class TranslationResultRecordView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SpinKitThreeBounce(
-            color: Theme.of(context).textTheme.bodySmall!.color,
+            color: iconThemeData.color,
             size: 12.0,
           ),
         ],

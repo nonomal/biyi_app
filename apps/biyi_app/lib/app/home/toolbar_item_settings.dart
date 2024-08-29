@@ -1,7 +1,6 @@
 import 'package:biyi_app/app/router_config.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
-import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_platform/uni_platform.dart';
 import 'package:window_manager/window_manager.dart';
@@ -29,12 +28,11 @@ class _ToolbarItemSettingsState extends State<ToolbarItemSettings> {
 
   @override
   Widget build(BuildContext context) {
-    Brightness brightness = Theme.of(context).brightness;
+    final iconThemeData = Theme.of(context).iconTheme;
     return IconButton(
       FluentIcons.settings_20_regular,
       variant: IconButtonVariant.transparent,
-      color:
-          brightness == Brightness.light ? Colors.black : ReflectColors.gray,
+      color: iconThemeData.color,
       onPressed: _handleClick,
     );
   }

@@ -84,9 +84,10 @@ class AllowAccessListItem extends StatelessWidget {
                           ),
                       ],
                       style: TextStyle(
-                        color: ReflectColors.amber.shade900,
+                        color: ReflectColors.neutral.shade700,
                         decoration: TextDecoration.underline,
-                        decorationColor: ReflectColors.amber.shade900,
+                        decorationThickness: 1.5,
+                        decorationColor: ReflectColors.neutral.shade700,
                         fontWeight: FontWeight.w700,
                         fontSize: 13,
                         height: 18 / 13,
@@ -212,11 +213,16 @@ class LimitedFunctionalityBanner extends StatelessWidget {
         ),
       ),
       actions: [
-        Button(
-          kind: ButtonKind.secondary,
-          variant: ButtonVariant.tinted,
-          onPressed: onTappedRecheckIsAllowedAllAccess,
-          child: Text(LocaleKeys.app_home_limited_banner_btn_check_again.tr()),
+        Theme(
+          data: Theme.of(context).copyWith(brightness: Brightness.light),
+          child: Button(
+            kind: ButtonKind.secondary,
+            variant: ButtonVariant.tinted,
+            onPressed: onTappedRecheckIsAllowedAllAccess,
+            child: Text(
+              LocaleKeys.app_home_limited_banner_btn_check_again.tr(),
+            ),
+          ),
         ),
         Expanded(child: Container()),
       ],

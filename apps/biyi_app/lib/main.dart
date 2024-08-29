@@ -27,21 +27,18 @@ const String _kDefaultFontFamily = 'Inter';
 
 const TextStyle _kBodyLargeTextStyle = TextStyle(
   fontFamily: _kDefaultFontFamily,
-  color: Colors.black,
   fontSize: 16,
   height: 20 / 16,
 );
 
 const TextStyle _kBodyMediumTextStyle = TextStyle(
   fontFamily: _kDefaultFontFamily,
-  color: Colors.black,
   fontSize: 14,
   height: 18 / 14,
 );
 
 const TextStyle _kBodySmallTextStyle = TextStyle(
   fontFamily: _kDefaultFontFamily,
-  color: Colors.black,
   fontSize: 12,
   height: 16 / 12,
 );
@@ -49,7 +46,6 @@ const TextStyle _kBodySmallTextStyle = TextStyle(
 const TextStyle _kLabelLargeTextStyle = TextStyle(
   fontFamily: _kDefaultFontFamily,
   fontWeight: FontWeight.w600,
-  color: Colors.black,
   fontSize: 14,
   height: 18 / 14,
 );
@@ -57,7 +53,6 @@ const TextStyle _kLabelLargeTextStyle = TextStyle(
 const TextStyle _kLabelMediumTextStyle = TextStyle(
   fontFamily: _kDefaultFontFamily,
   fontWeight: FontWeight.w600,
-  color: Colors.black,
   fontSize: 12,
   height: 16 / 12,
 );
@@ -65,14 +60,13 @@ const TextStyle _kLabelMediumTextStyle = TextStyle(
 const TextStyle _kLabelSmallTextStyle = TextStyle(
   fontFamily: _kDefaultFontFamily,
   fontWeight: FontWeight.w600,
-  color: Colors.black,
   fontSize: 10,
   height: 14 / 10,
 );
 
 final _lightThemeBase = ThemeData.light();
 
-final _lightTheme = _lightThemeBase.copyWith(
+final _lightTheme = ThemeData(
   colorScheme: _lightThemeBase.colorScheme.copyWith(
     primary: ReflectColors.blue,
     // onPrimary,
@@ -112,8 +106,8 @@ final _lightTheme = _lightThemeBase.copyWith(
     // surfaceContainerHigh,
     // surfaceContainerHighest,
     // onSurfaceVariant,
-    outline: ReflectColors.gray.shade300,
-    outlineVariant: ReflectColors.gray.shade300,
+    outline: ReflectColors.gray.shade200,
+    outlineVariant: ReflectColors.gray.shade200,
     // shadow,
     // scrim,
     // inverseSurface,
@@ -123,28 +117,98 @@ final _lightTheme = _lightThemeBase.copyWith(
   ),
   scaffoldBackgroundColor: ReflectColors.gray.shade100,
   textTheme: _lightThemeBase.textTheme.copyWith(
-    bodyLarge: _kBodyLargeTextStyle,
-    bodyMedium: _kBodyMediumTextStyle,
-    bodySmall: _kBodySmallTextStyle,
-    labelLarge: _kLabelLargeTextStyle,
-    labelMedium: _kLabelMediumTextStyle,
-    labelSmall: _kLabelSmallTextStyle,
+    bodyLarge: _kBodyLargeTextStyle.copyWith(
+      color: Colors.black,
+    ),
+    bodyMedium: _kBodyMediumTextStyle.copyWith(
+      color: Colors.black,
+    ),
+    bodySmall: _kBodySmallTextStyle.copyWith(
+      color: Colors.black,
+    ),
+    labelLarge: _kLabelLargeTextStyle.copyWith(
+      color: Colors.black,
+    ),
+    labelMedium: _kLabelMediumTextStyle.copyWith(
+      color: Colors.black,
+    ),
+    labelSmall: _kLabelSmallTextStyle.copyWith(
+      color: Colors.black,
+    ),
   ),
 );
 
 final _darkThemeBase = ThemeData.dark();
 
 final _darkTheme = _darkThemeBase.copyWith(
-  colorScheme: _lightThemeBase.colorScheme.copyWith(
-    primary: ReflectColors.indigo,
+  colorScheme: _darkThemeBase.colorScheme.copyWith(
+    primary: ReflectColors.blue,
+    // onPrimary,
+    // primaryContainer,
+    // onPrimaryContainer,
+    // primaryFixed,
+    // primaryFixedDim,
+    // onPrimaryFixed,
+    // onPrimaryFixedVariant,
+    // secondary,
+    // onSecondary,
+    // secondaryContainer,
+    // onSecondaryContainer,
+    // secondaryFixed,
+    // secondaryFixedDim,
+    // onSecondaryFixed,
+    // onSecondaryFixedVariant,
+    // tertiary,
+    // onTertiary,
+    // tertiaryContainer,
+    // onTertiaryContainer,
+    // tertiaryFixed,
+    // tertiaryFixedDim,
+    // onTertiaryFixed,
+    // onTertiaryFixedVariant,
+    // error,
+    // onError,
+    // errorContainer,
+    // onErrorContainer,
+    // surface,
+    // onSurface,
+    // surfaceDim,
+    // surfaceBright,
+    // surfaceContainerLowest,
+    surfaceContainerLow: ReflectColors.neutral.shade900,
+    // surfaceContainer,
+    // surfaceContainerHigh,
+    // surfaceContainerHighest,
+    // onSurfaceVariant,
+    outline: ReflectColors.neutral.shade800,
+    outlineVariant: ReflectColors.neutral.shade800,
+    // shadow,
+    // scrim,
+    // inverseSurface,
+    // onInverseSurface,
+    // inversePrimary,
+    // surfaceTint,
   ),
+  scaffoldBackgroundColor: Colors.black,
   textTheme: _darkThemeBase.textTheme.copyWith(
-    bodyLarge: _kBodyLargeTextStyle,
-    bodyMedium: _kBodyMediumTextStyle,
-    bodySmall: _kBodySmallTextStyle,
-    labelLarge: _kLabelLargeTextStyle,
-    labelMedium: _kLabelMediumTextStyle,
-    labelSmall: _kLabelSmallTextStyle,
+    bodyLarge: _kBodyLargeTextStyle.copyWith(
+      color: Colors.white,
+    ),
+    bodyMedium: _kBodyMediumTextStyle.copyWith(
+      color: Colors.white,
+    ),
+    bodySmall: _kBodySmallTextStyle.copyWith(
+      color: Colors.white,
+    ),
+    labelLarge: _kLabelLargeTextStyle.copyWith(
+      color: Colors.white,
+    ),
+    labelMedium: _kLabelMediumTextStyle.copyWith(
+      color: Colors.white,
+    ),
+    labelSmall: _kLabelSmallTextStyle.copyWith(
+      color: Colors.white,
+    ),
   ),
 );
 

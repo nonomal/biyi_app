@@ -105,6 +105,7 @@ class _TranslationTargetSelectViewState
 
   @override
   Widget build(BuildContext context) {
+    IconThemeData iconThemeData = Theme.of(context).iconTheme;
     TextTheme textTheme = Theme.of(context).textTheme;
     if (widget.translationMode == TranslationMode.auto) {
       return Container();
@@ -153,7 +154,7 @@ class _TranslationTargetSelectViewState
                             FluentIcons.chevron_down_20_regular,
                             size: 14,
                             color: widget.isShowSourceLanguageSelector
-                                ? Theme.of(context).primaryColor
+                                ? iconThemeData.color
                                 : textTheme.bodyMedium!.color,
                           ),
                         ),
@@ -176,10 +177,10 @@ class _TranslationTargetSelectViewState
                     transform: Matrix4.rotationZ(
                       _isRotated ? math.pi / 1 : 0,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       FluentIcons.arrow_swap_20_regular,
                       size: 20,
-                      color: Colors.black,
+                      color: iconThemeData.color,
                     ),
                   ),
                   onPressed: () {
@@ -240,11 +241,7 @@ class _TranslationTargetSelectViewState
           ),
           if (widget.isShowSourceLanguageSelector ||
               widget.isShowTargetLanguageSelector)
-            const Divider(
-                // height: 0,
-                // indent: 12,
-                // endIndent: 12,
-                ),
+            const Divider(),
           if (widget.isShowSourceLanguageSelector)
             AvailableLanguageSelector(
               value: widget.sourceLanguage,

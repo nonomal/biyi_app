@@ -46,7 +46,9 @@ class TranslationInputView extends StatelessWidget {
 
   Widget _buildToolbarItems(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    return Row(
+    final IconThemeData iconThemeData = Theme.of(context).iconTheme;
+    return GappedRow(
+      gap: 6,
       children: [
         Tooltip(
           message: LocaleKeys.app_home_tip_translation_mode.tr(
@@ -65,7 +67,7 @@ class TranslationInputView extends StatelessWidget {
                     icon,
                     color: translationMode == TranslationMode.auto
                         ? themeData.colorScheme.primary
-                        : null,
+                        : iconThemeData.color,
                     size: 20,
                   ),
                   if (translationMode == TranslationMode.auto)
@@ -105,7 +107,7 @@ class TranslationInputView extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          width: 8,
+          width: 0,
           height: 20,
           child: VerticalDivider(),
         ),
@@ -115,15 +117,17 @@ class TranslationInputView extends StatelessWidget {
           child: IconButton(
             FluentIcons.crop_20_regular,
             variant: IconButtonVariant.subtle,
+            iconColor: iconThemeData.color,
             onPressed: onClickExtractTextFromScreenCapture,
           ),
         ),
-        const SizedBox(width: 4),
         Tooltip(
           message: LocaleKeys.app_home_tip_extract_text_from_clipboard.tr(),
           child: IconButton(
             FluentIcons.clipboard_text_ltr_20_regular,
             variant: IconButtonVariant.subtle,
+            iconColor: iconThemeData.color,
+            iconSize: 20,
             onPressed: onClickExtractTextFromClipboard,
           ),
         ),
@@ -237,9 +241,7 @@ class TranslationInputView extends StatelessWidget {
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 12),
-            child: Divider(
-              height: 1,
-            ),
+            child: Divider(height: 1),
           ),
           Container(
             padding: const EdgeInsets.only(

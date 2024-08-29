@@ -25,6 +25,7 @@ class _ToolbarItemAlwaysOnTopState extends State<ToolbarItemAlwaysOnTop> {
 
   @override
   Widget build(BuildContext context) {
+    final iconThemeData = Theme.of(context).iconTheme;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       curve: Curves.fastOutSlowIn,
@@ -36,9 +37,7 @@ class _ToolbarItemAlwaysOnTopState extends State<ToolbarItemAlwaysOnTop> {
         _isAlwaysOnTop ? FluentIcons.pin_20_filled : FluentIcons.pin_20_regular,
         variant: IconButtonVariant.transparent,
         padding: EdgeInsets.zero,
-        color: _isAlwaysOnTop
-            ? Theme.of(context).primaryColor
-            : Theme.of(context).iconTheme.color,
+        color: _isAlwaysOnTop ? null : iconThemeData.color,
         onPressed: () {
           setState(() {
             _isAlwaysOnTop = !_isAlwaysOnTop;
