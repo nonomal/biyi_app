@@ -1,5 +1,4 @@
 import 'package:biyi_app/widgets/navigation_rail/navigation_rail_destination.dart';
-import 'package:biyi_app/widgets/navigation_rail/navigation_rail_theme.dart';
 import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
@@ -23,19 +22,34 @@ class NavigationRail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final NavigationRailThemeData? themeData = NavigationRailTheme.of(context);
-    final NavigationRailThemeData defaults = _NavigationRailDefaults(context);
+    late final ThemeData themeData = Theme.of(context);
+    late final bool isDark = themeData.brightness == Brightness.dark;
 
-    final unselectedIconTheme =
-        themeData?.unselectedIconTheme ?? defaults.unselectedIconTheme!;
-    final unselectedLabelStyle =
-        themeData?.unselectedLabelStyle ?? defaults.unselectedLabelStyle;
-    final selectedIconTheme =
-        themeData?.selectedIconTheme ?? defaults.selectedIconTheme!;
-    final selectedLabelStyle =
-        themeData?.selectedLabelStyle ?? defaults.selectedLabelStyle;
-    final indicatorColor = themeData?.indicatorColor ?? defaults.indicatorColor;
-    final indicatorShape = themeData?.indicatorShape ?? defaults.indicatorShape;
+    IconThemeData? unselectedIconTheme = IconThemeData(
+      color: isDark ? Colors.white : ReflectColors.neutral.shade600,
+      size: 18,
+    );
+
+    TextStyle? unselectedLabelStyle = themeData.textTheme.bodyMedium?.copyWith(
+      color: isDark ? Colors.white : ReflectColors.neutral.shade900,
+      fontSize: 13,
+      fontWeight: FontWeight.w500,
+    );
+
+    IconThemeData? selectedIconTheme = IconThemeData(
+      color: isDark ? Colors.white : ReflectColors.neutral.shade600,
+      size: 18,
+    );
+
+    TextStyle? selectedLabelStyle = themeData.textTheme.bodyMedium?.copyWith(
+      color: isDark ? Colors.white : ReflectColors.neutral.shade900,
+      fontSize: 13,
+      fontWeight: FontWeight.w500,
+    );
+
+    Color? indicatorColor = isDark
+        ? ReflectColors.neutral.shade800
+        : ReflectColors.neutral.shade200;
 
     return Padding(
       padding: const EdgeInsets.only(),
@@ -59,8 +73,8 @@ class NavigationRail extends StatelessWidget {
                   label: destinations[i].label,
                   labelTextStyle:
                       selected ? selectedLabelStyle : unselectedLabelStyle,
-                  backgroundColor: selected ? indicatorColor : null,
-                  shape: indicatorShape,
+                  backgroundColor: selected ? indicatorColor : Colors.transparent,
+                  shape: null,
                   onTap: () => onDestinationSelected?.call(destination.value),
                 );
               },
@@ -139,7 +153,7 @@ class __RailDestinationState extends State<_RailDestination> {
                   child: DefaultTextStyle(
                     style: widget.labelTextStyle ?? const TextStyle(),
                     child: GappedRow(
-                      gap: 12,
+                      gap: 8,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         if (widget.icon != null || widget.iconBuilder != null)
@@ -171,55 +185,4 @@ class __RailDestinationState extends State<_RailDestination> {
       ),
     );
   }
-}
-
-class _NavigationRailDefaults extends NavigationRailThemeData {
-  _NavigationRailDefaults(this.context) : super();
-
-  final BuildContext context;
-
-  late final ThemeData _theme = Theme.of(context);
-  late final bool _isDark = _theme.brightness == Brightness.dark;
-
-  @override
-  IconThemeData? get unselectedIconTheme {
-    return IconThemeData(
-      color: _isDark ? Colors.white : ReflectColors.gray.shade600,
-      size: 22,
-    );
-  }
-
-  @override
-  TextStyle? get unselectedLabelStyle {
-    return _theme.textTheme.bodyMedium?.copyWith(
-      color: _isDark ? Colors.white : ReflectColors.gray.shade900,
-      fontWeight: FontWeight.w500,
-    );
-  }
-
-  @override
-  IconThemeData? get selectedIconTheme {
-    return IconThemeData(
-      color: _isDark ? Colors.white : ReflectColors.gray.shade600,
-      size: 22,
-    );
-  }
-
-  @override
-  TextStyle? get selectedLabelStyle {
-    return _theme.textTheme.bodyMedium?.copyWith(
-      color: _isDark ? Colors.white : ReflectColors.gray.shade900,
-      fontWeight: FontWeight.w500,
-    );
-  }
-
-  @override
-  Color? get indicatorColor {
-    return _isDark
-        ? ReflectColors.gray.shade900
-        : ReflectColors.gray.shade100;
-  }
-
-  @override
-  ShapeBorder? get indicatorShape => null;
 }

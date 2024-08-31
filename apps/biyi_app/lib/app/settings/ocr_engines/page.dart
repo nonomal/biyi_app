@@ -3,8 +3,6 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
-import 'package:biyi_app/widgets/list_section.dart';
-import 'package:biyi_app/widgets/list_tile.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
@@ -42,17 +40,15 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
     return ListSection(
       children: [
         for (OcrEngineConfig item in proOcrEngineList)
-          ListTile(
+          SwitchListTile(
+            value: !item.disabled,
+            onChanged: (newValue) {
+              context.watch<Settings>().privateOcrEngine(item.id).update(
+                    disabled: !item.disabled,
+                  );
+            },
             leading: OcrEngineIcon(item.type),
             title: OcrEngineName(item),
-            additionalInfo: Switch(
-              value: !item.disabled,
-              onChanged: (newValue) {
-                context.watch<Settings>().privateOcrEngine(item.id).update(
-                      disabled: !item.disabled,
-                    );
-              },
-            ),
             onTap: () {
               context.push<String?>(
                 PageId.settingsOcrEngine(item.id),
@@ -92,46 +88,51 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
         LocaleKeys.app_settings_ocr_engines_private_description.tr(),
       ),
       children: [
-        ReorderableColumn(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          onReorder: onReorder,
-          children: [
-            for (var i = 0; i < privateOcrEngineList.length; i++)
-              ReorderableWidget(
-                reorderable: true,
-                key: ValueKey(i),
-                child: Builder(
-                  builder: (_) {
-                    final item = privateOcrEngineList[i];
-                    return ListTile(
-                      leading: OcrEngineIcon(item.type),
-                      title: OcrEngineName(item),
-                      additionalInfo: Switch(
-                        value: !item.disabled,
-                        onChanged: (newValue) {
-                          context
-                              .read<Settings>()
-                              .privateOcrEngine(item.id)
-                              .update(
-                                disabled: !item.disabled,
+        if (privateOcrEngineList.isNotEmpty)
+          ReorderableColumn(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            onReorder: onReorder,
+            children: [
+              for (var i = 0; i < privateOcrEngineList.length; i++)
+                ReorderableWidget(
+                  reorderable: true,
+                  key: ValueKey(i),
+                  child: Builder(
+                    builder: (_) {
+                      bool isLastItem = i == privateOcrEngineList.length - 1;
+                      final item = privateOcrEngineList[i];
+                      return Column(
+                        children: [
+                          SwitchListTile(
+                            value: !item.disabled,
+                            onChanged: (newValue) {
+                              context
+                                  .read<Settings>()
+                                  .privateOcrEngine(item.id)
+                                  .update(
+                                    disabled: !item.disabled,
+                                  );
+                            },
+                            leading: OcrEngineIcon(item.type),
+                            title: OcrEngineName(item),
+                            onTap: () {
+                              context.push<String?>(
+                                PageId.settingsOcrEngine(item.id),
+                                extra: {
+                                  'ocrEngineConfig': item,
+                                  'editable': true,
+                                },
                               );
-                        },
-                      ),
-                      onTap: () {
-                        context.push<String?>(
-                          PageId.settingsOcrEngine(item.id),
-                          extra: {
-                            'ocrEngineConfig': item,
-                            'editable': true,
-                          },
-                        );
-                      },
-                    );
-                  },
+                            },
+                          ),
+                          if (!isLastItem) const Divider(height: 1),
+                        ],
+                      );
+                    },
+                  ),
                 ),
-              ),
-          ],
-        ),
+            ],
+          ),
         ListTile(
           title: Text(
             LocaleKeys.add.tr(),

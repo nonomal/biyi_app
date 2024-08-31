@@ -14,7 +14,7 @@ class WordTagView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Badge(
       variant: BadgeVariant.outlined,
-      color: ReflectColors.gray,
+      color: ReflectColors.neutral,
       child: Text(wordTag.name),
     );
   }

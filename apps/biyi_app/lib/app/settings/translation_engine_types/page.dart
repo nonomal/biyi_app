@@ -1,11 +1,8 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/services/translate_client/translate_client.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
-import 'package:biyi_app/widgets/list_section.dart';
-import 'package:biyi_app/widgets/list_tile.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
@@ -55,18 +52,16 @@ class _TranslationEngineTypesPageState
         ListSection(
           children: [
             for (final engineType in kSupportedEngineTypes)
-              ListTile(
-                leading: TranslationEngineIcon(engineType),
-                title: Text('engine.$engineType'.tr()),
-                additionalInfo: _selectedEngineType == engineType
-                    ? const Icon(
-                        FluentIcons.checkmark_circle_16_filled,
-                      )
-                    : null,
-                onTap: () {
-                  _selectedEngineType = engineType;
+              RadioListTile<String>(
+                value: engineType,
+                groupValue: _selectedEngineType,
+                onChanged: (value) {
+                  _selectedEngineType = value;
                   setState(() {});
                 },
+                useCheckmarkStyle: true,
+                leading: TranslationEngineIcon(engineType),
+                title: Text('engine.$engineType'.tr()),
               ),
           ],
         ),

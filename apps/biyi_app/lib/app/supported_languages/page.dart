@@ -2,10 +2,7 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/utils/language_util.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/language_label/language_label.dart';
-import 'package:biyi_app/widgets/list_section.dart';
-import 'package:biyi_app/widgets/list_tile.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
@@ -58,18 +55,15 @@ class _SupportedLanguagesPageState extends State<SupportedLanguagesPage> {
           ),
           children: [
             for (var supportedLanguage in kSupportedLanguages)
-              ListTile(
-                title: LanguageLabel(supportedLanguage),
-                additionalInfo: _selectedLanguage == supportedLanguage
-                    ? Icon(
-                        FluentIcons.checkmark_circle_16_filled,
-                        color: Theme.of(context).colorScheme.primary,
-                      )
-                    : null,
-                onTap: () {
-                  _selectedLanguage = supportedLanguage;
+              RadioListTile<String>(
+                value: supportedLanguage,
+                groupValue: _selectedLanguage,
+                onChanged: (value) {
+                  _selectedLanguage = value;
                   setState(() {});
                 },
+                useCheckmarkStyle: true,
+                title: LanguageLabel(supportedLanguage),
               ),
           ],
         ),

@@ -1,23 +1,14 @@
-import 'package:biyi_app/widgets/kbd/kbd_style.dart';
-import 'package:biyi_app/widgets/kbd/kbd_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:reflect_colors/reflect_colors.dart';
-
-export 'kbd_theme.dart';
 
 /// Display keyboard button or keys combination
 class Kbd extends StatefulWidget {
   const Kbd(
     this.label, {
     super.key,
-    this.style,
-    this.size,
   });
 
   final String label;
-
-  final KbdStyle? style;
-  final Size? size;
 
   @override
   State<Kbd> createState() => _KbdState();
@@ -26,14 +17,23 @@ class Kbd extends StatefulWidget {
 class _KbdState extends State<Kbd> {
   @override
   Widget build(BuildContext context) {
-    final KbdThemeData? themeData = KbdTheme.of(context);
-    final KbdThemeData defaults = _KbdDefaults(context);
-    KbdStyle mergedStyle =
-        widget.style ?? themeData?.mediumStyle ?? const KbdStyle();
+    final ThemeData themeData = Theme.of(context);
+    final TextTheme textTheme = themeData.textTheme;
+    final bool isDark = themeData.brightness == Brightness.dark;
+
+    final backgroundColor =
+        isDark ? ReflectColors.neutral.shade500 : ReflectColors.neutral.shade50;
+
+    final borderColor = isDark
+        ? ReflectColors.neutral.shade300
+        : ReflectColors.neutral.shade300;
+
+    final labelColor =
+        isDark ? ReflectColors.neutral.shade50 : ReflectColors.neutral.shade700;
 
     final TextStyle textStyle =
-        (mergedStyle.labelStyle ?? const TextStyle()).copyWith(
-      color: themeData?.labelColor ?? defaults.labelColor,
+        (textTheme.labelMedium ?? const TextStyle()).copyWith(
+      color: labelColor,
       fontWeight: FontWeight.w700,
       fontFamily: 'Roboto Mono',
       fontFamilyFallback: ['Roboto'],
@@ -41,101 +41,38 @@ class _KbdState extends State<Kbd> {
     );
 
     return Container(
-      constraints: BoxConstraints(
-        minWidth: mergedStyle.size?.width ?? 0,
-        minHeight: mergedStyle.size?.height ?? 22,
+      constraints: const BoxConstraints(
+        minWidth: 0,
+        minHeight: 22,
       ),
       decoration: BoxDecoration(
-        color: themeData?.color ?? defaults.color,
+        color: backgroundColor,
         border: BorderDirectional(
           start: BorderSide(
-            color: themeData?.borderColor ?? defaults.borderColor!,
+            color: borderColor,
             width: 1,
           ),
           top: BorderSide(
-            color: themeData?.borderColor ?? defaults.borderColor!,
+            color: borderColor,
             width: 1,
           ),
           end: BorderSide(
-            color: themeData?.borderColor ?? defaults.borderColor!,
+            color: borderColor,
             width: 1,
           ),
           bottom: BorderSide(
-            color: themeData?.borderColor ?? defaults.borderColor!,
+            color: borderColor,
             width: 3,
           ),
         ),
-        borderRadius: themeData?.borderRadius ??
-            defaults.borderRadius ??
-            BorderRadius.zero,
+        borderRadius: const BorderRadius.all(Radius.circular(4.0)),
       ),
       child: Padding(
-        padding: mergedStyle.padding ??
-            const EdgeInsets.only(
-              left: 4,
-              right: 4,
-            ),
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
         child: DefaultTextStyle(
           style: textStyle,
           child: Text(widget.label),
         ),
-      ),
-    );
-  }
-}
-
-class _KbdDefaults extends KbdThemeData {
-  _KbdDefaults(this.context) : super();
-
-  final BuildContext context;
-
-  late final ThemeData _theme = Theme.of(context);
-  late final bool _isDark = _theme.brightness == Brightness.dark;
-
-  @override
-  get color =>
-      _isDark ? ReflectColors.gray.shade500 : ReflectColors.gray.shade50;
-
-  @override
-  get borderColor =>
-      _isDark ? ReflectColors.gray.shade300 : ReflectColors.gray.shade300;
-
-  @override
-  get labelColor =>
-      _isDark ? ReflectColors.gray.shade50 : ReflectColors.gray.shade700;
-
-  @override
-  get smallStyle {
-    return const KbdStyle(
-      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-      size: Size.square(12),
-      labelStyle: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
-      ),
-    );
-  }
-
-  @override
-  get mediumStyle {
-    return const KbdStyle(
-      padding: EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-      size: Size.square(14),
-      labelStyle: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-      ),
-    );
-  }
-
-  @override
-  get largeStyle {
-    return const KbdStyle(
-      padding: EdgeInsets.symmetric(horizontal: 9, vertical: 5),
-      size: Size.square(16),
-      labelStyle: TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
       ),
     );
   }

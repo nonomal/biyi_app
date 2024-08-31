@@ -273,10 +273,15 @@ final routerConfig = GoRouter(
     GoRoute(
       path: '/supported-languages',
       pageBuilder: (BuildContext context, GoRouterState state) {
+        bool isDark = Theme.of(context).brightness == Brightness.dark;
         return DialogPage(
-          barrierColor: Colors.black.withOpacity(0.5),
-          builder: (_) => SupportedLanguagesPage(
-            selectedLanguage: state.uri.queryParameters['selectedLanguage'],
+          barrierColor: isDark ? Colors.black38 : Colors.black54,
+          builder: (_) => Container(
+            padding: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.white, width: 1),
+            ),
+            child: const SupportedLanguagesPage(),
           ),
         );
       },

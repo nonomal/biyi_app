@@ -3,8 +3,6 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
-import 'package:biyi_app/widgets/list_section.dart';
-import 'package:biyi_app/widgets/list_tile.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
@@ -45,20 +43,18 @@ class _TranslationEnginesSettingPageState
     return ListSection(
       children: [
         for (TranslationEngineConfig item in proTranslationEngineList)
-          ListTile(
+          SwitchListTile(
+            value: !item.disabled,
+            onChanged: (newValue) {
+              context
+                  .watch<Settings>() // Linewrap
+                  .proTranslationEngine(item.id)
+                  .update(
+                    disabled: !item.disabled,
+                  );
+            },
             leading: TranslationEngineIcon(item.type),
             title: TranslationEngineName(item),
-            additionalInfo: Switch(
-              value: !item.disabled,
-              onChanged: (newValue) {
-                context
-                    .watch<Settings>() // Linewrap
-                    .proTranslationEngine(item.id)
-                    .update(
-                      disabled: !item.disabled,
-                    );
-              },
-            ),
             onTap: () {
               context.push<String?>(
                 PageId.settingsTranslationEngine(item.id),
@@ -102,46 +98,52 @@ class _TranslationEnginesSettingPageState
         LocaleKeys.app_settings_translation_engines_private_description.tr(),
       ),
       children: [
-        ReorderableColumn(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          onReorder: onReorder,
-          children: [
-            for (var i = 0; i < privateTranslationEngineList.length; i++)
-              ReorderableWidget(
-                reorderable: true,
-                key: ValueKey(i),
-                child: Builder(
-                  builder: (_) {
-                    final item = privateTranslationEngineList[i];
-                    return ListTile(
-                      leading: TranslationEngineIcon(item.type),
-                      title: TranslationEngineName(item),
-                      additionalInfo: Switch(
-                        value: !item.disabled,
-                        onChanged: (newValue) {
-                          context
-                              .read<Settings>() // Linewrap
-                              .privateTranslationEngine(item.id)
-                              .update(
-                                disabled: !item.disabled,
+        if (privateTranslationEngineList.isNotEmpty)
+          ReorderableColumn(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            onReorder: onReorder,
+            children: [
+              for (var i = 0; i < privateTranslationEngineList.length; i++)
+                ReorderableWidget(
+                  reorderable: true,
+                  key: ValueKey(i),
+                  child: Builder(
+                    builder: (_) {
+                      bool isLastItem =
+                          i == privateTranslationEngineList.length - 1;
+                      final item = privateTranslationEngineList[i];
+                      return Column(
+                        children: [
+                          SwitchListTile(
+                            value: !item.disabled,
+                            onChanged: (newValue) {
+                              context
+                                  .read<Settings>() // Linewrap
+                                  .privateTranslationEngine(item.id)
+                                  .update(
+                                    disabled: !item.disabled,
+                                  );
+                            },
+                            leading: TranslationEngineIcon(item.type),
+                            title: TranslationEngineName(item),
+                            onTap: () {
+                              context.push<String?>(
+                                PageId.settingsTranslationEngine(item.id),
+                                extra: {
+                                  'engineConfig': item,
+                                  'editable': true,
+                                },
                               );
-                        },
-                      ),
-                      onTap: () {
-                        context.push<String?>(
-                          PageId.settingsTranslationEngine(item.id),
-                          extra: {
-                            'engineConfig': item,
-                            'editable': true,
-                          },
-                        );
-                      },
-                    );
-                  },
+                            },
+                          ),
+                          if (!isLastItem) const Divider(height: 1),
+                        ],
+                      );
+                    },
+                  ),
                 ),
-              ),
-          ],
-        ),
+            ],
+          ),
         ListTile(
           title: Text(
             LocaleKeys.add.tr(),

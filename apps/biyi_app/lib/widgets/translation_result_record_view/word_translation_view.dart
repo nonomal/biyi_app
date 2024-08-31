@@ -59,7 +59,7 @@ class _WordTranslationViewState extends State<WordTranslationView> {
             ),
             const Badge(
               variant: BadgeVariant.outlined,
-              color: ReflectColors.gray,
+              color: ReflectColors.neutral,
               child: Text('常见释义'),
             ),
             if ((widget.wordTranslation.audioUrl ?? '').isNotEmpty &&

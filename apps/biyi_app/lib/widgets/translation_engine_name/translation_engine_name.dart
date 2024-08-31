@@ -20,7 +20,7 @@ class TranslationEngineName extends StatelessWidget {
           TextSpan(
             text: ' (${translationEngineConfig.id})',
             style: textTheme.bodySmall?.copyWith(
-              color: ReflectColors.gray.shade400,
+              color: ReflectColors.neutral.shade400,
             ),
           ),
         ],

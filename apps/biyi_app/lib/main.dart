@@ -12,6 +12,7 @@ import 'package:biyi_app/utils/env.dart';
 import 'package:biyi_app/utils/language_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
@@ -105,9 +106,9 @@ final _lightTheme = ThemeData(
     // surfaceContainer,
     // surfaceContainerHigh,
     // surfaceContainerHighest,
-    // onSurfaceVariant,
-    outline: ReflectColors.gray.shade200,
-    outlineVariant: ReflectColors.gray.shade200,
+    onSurfaceVariant: ReflectColors.neutral,
+    outline: ReflectColors.neutral.shade200,
+    outlineVariant: ReflectColors.neutral.shade200,
     // shadow,
     // scrim,
     // inverseSurface,
@@ -115,25 +116,25 @@ final _lightTheme = ThemeData(
     // inversePrimary,
     // surfaceTint,
   ),
-  scaffoldBackgroundColor: ReflectColors.gray.shade100,
+  scaffoldBackgroundColor: ReflectColors.neutral.shade100,
   textTheme: _lightThemeBase.textTheme.copyWith(
     bodyLarge: _kBodyLargeTextStyle.copyWith(
-      color: Colors.black,
+      color: ReflectColors.neutral.shade900,
     ),
     bodyMedium: _kBodyMediumTextStyle.copyWith(
-      color: Colors.black,
+      color: ReflectColors.neutral.shade900,
     ),
     bodySmall: _kBodySmallTextStyle.copyWith(
-      color: Colors.black,
+      color: ReflectColors.neutral.shade900,
     ),
     labelLarge: _kLabelLargeTextStyle.copyWith(
-      color: Colors.black,
+      color: ReflectColors.neutral.shade900,
     ),
     labelMedium: _kLabelMediumTextStyle.copyWith(
-      color: Colors.black,
+      color: ReflectColors.neutral.shade900,
     ),
     labelSmall: _kLabelSmallTextStyle.copyWith(
-      color: Colors.black,
+      color: ReflectColors.neutral.shade900,
     ),
   ),
 );
@@ -179,7 +180,7 @@ final _darkTheme = _darkThemeBase.copyWith(
     // surfaceContainer,
     // surfaceContainerHigh,
     // surfaceContainerHighest,
-    // onSurfaceVariant,
+    onSurfaceVariant: ReflectColors.neutral.shade500,
     outline: ReflectColors.neutral.shade800,
     outlineVariant: ReflectColors.neutral.shade800,
     // shadow,
@@ -192,22 +193,22 @@ final _darkTheme = _darkThemeBase.copyWith(
   scaffoldBackgroundColor: Colors.black,
   textTheme: _darkThemeBase.textTheme.copyWith(
     bodyLarge: _kBodyLargeTextStyle.copyWith(
-      color: Colors.white,
+      color: ReflectColors.neutral.shade100,
     ),
     bodyMedium: _kBodyMediumTextStyle.copyWith(
-      color: Colors.white,
+      color: ReflectColors.neutral.shade100,
     ),
     bodySmall: _kBodySmallTextStyle.copyWith(
-      color: Colors.white,
+      color: ReflectColors.neutral.shade100,
     ),
     labelLarge: _kLabelLargeTextStyle.copyWith(
-      color: Colors.white,
+      color: ReflectColors.neutral.shade100,
     ),
     labelMedium: _kLabelMediumTextStyle.copyWith(
-      color: Colors.white,
+      color: ReflectColors.neutral.shade100,
     ),
     labelSmall: _kLabelSmallTextStyle.copyWith(
-      color: Colors.white,
+      color: ReflectColors.neutral.shade100,
     ),
   ),
 );
@@ -320,6 +321,14 @@ class _MyAppState extends State<MyApp> {
         child = ExtendedTheme(
           data: ExtendedThemeData(
             colors: ThemeBaseColors(
+              gray: ReflectColors.neutral,
+              red: ReflectColors.red,
+              blue: ReflectColors.blue,
+              green: ReflectColors.green,
+              yellow: ReflectColors.yellow,
+              orange: ReflectColors.orange,
+              cyan: ReflectColors.cyan,
+              purple: ReflectColors.purple,
               primary: ReflectColors.blue,
               secondary: ReflectColors.neutral,
               success: ReflectColors.green,
@@ -330,6 +339,10 @@ class _MyAppState extends State<MyApp> {
             corners: const ThemeBaseCorners(),
             shadows: const ThemeBaseShadows(),
             spacing: const ThemeBaseSpacing(),
+            icons: const ThemeBaseIcons(
+              chevronLeft: FluentIcons.chevron_left_16_regular,
+              chevronRight: FluentIcons.chevron_right_16_regular,
+            ),
             baseStyleResolver: WidgetBaseStyleResolver(),
           ),
           child: child!,

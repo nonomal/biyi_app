@@ -4,8 +4,6 @@ import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/services/ocr_client/ocr_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
-import 'package:biyi_app/widgets/list_section.dart';
-import 'package:biyi_app/widgets/list_tile.dart';
 import 'package:biyi_app/widgets/ocr_engine_icon/ocr_engine_icon.dart';
 import 'package:biyi_app/widgets/ocr_engine_name/ocr_engine_name.dart';
 import 'package:easy_localization/easy_localization.dart';

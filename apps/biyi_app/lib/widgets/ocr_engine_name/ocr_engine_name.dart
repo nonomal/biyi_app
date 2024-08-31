@@ -20,7 +20,7 @@ class OcrEngineName extends StatelessWidget {
           TextSpan(
             text: ' (${ocrEngineConfig.id})',
             style: textTheme.bodySmall?.copyWith(
-              color: ReflectColors.gray.shade400,
+              color: ReflectColors.neutral.shade400,
             ),
           ),
         ],

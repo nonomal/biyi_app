@@ -7,7 +7,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:go_router/go_router.dart';
-import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_platform/uni_platform.dart';
 import 'package:window_manager/window_manager.dart';
@@ -19,6 +18,8 @@ class _NavigationRailLeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData themeData = Theme.of(context);
+    TextTheme textTheme = themeData.textTheme;
     return Container(
       padding: const EdgeInsets.symmetric(
         vertical: 2,
@@ -30,10 +31,8 @@ class _NavigationRailLeading extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: TextStyle(
-          color: ReflectColors.gray.shade500,
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
+        style: textTheme.bodySmall!.copyWith(
+          color: themeData.colorScheme.onSurfaceVariant,
         ),
       ),
     );
@@ -115,19 +114,21 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
   }
 
   Widget _buildSidebar(BuildContext context) {
+    ThemeData themeData = Theme.of(context);
+
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerLow,
+        color: themeData.colorScheme.surfaceContainerLow,
         border: Border(
           right: BorderSide(
-            color: Theme.of(context).dividerColor,
+            color: themeData.colorScheme.outlineVariant,
           ),
         ),
       ),
       padding: EdgeInsets.only(
         top: !UniPlatform.isWeb && UniPlatform.isMacOS ? 32 : 6,
       ),
-      width: 220,
+      width: 200,
       height: double.infinity,
       child: SingleChildScrollView(
         child: GappedColumn(
@@ -242,7 +243,7 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
             Breakpoints.smallAndUp: SlotLayout.from(
               key: const Key('body-medium-and-up'),
               builder: (_) => ColoredBox(
-                color: Theme.of(context).colorScheme.surface,
+                color: Theme.of(context).colorScheme.surfaceContainerLow,
                 child: widget.child,
               ),
             ),

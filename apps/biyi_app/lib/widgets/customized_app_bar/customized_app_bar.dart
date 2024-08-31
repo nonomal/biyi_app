@@ -16,8 +16,10 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
-    TextTheme textTheme = theme.textTheme;
+    ThemeData themeData = Theme.of(context);
+    TextTheme textTheme = themeData.textTheme;
+
+    final bool isDark = themeData.brightness == Brightness.dark;
 
     final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
 
@@ -25,16 +27,19 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
     final bool useCloseButton =
         parentRoute is PageRoute<dynamic> && parentRoute.fullscreenDialog;
 
+    EdgeInsets padding = const EdgeInsets.symmetric(horizontal: 12);
     Widget? leadingWidget = leading;
     if (leadingWidget == null) {
       if (canPop) {
+        padding = const EdgeInsets.symmetric(horizontal: 6);
         leadingWidget = IconButton(
           useCloseButton
               ? FluentIcons.dismiss_20_regular
-              : FluentIcons.chevron_left_20_regular,
-          variant: IconButtonVariant.filled,
-          color: ReflectColors.gray.shade900,
-          // size: const Size.square(24),
+              : FluentIcons.chevron_left_24_regular,
+          variant: IconButtonVariant.transparent,
+          color: isDark
+              ? ReflectColors.neutral.shade200
+              : ReflectColors.neutral.shade900,
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -45,29 +50,21 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
     return SafeArea(
       child: Container(
         height: double.infinity,
-        padding: const EdgeInsets.only(
-          left: 12,
-          right: 24,
-        ),
-        decoration: BoxDecoration(
-          color: ReflectColors.cyan.withOpacity(0.1),
+        padding: padding,
+        decoration: const BoxDecoration(
+          color: Colors.transparent,
         ),
         child: Row(
           children: [
             if (leadingWidget != null)
               Container(
-                color: ReflectColors.cyan.withOpacity(0.2),
-                padding: const EdgeInsets.all(12),
-                child: ColoredBox(
-                  color: ReflectColors.cyan.withOpacity(0.3),
-                  child: leadingWidget,
-                ),
+                padding: const EdgeInsets.only(right: 4),
+                child: leadingWidget,
               ),
             const SizedBox(width: 4),
             DefaultTextStyle(
-              style: textTheme.titleMedium!.copyWith(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
+              style: textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.w600,
               ),
               child: title,
             ),
@@ -84,5 +81,5 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(56);
+  Size get preferredSize => const Size.fromHeight(44);
 }

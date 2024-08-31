@@ -4,12 +4,10 @@ import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/services/translate_client/translate_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
-import 'package:biyi_app/widgets/list_section.dart';
-import 'package:biyi_app/widgets/list_tile.dart';
+import 'package:biyi_app/widgets/feature_status_icon/feature_status_icon.dart';
 import 'package:biyi_app/widgets/translation_engine_icon/translation_engine_icon.dart';
 import 'package:biyi_app/widgets/translation_engine_name/translation_engine_name.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:reflect_ui/reflect_ui.dart';
@@ -149,6 +147,7 @@ class _TranslationEnginesNewOrEditPageState
         ),
         if (translationEngine != null)
           ListSection(
+            hasLeading: false,
             header: Text(
               LocaleKeys.app_translation_engines_new_support_interface_title
                   .tr(),
@@ -166,29 +165,16 @@ class _TranslationEnginesNewOrEditPageState
                     'engine_scope.${scope.name.toLowerCase()}'.tr(),
                   ),
                   subtitle: Text(scope.name),
-                  additionalInfo: Container(
-                    margin: EdgeInsets.zero,
-                    child: Builder(
-                      builder: (_) {
-                        if (!(translationEngine?.supportedScopes ?? [])
-                            .contains(scope)) {
-                          return const Icon(
-                            FluentIcons.dismiss_circle_20_filled,
-                            // color: ReflectColors.red,
-                          );
-                        }
-                        return const Icon(
-                          FluentIcons.checkmark_circle_16_filled,
-                          // color: ReflectColors.green,
-                        );
-                      },
-                    ),
+                  additionalInfo: FeatureStatusIcon(
+                    supported: (translationEngine?.supportedScopes ?? [])
+                        .contains(scope),
                   ),
                 ),
             ],
           ),
         if (widget.editable && _type != null)
           ListSection(
+            hasLeading: false,
             header: Text(
               LocaleKeys.app_translation_engines_new_option_title.tr(),
             ),

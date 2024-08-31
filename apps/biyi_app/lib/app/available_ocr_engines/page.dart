@@ -2,11 +2,8 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
-import 'package:biyi_app/widgets/list_section.dart';
-import 'package:biyi_app/widgets/list_tile.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
@@ -42,6 +39,12 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
     });
   }
 
+  void _handleSelectedEngineIdChanged(String? engineId) {
+    setState(() {
+      _selectedEngineId = engineId;
+    });
+  }
+
   Future<void> _handleClickOk() async {
     OcrEngineConfig? ocrEngineConfig =
         Settings.instance.privateOcrEngine(_selectedEngineId).get() ??
@@ -56,19 +59,13 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
           ListSection(
             children: [
               for (var ocrEngineConfig in _proOcrEngineList)
-                ListTile(
+                RadioListTile<String>(
+                  value: ocrEngineConfig.id,
+                  groupValue: _selectedEngineId,
+                  onChanged: _handleSelectedEngineIdChanged,
+                  useCheckmarkStyle: true,
                   leading: OcrEngineIcon(ocrEngineConfig.type),
                   title: OcrEngineName(ocrEngineConfig),
-                  additionalInfo: ocrEngineConfig.id == _selectedEngineId
-                      ? const Icon(
-                          FluentIcons.checkmark_circle_16_filled,
-                        )
-                      : null,
-                  onTap: () {
-                    setState(() {
-                      _selectedEngineId = ocrEngineConfig.id;
-                    });
-                  },
                 ),
             ],
           ),
@@ -78,19 +75,13 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
           ),
           children: [
             for (var ocrEngineConfig in _privateOcrEngineList)
-              ListTile(
+              RadioListTile<String>(
+                value: ocrEngineConfig.id,
+                groupValue: _selectedEngineId,
+                onChanged: _handleSelectedEngineIdChanged,
+                useCheckmarkStyle: true,
                 leading: OcrEngineIcon(ocrEngineConfig.type),
                 title: OcrEngineName(ocrEngineConfig),
-                additionalInfo: ocrEngineConfig.id == _selectedEngineId
-                    ? const Icon(
-                        FluentIcons.checkmark_circle_16_filled,
-                      )
-                    : null,
-                onTap: () {
-                  setState(() {
-                    _selectedEngineId = ocrEngineConfig.id;
-                  });
-                },
               ),
             if (_privateOcrEngineList.isEmpty)
               ListTile(
@@ -113,7 +104,7 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
         ),
         actions: [
           Button(
-            variant: ButtonVariant.filled,
+            variant: ButtonVariant.subtle,
             onPressed: _handleClickOk,
             child: Text(LocaleKeys.ok.tr()),
           ),

@@ -4,8 +4,6 @@ import 'package:biyi_app/models/translation_target.dart';
 import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
-import 'package:biyi_app/widgets/list_section.dart';
-import 'package:biyi_app/widgets/list_tile.dart';
 import 'package:biyi_app/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -83,23 +81,16 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
         ),
         ListSection(
           children: [
-            ListTile(
+            SwitchListTile(
+              value: settings.autoCopyRecognizedText,
+              onChanged: (value) {
+                _handleUpdateSettings(autoCopyRecognizedText: value);
+              },
               title: Text(
                 LocaleKeys
                     .app_settings_general_extract_text_auto_copy_detected_text_title
                     .tr(),
               ),
-              additionalInfo: Switch(
-                value: settings.autoCopyRecognizedText,
-                onChanged: (value) {
-                  _handleUpdateSettings(autoCopyRecognizedText: value);
-                },
-              ),
-              onTap: () async {
-                _handleUpdateSettings(
-                  autoCopyRecognizedText: !settings.autoCopyRecognizedText,
-                );
-              },
             ),
           ],
         ),
@@ -140,30 +131,26 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           ],
         ),
         ListSection(
+          hasLeading: false,
           header: Text(
             LocaleKeys.app_settings_general_translation_mode_title.tr(),
           ),
           children: [
-            ListTile(
+            RadioListTile<TranslationMode>(
+              value: TranslationMode.manual,
+              groupValue: settings.translationMode,
+              onChanged: (value) =>
+                  _handleUpdateSettings(translationMode: value),
+              useCheckmarkStyle: true,
               title: Text(LocaleKeys.translation_mode_manual.tr()),
-              additionalInfo: settings.translationMode == TranslationMode.manual
-                  ? const Icon(
-                      FluentIcons.checkmark_circle_16_filled,
-                    )
-                  : null,
-              onTap: () => _handleUpdateSettings(
-                translationMode: TranslationMode.manual,
-              ),
             ),
-            ListTile(
+            RadioListTile<TranslationMode>(
+              value: TranslationMode.auto,
+              groupValue: settings.translationMode,
+              onChanged: (value) =>
+                  _handleUpdateSettings(translationMode: value),
+              useCheckmarkStyle: true,
               title: Text(LocaleKeys.translation_mode_auto.tr()),
-              additionalInfo: settings.translationMode == TranslationMode.auto
-                  ? const Icon(
-                      FluentIcons.checkmark_circle_16_filled,
-                    )
-                  : null,
-              onTap: () =>
-                  _handleUpdateSettings(translationMode: TranslationMode.auto),
             ),
           ],
         ),
@@ -262,51 +249,45 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
           ),
         ListSection(
           children: [
-            ListTile(
+            SwitchListTile(
+              value: settings.doubleClickCopyResult,
+              onChanged: (value) {
+                _handleUpdateSettings(
+                  doubleClickCopyResult: value,
+                );
+              },
               title: Text(
                 LocaleKeys
                     .app_settings_general_translate_double_click_copy_result_title
                     .tr(),
               ),
-              additionalInfo: Switch(
-                value: settings.doubleClickCopyResult,
-                onChanged: (value) {
-                  _handleUpdateSettings(
-                    doubleClickCopyResult: value,
-                  );
-                },
-              ),
-              onTap: () async {
-                _handleUpdateSettings(
-                  doubleClickCopyResult: !settings.doubleClickCopyResult,
-                );
-              },
             ),
           ],
         ),
         ListSection(
+          hasLeading: false,
           header: Text(
             LocaleKeys.app_settings_general_input_settings_title.tr(),
           ),
           children: [
-            ListTile(
+            RadioListTile<InputSubmitMode>(
+              value: InputSubmitMode.enter,
+              groupValue: settings.inputSubmitMode,
+              onChanged: (value) =>
+                  _handleUpdateSettings(inputSubmitMode: value),
+              useCheckmarkStyle: true,
               title: Text(
                 LocaleKeys
                     .app_settings_general_input_settings_submit_with_enter_title
                     .tr(),
               ),
-              additionalInfo: settings.inputSubmitMode == InputSubmitMode.enter
-                  ? const Icon(
-                      FluentIcons.checkmark_circle_16_filled,
-                    )
-                  : null,
-              onTap: () {
-                _handleUpdateSettings(
-                  inputSubmitMode: InputSubmitMode.enter,
-                );
-              },
             ),
-            ListTile(
+            RadioListTile<InputSubmitMode>(
+              value: InputSubmitMode.metaEnter,
+              groupValue: settings.inputSubmitMode,
+              onChanged: (value) =>
+                  _handleUpdateSettings(inputSubmitMode: value),
+              useCheckmarkStyle: true,
               title: Text(
                 UniPlatform.isMacOS
                     ? LocaleKeys
@@ -316,17 +297,6 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                         .app_settings_general_input_settings_submit_with_meta_enter_title
                         .tr(),
               ),
-              additionalInfo:
-                  settings.inputSubmitMode == InputSubmitMode.metaEnter
-                      ? const Icon(
-                          FluentIcons.checkmark_circle_16_filled,
-                        )
-                      : null,
-              onTap: () {
-                _handleUpdateSettings(
-                  inputSubmitMode: InputSubmitMode.metaEnter,
-                );
-              },
             ),
           ],
         ),

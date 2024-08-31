@@ -21,6 +21,7 @@ class TranslationEngineIcon extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
+        color: Colors.white,
         image: DecorationImage(
           image: AssetImage(R.image('translation_engine_icons/$type.png')),
           fit: BoxFit.cover,

@@ -2,14 +2,11 @@ import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/kbd/kbd.dart';
-import 'package:biyi_app/widgets/list_section.dart';
-import 'package:biyi_app/widgets/list_tile.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart' show Scaffold;
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:provider/provider.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_platform/uni_platform.dart';
 
 class HotKeyDisplayView extends StatelessWidget {
@@ -83,6 +80,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
     return ListView(
       children: [
         ListSection(
+          hasLeading: false,
           children: [
             ListTile(
               title: Text(
@@ -115,6 +113,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
           ],
         ),
         ListSection(
+          hasLeading: false,
           header: Text(
             LocaleKeys.app_settings_keybinds_extract_text_title.tr(),
           ),
@@ -178,6 +177,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
         ),
         if (!UniPlatform.isLinux)
           ListSection(
+          hasLeading: false,
             header: Text(
               LocaleKeys.app_settings_keybinds_input_assist_function_title.tr(),
             ),

@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
         boxShadow: Theme.of(context).brightness == Brightness.light
             ? [
                 BoxShadow(
-                  color: ReflectColors.gray.withOpacity(0.2),
+                  color: ReflectColors.neutral.withOpacity(0.2),
                   blurRadius: 16,
                 ),
               ]

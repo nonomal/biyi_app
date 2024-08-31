@@ -1,5 +1,6 @@
 import 'package:biyi_app/generated/locale_keys.g.dart';
 import 'package:biyi_app/utils/utils.dart';
+import 'package:biyi_app/widgets/feature_status_icon/feature_status_icon.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -30,24 +31,7 @@ class AllowAccessListItem extends StatelessWidget {
       gap: 6,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          width: 16,
-          height: 16,
-          padding: const EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: allowed ? ReflectColors.green : ReflectColors.red,
-          ),
-          child: Center(
-            child: Icon(
-              allowed
-                  ? FluentIcons.checkmark_12_regular
-                  : FluentIcons.dismiss_12_regular,
-              color: Colors.white,
-              size: 12,
-            ),
-          ),
-        ),
+        FeatureStatusIcon(supported: allowed),
         Expanded(
           child: Wrap(
             spacing: 30,
