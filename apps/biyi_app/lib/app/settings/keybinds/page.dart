@@ -177,7 +177,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
         ),
         if (!UniPlatform.isLinux)
           ListSection(
-          hasLeading: false,
+            hasLeading: false,
             header: Text(
               LocaleKeys.app_settings_keybinds_input_assist_function_title.tr(),
             ),

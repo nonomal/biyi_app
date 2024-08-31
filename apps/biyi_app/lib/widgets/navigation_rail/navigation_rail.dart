@@ -73,7 +73,8 @@ class NavigationRail extends StatelessWidget {
                   label: destinations[i].label,
                   labelTextStyle:
                       selected ? selectedLabelStyle : unselectedLabelStyle,
-                  backgroundColor: selected ? indicatorColor : Colors.transparent,
+                  backgroundColor:
+                      selected ? indicatorColor : Colors.transparent,
                   shape: null,
                   onTap: () => onDestinationSelected?.call(destination.value),
                 );
