@@ -106,7 +106,7 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
               title: _type == null
                   ? Text(LocaleKeys.please_choose.tr())
                   : Text('ocr_engine.$_type'.tr()),
-              trailing: const ListTileChevron(),
+              trailing: widget.editable ? const ListTileChevron() : null,
               onTap: widget.editable
                   ? () async {
                       final newEngineType = await context.push<String?>(

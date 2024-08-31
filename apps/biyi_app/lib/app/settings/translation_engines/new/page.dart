@@ -10,6 +10,7 @@ import 'package:biyi_app/widgets/translation_engine_name/translation_engine_name
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:shortid/shortid.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
@@ -126,7 +127,7 @@ class _TranslationEnginesNewOrEditPageState
               title: _type == null
                   ? Text(LocaleKeys.please_choose.tr())
                   : Text('engine.$_type'.tr()),
-              trailing: const ListTileChevron(),
+              trailing: widget.editable ? const ListTileChevron() : null,
               onTap: widget.editable
                   ? () async {
                       final newEngineType = await context.push<String?>(
@@ -204,7 +205,7 @@ class _TranslationEnginesNewOrEditPageState
                 title: Center(
                   child: Text(
                     LocaleKeys.delete.tr(),
-                    // style: const TextStyle(color: ReflectColors.red),
+                    style: const TextStyle(color: ReflectColors.red),
                   ),
                 ),
                 onTap: () async {

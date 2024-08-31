@@ -16,12 +16,13 @@ class ToolbarItemSettings extends StatefulWidget {
 
 class _ToolbarItemSettingsState extends State<ToolbarItemSettings> {
   Future<void> _handleClick() async {
-    UniPlatform.call<Future<void>>(
+    await UniPlatform.call<Future<void>>(
       desktop: () async {
-        await windowManager.hide();
+        await windowManager.setOpacity(0);
       },
       otherwise: () => Future(() => null),
     );
+    await Future.delayed(Duration.zero);
     // ignore: use_build_context_synchronously
     context.go(PageId.settingsGeneral);
   }

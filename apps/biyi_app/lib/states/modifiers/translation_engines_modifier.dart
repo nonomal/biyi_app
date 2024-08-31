@@ -79,13 +79,12 @@ class TranslationEnginesModifier {
     settings.translationEngines[index].type = type ?? oldTranslationEngine.type;
     settings.translationEngines[index].option =
         option ?? oldTranslationEngine.option;
-    settings.translationEngines[index].supportedScopes =
-        (supportedScopes ?? oldTranslationEngine.supportedScopes)
-            .map(
-              (e) =>
-                  TranslationEngineScope.values.firstWhere((v) => e == v.name),
-            )
-            .toList();
+    if (supportedScopes != null) {
+      settings.translationEngines[index].supportedScopes =
+          TranslationEngineScope.values
+              .where((e) => supportedScopes.contains(e.name))
+              .toList();
+    }
     settings.translationEngines[index].disabled =
         disabled ?? oldTranslationEngine.disabled;
 

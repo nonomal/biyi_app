@@ -47,7 +47,7 @@ class _TranslationEnginesSettingPageState
             value: !item.disabled,
             onChanged: (newValue) {
               context
-                  .watch<Settings>() // Linewrap
+                  .read<Settings>() // Linewrap
                   .proTranslationEngine(item.id)
                   .update(
                     disabled: !item.disabled,

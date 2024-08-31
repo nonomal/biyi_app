@@ -43,7 +43,10 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
           SwitchListTile(
             value: !item.disabled,
             onChanged: (newValue) {
-              context.watch<Settings>().privateOcrEngine(item.id).update(
+              context
+                  .read<Settings>() // Linewrap
+                  .proOcrEngine(item.id)
+                  .update(
                     disabled: !item.disabled,
                   );
             },

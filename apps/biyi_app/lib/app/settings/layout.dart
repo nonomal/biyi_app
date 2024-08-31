@@ -98,6 +98,7 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
     ]);
 
     await Future<void>.delayed(const Duration(milliseconds: 200));
+    await windowManager.setOpacity(1);
     await windowManager.show();
   }
 

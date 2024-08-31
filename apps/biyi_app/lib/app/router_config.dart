@@ -22,6 +22,7 @@ import 'package:biyi_app/models/translation_target.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart' show DialogRoute;
 import 'package:go_router/go_router.dart';
+import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_platform/uni_platform.dart';
 
@@ -69,7 +70,6 @@ final routerConfig = GoRouter(
       path: '/available-ocr-engines',
       pageBuilder: (BuildContext context, GoRouterState state) {
         return DialogPage(
-          barrierColor: Colors.black.withOpacity(0.5),
           builder: (_) => AvailableOcrEnginesPage(
             selectedEngineId: state.uri.queryParameters['selectedEngineId'],
           ),
@@ -80,7 +80,6 @@ final routerConfig = GoRouter(
       path: '/available-translation-engines',
       pageBuilder: (BuildContext context, GoRouterState state) {
         return DialogPage(
-          barrierColor: Colors.black.withOpacity(0.5),
           builder: (_) => AvailableTranslationEnginesPage(
             selectedEngineId: state.uri.queryParameters['selectedEngineId'],
           ),
@@ -100,7 +99,6 @@ final routerConfig = GoRouter(
       path: '/record-shortcut',
       pageBuilder: (BuildContext context, GoRouterState state) {
         return DialogPage(
-          barrierColor: Colors.black.withOpacity(0.5),
           builder: (_) => const RecordShortcutPage(),
         );
       },
@@ -273,16 +271,8 @@ final routerConfig = GoRouter(
     GoRoute(
       path: '/supported-languages',
       pageBuilder: (BuildContext context, GoRouterState state) {
-        bool isDark = Theme.of(context).brightness == Brightness.dark;
         return DialogPage(
-          barrierColor: isDark ? Colors.black38 : Colors.black54,
-          builder: (_) => Container(
-            padding: const EdgeInsets.all(2),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.white, width: 1),
-            ),
-            child: const SupportedLanguagesPage(),
-          ),
+          builder: (_) => const SupportedLanguagesPage(),
         );
       },
     ),
@@ -314,6 +304,7 @@ class DialogPage<T> extends Page<T> {
 
   @override
   Route<T> createRoute(BuildContext context) {
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
     return DialogRoute<T>(
       context: context,
       settings: this,
@@ -325,7 +316,26 @@ class DialogPage<T> extends Page<T> {
               maxWidth: 480,
               maxHeight: 600,
             ),
-            child: Card(
+            child: Container(
+              padding: EdgeInsets.zero,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: isDark
+                      ? ReflectColors.neutral.shade800
+                      : ReflectColors.neutral.shade200,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: isDark
+                        ? Colors.white.withOpacity(0.05)
+                        : Colors.black.withOpacity(0.3),
+                    offset: const Offset(0.0, 0.0),
+                    blurRadius: 20,
+                  ),
+                ],
+              ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: builder(context),
@@ -335,7 +345,7 @@ class DialogPage<T> extends Page<T> {
         );
       },
       anchorPoint: anchorPoint,
-      barrierColor: barrierColor,
+      barrierColor: barrierColor ?? Colors.black.withOpacity(0.5),
       barrierDismissible: barrierDismissible,
       barrierLabel: barrierLabel,
       useSafeArea: useSafeArea,
