@@ -78,7 +78,6 @@ dependency_overrides:
 
 flutter:
   uses-material-design: false
-
   assets:
     - resources/images/
     - resources/images/flag_icons/

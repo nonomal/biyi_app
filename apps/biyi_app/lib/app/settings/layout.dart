@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/generated/locale_keys.g.dart';
-import 'package:biyi_app/widgets/navigation_rail/navigation_rail.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
@@ -10,34 +9,6 @@ import 'package:go_router/go_router.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_platform/uni_platform.dart';
 import 'package:window_manager/window_manager.dart';
-
-class _NavigationRailLeading extends StatelessWidget {
-  const _NavigationRailLeading({required this.label});
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    ThemeData themeData = Theme.of(context);
-    TextTheme textTheme = themeData.textTheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 2,
-        horizontal: 8,
-      ),
-      margin: const EdgeInsets.only(
-        left: 12,
-        right: 12,
-      ),
-      child: Text(
-        label,
-        style: textTheme.bodySmall!.copyWith(
-          color: themeData.colorScheme.onSurfaceVariant,
-        ),
-      ),
-    );
-  }
-}
 
 class SettingsLayout extends StatefulWidget {
   const SettingsLayout({
@@ -131,80 +102,88 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
       ),
       width: 200,
       height: double.infinity,
-      child: SingleChildScrollView(
-        child: GappedColumn(
-          gap: 12,
-          children: [
-            NavigationRail(
-              leading: _NavigationRailLeading(
-                label: LocaleKeys.app_settings__layout_navgroup_client.tr(),
-              ),
-              destinations: [
-                NavigationRailDestination(
-                  value: PageId.settingsGeneral,
-                  icon: FluentIcons.app_generic_20_regular,
-                  label: LocaleKeys.app_settings_general_title.tr(),
-                ),
-                NavigationRailDestination(
-                  value: PageId.settingsAppearance,
-                  icon: FluentIcons.style_guide_20_regular,
-                  label: LocaleKeys.app_settings_appearance_title.tr(),
-                ),
-                NavigationRailDestination(
-                  value: PageId.settingsKeybinds,
-                  icon: FluentIcons.keyboard_20_regular,
-                  label: LocaleKeys.app_settings_keybinds_title.tr(),
-                ),
-                NavigationRailDestination(
-                  value: PageId.settingsLanguage,
-                  icon: FluentIcons.local_language_20_regular,
-                  label: LocaleKeys.app_settings_language_title.tr(),
-                ),
-                NavigationRailDestination(
-                  value: PageId.settingsAdvanced,
-                  icon: FluentIcons.settings_20_regular,
-                  label: LocaleKeys.app_settings_advanced_title.tr(),
-                ),
-              ],
-              selectedValue: _selectedDestination,
-              onDestinationSelected: _handleDestinationSelected,
+      child: NavList(
+        children: [
+          NavListSection(
+            header: Text(
+              LocaleKeys.app_settings__layout_navgroup_client.tr(),
             ),
-            NavigationRail(
-              leading: _NavigationRailLeading(
-                label:
-                    LocaleKeys.app_settings__layout_navgroup_integrations.tr(),
+            children: [
+              NavListItem(
+                selected: _selectedDestination == PageId.settingsGeneral,
+                leading: const Icon(FluentIcons.app_generic_20_regular),
+                title: Text(LocaleKeys.app_settings_general_title.tr()),
+                onTap: () => _handleDestinationSelected(PageId.settingsGeneral),
               ),
-              destinations: [
-                NavigationRailDestination(
-                  value: PageId.settingsOcrEngines,
-                  icon: FluentIcons.scan_20_regular,
-                  label: LocaleKeys.app_settings_ocr_engines_title.tr(),
-                ),
-                NavigationRailDestination(
-                  value: PageId.settingsTranslationEngines,
-                  icon: FluentIcons.translate_20_regular,
-                  label: LocaleKeys.app_settings_translation_engines_title.tr(),
-                ),
-              ],
-              selectedValue: _selectedDestination,
-              onDestinationSelected: _handleDestinationSelected,
-            ),
-            NavigationRail(
-              leading: _NavigationRailLeading(
-                label: LocaleKeys.app_settings__layout_navgroup_resources.tr(),
+              NavListItem(
+                selected: _selectedDestination == PageId.settingsAppearance,
+                leading: const Icon(FluentIcons.style_guide_20_regular),
+                title: Text(LocaleKeys.app_settings_appearance_title.tr()),
+                onTap: () =>
+                    _handleDestinationSelected(PageId.settingsAppearance),
               ),
-              destinations: [
-                NavigationRailDestination(
-                  value: PageId.settingsAbout,
-                  icon: FluentIcons.info_20_regular,
-                  label: LocaleKeys.app_settings_about_title.tr(),
-                ),
-              ],
-              selectedValue: _selectedDestination,
-              onDestinationSelected: _handleDestinationSelected,
+              NavListItem(
+                selected: _selectedDestination == PageId.settingsKeybinds,
+                leading: const Icon(FluentIcons.keyboard_20_regular),
+                title: Text(LocaleKeys.app_settings_keybinds_title.tr()),
+                onTap: () =>
+                    _handleDestinationSelected(PageId.settingsKeybinds),
+              ),
+              NavListItem(
+                selected: _selectedDestination == PageId.settingsLanguage,
+                leading: const Icon(FluentIcons.local_language_20_regular),
+                title: Text(LocaleKeys.app_settings_language_title.tr()),
+                onTap: () =>
+                    _handleDestinationSelected(PageId.settingsLanguage),
+              ),
+              NavListItem(
+                selected: _selectedDestination == PageId.settingsAdvanced,
+                leading: const Icon(FluentIcons.settings_20_regular),
+                title: Text(LocaleKeys.app_settings_advanced_title.tr()),
+                onTap: () =>
+                    _handleDestinationSelected(PageId.settingsAdvanced),
+              ),
+            ],
+          ),
+          NavListSection(
+            header: Text(
+              LocaleKeys.app_settings__layout_navgroup_integrations.tr(),
             ),
-          ],
-        ),
+            children: [
+              NavListItem(
+                selected: _selectedDestination == PageId.settingsOcrEngines,
+                leading: const Icon(FluentIcons.scan_20_regular),
+                title: Text(LocaleKeys.app_settings_ocr_engines_title.tr()),
+                onTap: () =>
+                    _handleDestinationSelected(PageId.settingsOcrEngines),
+              ),
+              NavListItem(
+                selected:
+                    _selectedDestination == PageId.settingsTranslationEngines,
+                leading: const Icon(FluentIcons.translate_20_regular),
+                title: Text(
+                  LocaleKeys.app_settings_translation_engines_title.tr(),
+                ),
+                onTap: () => _handleDestinationSelected(
+                  PageId.settingsTranslationEngines,
+                ),
+              ),
+            ],
+          ),
+          NavListSection(
+            header: Text(
+              LocaleKeys.app_settings__layout_navgroup_resources.tr(),
+            ),
+            children: [
+              NavListItem(
+                selected: _selectedDestination == PageId.settingsAbout,
+                leading: const Icon(FluentIcons.info_20_regular),
+                title: Text(LocaleKeys.app_settings_about_title.tr()),
+                onTap: () => _handleDestinationSelected(PageId.settingsAbout),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

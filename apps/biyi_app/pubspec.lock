@@ -888,7 +888,7 @@ packages:
     description:
       path: "packages/reflect_ui"
       ref: HEAD
-      resolved-ref: "40609c2aa166653085d77f81dc82fb337816488b"
+      resolved-ref: "8360ae84bf68c613c593a99c5738eddf110d6409"
       url: "https://github.com/leanflutter/reflect_ui.git"
     source: git
     version: "0.0.1"
