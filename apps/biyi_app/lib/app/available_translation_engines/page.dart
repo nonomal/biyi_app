@@ -1,9 +1,9 @@
-import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
@@ -74,7 +74,7 @@ class _AvailableTranslationEnginesPageState
           ),
         ListSection(
           header: Text(
-            LocaleKeys.app_translation_engines_private_title.tr(),
+            t.app.translation_engines.private.title,
           ),
           children: [
             for (var engineConfig in _privateEngineList)
@@ -89,8 +89,7 @@ class _AvailableTranslationEnginesPageState
             if (_privateEngineList.isEmpty)
               ListTile(
                 title: Text(
-                  LocaleKeys.app_translation_engines__msg_no_available_engines
-                      .tr(),
+                  t.app.translation_engines.msg.no_available_engines,
                 ),
               ),
           ],
@@ -104,13 +103,13 @@ class _AvailableTranslationEnginesPageState
     return Scaffold(
       appBar: CustomizedAppBar(
         title: Text(
-          LocaleKeys.app_translation_engines_title.tr(),
+          t.app.translation_engines.title,
         ),
         actions: [
           Button(
             variant: ButtonVariant.filled,
             onPressed: _handleClickOk,
-            child: Text(LocaleKeys.ok.tr()),
+            child: Text(t.ok),
           ),
         ],
       ),

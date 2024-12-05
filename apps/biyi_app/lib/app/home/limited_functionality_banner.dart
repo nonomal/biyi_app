@@ -1,8 +1,7 @@
-import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/utils/utils.dart';
 import 'package:biyi_app/widgets/feature_status_icon/feature_status_icon.dart';
 import 'package:bot_toast/bot_toast.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/gestures.dart';
 import 'package:reflect_colors/reflect_colors.dart';
@@ -46,8 +45,7 @@ class AllowAccessListItem extends StatelessWidget {
                       children: [
                         if (onTappedTryAllow != null)
                           TextSpan(
-                            text: LocaleKeys.app_home_limited_banner_btn_allow
-                                .tr(),
+                            text: t.app.home.limited_banner_btn_allow,
                             recognizer: TapGestureRecognizer()
                               ..onTap = onTappedTryAllow,
                           ),
@@ -60,9 +58,7 @@ class AllowAccessListItem extends StatelessWidget {
                           ),
                         if (onTappedGoSettings != null)
                           TextSpan(
-                            text: LocaleKeys
-                                .app_home_limited_banner_btn_go_settings
-                                .tr(),
+                            text: t.app.home.limited_banner_btn_go_settings,
                             recognizer: TapGestureRecognizer()
                               ..onTap = onTappedGoSettings,
                           ),
@@ -111,10 +107,10 @@ class LimitedFunctionalityBanner extends StatelessWidget {
       title: Text.rich(
         TextSpan(
           children: [
-            TextSpan(text: LocaleKeys.app_home_limited_banner_title.tr()),
+            TextSpan(text: t.app.home.limited_banner_title),
             WidgetSpan(
               child: Tooltip(
-                message: LocaleKeys.app_home_limited_banner_tip_help.tr(),
+                message: t.app.home.limited_banner_tip_help,
                 child: GestureDetector(
                   child: Container(
                     margin: const EdgeInsets.only(left: 4),
@@ -156,14 +152,12 @@ class LimitedFunctionalityBanner extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AllowAccessListItem(
-              title:
-                  LocaleKeys.app_home_limited_banner_text_screen_capture.tr(),
+              title: t.app.home.limited_banner_text_screen_capture,
               allowed: isAllowedScreenCaptureAccess,
               onTappedTryAllow: () {
                 ScreenCapturer.instance.requestAccess();
                 BotToast.showText(
-                  text: LocaleKeys.app_home_limited_banner_msg_allow_access_tip
-                      .tr(),
+                  text: t.app.home.limited_banner_msg_allow_access_tip,
                   align: Alignment.center,
                   duration: const Duration(seconds: 5),
                 );
@@ -175,14 +169,12 @@ class LimitedFunctionalityBanner extends StatelessWidget {
               },
             ),
             AllowAccessListItem(
-              title:
-                  LocaleKeys.app_home_limited_banner_text_screen_selection.tr(),
+              title: t.app.home.limited_banner_text_screen_selection,
               allowed: isAllowedScreenSelectionAccess,
               onTappedTryAllow: () {
                 screenTextExtractor.requestAccess();
                 BotToast.showText(
-                  text: LocaleKeys.app_home_limited_banner_msg_allow_access_tip
-                      .tr(),
+                  text: t.app.home.limited_banner_msg_allow_access_tip,
                   align: Alignment.center,
                   duration: const Duration(seconds: 5),
                 );
@@ -204,7 +196,7 @@ class LimitedFunctionalityBanner extends StatelessWidget {
             variant: ButtonVariant.tinted,
             onPressed: onTappedRecheckIsAllowedAllAccess,
             child: Text(
-              LocaleKeys.app_home_limited_banner_btn_check_again.tr(),
+              t.app.home.limited_banner_btn_check_again,
             ),
           ),
         ),

@@ -164,7 +164,7 @@
   },
   "app": {
     "home": {
-      "newversion_banner_text_found_new_version": "发现新版本：{}",
+      "newversion_banner_text_found_new_version": "发现新版本：$version",
       "newversion_banner_btn_update": "立即更新",
       "limited_banner_title": "功能受限，请根据提示进行检查。",
       "limited_banner_text_screen_capture": "授予屏幕录制权限",
@@ -178,7 +178,7 @@
       "limited_banner_msg_all_access_not_allowed": "未获得所需权限，\n请重新检查并进行设置。",
       "input_hint": "在此处输入单词或文本",
       "text_extracting_text": "正在提取文字...",
-      "tip_translation_mode": "当前翻译模式：{}",
+      "tip_translation_mode": "当前翻译模式：$mode",
       "tip_extract_text_from_screen_capture": "截取屏幕区域并识别文字",
       "tip_extract_text_from_clipboard": "读取剪切板内容",
       "btn_clear": "清空",
@@ -194,7 +194,7 @@
     },
     "ocr_engines": {
       "title": "文字识别引擎",
-      "_msg": {
+      "msg": {
         "no_available_engines": "无可用的引擎"
       },
       "private": {
@@ -212,8 +212,8 @@
     },
     "settings": {
       "title": "Settings",
-      "text_version": "Version {} BUILD {}",
-      "_layout": {
+      "text_version": "Version $version BUILD $buildNumber",
+      "kLayout": {
         "navgroup": {
           "client": "客户端",
           "integrations": "服务接入",
@@ -343,7 +343,7 @@
     },
     "translation_engines": {
       "title": "文本翻译引擎",
-      "_msg": {
+      "msg": {
         "no_available_engines": "无可用的引擎"
       },
       "private": {

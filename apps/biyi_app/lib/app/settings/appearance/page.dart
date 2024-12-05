@@ -1,7 +1,7 @@
-import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:provider/provider.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
@@ -47,17 +47,17 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
                 useCheckmarkStyle: true,
                 title: Text(
                   themeMode == ThemeMode.light
-                      ? LocaleKeys.theme_mode_light.tr()
+                      ? t.theme_mode.light
                       : themeMode == ThemeMode.dark
-                          ? LocaleKeys.theme_mode_dark.tr()
-                          : LocaleKeys.theme_mode_system.tr(),
+                          ? t.theme_mode.dark
+                          : t.theme_mode.system,
                 ),
               ),
           ],
         ),
         ListSection(
           header: Text(
-            LocaleKeys.app_settings_appearance_tray_icon_title.tr(),
+            t.app.settings.appearance.tray_icon.title,
           ),
           children: [
             SwitchListTile(
@@ -65,7 +65,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
               onChanged: (newValue) =>
                   _handleUpdateSettings(trayIconEnabled: newValue),
               title: Text(
-                LocaleKeys.app_settings_appearance_tray_icon_show_title.tr(),
+                t.app.settings.appearance.tray_icon.show.title,
               ),
             ),
           ],
@@ -73,7 +73,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
         ListSection(
           hasLeading: false,
           header: Text(
-            LocaleKeys.app_settings_appearance_max_window_height_title.tr(),
+            t.app.settings.appearance.max_window_height.title,
           ),
           children: [
             for (var option in _kMaxWindowHeightOptions)
@@ -95,7 +95,7 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomizedAppBar(
-        title: Text(LocaleKeys.app_settings_appearance_title.tr()),
+        title: Text(t.app.settings.appearance.title),
       ),
       body: _buildBody(context),
     );

@@ -1,4 +1,5 @@
 import 'package:biyi_api_client/biyi_api_client.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/models/translation_target.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart' show ThemeMode;
@@ -21,6 +22,15 @@ enum TranslationMode {
         return TranslationMode.manual;
       default:
         return TranslationMode.auto;
+    }
+  }
+
+  String get displayName {
+    switch (this) {
+      case TranslationMode.auto:
+        return t.translation_mode.auto;
+      case TranslationMode.manual:
+        return t.translation_mode.manual;
     }
   }
 }

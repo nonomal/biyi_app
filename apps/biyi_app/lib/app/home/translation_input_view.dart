@@ -1,8 +1,7 @@
 import 'dart:ui';
 
-import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/models/settings_base.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:reflect_ui/reflect_ui.dart';
@@ -51,10 +50,8 @@ class TranslationInputView extends StatelessWidget {
       gap: 6,
       children: [
         Tooltip(
-          message: LocaleKeys.app_home_tip_translation_mode.tr(
-            args: [
-              'translation_mode.${translationMode.name}'.tr(),
-            ],
+          message: t.app.home.tip_translation_mode(
+            mode: translationMode.displayName,
           ),
           child: IconButton(
             FluentIcons.target_20_regular,
@@ -112,8 +109,7 @@ class TranslationInputView extends StatelessWidget {
           child: VerticalDivider(),
         ),
         Tooltip(
-          message:
-              LocaleKeys.app_home_tip_extract_text_from_screen_capture.tr(),
+          message: t.app.home.tip_extract_text_from_screen_capture,
           child: IconButton(
             FluentIcons.crop_20_regular,
             variant: IconButtonVariant.subtle,
@@ -122,7 +118,7 @@ class TranslationInputView extends StatelessWidget {
           ),
         ),
         Tooltip(
-          message: LocaleKeys.app_home_tip_extract_text_from_clipboard.tr(),
+          message: t.app.home.tip_extract_text_from_clipboard,
           child: IconButton(
             FluentIcons.clipboard_text_ltr_20_regular,
             variant: IconButtonVariant.subtle,
@@ -144,7 +140,7 @@ class TranslationInputView extends StatelessWidget {
           child: Button(
             variant: ButtonVariant.outlined,
             onPressed: onButtonTappedClear,
-            child: Text(LocaleKeys.app_home_btn_clear.tr()),
+            child: Text(t.app.home.btn_clear),
           ),
         ),
         ConstrainedBox(
@@ -152,7 +148,7 @@ class TranslationInputView extends StatelessWidget {
           child: Button(
             variant: ButtonVariant.filled,
             onPressed: onButtonTappedTrans,
-            child: Text(LocaleKeys.app_home_btn_trans.tr()),
+            child: Text(t.app.home.btn_trans),
           ),
         ),
       ],
@@ -191,7 +187,7 @@ class TranslationInputView extends StatelessWidget {
                   style: textTheme.bodyMedium?.copyWith(
                     height: 1.2,
                   ),
-                  placeholder: LocaleKeys.app_home_input_hint.tr(),
+                  placeholder: t.app.home.input_hint,
                   placeholderStyle: textTheme.bodyMedium?.copyWith(
                     color: textTheme.bodyMedium?.color?.withOpacity(0.5),
                     height: 1.2,
@@ -223,7 +219,7 @@ class TranslationInputView extends StatelessWidget {
                               ),
                               const SizedBox(width: 6),
                               Text(
-                                LocaleKeys.app_home_text_extracting_text.tr(),
+                                t.app.home.text_extracting_text,
                                 style: TextStyle(
                                   color: textTheme.bodySmall!.color,
                                   fontSize: 13,

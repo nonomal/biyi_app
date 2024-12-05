@@ -1,9 +1,8 @@
-import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
@@ -71,7 +70,7 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
           ),
         ListSection(
           header: Text(
-            LocaleKeys.app_ocr_engines_private_title.tr(),
+            t.app.ocr_engines.private.title,
           ),
           children: [
             for (var ocrEngineConfig in _privateOcrEngineList)
@@ -86,7 +85,7 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
             if (_privateOcrEngineList.isEmpty)
               ListTile(
                 title: Text(
-                  LocaleKeys.app_ocr_engines__msg_no_available_engines.tr(),
+                  t.app.ocr_engines.msg.no_available_engines,
                 ),
               ),
           ],
@@ -100,13 +99,13 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
     return Scaffold(
       appBar: CustomizedAppBar(
         title: Text(
-          LocaleKeys.app_ocr_engines_title.tr(),
+          t.app.ocr_engines.title,
         ),
         actions: [
           Button(
             variant: ButtonVariant.subtle,
             onPressed: _handleClickOk,
-            child: Text(LocaleKeys.ok.tr()),
+            child: Text(t.ok),
           ),
         ],
       ),

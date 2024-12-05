@@ -1,11 +1,11 @@
 import 'package:biyi_app/app/router_config.dart';
-import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/models/translation_target.dart';
 import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -48,8 +48,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
       children: [
         ListSection(
           header: Text(
-            LocaleKeys.app_settings_general_default_detect_text_engine_title
-                .tr(),
+            t.app.settings.general.default_detect_text_engine.title,
           ),
           children: [
             ListTile(
@@ -59,7 +58,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               title: Builder(
                 builder: (_) {
                   if (settings.defaultOcrEngineConfig == null) {
-                    return Text(LocaleKeys.please_choose.tr());
+                    return Text(t.please_choose);
                   }
                   return OcrEngineName(
                     settings.defaultOcrEngineConfig!,
@@ -87,16 +86,15 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                 _handleUpdateSettings(autoCopyRecognizedText: value);
               },
               title: Text(
-                LocaleKeys
-                    .app_settings_general_extract_text_auto_copy_detected_text_title
-                    .tr(),
+                t.app.settings.general.extract_text.auto_copy_detected_text
+                    .title,
               ),
             ),
           ],
         ),
         ListSection(
           header: Text(
-            LocaleKeys.app_settings_general_default_translate_engine_title.tr(),
+            t.app.settings.general.default_translate_engine.title,
           ),
           children: [
             ListTile(
@@ -108,7 +106,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               title: Builder(
                 builder: (_) {
                   if (settings.defaultTranslationEngineConfig == null) {
-                    return Text(LocaleKeys.please_choose.tr());
+                    return Text(t.please_choose);
                   }
                   return TranslationEngineName(
                     settings.defaultTranslationEngineConfig!,
@@ -133,7 +131,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
         ListSection(
           hasLeading: false,
           header: Text(
-            LocaleKeys.app_settings_general_translation_mode_title.tr(),
+            t.app.settings.general.translation_mode.title,
           ),
           children: [
             RadioListTile<TranslationMode>(
@@ -142,7 +140,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               onChanged: (value) =>
                   _handleUpdateSettings(translationMode: value),
               useCheckmarkStyle: true,
-              title: Text(LocaleKeys.translation_mode_manual.tr()),
+              title: Text(t.translation_mode.manual),
             ),
             RadioListTile<TranslationMode>(
               value: TranslationMode.auto,
@@ -150,16 +148,14 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               onChanged: (value) =>
                   _handleUpdateSettings(translationMode: value),
               useCheckmarkStyle: true,
-              title: Text(LocaleKeys.translation_mode_auto.tr()),
+              title: Text(t.translation_mode.auto),
             ),
           ],
         ),
         if (settings.translationMode == TranslationMode.auto)
           ListSection(
             header: Text(
-              LocaleKeys
-                  .app_settings_general_default_detect_language_engine_title
-                  .tr(),
+              t.app.settings.general.default_detect_language_engine.title,
             ),
             children: [
               ListTile(
@@ -171,7 +167,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                 title: Builder(
                   builder: (_) {
                     if (settings.defaultDetectLanguageEngineConfig == null) {
-                      return Text(LocaleKeys.please_choose.tr());
+                      return Text(t.please_choose);
                     }
                     return TranslationEngineName(
                       settings.defaultDetectLanguageEngineConfig!,
@@ -195,7 +191,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
         if (settings.translationMode == TranslationMode.auto)
           ListSection(
             header: Text(
-              LocaleKeys.app_settings_general_translation_target_title.tr(),
+              t.app.settings.general.translation_target.title,
             ),
             children: [
               for (TranslationTarget translationTarget
@@ -234,7 +230,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                 ),
               ListTile(
                 title: Text(
-                  LocaleKeys.add.tr(),
+                  t.add,
                   style: const TextStyle(
                       // color: Theme.of(context).primaryColor,
                       ),
@@ -257,9 +253,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                 );
               },
               title: Text(
-                LocaleKeys
-                    .app_settings_general_translate_double_click_copy_result_title
-                    .tr(),
+                t.app.settings.general.translate.double_click_copy_result.title,
               ),
             ),
           ],
@@ -267,7 +261,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
         ListSection(
           hasLeading: false,
           header: Text(
-            LocaleKeys.app_settings_general_input_settings_title.tr(),
+            t.app.settings.general.input_settings.title,
           ),
           children: [
             RadioListTile<InputSubmitMode>(
@@ -277,9 +271,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                   _handleUpdateSettings(inputSubmitMode: value),
               useCheckmarkStyle: true,
               title: Text(
-                LocaleKeys
-                    .app_settings_general_input_settings_submit_with_enter_title
-                    .tr(),
+                t.app.settings.general.input_settings.submit_with_enter.title,
               ),
             ),
             RadioListTile<InputSubmitMode>(
@@ -290,12 +282,10 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
               useCheckmarkStyle: true,
               title: Text(
                 UniPlatform.isMacOS
-                    ? LocaleKeys
-                        .app_settings_general_input_settings_submit_with_meta_enter_mac_title
-                        .tr()
-                    : LocaleKeys
-                        .app_settings_general_input_settings_submit_with_meta_enter_title
-                        .tr(),
+                    ? t.app.settings.general.input_settings
+                        .submit_with_meta_enter_mac.title
+                    : t.app.settings.general.input_settings
+                        .submit_with_meta_enter.title,
               ),
             ),
           ],
@@ -308,7 +298,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomizedAppBar(
-        title: Text(LocaleKeys.app_settings_general_title.tr()),
+        title: Text(t.app.settings.general.title),
       ),
       body: _buildBody(context),
     );

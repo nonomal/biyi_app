@@ -1,10 +1,9 @@
 import 'package:biyi_app/app/router_config.dart';
-import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/models/models.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:reflect_ui/reflect_ui.dart';
@@ -48,14 +47,14 @@ class _TranslationTargetNewOrEditPageState
     return CustomizedAppBar(
       title: Text(
         widget.translationTarget != null
-            ? LocaleKeys.app_translation_targets_new_title_with_edit.tr()
-            : LocaleKeys.app_translation_targets_new_title.tr(),
+            ? t.app.translation_targets.kNew.title_with_edit
+            : t.app.translation_targets.kNew.title,
       ),
       actions: [
         Button(
           variant: ButtonVariant.filled,
           onPressed: _handleClickOk,
-          child: Text(LocaleKeys.ok.tr()),
+          child: Text(t.ok),
         ),
       ],
     );
@@ -68,11 +67,11 @@ class _TranslationTargetNewOrEditPageState
           children: [
             ListTile(
               title: Text(
-                LocaleKeys.app_translation_targets_new_source_language.tr(),
+                t.app.translation_targets.kNew.source_language,
               ),
               additionalInfo: _sourceLanguage != null
                   ? LanguageLabel(_sourceLanguage!)
-                  : Text(LocaleKeys.please_choose.tr()),
+                  : Text(t.please_choose),
               onTap: () async {
                 final selectedLanguage = await context.push<String?>(
                   '${PageId.supportedLanguages}?selectedLanguage=$_sourceLanguage',
@@ -85,11 +84,11 @@ class _TranslationTargetNewOrEditPageState
             ),
             ListTile(
               title: Text(
-                LocaleKeys.app_translation_targets_new_target_language.tr(),
+                t.app.translation_targets.kNew.target_language,
               ),
               additionalInfo: _targetLanguage != null
                   ? LanguageLabel(_targetLanguage!)
-                  : Text(LocaleKeys.please_choose.tr()),
+                  : Text(t.please_choose),
               onTap: () async {
                 final selectedLanguage = await context.push<String?>(
                   '${PageId.supportedLanguages}?selectedLanguage=$_targetLanguage',
@@ -109,7 +108,7 @@ class _TranslationTargetNewOrEditPageState
               ListTile(
                 title: Center(
                   child: Text(
-                    LocaleKeys.delete.tr(),
+                    t.delete,
                     // style: const TextStyle(color: ReflectColors),
                   ),
                 ),

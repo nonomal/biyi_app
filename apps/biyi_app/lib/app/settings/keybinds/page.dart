@@ -1,7 +1,7 @@
-import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:provider/provider.dart';
@@ -83,7 +83,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
           children: [
             ListTile(
               title: Text(
-                LocaleKeys.app_settings_keybinds_window_show_or_hide_title.tr(),
+                t.app.settings.keybinds.window.show_or_hide.title,
               ),
               additionalInfo: HotKeyDisplayView(boundShortcuts.showOrHide),
               onTap: () {
@@ -97,7 +97,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
             ),
             ListTile(
               title: Text(
-                LocaleKeys.app_settings_keybinds_window_hide_title.tr(),
+                t.app.settings.keybinds.window.hide.title,
               ),
               additionalInfo: HotKeyDisplayView(boundShortcuts.hide),
               onTap: () {
@@ -114,14 +114,12 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
         ListSection(
           hasLeading: false,
           header: Text(
-            LocaleKeys.app_settings_keybinds_extract_text_title.tr(),
+            t.app.settings.keybinds.extract_text.title,
           ),
           children: [
             ListTile(
               title: Text(
-                LocaleKeys
-                    .app_settings_keybinds_extract_text_from_selection_title
-                    .tr(),
+                t.app.settings.keybinds.extract_text.from_selection.title,
               ),
               additionalInfo: HotKeyDisplayView(
                 boundShortcuts.extractFromScreenSelection,
@@ -138,9 +136,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
             if (!UniPlatform.isLinux)
               ListTile(
                 title: Text(
-                  LocaleKeys
-                      .app_settings_keybinds_extract_text_from_capture_title
-                      .tr(),
+                  t.app.settings.keybinds.extract_text.from_capture.title,
                 ),
                 additionalInfo: HotKeyDisplayView(
                   boundShortcuts.extractFromScreenCapture,
@@ -156,9 +152,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
               ),
             ListTile(
               title: Text(
-                LocaleKeys
-                    .app_settings_keybinds_extract_text_from_clipboard_title
-                    .tr(),
+                t.app.settings.keybinds.extract_text.from_clipboard.title,
               ),
               additionalInfo: HotKeyDisplayView(
                 boundShortcuts.extractFromClipboard,
@@ -178,14 +172,13 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
           ListSection(
             hasLeading: false,
             header: Text(
-              LocaleKeys.app_settings_keybinds_input_assist_function_title.tr(),
+              t.app.settings.keybinds.input_assist_function.title,
             ),
             children: [
               ListTile(
                 title: Text(
-                  LocaleKeys
-                      .app_settings_keybinds_input_assist_function_translate_input_content_title
-                      .tr(),
+                  t.app.settings.keybinds.input_assist_function
+                      .translate_input_content.title,
                 ),
                 additionalInfo: HotKeyDisplayView(
                   boundShortcuts.translateInputContent,
@@ -209,7 +202,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomizedAppBar(
-        title: Text(LocaleKeys.app_settings_keybinds_title.tr()),
+        title: Text(t.app.settings.keybinds.title),
       ),
       body: _buildBody(context),
     );

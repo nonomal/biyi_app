@@ -1,5 +1,6 @@
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/utils/r.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/widgets.dart';
 
 const kLanguageDE = 'de';
@@ -45,7 +46,29 @@ final Map<String, String> _knownFlagIcons = {
 };
 
 String getLanguageName(String language) {
-  return 'language.$language'.tr();
+  switch (language) {
+    case kLanguageDE:
+      return t.language.de;
+    case kLanguageEN:
+      return t.language.en;
+    case kLanguageES:
+      return t.language.es;
+    case kLanguageFR:
+      return t.language.fr;
+    case kLanguageIT:
+      return t.language.it;
+    case kLanguageJA:
+      return t.language.ja;
+    case kLanguageKO:
+      return t.language.ko;
+    case kLanguagePT:
+      return t.language.pt;
+    case kLanguageRU:
+      return t.language.ru;
+    case kLanguageZH:
+      return t.language.zh;
+  }
+  return language;
 }
 
 String getLanguageFlag(String language) {

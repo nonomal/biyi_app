@@ -10,7 +10,7 @@ import 'package:biyi_app/app/home/translation_input_view.dart';
 import 'package:biyi_app/app/home/translation_results_view.dart';
 import 'package:biyi_app/app/home/translation_target_select_view.dart';
 import 'package:biyi_app/extension/hotkey.dart';
-import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/models/models.dart';
 import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/services/services.dart';
@@ -18,7 +18,6 @@ import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/utils/utils.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:collection/collection.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
@@ -237,35 +236,32 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
       Menu menu = Menu(
         items: [
           MenuItem(
-            label:
-                '${LocaleKeys.app_name.tr()} v${sharedEnv.appVersion} (BUILD ${sharedEnv.appBuildNumber})',
+            label: '${t.app_name} v${sharedEnv.appVersion} '
+                '(BUILD ${sharedEnv.appBuildNumber})',
             disabled: true,
           ),
           MenuItem.separator(),
           if (UniPlatform.isLinux)
             MenuItem(
               key: kMenuItemKeyShow,
-              label: LocaleKeys.tray_context_menu_item_show.tr(),
+              label: t.tray_context_menu.item_show,
             ),
           MenuItem(
             key: kMenuItemKeyQuickStartGuide,
-            label: LocaleKeys.tray_context_menu_item_quick_start_guide.tr(),
+            label: t.tray_context_menu.item_quick_start_guide,
           ),
           MenuItem.submenu(
-            label: LocaleKeys.tray_context_menu_item_discussion.tr(),
+            label: t.tray_context_menu.item_discussion,
             submenu: Menu(
               items: [
                 MenuItem(
                   key: kMenuSubItemKeyJoinDiscord,
-                  label: LocaleKeys
-                      .tray_context_menu_item_discussion_subitem_discord_server
-                      .tr(),
+                  label: t
+                      .tray_context_menu.item_discussion_subitem_discord_server,
                 ),
                 MenuItem(
                   key: kMenuSubItemKeyJoinQQGroup,
-                  label: LocaleKeys
-                      .tray_context_menu_item_discussion_subitem_qq_group
-                      .tr(),
+                  label: t.tray_context_menu.item_discussion_subitem_qq_group,
                 ),
               ],
             ),
@@ -273,7 +269,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
           MenuItem.separator(),
           MenuItem(
             key: kMenuItemKeyQuitApp,
-            label: LocaleKeys.tray_context_menu_item_quit_app.tr(),
+            label: t.tray_context_menu.item_quit_app,
           ),
         ],
       );
@@ -646,7 +642,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
 
     if (_capturedData == null) {
       BotToast.showText(
-        text: LocaleKeys.app_home_msg_capture_screen_area_canceled.tr(),
+        text: t.app.home.msg_capture_screen_area_canceled,
         align: Alignment.center,
       );
       setState(() {});
@@ -715,7 +711,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   Future<void> _handleButtonTappedTrans() async {
     if (_text.isEmpty) {
       BotToast.showText(
-        text: LocaleKeys.app_home_msg_please_enter_word_or_text.tr(),
+        text: t.app.home.msg_please_enter_word_or_text,
         align: Alignment.center,
       );
       _focusNode.requestFocus();
@@ -759,16 +755,12 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
                 if (_isAllowedScreenCaptureAccess &&
                     _isAllowedScreenSelectionAccess) {
                   BotToast.showText(
-                    text: LocaleKeys
-                        .app_home_limited_banner_msg_all_access_allowed
-                        .tr(),
+                    text: t.app.home.limited_banner_msg_all_access_allowed,
                     align: Alignment.center,
                   );
                 } else {
                   BotToast.showText(
-                    text: LocaleKeys
-                        .app_home_limited_banner_msg_all_access_not_allowed
-                        .tr(),
+                    text: t.app.home.limited_banner_msg_all_access_not_allowed,
                     align: Alignment.center,
                   );
                 }

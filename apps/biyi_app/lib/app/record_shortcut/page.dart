@@ -1,6 +1,5 @@
-import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:reflect_ui/reflect_ui.dart';
@@ -66,13 +65,13 @@ class _RecordShortcutPageState extends State<RecordShortcutPage> {
     return Scaffold(
       appBar: CustomizedAppBar(
         title: Text(
-          LocaleKeys.app_record_shortcut_title.tr(),
+          t.app.record_shortcut.title,
         ),
         actions: [
           Button(
             variant: ButtonVariant.filled,
             onPressed: _handleClickOk,
-            child: Text(LocaleKeys.ok.tr()),
+            child: Text(t.ok),
           ),
         ],
       ),

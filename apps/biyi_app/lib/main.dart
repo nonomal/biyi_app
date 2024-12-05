@@ -4,16 +4,15 @@ import 'dart:io';
 
 import 'package:biyi_app/app/router_config.dart';
 import 'package:biyi_app/extension/hotkey.dart';
-import 'package:biyi_app/generated/codegen_loader.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/services/local_db/local_db.dart';
 import 'package:biyi_app/states/actions/translate_input_content.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/utils/env.dart';
-import 'package:biyi_app/utils/language_util.dart';
 import 'package:bot_toast/bot_toast.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -215,7 +214,6 @@ final _darkTheme = _darkThemeBase.copyWith(
 
 Future<void> _ensureInitialized() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
   if (UniPlatform.isLinux || UniPlatform.isMacOS || UniPlatform.isWindows) {
     await hotKeyManager.unregisterAll();
     await windowManager.ensureInitialized();
@@ -260,18 +258,11 @@ void main() async {
   );
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(value: Settings.instance),
-      ],
-      child: EasyLocalization(
-        supportedLocales: const [
-          Locale(kLanguageEN),
-          Locale(kLanguageZH),
+    TranslationProvider(
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider.value(value: Settings.instance),
         ],
-        path: 'resources/langs',
-        assetLoader: const CodegenLoader(),
-        fallbackLocale: const Locale(kLanguageEN),
         child: const MyApp(),
       ),
     ),
@@ -290,9 +281,6 @@ class _MyAppState extends State<MyApp> {
 
   Widget _buildApp(BuildContext context) {
     final settings = context.watch<Settings>();
-    if (context.locale != settings.locale) {
-      context.setLocale(settings.locale);
-    }
     return MaterialApp.router(
       routerConfig: routerConfig,
       theme: _lightTheme,
@@ -350,9 +338,9 @@ class _MyAppState extends State<MyApp> {
         child = botToastBuilder(context, child);
         return child;
       },
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
+      locale: TranslationProvider.of(context).flutterLocale,
+      supportedLocales: AppLocaleUtils.supportedLocales,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
       debugShowCheckedModeBanner: false,
     );
   }

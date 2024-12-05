@@ -1,8 +1,8 @@
-import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/services/translate_client/translate_client.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
@@ -35,12 +35,12 @@ class _TranslationEngineTypesPageState
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomizedAppBar(
-      title: Text(LocaleKeys.app_translation_engine_types_title.tr()),
+      title: Text(t.app.translation_engine_types.title),
       actions: [
         Button(
           variant: ButtonVariant.filled,
           onPressed: _handleClickOk,
-          child: Text(LocaleKeys.ok.tr()),
+          child: Text(t.ok),
         ),
       ],
     );
@@ -61,7 +61,7 @@ class _TranslationEngineTypesPageState
                 },
                 useCheckmarkStyle: true,
                 leading: TranslationEngineIcon(engineType),
-                title: Text('engine.$engineType'.tr()),
+                title: Text('engine.$engineType'),
               ),
           ],
         ),

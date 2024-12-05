@@ -1,10 +1,10 @@
 import 'package:biyi_app/app/router_config.dart';
-import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/services/api_client.dart';
 import 'package:biyi_app/states/settings.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/widgets.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:reflect_ui/reflect_ui.dart';
@@ -92,10 +92,10 @@ class _TranslationEnginesSettingPageState
 
     return ListSection(
       header: Text(
-        LocaleKeys.app_settings_translation_engines_private_title.tr(),
+        t.app.settings.translation_engines.private.title,
       ),
       footer: Text(
-        LocaleKeys.app_settings_translation_engines_private_description.tr(),
+        t.app.settings.translation_engines.private.description,
       ),
       children: [
         if (privateTranslationEngineList.isNotEmpty)
@@ -146,7 +146,7 @@ class _TranslationEnginesSettingPageState
           ),
         ListTile(
           title: Text(
-            LocaleKeys.add.tr(),
+            t.add,
             style: const TextStyle(),
           ),
           onTap: _handleClickAdd,
@@ -168,7 +168,7 @@ class _TranslationEnginesSettingPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomizedAppBar(
-        title: Text(LocaleKeys.app_settings_translation_engines_title.tr()),
+        title: Text(t.app.settings.translation_engines.title),
       ),
       body: _buildBody(context),
     );

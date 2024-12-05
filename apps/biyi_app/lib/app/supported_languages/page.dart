@@ -1,8 +1,8 @@
-import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/utils/language_util.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
 import 'package:biyi_app/widgets/language_label/language_label.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
@@ -34,13 +34,13 @@ class _SupportedLanguagesPageState extends State<SupportedLanguagesPage> {
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomizedAppBar(
       title: Text(
-        LocaleKeys.app_supported_languages_title.tr(),
+        t.app.supported_languages.title,
       ),
       actions: [
         Button(
           variant: ButtonVariant.filled,
           onPressed: _handleClickOk,
-          child: Text(LocaleKeys.ok.tr()),
+          child: Text(t.ok),
         ),
       ],
     );
@@ -51,7 +51,7 @@ class _SupportedLanguagesPageState extends State<SupportedLanguagesPage> {
       children: [
         ListSection(
           header: Text(
-            LocaleKeys.app_supported_languages_all_title.tr(),
+            t.app.supported_languages.all.title,
           ),
           children: [
             for (var supportedLanguage in kSupportedLanguages)

@@ -1,6 +1,6 @@
-import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
@@ -45,7 +45,7 @@ class _AdvancedSettingPageState extends State<AdvancedSettingPage> {
               value: _launchAtLoginEnabled,
               onChanged: _handleLaunchAtLoginChanged,
               title: Text(
-                LocaleKeys.app_settings_advanced_launch_at_login_title.tr(),
+                t.app.settings.advanced.launch_at_login.title,
               ),
             ),
           ],
@@ -58,7 +58,7 @@ class _AdvancedSettingPageState extends State<AdvancedSettingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomizedAppBar(
-        title: Text(LocaleKeys.app_settings_advanced_title.tr()),
+        title: Text(t.app.settings.advanced.title),
       ),
       body: _buildBody(context),
     );

@@ -1,10 +1,20 @@
-import 'package:biyi_app/generated/locale_keys.g.dart';
+import 'package:biyi_app/i18n/strings.g.dart';
 import 'package:biyi_app/states/settings.dart';
-import 'package:biyi_app/utils/language_util.dart';
 import 'package:biyi_app/widgets/customized_app_bar/customized_app_bar.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:provider/provider.dart';
 import 'package:reflect_ui/reflect_ui.dart';
+
+extension on AppLocale {
+  String get displayName {
+    switch (this) {
+      case AppLocale.en:
+        return t.language.en;
+      case AppLocale.zhCn:
+        return t.language.zh_CN;
+    }
+  }
+}
 
 class LanguageSettingPage extends StatefulWidget {
   const LanguageSettingPage({super.key});
@@ -14,33 +24,44 @@ class LanguageSettingPage extends StatefulWidget {
 }
 
 class _LanguageSettingPageState extends State<LanguageSettingPage> {
+  late AppLocale _currentLocale;
+
+  @override
+  void initState() {
+    _currentLocale = LocaleSettings.instance.currentLocale;
+    super.initState();
+  }
+
   void _handleUpdateSettings({
-    String? displayLanguage,
+    AppLocale? locale,
   }) {
     final settings = context.read<Settings>();
-    if (displayLanguage != null) {
-      settings.locale = languageToLocale(displayLanguage);
+
+    if (locale != null) {
+      _currentLocale = locale;
+      settings.update(
+        displayLanguage: locale.languageTag,
+      );
+      LocaleSettings.instance.setLocale(locale);
     }
+    setState(() {});
   }
 
   Widget _buildBody(BuildContext context) {
-    final settings = context.watch<Settings>();
     return ListView(
       children: [
         ListSection(
           hasLeading: false,
           children: [
-            for (var appLanguage in kAppLanguages)
-              RadioListTile<String>(
-                value: appLanguage,
-                groupValue: settings.locale.languageCode,
+            for (AppLocale locale in [AppLocale.en, AppLocale.zhCn])
+              RadioListTile<AppLocale>(
+                value: locale,
+                groupValue: _currentLocale,
                 onChanged: (_) async {
-                  _handleUpdateSettings(displayLanguage: appLanguage);
-                  await context.setLocale(languageToLocale(appLanguage));
-                  await WidgetsBinding.instance.performReassemble();
+                  _handleUpdateSettings(locale: locale);
                 },
                 useCheckmarkStyle: true,
-                title: Text(getLanguageName(appLanguage)),
+                title: Text(locale.displayName),
               ),
           ],
         ),
@@ -52,7 +73,7 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomizedAppBar(
-        title: Text(LocaleKeys.app_settings_language_title.tr()),
+        title: Text(t.app.settings.language.title),
       ),
       body: _buildBody(context),
     );
