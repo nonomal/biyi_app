@@ -27,6 +27,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   hotkey_manager: ^0.2.2
+  intl: ^0.19.0
   json_annotation: ^4.8.0
   keypress_simulator: ^0.2.0
   launch_at_startup: ^0.3.1

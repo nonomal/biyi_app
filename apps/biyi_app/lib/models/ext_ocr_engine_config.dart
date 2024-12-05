@@ -1,6 +1,5 @@
 import 'package:biyi_app/services/api_client.dart' show OcrEngineConfig;
 
-
 export 'package:biyi_app/services/api_client.dart' show OcrEngineConfig;
 
 extension ExtOcrEngineConfig on OcrEngineConfig {

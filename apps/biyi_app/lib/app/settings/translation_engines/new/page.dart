@@ -123,9 +123,8 @@ class _TranslationEnginesNewOrEditPageState
           children: [
             ListTile(
               leading: _type == null ? null : TranslationEngineIcon(_type!),
-              title: _type == null
-                  ? Text(t.please_choose)
-                  : Text('engine.$_type'),
+              title:
+                  _type == null ? Text(t.please_choose) : Text('engine.$_type'),
               trailing: widget.editable ? const ListTileChevron() : null,
               onTap: widget.editable
                   ? () async {
@@ -149,8 +148,7 @@ class _TranslationEnginesNewOrEditPageState
           ListSection(
             hasLeading: false,
             header: Text(
-              t.app.translation_engines_new.support_interface.title
-                  ,
+              t.app.translation_engines_new.support_interface.title,
             ),
             children: [
               for (var scope in TranslationEngineScope.values)
