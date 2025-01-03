@@ -15,7 +15,7 @@ class NewVersionFoundBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
+    final DesignThemeData theme = DesignTheme.of(context);
     return Container(
       color: Theme.of(context).primaryColor,
       width: double.infinity,
@@ -40,7 +40,7 @@ class NewVersionFoundBanner extends StatelessWidget {
                   version: latestVersion.version,
                 ),
               ),
-              style: textTheme.bodyMedium!.copyWith(
+              style: theme.typography.bodyMedium.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),
@@ -71,7 +71,7 @@ class NewVersionFoundBanner extends StatelessWidget {
                   ),
                 ],
               ),
-              style: textTheme.bodyMedium!.copyWith(
+              style: theme.typography.bodyMedium.copyWith(
                 color: Colors.white,
               ),
             ),

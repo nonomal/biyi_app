@@ -4,7 +4,6 @@ import 'package:biyi_app/widgets/feature_status_icon/feature_status_icon.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/gestures.dart';
-import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:screen_capturer/screen_capturer.dart';
 import 'package:screen_text_extractor/screen_text_extractor.dart';
@@ -64,10 +63,10 @@ class AllowAccessListItem extends StatelessWidget {
                           ),
                       ],
                       style: TextStyle(
-                        color: ReflectColors.neutral.shade700,
+                        color: Colors.neutral.shade700,
                         decoration: TextDecoration.underline,
                         decorationThickness: 1.5,
-                        decorationColor: ReflectColors.neutral.shade700,
+                        decorationColor: Colors.neutral.shade700,
                         fontWeight: FontWeight.w700,
                         fontSize: 13,
                         height: 18 / 13,
@@ -124,7 +123,9 @@ class LimitedFunctionalityBanner extends StatelessWidget {
                             child: Icon(
                               FluentIcons.question_circle_20_regular,
                               size: 14,
-                              color: hovered ? Colors.white70 : Colors.white,
+                              color: hovered
+                                  ? Colors.white.withOpacity(0.7)
+                                  : Colors.white,
                             ),
                           );
                         },

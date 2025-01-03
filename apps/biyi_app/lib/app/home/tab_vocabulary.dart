@@ -6,7 +6,7 @@ class TabVocabularyScene extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PageScaffold(
       appBar: const CustomizedAppBar(
         title: Text('Vocabulary'),
       ),

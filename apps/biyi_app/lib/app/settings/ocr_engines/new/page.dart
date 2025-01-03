@@ -10,7 +10,6 @@ import 'package:biyi_app/widgets/ocr_engine_name/ocr_engine_name.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ocr_engine_youdao/ocr_engine_youdao.dart';
 import 'package:provider/provider.dart';
-import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:shortid/shortid.dart';
 
@@ -156,7 +155,7 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
                 title: Center(
                   child: Text(
                     t.delete,
-                    style: const TextStyle(color: ReflectColors.red),
+                    style: const TextStyle(color: Colors.red),
                   ),
                 ),
                 onTap: () {
@@ -174,7 +173,7 @@ class _OcrEnginesNewOrEditPageState extends State<OcrEnginesNewOrEditPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PageScaffold(
       appBar: _buildAppBar(context),
       body: _buildBody(context),
     );

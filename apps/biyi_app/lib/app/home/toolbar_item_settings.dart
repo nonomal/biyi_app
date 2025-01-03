@@ -32,7 +32,7 @@ class _ToolbarItemSettingsState extends State<ToolbarItemSettings> {
     final iconThemeData = Theme.of(context).iconTheme;
     return IconButton(
       FluentIcons.settings_20_regular,
-      variant: IconButtonVariant.transparent,
+      variant: IconButtonVariant.plain,
       color: iconThemeData.color,
       onPressed: _handleClick,
     );

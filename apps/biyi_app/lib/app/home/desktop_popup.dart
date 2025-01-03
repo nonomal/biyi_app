@@ -908,7 +908,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
           _handleButtonTappedTrans();
         },
       },
-      child: Scaffold(
+      child: PageScaffold(
         appBar: _buildAppBar(context),
         body: _buildBody(context),
       ),

@@ -18,199 +18,9 @@ import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:protocol_handler/protocol_handler.dart';
 import 'package:provider/provider.dart';
-import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_platform/uni_platform.dart';
 import 'package:window_manager/window_manager.dart';
-
-const String _kDefaultFontFamily = 'Inter';
-
-const TextStyle _kBodyLargeTextStyle = TextStyle(
-  fontFamily: _kDefaultFontFamily,
-  fontSize: 16,
-  height: 20 / 16,
-);
-
-const TextStyle _kBodyMediumTextStyle = TextStyle(
-  fontFamily: _kDefaultFontFamily,
-  fontSize: 14,
-  height: 18 / 14,
-);
-
-const TextStyle _kBodySmallTextStyle = TextStyle(
-  fontFamily: _kDefaultFontFamily,
-  fontSize: 12,
-  height: 16 / 12,
-);
-
-const TextStyle _kLabelLargeTextStyle = TextStyle(
-  fontFamily: _kDefaultFontFamily,
-  fontWeight: FontWeight.w600,
-  fontSize: 14,
-  height: 18 / 14,
-);
-
-const TextStyle _kLabelMediumTextStyle = TextStyle(
-  fontFamily: _kDefaultFontFamily,
-  fontWeight: FontWeight.w600,
-  fontSize: 12,
-  height: 16 / 12,
-);
-
-const TextStyle _kLabelSmallTextStyle = TextStyle(
-  fontFamily: _kDefaultFontFamily,
-  fontWeight: FontWeight.w600,
-  fontSize: 10,
-  height: 14 / 10,
-);
-
-final _lightThemeBase = ThemeData.light();
-
-final _lightTheme = ThemeData(
-  colorScheme: _lightThemeBase.colorScheme.copyWith(
-    primary: ReflectColors.blue,
-    // onPrimary,
-    // primaryContainer,
-    // onPrimaryContainer,
-    // primaryFixed,
-    // primaryFixedDim,
-    // onPrimaryFixed,
-    // onPrimaryFixedVariant,
-    // secondary,
-    // onSecondary,
-    // secondaryContainer,
-    // onSecondaryContainer,
-    // secondaryFixed,
-    // secondaryFixedDim,
-    // onSecondaryFixed,
-    // onSecondaryFixedVariant,
-    // tertiary,
-    // onTertiary,
-    // tertiaryContainer,
-    // onTertiaryContainer,
-    // tertiaryFixed,
-    // tertiaryFixedDim,
-    // onTertiaryFixed,
-    // onTertiaryFixedVariant,
-    // error,
-    // onError,
-    // errorContainer,
-    // onErrorContainer,
-    // surface,
-    // onSurface,
-    // surfaceDim,
-    // surfaceBright,
-    // surfaceContainerLowest,
-    surfaceContainerLow: Colors.white,
-    // surfaceContainer,
-    // surfaceContainerHigh,
-    // surfaceContainerHighest,
-    onSurfaceVariant: ReflectColors.neutral,
-    outline: ReflectColors.neutral.shade200,
-    outlineVariant: ReflectColors.neutral.shade200,
-    // shadow,
-    // scrim,
-    // inverseSurface,
-    // onInverseSurface,
-    // inversePrimary,
-    // surfaceTint,
-  ),
-  scaffoldBackgroundColor: ReflectColors.neutral.shade100,
-  textTheme: _lightThemeBase.textTheme.copyWith(
-    bodyLarge: _kBodyLargeTextStyle.copyWith(
-      color: ReflectColors.neutral.shade900,
-    ),
-    bodyMedium: _kBodyMediumTextStyle.copyWith(
-      color: ReflectColors.neutral.shade900,
-    ),
-    bodySmall: _kBodySmallTextStyle.copyWith(
-      color: ReflectColors.neutral.shade900,
-    ),
-    labelLarge: _kLabelLargeTextStyle.copyWith(
-      color: ReflectColors.neutral.shade900,
-    ),
-    labelMedium: _kLabelMediumTextStyle.copyWith(
-      color: ReflectColors.neutral.shade900,
-    ),
-    labelSmall: _kLabelSmallTextStyle.copyWith(
-      color: ReflectColors.neutral.shade900,
-    ),
-  ),
-);
-
-final _darkThemeBase = ThemeData.dark();
-
-final _darkTheme = _darkThemeBase.copyWith(
-  colorScheme: _darkThemeBase.colorScheme.copyWith(
-    primary: ReflectColors.blue,
-    // onPrimary,
-    // primaryContainer,
-    // onPrimaryContainer,
-    // primaryFixed,
-    // primaryFixedDim,
-    // onPrimaryFixed,
-    // onPrimaryFixedVariant,
-    // secondary,
-    // onSecondary,
-    // secondaryContainer,
-    // onSecondaryContainer,
-    // secondaryFixed,
-    // secondaryFixedDim,
-    // onSecondaryFixed,
-    // onSecondaryFixedVariant,
-    // tertiary,
-    // onTertiary,
-    // tertiaryContainer,
-    // onTertiaryContainer,
-    // tertiaryFixed,
-    // tertiaryFixedDim,
-    // onTertiaryFixed,
-    // onTertiaryFixedVariant,
-    // error,
-    // onError,
-    // errorContainer,
-    // onErrorContainer,
-    // surface,
-    // onSurface,
-    // surfaceDim,
-    // surfaceBright,
-    // surfaceContainerLowest,
-    surfaceContainerLow: ReflectColors.neutral.shade900,
-    // surfaceContainer,
-    // surfaceContainerHigh,
-    // surfaceContainerHighest,
-    onSurfaceVariant: ReflectColors.neutral.shade500,
-    outline: ReflectColors.neutral.shade800,
-    outlineVariant: ReflectColors.neutral.shade800,
-    // shadow,
-    // scrim,
-    // inverseSurface,
-    // onInverseSurface,
-    // inversePrimary,
-    // surfaceTint,
-  ),
-  scaffoldBackgroundColor: Colors.black,
-  textTheme: _darkThemeBase.textTheme.copyWith(
-    bodyLarge: _kBodyLargeTextStyle.copyWith(
-      color: ReflectColors.neutral.shade100,
-    ),
-    bodyMedium: _kBodyMediumTextStyle.copyWith(
-      color: ReflectColors.neutral.shade100,
-    ),
-    bodySmall: _kBodySmallTextStyle.copyWith(
-      color: ReflectColors.neutral.shade100,
-    ),
-    labelLarge: _kLabelLargeTextStyle.copyWith(
-      color: ReflectColors.neutral.shade100,
-    ),
-    labelMedium: _kLabelMediumTextStyle.copyWith(
-      color: ReflectColors.neutral.shade100,
-    ),
-    labelSmall: _kLabelSmallTextStyle.copyWith(
-      color: ReflectColors.neutral.shade100,
-    ),
-  ),
-);
 
 Future<void> _ensureInitialized() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -283,10 +93,9 @@ class _MyAppState extends State<MyApp> {
     final settings = context.watch<Settings>();
     return MaterialApp.router(
       routerConfig: routerConfig,
-      theme: _lightTheme,
-      darkTheme: _darkTheme,
       themeMode: settings.themeMode,
       builder: (context, child) {
+        Brightness brightness = Theme.of(context).brightness;
         if (UniPlatform.isLinux || UniPlatform.isWindows) {
           child = Stack(
             children: [
@@ -306,33 +115,20 @@ class _MyAppState extends State<MyApp> {
             ],
           );
         }
-        child = ExtendedTheme(
-          data: ExtendedThemeData(
-            colors: ThemeBaseColors(
-              gray: ReflectColors.neutral,
-              red: ReflectColors.red,
-              blue: ReflectColors.blue,
-              green: ReflectColors.green,
-              yellow: ReflectColors.yellow,
-              orange: ReflectColors.orange,
-              cyan: ReflectColors.cyan,
-              purple: ReflectColors.purple,
-              primary: ReflectColors.blue,
-              secondary: ReflectColors.neutral,
-              success: ReflectColors.green,
-              danger: ReflectColors.red,
-              warning: ReflectColors.amber,
-              info: ReflectColors.sky,
-            ),
-            corners: const ThemeBaseCorners(),
-            shadows: const ThemeBaseShadows(),
-            spacing: const ThemeBaseSpacing(),
-            icons: const ThemeBaseIcons(
-              chevronLeft: FluentIcons.chevron_left_16_regular,
-              chevronRight: FluentIcons.chevron_right_16_regular,
-            ),
-            baseStyleResolver: WidgetBaseStyleResolver(),
-          ),
+        child = DesignTheme(
+          data: brightness == Brightness.light
+              ? DesignThemeData.lightCompact(
+                  iconLibrary: const IconLibrary(
+                    chevronLeft: FluentIcons.chevron_left_16_regular,
+                    chevronRight: FluentIcons.chevron_right_16_regular,
+                  ),
+                )
+              : DesignThemeData.darkCompact(
+                  iconLibrary: const IconLibrary(
+                    chevronLeft: FluentIcons.chevron_left_16_regular,
+                    chevronRight: FluentIcons.chevron_right_16_regular,
+                  ),
+                ),
           child: child!,
         );
         child = botToastBuilder(context, child);

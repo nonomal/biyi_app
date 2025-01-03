@@ -1,7 +1,6 @@
 import 'dart:ui' as ui;
 
 import 'package:biyi_app/widgets/sound_play_button/sound_play_button.dart';
-import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
 
@@ -21,7 +20,7 @@ class _WordTranslationViewState extends State<WordTranslationView> {
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
+    final DesignThemeData theme = DesignTheme.of(context);
     return MouseRegion(
       onEnter: (event) {
         _isHovered = true;
@@ -52,14 +51,14 @@ class _WordTranslationViewState extends State<WordTranslationView> {
                   TextSpan(text: widget.wordTranslation.text),
                 ],
               ),
-              style: textTheme.bodyMedium!.copyWith(
+              style: theme.typography.bodyMedium.copyWith(
                 height: 1.4,
               ),
               selectionHeightStyle: ui.BoxHeightStyle.max,
             ),
             const Badge(
               variant: BadgeVariant.outlined,
-              color: ReflectColors.neutral,
+              color: Colors.neutral,
               child: Text('常见释义'),
             ),
             if ((widget.wordTranslation.audioUrl ?? '').isNotEmpty &&

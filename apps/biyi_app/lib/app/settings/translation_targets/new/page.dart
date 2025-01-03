@@ -109,7 +109,7 @@ class _TranslationTargetNewOrEditPageState
                 title: Center(
                   child: Text(
                     t.delete,
-                    // style: const TextStyle(color: ReflectColors),
+                    // style: const TextStyle(color: Colors),
                   ),
                 ),
                 // accessoryView: Container(),
@@ -129,7 +129,7 @@ class _TranslationTargetNewOrEditPageState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PageScaffold(
       appBar: _buildAppBar(context),
       body: _buildBody(context),
     );

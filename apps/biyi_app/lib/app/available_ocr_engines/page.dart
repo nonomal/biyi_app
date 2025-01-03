@@ -96,7 +96,7 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PageScaffold(
       appBar: CustomizedAppBar(
         title: Text(
           t.app.ocr_engines.title,

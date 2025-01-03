@@ -4,7 +4,6 @@ import 'package:biyi_app/app/home/tab_settings.dart';
 import 'package:biyi_app/app/home/tab_vocabulary.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_platform/uni_platform.dart';
 
@@ -45,7 +44,7 @@ class _HomePageState extends State<HomePage> {
         boxShadow: Theme.of(context).brightness == Brightness.light
             ? [
                 BoxShadow(
-                  color: ReflectColors.neutral.withOpacity(0.2),
+                  color: Colors.neutral.withOpacity(0.2),
                   blurRadius: 16,
                 ),
               ]
@@ -87,7 +86,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _build(BuildContext context) {
-    return Scaffold(
+    return PageScaffold(
       body: _buildBody(context),
       bottomNavigationBar: _buildBottomNavigationBar(context),
     );

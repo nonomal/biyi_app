@@ -22,7 +22,6 @@ import 'package:biyi_app/models/translation_target.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart' show DialogRoute;
 import 'package:go_router/go_router.dart';
-import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:uni_platform/uni_platform.dart';
 
@@ -321,8 +320,8 @@ class DialogPage<T> extends Page<T> {
               decoration: BoxDecoration(
                 border: Border.all(
                   color: isDark
-                      ? ReflectColors.neutral.shade800
-                      : ReflectColors.neutral.shade200,
+                      ? Colors.neutral.shade800
+                      : Colors.neutral.shade200,
                   width: 1,
                 ),
                 borderRadius: BorderRadius.circular(10),

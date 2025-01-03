@@ -6,7 +6,7 @@ class LanguageLabel extends StatelessWidget {
   const LanguageLabel(
     this.language, {
     super.key,
-    this.flagSize = 22,
+    this.flagSize = 20,
     this.flagBorderColor,
     this.style,
   });
@@ -18,9 +18,8 @@ class LanguageLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
     return GappedRow(
-      gap: 5,
+      gap: 6,
       mainAxisSize: MainAxisSize.min,
       children: [
         LanguageFlagView(
@@ -28,12 +27,9 @@ class LanguageLabel extends StatelessWidget {
           size: flagSize,
           borderColor: flagBorderColor,
         ),
-        DefaultTextStyle(
-          style: textTheme.bodyMedium!,
-          child: Text(
-            getLanguageName(language),
-            style: style,
-          ),
+        Text(
+          getLanguageName(language),
+          style: style,
         ),
       ],
     );

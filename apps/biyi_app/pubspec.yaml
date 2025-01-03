@@ -38,7 +38,6 @@ dependencies:
   path_provider: ^2.1.1
   protocol_handler: ^0.1.6
   provider: ^6.1.1
-  reflect_colors: ^0.0.1
   reflect_ui: 0.0.0
   reorderables: ^0.6.0
   screen_capturer: ^0.2.2

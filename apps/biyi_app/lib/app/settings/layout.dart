@@ -86,14 +86,14 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
   }
 
   Widget _buildSidebar(BuildContext context) {
-    ThemeData themeData = Theme.of(context);
+    final DesignThemeData theme = DesignTheme.of(context);
 
     return Container(
       decoration: BoxDecoration(
-        color: themeData.colorScheme.surfaceContainerLow,
+        color: theme.colorScheme.surfaceContainer,
         border: Border(
           right: BorderSide(
-            color: themeData.colorScheme.outlineVariant,
+            color: theme.colorScheme.outline,
           ),
         ),
       ),
@@ -200,7 +200,7 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
       );
     });
 
-    return Scaffold(
+    return PageScaffold(
       body: AdaptiveLayout(
         primaryNavigation: SlotLayout(
           config: <Breakpoint, SlotLayoutConfig>{

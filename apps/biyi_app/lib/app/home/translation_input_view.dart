@@ -44,8 +44,7 @@ class TranslationInputView extends StatelessWidget {
   final bool isAddedToVocabulary = true;
 
   Widget _buildToolbarItems(BuildContext context) {
-    final ThemeData themeData = Theme.of(context);
-    final IconThemeData iconThemeData = Theme.of(context).iconTheme;
+    final DesignThemeData theme = DesignTheme.of(context);
     return GappedRow(
       gap: 6,
       children: [
@@ -63,8 +62,8 @@ class TranslationInputView extends StatelessWidget {
                   Icon(
                     icon,
                     color: translationMode == TranslationMode.auto
-                        ? themeData.colorScheme.primary
-                        : iconThemeData.color,
+                        ? theme.colorScheme.primary
+                        : theme.colorScheme.onSurfaceContainer,
                     size: 20,
                   ),
                   if (translationMode == TranslationMode.auto)
@@ -72,7 +71,7 @@ class TranslationInputView extends StatelessWidget {
                       bottom: 0,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: themeData.colorScheme.primary,
+                          color: theme.colorScheme.primary,
                           borderRadius: BorderRadius.circular(2),
                         ),
                         padding: const EdgeInsets.only(
@@ -104,16 +103,16 @@ class TranslationInputView extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          width: 0,
+          width: 1,
           height: 20,
-          child: VerticalDivider(),
+          child: VerticalDivider(width: 1),
         ),
         Tooltip(
           message: t.app.home.tip_extract_text_from_screen_capture,
           child: IconButton(
             FluentIcons.crop_20_regular,
             variant: IconButtonVariant.subtle,
-            iconColor: iconThemeData.color,
+            iconColor: theme.colorScheme.onSurfaceContainer,
             onPressed: onClickExtractTextFromScreenCapture,
           ),
         ),
@@ -122,7 +121,7 @@ class TranslationInputView extends StatelessWidget {
           child: IconButton(
             FluentIcons.clipboard_text_ltr_20_regular,
             variant: IconButtonVariant.subtle,
-            iconColor: iconThemeData.color,
+            iconColor: theme.colorScheme.onSurfaceContainer,
             iconSize: 20,
             onPressed: onClickExtractTextFromClipboard,
           ),

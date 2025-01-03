@@ -1,5 +1,4 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 
 class FeatureStatusIcon extends StatelessWidget {
@@ -16,7 +15,7 @@ class FeatureStatusIcon extends StatelessWidget {
       width: 16,
       height: 16,
       decoration: BoxDecoration(
-        color: supported ? ReflectColors.green : ReflectColors.red,
+        color: supported ? Colors.green : Colors.red,
         borderRadius: BorderRadius.circular(8),
       ),
       margin: EdgeInsets.zero,
@@ -25,7 +24,7 @@ class FeatureStatusIcon extends StatelessWidget {
           supported
               ? FluentIcons.checkmark_12_filled
               : FluentIcons.dismiss_12_filled,
-          color: ReflectColors.white,
+          color: Colors.white,
           size: supported ? 12 : 10,
         ),
       ),

@@ -33,7 +33,7 @@ class _TabHomepageSceneState extends State<TabHomepageScene> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PageScaffold(
       appBar: _buildAppBar(context),
       body: _buildBody(context),
     );

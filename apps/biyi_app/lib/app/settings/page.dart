@@ -37,7 +37,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _build(BuildContext context) {
-    return Scaffold(
+    return PageScaffold(
       appBar: CustomizedAppBar(
         title: Text(
           t.app.settings.title,

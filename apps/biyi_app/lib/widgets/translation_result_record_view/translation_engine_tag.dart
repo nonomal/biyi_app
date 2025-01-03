@@ -58,9 +58,9 @@ class _TranslationEngineTagState extends State<TranslationEngineTag> {
             right: 2,
           ),
           child: Button(
-            variant: ButtonVariant.transparent,
-            padding: EdgeInsets.zero,
-            minSize: 0,
+            variant: ButtonVariant.plain,
+            // padding: EdgeInsets.zero,
+            // minSize: 0,
             onPressed: () {},
             child: AnimatedCrossFade(
               crossFadeState: !_isHovered

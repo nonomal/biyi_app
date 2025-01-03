@@ -25,7 +25,7 @@ class WordImageView extends StatelessWidget {
       ),
       child: Button(
         variant: ButtonVariant.filled,
-        padding: EdgeInsets.zero,
+        // padding: EdgeInsets.zero,
         onPressed: onPressed,
         child: Hero(
           tag: wordImage.url,

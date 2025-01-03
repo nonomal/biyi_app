@@ -9,7 +9,6 @@ import 'package:biyi_app/widgets/translation_engine_icon/translation_engine_icon
 import 'package:biyi_app/widgets/translation_engine_name/translation_engine_name.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:reflect_colors/reflect_colors.dart';
 import 'package:reflect_ui/reflect_ui.dart';
 import 'package:shortid/shortid.dart';
 import 'package:uni_translate_client/uni_translate_client.dart';
@@ -202,7 +201,7 @@ class _TranslationEnginesNewOrEditPageState
                 title: Center(
                   child: Text(
                     t.delete,
-                    style: const TextStyle(color: ReflectColors.red),
+                    style: const TextStyle(color: Colors.red),
                   ),
                 ),
                 onTap: () async {
@@ -221,7 +220,7 @@ class _TranslationEnginesNewOrEditPageState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PageScaffold(
       appBar: _buildAppBar(context),
       body: _buildBody(context),
     );

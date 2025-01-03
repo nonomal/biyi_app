@@ -73,7 +73,7 @@ class _SupportedLanguagesPageState extends State<SupportedLanguagesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PageScaffold(
       appBar: _buildAppBar(context),
       body: _buildBody(context),
     );

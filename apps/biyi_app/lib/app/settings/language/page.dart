@@ -71,7 +71,7 @@ class _LanguageSettingPageState extends State<LanguageSettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PageScaffold(
       appBar: CustomizedAppBar(
         title: Text(t.app.settings.language.title),
       ),

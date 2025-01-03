@@ -28,7 +28,7 @@ class _GeneratingCursorState extends State<GeneratingCursor>
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
+    final DesignThemeData theme = DesignTheme.of(context);
     return Padding(
       padding: const EdgeInsets.only(left: 2),
       child: AnimatedBuilder(
@@ -36,7 +36,7 @@ class _GeneratingCursorState extends State<GeneratingCursor>
         builder: (context, child) {
           return Text(
             '|',
-            style: textTheme.bodyMedium!.copyWith(
+            style: theme.typography.bodyMedium.copyWith(
               height: 1.4,
             ),
           );

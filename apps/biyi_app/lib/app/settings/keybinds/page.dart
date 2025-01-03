@@ -200,7 +200,7 @@ class _KeybindsSettingPageState extends State<KeybindsSettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PageScaffold(
       appBar: CustomizedAppBar(
         title: Text(t.app.settings.keybinds.title),
       ),
