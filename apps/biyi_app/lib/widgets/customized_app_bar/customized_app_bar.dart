@@ -34,7 +34,7 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
           useCloseButton
               ? FluentIcons.dismiss_20_regular
               : FluentIcons.chevron_left_24_regular,
-          variant: IconButtonVariant.plain,
+          variant: IconButtonVariant.cleared,
           color: isDark
               ? Colors.neutral.shade200
               : Colors.neutral.shade900,

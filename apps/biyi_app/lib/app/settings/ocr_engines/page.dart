@@ -159,10 +159,10 @@ class _OcrEnginesSettingPageState extends State<OcrEnginesSettingPage> {
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
-      appBar: CustomizedAppBar(
+      navigationBar: CustomizedAppBar(
         title: Text(t.app.settings.ocr_engines.title),
       ),
-      body: _buildBody(context),
+      child: _buildBody(context),
     );
   }
 }

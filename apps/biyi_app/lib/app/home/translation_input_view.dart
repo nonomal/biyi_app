@@ -54,7 +54,7 @@ class TranslationInputView extends StatelessWidget {
           ),
           child: IconButton(
             FluentIcons.target_20_regular,
-            variant: IconButtonVariant.subtle,
+            variant: IconButtonVariant.muted,
             iconBuilder: (context, icon) {
               return Stack(
                 alignment: Alignment.center,
@@ -111,7 +111,7 @@ class TranslationInputView extends StatelessWidget {
           message: t.app.home.tip_extract_text_from_screen_capture,
           child: IconButton(
             FluentIcons.crop_20_regular,
-            variant: IconButtonVariant.subtle,
+            variant: IconButtonVariant.muted,
             iconColor: theme.colorScheme.onSurfaceContainer,
             onPressed: onClickExtractTextFromScreenCapture,
           ),
@@ -120,7 +120,7 @@ class TranslationInputView extends StatelessWidget {
           message: t.app.home.tip_extract_text_from_clipboard,
           child: IconButton(
             FluentIcons.clipboard_text_ltr_20_regular,
-            variant: IconButtonVariant.subtle,
+            variant: IconButtonVariant.muted,
             iconColor: theme.colorScheme.onSurfaceContainer,
             iconSize: 20,
             onPressed: onClickExtractTextFromClipboard,

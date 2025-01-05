@@ -87,8 +87,8 @@ class _HomePageState extends State<HomePage> {
 
   Widget _build(BuildContext context) {
     return PageScaffold(
-      body: _buildBody(context),
-      bottomNavigationBar: _buildBottomNavigationBar(context),
+      child: _buildBody(context),
+      // bottomNavigationBar: _buildBottomNavigationBar(context),
     );
   }
 

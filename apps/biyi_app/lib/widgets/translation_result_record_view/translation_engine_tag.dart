@@ -58,7 +58,7 @@ class _TranslationEngineTagState extends State<TranslationEngineTag> {
             right: 2,
           ),
           child: Button(
-            variant: ButtonVariant.plain,
+            variant: ButtonVariant.cleared,
             // padding: EdgeInsets.zero,
             // minSize: 0,
             onPressed: () {},

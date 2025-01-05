@@ -84,7 +84,7 @@ class _SoundPlayButtonState extends State<SoundPlayButton>
       width: 20,
       height: 20,
       child: Button(
-        variant: ButtonVariant.subtle,
+        variant: ButtonVariant.muted,
         // padding: EdgeInsets.zero,
         child: Center(
           child: IndexedStack(

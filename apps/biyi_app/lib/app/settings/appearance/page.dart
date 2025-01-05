@@ -94,10 +94,10 @@ class _AppearanceSettingPageState extends State<AppearanceSettingPage> {
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
-      appBar: CustomizedAppBar(
+      navigationBar: CustomizedAppBar(
         title: Text(t.app.settings.appearance.title),
       ),
-      body: _buildBody(context),
+      child: _buildBody(context),
     );
   }
 }

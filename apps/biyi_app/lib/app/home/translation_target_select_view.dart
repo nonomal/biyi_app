@@ -114,7 +114,7 @@ class _TranslationTargetSelectViewState
             child: Row(
               children: [
                 Button(
-                  variant: ButtonVariant.plain,
+                  variant: ButtonVariant.cleared,
                   // padding: const EdgeInsets.only(left: 12, right: 12),
                   child: Row(
                     children: [
@@ -157,7 +157,7 @@ class _TranslationTargetSelectViewState
                   },
                 ),
                 Button(
-                  variant: ButtonVariant.plain,
+                  variant: ButtonVariant.cleared,
                   // padding: EdgeInsets.zero,
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
@@ -183,7 +183,7 @@ class _TranslationTargetSelectViewState
                   },
                 ),
                 Button(
-                  variant: ButtonVariant.plain,
+                  variant: ButtonVariant.cleared,
                   // padding: const EdgeInsets.only(left: 12, right: 12),
                   child: Row(
                     children: [

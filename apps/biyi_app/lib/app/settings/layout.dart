@@ -201,7 +201,7 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
     });
 
     return PageScaffold(
-      body: AdaptiveLayout(
+      child: AdaptiveLayout(
         primaryNavigation: SlotLayout(
           config: <Breakpoint, SlotLayoutConfig>{
             Breakpoints.large: SlotLayout.from(

@@ -909,8 +909,8 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
         },
       },
       child: PageScaffold(
-        appBar: _buildAppBar(context),
-        body: _buildBody(context),
+        navigationBar: _buildAppBar(context),
+        child: _buildBody(context),
       ),
     );
   }

@@ -63,7 +63,7 @@ class _RecordShortcutPageState extends State<RecordShortcutPage> {
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
-      appBar: CustomizedAppBar(
+      navigationBar: CustomizedAppBar(
         title: Text(
           t.app.record_shortcut.title,
         ),
@@ -75,7 +75,7 @@ class _RecordShortcutPageState extends State<RecordShortcutPage> {
           ),
         ],
       ),
-      body: _buildBody(context),
+      child: _buildBody(context),
     );
   }
 }

@@ -29,11 +29,8 @@ class _ToolbarItemSettingsState extends State<ToolbarItemSettings> {
 
   @override
   Widget build(BuildContext context) {
-    final iconThemeData = Theme.of(context).iconTheme;
     return IconButton(
       FluentIcons.settings_20_regular,
-      variant: IconButtonVariant.plain,
-      color: iconThemeData.color,
       onPressed: _handleClick,
     );
   }

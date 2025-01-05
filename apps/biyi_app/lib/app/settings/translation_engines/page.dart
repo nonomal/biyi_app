@@ -167,10 +167,10 @@ class _TranslationEnginesSettingPageState
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
-      appBar: CustomizedAppBar(
+      navigationBar: CustomizedAppBar(
         title: Text(t.app.settings.translation_engines.title),
       ),
-      body: _buildBody(context),
+      child: _buildBody(context),
     );
   }
 }

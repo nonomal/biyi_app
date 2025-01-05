@@ -297,10 +297,10 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
-      appBar: CustomizedAppBar(
+      navigationBar: CustomizedAppBar(
         title: Text(t.app.settings.general.title),
       ),
-      body: _buildBody(context),
+      child: _buildBody(context),
     );
   }
 }

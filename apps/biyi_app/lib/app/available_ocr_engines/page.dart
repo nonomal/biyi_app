@@ -97,19 +97,19 @@ class _AvailableOcrEnginesPageState extends State<AvailableOcrEnginesPage> {
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
-      appBar: CustomizedAppBar(
+      navigationBar: CustomizedAppBar(
         title: Text(
           t.app.ocr_engines.title,
         ),
         actions: [
           Button(
-            variant: ButtonVariant.subtle,
+            variant: ButtonVariant.muted,
             onPressed: _handleClickOk,
             child: Text(t.ok),
           ),
         ],
       ),
-      body: _buildBody(context),
+      child: _buildBody(context),
     );
   }
 }
