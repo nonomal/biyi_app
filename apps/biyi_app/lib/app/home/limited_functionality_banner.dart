@@ -25,18 +25,20 @@ class AllowAccessListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DesignThemeData theme = DesignTheme.of(context);
     return GappedRow(
       gap: 6,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FeatureStatusIcon(supported: allowed),
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 2),
+          child: FeatureStatusIcon(supported: allowed),
+        ),
         Expanded(
           child: Wrap(
-            spacing: 30,
+            spacing: 12,
             children: [
-              Text(
-                title,
-              ),
+              Text(title),
               Text.rich(
                 TextSpan(
                   children: [
@@ -62,14 +64,14 @@ class AllowAccessListItem extends StatelessWidget {
                               ..onTap = onTappedGoSettings,
                           ),
                       ],
-                      style: TextStyle(
+                      style: theme.typography.bodyMedium.copyWith(
                         color: Colors.neutral.shade700,
                         decoration: TextDecoration.underline,
                         decorationThickness: 1.5,
                         decorationColor: Colors.neutral.shade700,
                         fontWeight: FontWeight.w700,
                         fontSize: 13,
-                        height: 18 / 13,
+                        height: 20 / 13,
                       ),
                     ),
                   ],
@@ -190,15 +192,12 @@ class LimitedFunctionalityBanner extends StatelessWidget {
         ),
       ),
       actions: [
-        Theme(
-          data: Theme.of(context).copyWith(brightness: Brightness.light),
-          child: Button(
-            kind: ButtonKind.secondary,
-            variant: ButtonVariant.tinted,
-            onPressed: onTappedRecheckIsAllowedAllAccess,
-            child: Text(
-              t.app.home.limited_banner_btn_check_again,
-            ),
+        Button(
+          kind: ButtonKind.secondary,
+          variant: ButtonVariant.tinted,
+          onPressed: onTappedRecheckIsAllowedAllAccess,
+          child: Text(
+            t.app.home.limited_banner_btn_check_again,
           ),
         ),
         Expanded(child: Container()),

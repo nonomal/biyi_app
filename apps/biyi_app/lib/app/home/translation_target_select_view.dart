@@ -110,13 +110,15 @@ class _TranslationTargetSelectViewState
         children: [
           Container(
             margin: EdgeInsets.zero,
-            height: 40,
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             child: Row(
               children: [
                 Button(
+                  kind: ButtonKind.secondary,
                   variant: ButtonVariant.cleared,
-                  // padding: const EdgeInsets.only(left: 12, right: 12),
-                  child: Row(
+                  size: WidgetSize.large,
+                  child: GappedRow(
+                    gap: 4,
                     children: [
                       LanguageLabel(
                         widget.sourceLanguage,
@@ -157,8 +159,10 @@ class _TranslationTargetSelectViewState
                   },
                 ),
                 Button(
+                  kind: ButtonKind.secondary,
                   variant: ButtonVariant.cleared,
-                  // padding: EdgeInsets.zero,
+                  padding: EdgeInsets.zero,
+                  iconSize: 22,
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     curve: Curves.fastOutSlowIn,
@@ -166,10 +170,8 @@ class _TranslationTargetSelectViewState
                     transform: Matrix4.rotationZ(
                       _isRotated ? math.pi / 1 : 0,
                     ),
-                    child: Icon(
+                    child: const Icon(
                       FluentIcons.arrow_swap_20_regular,
-                      size: 20,
-                      color: iconThemeData.color,
                     ),
                   ),
                   onPressed: () {
@@ -183,9 +185,11 @@ class _TranslationTargetSelectViewState
                   },
                 ),
                 Button(
+                  kind: ButtonKind.secondary,
                   variant: ButtonVariant.cleared,
-                  // padding: const EdgeInsets.only(left: 12, right: 12),
-                  child: Row(
+                  padding: const EdgeInsets.only(left: 12, right: 12),
+                  child: GappedRow(
+                    gap: 4,
                     children: [
                       LanguageLabel(
                         widget.targetLanguage,
@@ -230,7 +234,7 @@ class _TranslationTargetSelectViewState
           ),
           if (widget.isShowSourceLanguageSelector ||
               widget.isShowTargetLanguageSelector)
-            const Divider(),
+            const Divider(height: 1),
           if (widget.isShowSourceLanguageSelector)
             AvailableLanguageSelector(
               value: widget.sourceLanguage,

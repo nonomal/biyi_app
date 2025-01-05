@@ -52,47 +52,49 @@ class TranslationInputView extends StatelessWidget {
           message: t.app.home.tip_translation_mode(
             mode: translationMode.displayName,
           ),
-          child: IconButton(
-            FluentIcons.target_20_regular,
-            variant: IconButtonVariant.muted,
-            iconBuilder: (context, icon) {
-              return Stack(
-                alignment: Alignment.center,
-                children: [
-                  Icon(
-                    icon,
-                    color: translationMode == TranslationMode.auto
-                        ? theme.colorScheme.primary
-                        : theme.colorScheme.onSurfaceContainer,
-                    size: 20,
-                  ),
-                  if (translationMode == TranslationMode.auto)
-                    Positioned(
-                      bottom: 0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: theme.colorScheme.primary,
-                          borderRadius: BorderRadius.circular(2),
-                        ),
-                        padding: const EdgeInsets.only(
-                          left: 2,
-                          right: 2,
-                          top: 1.4,
-                          bottom: 1.4,
-                        ),
-                        child: const Text(
-                          'AUTO',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 5.4,
-                            fontWeight: FontWeight.w500,
+          child: Button(
+            kind: translationMode == TranslationMode.auto
+                ? ButtonKind.primary
+                : ButtonKind.secondary,
+            variant: ButtonVariant.muted,
+            padding: const EdgeInsets.all(0),
+            iconSize: 22,
+            child: Builder(
+              builder: (context) {
+                return Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    const Icon(
+                      FluentIcons.target_20_regular,
+                    ),
+                    if (translationMode == TranslationMode.auto)
+                      Positioned(
+                        bottom: 0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.primary,
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                          padding: const EdgeInsets.only(
+                            left: 2,
+                            right: 2,
+                            top: 1.4,
+                            bottom: 1.4,
+                          ),
+                          child: const Text(
+                            'AUTO',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 5.4,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                ],
-              );
-            },
+                  ],
+                );
+              },
+            ),
             onPressed: () {
               TranslationMode newTranslationMode =
                   translationMode == TranslationMode.auto
@@ -105,25 +107,32 @@ class TranslationInputView extends StatelessWidget {
         const SizedBox(
           width: 1,
           height: 20,
-          child: VerticalDivider(width: 1),
+          child: VerticalDivider(thickness: 1),
         ),
         Tooltip(
           message: t.app.home.tip_extract_text_from_screen_capture,
-          child: IconButton(
-            FluentIcons.crop_20_regular,
-            variant: IconButtonVariant.muted,
-            iconColor: theme.colorScheme.onSurfaceContainer,
+          child: Button(
+            kind: ButtonKind.secondary,
+            variant: ButtonVariant.muted,
+            padding: const EdgeInsets.all(0),
+            iconSize: 22,
             onPressed: onClickExtractTextFromScreenCapture,
+            child: const Icon(
+              FluentIcons.crop_20_regular,
+            ),
           ),
         ),
         Tooltip(
           message: t.app.home.tip_extract_text_from_clipboard,
-          child: IconButton(
-            FluentIcons.clipboard_text_ltr_20_regular,
-            variant: IconButtonVariant.muted,
-            iconColor: theme.colorScheme.onSurfaceContainer,
-            iconSize: 20,
+          child: Button(
+            kind: ButtonKind.secondary,
+            variant: ButtonVariant.muted,
+            padding: const EdgeInsets.all(0),
+            iconSize: 22,
             onPressed: onClickExtractTextFromClipboard,
+            child: const Icon(
+              FluentIcons.clipboard_text_ltr_20_regular,
+            ),
           ),
         ),
       ],

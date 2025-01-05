@@ -151,9 +151,9 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
   }
 
   Future<void> _initWindow() async {
-    const size = Size(400, 185);
-    const minimunSize = Size(400, 185);
-    const maximumSize = Size(400, 600);
+    const size = Size(420, 185);
+    const minimunSize = Size(420, 185);
+    const maximumSize = Size(420, 600);
     await Future.any([
       windowManager.setSize(size),
       windowManager.setMinimumSize(minimunSize),
@@ -867,7 +867,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
     return PreferredSize(
       preferredSize: const Size.fromHeight(34),
       child: Container(
-        padding: const EdgeInsets.only(left: 8, right: 8, top: 0),
+        padding: const EdgeInsets.symmetric(horizontal: 4),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
