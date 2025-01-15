@@ -17,8 +17,6 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     DesignThemeData theme = DesignTheme.of(context);
 
-    final bool isDark = theme.brightness == Brightness.dark;
-
     final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
 
     final bool canPop = parentRoute?.canPop ?? false;
@@ -35,9 +33,6 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
               ? FluentIcons.dismiss_20_regular
               : FluentIcons.chevron_left_24_regular,
           variant: IconButtonVariant.cleared,
-          color: isDark
-              ? Colors.neutral.shade200
-              : Colors.neutral.shade900,
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -63,7 +58,7 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
             DefaultTextStyle(
               style: theme.typography.bodyLarge.copyWith(
                 fontWeight: FontWeight.w600,
-                color: theme.colorScheme.onSurface,
+                color: theme.colorScheme.content,
               ),
               child: title,
             ),

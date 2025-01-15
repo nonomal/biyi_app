@@ -101,9 +101,9 @@ class LimitedFunctionalityBanner extends StatelessWidget {
 
   Widget _build(BuildContext context) {
     if (_isAllowedAllAccess) return Container();
-    return Alert(
-      kind: AlertKind.warning,
-      variant: AlertVariant.filled,
+    return Banner(
+      kind: BannerKind.warning,
+      variant: BannerVariant.filled,
       icon: const Icon(FluentIcons.warning_20_regular),
       title: Text.rich(
         TextSpan(

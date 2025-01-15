@@ -90,10 +90,10 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
 
     return Container(
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainer,
+        color: theme.colorScheme.surfaceMuted,
         border: Border(
           right: BorderSide(
-            color: theme.colorScheme.outline,
+            color: theme.colorScheme.border!,
           ),
         ),
       ),
@@ -102,41 +102,41 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
       ),
       width: 200,
       height: double.infinity,
-      child: NavList(
+      child: SideNavigation(
         children: [
-          NavListSection(
+          SideNavigationSection(
             header: Text(
               t.app.settings.kLayout.navgroup.client,
             ),
             children: [
-              NavListItem(
+              SideNavigationItem(
                 selected: _selectedDestination == PageId.settingsGeneral,
                 leading: const Icon(FluentIcons.app_generic_20_regular),
                 title: Text(t.app.settings.general.title),
                 onTap: () => _handleDestinationSelected(PageId.settingsGeneral),
               ),
-              NavListItem(
+              SideNavigationItem(
                 selected: _selectedDestination == PageId.settingsAppearance,
                 leading: const Icon(FluentIcons.style_guide_20_regular),
                 title: Text(t.app.settings.appearance.title),
                 onTap: () =>
                     _handleDestinationSelected(PageId.settingsAppearance),
               ),
-              NavListItem(
+              SideNavigationItem(
                 selected: _selectedDestination == PageId.settingsKeybinds,
                 leading: const Icon(FluentIcons.keyboard_20_regular),
                 title: Text(t.app.settings.keybinds.title),
                 onTap: () =>
                     _handleDestinationSelected(PageId.settingsKeybinds),
               ),
-              NavListItem(
+              SideNavigationItem(
                 selected: _selectedDestination == PageId.settingsLanguage,
                 leading: const Icon(FluentIcons.local_language_20_regular),
                 title: Text(t.app.settings.language.title),
                 onTap: () =>
                     _handleDestinationSelected(PageId.settingsLanguage),
               ),
-              NavListItem(
+              SideNavigationItem(
                 selected: _selectedDestination == PageId.settingsAdvanced,
                 leading: const Icon(FluentIcons.settings_20_regular),
                 title: Text(t.app.settings.advanced.title),
@@ -145,19 +145,19 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
               ),
             ],
           ),
-          NavListSection(
+          SideNavigationSection(
             header: Text(
               t.app.settings.kLayout.navgroup.integrations,
             ),
             children: [
-              NavListItem(
+              SideNavigationItem(
                 selected: _selectedDestination == PageId.settingsOcrEngines,
                 leading: const Icon(FluentIcons.scan_20_regular),
                 title: Text(t.app.settings.ocr_engines.title),
                 onTap: () =>
                     _handleDestinationSelected(PageId.settingsOcrEngines),
               ),
-              NavListItem(
+              SideNavigationItem(
                 selected:
                     _selectedDestination == PageId.settingsTranslationEngines,
                 leading: const Icon(FluentIcons.translate_20_regular),
@@ -170,12 +170,12 @@ class _SettingsLayoutState extends State<SettingsLayout> with WindowListener {
               ),
             ],
           ),
-          NavListSection(
+          SideNavigationSection(
             header: Text(
               t.app.settings.kLayout.navgroup.resources,
             ),
             children: [
-              NavListItem(
+              SideNavigationItem(
                 selected: _selectedDestination == PageId.settingsAbout,
                 leading: const Icon(FluentIcons.info_20_regular),
                 title: Text(t.app.settings.about.title),

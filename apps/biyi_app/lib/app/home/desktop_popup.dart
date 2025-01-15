@@ -882,6 +882,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
 
   @override
   Widget build(BuildContext context) {
+    final DesignThemeData theme = DesignTheme.of(context);
     WidgetsBinding.instance.addPostFrameCallback((_) => _windowResize());
     final shortcuts = context.watch<Settings>().boundShortcuts;
     return CallbackGlobalShortcuts(
@@ -909,6 +910,7 @@ class _DesktopPopupPageState extends State<DesktopPopupPage>
         },
       },
       child: PageScaffold(
+        backgroundColor: theme.colorScheme.surfaceMuted,
         navigationBar: _buildAppBar(context),
         child: _buildBody(context),
       ),
