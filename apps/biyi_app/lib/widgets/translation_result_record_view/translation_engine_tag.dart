@@ -1,12 +1,14 @@
-import 'package:biyi_app/includes.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:biyi_app/models/ext_translation_engine_config.dart';
+import 'package:biyi_app/models/translation_result_record.dart';
+import 'package:biyi_app/states/settings.dart';
+import 'package:biyi_app/widgets/translation_engine_icon/translation_engine_icon.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 class TranslationEngineTag extends StatefulWidget {
   const TranslationEngineTag({
-    Key? key,
+    super.key,
     required this.translationResultRecord,
-  }) : super(key: key);
+  });
 
   final TranslationResultRecord translationResultRecord;
 
@@ -17,14 +19,18 @@ class TranslationEngineTag extends StatefulWidget {
 class _TranslationEngineTagState extends State<TranslationEngineTag> {
   bool _isHovered = false;
 
-  TranslationEngineConfig get _translationEngineConfig {
-    return localDb
-        .engine(widget.translationResultRecord.translationEngineId!)
-        .get()!;
+  TranslationEngineConfig? get _translationEngineConfig {
+    String id = widget.translationResultRecord.translationEngineId!;
+    Settings settings = Settings.instance;
+    return settings.proTranslationEngine(id).get() ??
+        settings.privateTranslationEngine(id).get();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_translationEngineConfig == null) {
+      return const SizedBox();
+    }
     return MouseRegion(
       onEnter: (event) {
         _isHovered = true;
@@ -39,14 +45,10 @@ class _TranslationEngineTagState extends State<TranslationEngineTag> {
         alignment: Alignment.centerRight,
         child: Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            border: Border.all(
-              color: Theme.of(context).dividerColor,
-              width: 0.5,
-            ),
+            color: Theme.of(context).colorScheme.outlineVariant,
             borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(12),
-              bottomLeft: Radius.circular(12),
+              topLeft: Radius.circular(20),
+              bottomLeft: Radius.circular(20),
             ),
           ),
           padding: const EdgeInsets.only(
@@ -55,9 +57,10 @@ class _TranslationEngineTagState extends State<TranslationEngineTag> {
             left: 4,
             right: 2,
           ),
-          child: CupertinoButton(
-            minSize: 0,
-            padding: EdgeInsets.zero,
+          child: Button(
+            variant: ButtonVariant.cleared,
+            // padding: EdgeInsets.zero,
+            // minSize: 0,
             onPressed: () {},
             child: AnimatedCrossFade(
               crossFadeState: !_isHovered
@@ -70,7 +73,7 @@ class _TranslationEngineTagState extends State<TranslationEngineTag> {
               firstChild: Row(
                 children: [
                   TranslationEngineIcon(
-                    _translationEngineConfig.type,
+                    _translationEngineConfig!.type,
                     size: 12,
                   ),
                 ],
@@ -78,13 +81,13 @@ class _TranslationEngineTagState extends State<TranslationEngineTag> {
               secondChild: Row(
                 children: [
                   TranslationEngineIcon(
-                    _translationEngineConfig.type,
+                    _translationEngineConfig!.type,
                     size: 12,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 4, right: 2),
                     child: Text(
-                      _translationEngineConfig.typeName,
+                      _translationEngineConfig!.typeName,
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             fontSize: 10,
                           ),

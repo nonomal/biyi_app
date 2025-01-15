@@ -1,5 +1,5 @@
 name: biyi_workspace
-repository: https://github.com/biyidev/biyi
+repository: https://github.com/lijy91/biyi
 
 packages:
   - apps/*
@@ -30,6 +30,6 @@ scripts:
 
   dependency_validator:
     exec: flutter pub run dependency_validator
-    select-package:
-      depends-on:
+    packageFilters:
+      dependsOn:
         - dependency_validator

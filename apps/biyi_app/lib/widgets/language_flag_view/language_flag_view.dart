@@ -1,14 +1,14 @@
-import 'package:biyi_app/includes.dart';
-import 'package:flutter/material.dart';
+import 'package:biyi_app/utils/language_util.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 class LanguageFlagView extends StatelessWidget {
   const LanguageFlagView(
     this.language, {
-    Key? key,
+    super.key,
     this.size = 22,
     this.borderColor,
-  }) : super(key: key);
+  });
 
   final String language;
   final double size;

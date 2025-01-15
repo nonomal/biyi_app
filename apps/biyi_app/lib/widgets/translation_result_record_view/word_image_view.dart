@@ -1,15 +1,14 @@
-import 'package:biyi_app/includes.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:reflect_ui/reflect_ui.dart';
+import 'package:uni_translate_client/uni_translate_client.dart';
 
 const kWordImageSize = 74.0;
 
 class WordImageView extends StatelessWidget {
   const WordImageView(
     this.wordImage, {
-    Key? key,
+    super.key,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   final WordImage wordImage;
   final VoidCallback? onPressed;
@@ -24,15 +23,16 @@ class WordImageView extends StatelessWidget {
         border: Border.all(color: Theme.of(context).dividerColor),
         borderRadius: BorderRadius.circular(2),
       ),
-      child: CupertinoButton(
-        padding: EdgeInsets.zero,
+      child: Button(
+        variant: ButtonVariant.filled,
+        // padding: EdgeInsets.zero,
         onPressed: onPressed,
         child: Hero(
           tag: wordImage.url,
-          child: CustomImage(
+          child: Image.network(
             wordImage.url,
-            width: kWordImageSize,
-            height: kWordImageSize,
+            width: kWordImageSize - 2,
+            height: kWordImageSize - 2,
             fit: BoxFit.cover,
           ),
         ),

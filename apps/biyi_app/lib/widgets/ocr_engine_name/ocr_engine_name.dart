@@ -1,27 +1,27 @@
-import 'package:biyi_app/includes.dart';
-import 'package:flutter/material.dart';
+import 'package:biyi_app/models/ext_ocr_engine_config.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 class OcrEngineName extends StatelessWidget {
   const OcrEngineName(
     this.ocrEngineConfig, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final OcrEngineConfig ocrEngineConfig;
 
   @override
   Widget build(BuildContext context) {
+    final DesignThemeData theme = DesignTheme.of(context);
     return Text.rich(
       TextSpan(
         text: ocrEngineConfig.typeName,
         children: [
           TextSpan(
-            text: ' (${ocrEngineConfig.identifier})',
-            style: const TextStyle(
-              fontSize: 12,
-              color: Colors.grey,
+            text: ' (${ocrEngineConfig.id})',
+            style: theme.typography.bodySmall.copyWith(
+              color: Colors.neutral.shade400,
             ),
-          )
+          ),
         ],
       ),
     );

@@ -1,7 +1,8 @@
-import 'package:biyi_app/includes.dart';
+import 'package:biyi_advanced_features/models/user_preference.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+@Deprecated('No longer used.')
 class PreferencesModifier extends Listenable {
   Box? _boxInstance;
 
@@ -67,7 +68,7 @@ class PreferencesModifier extends Listenable {
   }
 
   bool exists() {
-    return _box.containsKey(_key);
+    return _key != null && _box.containsKey(_key);
   }
 
   Future<void> updateOrCreate({

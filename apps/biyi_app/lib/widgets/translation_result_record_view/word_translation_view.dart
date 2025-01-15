@@ -1,12 +1,14 @@
-import 'package:biyi_app/includes.dart';
-import 'package:flutter/material.dart';
+import 'dart:ui' as ui;
+
+import 'package:biyi_app/widgets/sound_play_button/sound_play_button.dart';
+import 'package:reflect_ui/reflect_ui.dart';
+import 'package:uni_translate_client/uni_translate_client.dart';
 
 class WordTranslationView extends StatefulWidget {
-
   const WordTranslationView(
     this.wordTranslation, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final TextTranslation wordTranslation;
 
   @override
@@ -18,7 +20,7 @@ class _WordTranslationViewState extends State<WordTranslationView> {
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
+    final DesignThemeData theme = DesignTheme.of(context);
     return MouseRegion(
       onEnter: (event) {
         _isHovered = true;
@@ -38,8 +40,9 @@ class _WordTranslationViewState extends State<WordTranslationView> {
           bottom: 7,
         ),
         alignment: Alignment.centerLeft,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: GappedRow(
+          gap: 4,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
             SelectableText.rich(
@@ -48,26 +51,15 @@ class _WordTranslationViewState extends State<WordTranslationView> {
                   TextSpan(text: widget.wordTranslation.text),
                 ],
               ),
-              style: textTheme.bodyMedium!.copyWith(
+              style: theme.typography.bodyMedium.copyWith(
                 height: 1.4,
               ),
+              selectionHeightStyle: ui.BoxHeightStyle.max,
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 2, left: 4),
-              padding: const EdgeInsets.only(left: 2, right: 2),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: const Color(0xff80838a).withOpacity(0.6),
-                ),
-                borderRadius: BorderRadius.circular(2),
-              ),
-              child: const Text(
-                '常见释义',
-                style: TextStyle(
-                  color: Color(0xff80838a),
-                  fontSize: 10,
-                ),
-              ),
+            const Badge(
+              variant: BadgeVariant.outlined,
+              color: Colors.neutral,
+              child: Text('常见释义'),
             ),
             if ((widget.wordTranslation.audioUrl ?? '').isNotEmpty &&
                 _isHovered)

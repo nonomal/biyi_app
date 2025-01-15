@@ -1,8 +1,10 @@
-import 'package:biyi_app/includes.dart';
+import 'package:biyi_app/services/api_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shortid/shortid.dart';
+import 'package:uni_translate_client/uni_translate_client.dart';
 
+@Deprecated('No longer used.')
 class EnginesModifier extends Listenable {
   Box? _boxInstance;
 
@@ -53,7 +55,7 @@ class EnginesModifier extends Listenable {
   }
 
   TranslationEngineConfig? get() {
-    if (_box.containsKey(_id)) {
+    if (_id != null && _box.containsKey(_id)) {
       dynamic value = _box.get(_id);
       return TranslationEngineConfig.fromJson(value);
     }
@@ -74,10 +76,14 @@ class EnginesModifier extends Listenable {
     final value = TranslationEngineConfig(
       position: position,
       group: _group,
-      identifier: _id ?? shortid.generate(),
+      id: _id ?? shortid.generate(),
       type: type,
       option: option,
-      supportedScopes: supportedScopes ?? [],
+      supportedScopes: (supportedScopes ?? [])
+          .map(
+            (e) => TranslationEngineScope.values.firstWhere((v) => e == v.name),
+          )
+          .toList(),
       disabled: disabled ?? false,
     );
     _box.put(value.identifier, value.toJson());
@@ -94,7 +100,11 @@ class EnginesModifier extends Listenable {
     value.position = position ?? value.position;
     value.type = type ?? value.type;
     value.option = option ?? value.option;
-    value.supportedScopes = supportedScopes ?? value.supportedScopes;
+    value.supportedScopes = (supportedScopes ?? value.supportedScopes)
+        .map(
+          (e) => TranslationEngineScope.values.firstWhere((v) => e == v.name),
+        )
+        .toList();
     value.disabled = disabled ?? value.disabled;
     _box.put(value.identifier, value.toJson());
   }

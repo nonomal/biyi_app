@@ -1,18 +1,17 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:biyi_app/includes.dart';
+import 'package:biyi_app/utils/global_audio_player.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 const _kIconSize = 16.0;
 
 class SoundPlayButton extends StatefulWidget {
   const SoundPlayButton({
-    Key? key,
+    super.key,
     required this.audioUrl,
-  }) : super(key: key);
+  });
 
   final String audioUrl;
 
@@ -67,13 +66,13 @@ class _SoundPlayButtonState extends State<SoundPlayButton>
     _playingAnimImageIndex = 0;
   }
 
-  void _handleClickPlay() async {
+  Future<void> _handleClickPlay() async {
     _audioSource ??= UrlSource(widget.audioUrl);
     await globalAudioPlayer.play(_audioSource!);
     _startPlayingAnimTimer();
   }
 
-  void _handleClickStop() async {
+  Future<void> _handleClickStop() async {
     await globalAudioPlayer.stop();
     _stopPlayingAnimTimer();
     if (mounted) setState(() {});
@@ -84,20 +83,20 @@ class _SoundPlayButtonState extends State<SoundPlayButton>
     return SizedBox(
       width: 20,
       height: 20,
-      child: CupertinoButton(
-        padding: EdgeInsets.zero,
+      child: Button(
+        variant: ButtonVariant.muted,
+        // padding: EdgeInsets.zero,
         child: Center(
           child: IndexedStack(
             index: _playingAnimImageIndex,
             alignment: Alignment.center,
-            children: <Widget>[
+            children: const <Widget>[
               SizedBox(
                 width: _kIconSize,
                 height: _kIconSize,
                 child: Icon(
                   FluentIcons.speaker_2_20_regular,
                   size: _kIconSize,
-                  color: Theme.of(context).textTheme.bodySmall!.color,
                 ),
               ),
               SizedBox(
@@ -106,7 +105,6 @@ class _SoundPlayButtonState extends State<SoundPlayButton>
                 child: Icon(
                   FluentIcons.speaker_1_20_regular,
                   size: _kIconSize,
-                  color: Theme.of(context).textTheme.bodySmall!.color,
                 ),
               ),
               SizedBox(
@@ -115,7 +113,6 @@ class _SoundPlayButtonState extends State<SoundPlayButton>
                 child: Icon(
                   FluentIcons.speaker_0_20_regular,
                   size: _kIconSize,
-                  color: Theme.of(context).textTheme.bodySmall!.color,
                 ),
               ),
             ],

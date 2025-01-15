@@ -1,20 +1,22 @@
-import 'package:biyi_app/includes.dart';
+import 'dart:ui' as ui;
+
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:reflect_ui/reflect_ui.dart';
+import 'package:uni_translate_client/uni_translate_client.dart';
 
 class WordPhraseView extends StatelessWidget {
   const WordPhraseView(
     this.wordPhrase, {
-    Key? key,
+    super.key,
     required this.onTextTapped,
-  }) : super(key: key);
+  });
 
   final WordPhrase wordPhrase;
   final ValueChanged<String> onTextTapped;
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
+    final DesignThemeData theme = DesignTheme.of(context);
     return Container(
       margin: const EdgeInsets.only(top: 6),
       width: double.infinity,
@@ -28,8 +30,8 @@ class WordPhraseView extends StatelessWidget {
               children: [
                 TextSpan(
                   text: wordPhrase.text,
-                  style: textTheme.bodyMedium!.copyWith(
-                    color: Theme.of(context).primaryColor,
+                  style: theme.typography.bodyMedium.copyWith(
+                    color: theme.colorScheme.primary,
                     fontWeight: FontWeight.w500,
                   ),
                   recognizer: TapGestureRecognizer()
@@ -44,9 +46,10 @@ class WordPhraseView extends StatelessWidget {
                 ),
               ],
             ),
-            style: textTheme.bodyMedium!.copyWith(
+            style: theme.typography.bodyMedium.copyWith(
               height: 1.4,
             ),
+            selectionHeightStyle: ui.BoxHeightStyle.max,
           ),
         ],
       ),

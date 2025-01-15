@@ -1,27 +1,27 @@
-import 'package:biyi_app/includes.dart';
-import 'package:flutter/material.dart';
+import 'package:biyi_app/models/ext_translation_engine_config.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 class TranslationEngineName extends StatelessWidget {
   const TranslationEngineName(
     this.translationEngineConfig, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final TranslationEngineConfig translationEngineConfig;
 
   @override
   Widget build(BuildContext context) {
+    final DesignThemeData theme = DesignTheme.of(context);
     return Text.rich(
       TextSpan(
         text: translationEngineConfig.typeName,
         children: [
           TextSpan(
-            text: ' (${translationEngineConfig.identifier})',
-            style: const TextStyle(
-              fontSize: 12,
-              color: Colors.grey,
+            text: ' (${translationEngineConfig.id})',
+            style: theme.typography.bodySmall.copyWith(
+              color: Colors.neutral.shade400,
             ),
-          )
+          ),
         ],
       ),
     );

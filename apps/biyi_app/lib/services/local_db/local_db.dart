@@ -1,53 +1,24 @@
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:biyi_app/includes.dart';
+import 'package:biyi_app/services/local_db/configuration.dart';
 import 'package:biyi_app/services/local_db/init_data_if_need.dart';
-import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
+import 'package:biyi_app/services/local_db/modifiers/engines_modifier.dart';
+import 'package:biyi_app/services/local_db/modifiers/ocr_engines_modifier.dart';
+import 'package:biyi_app/services/local_db/modifiers/preferences_modifier.dart';
+import 'package:biyi_app/services/local_db/modifiers/translation_targets_modifier.dart';
+import 'package:biyi_app/utils/utils.dart';
 import 'package:hive/hive.dart';
 import 'package:path/path.dart' as path;
+import 'package:uni_platform/uni_platform.dart';
 
 export 'configuration.dart';
-export 'local_db_listener.dart';
-// import 'migrate_old_db.dart';
-
 export 'modifiers/engines_modifier.dart';
 export 'modifiers/ocr_engines_modifier.dart';
 export 'modifiers/preferences_modifier.dart';
 export 'modifiers/translation_targets_modifier.dart';
 
-Future<User> getCurrentUser() {
-  return _getCurrentUser();
-}
-
-Future<User> _getCurrentUser() async {
-  try {
-    final appDir = await getAppDirectory();
-    final file = File('${appDir.path}/user.json');
-
-    if (file.existsSync()) {
-      String jsonString = await file.readAsString();
-      return User.fromJson(json.decode(jsonString));
-    }
-  } catch (e) {
-    // 忽略异常
-  }
-  return User(id: -1);
-}
-
-Future<void> _setCurrentUser(User user) async {
-  final appDir = await getAppDirectory();
-  final file = File('${appDir.path}/user.json');
-
-  final String jsonString = prettyJsonString(
-    user.toJson().removeNulls(),
-  );
-  await file.writeAsString(jsonString);
-}
-
+@Deprecated('Use Settings instead.')
 class LocalDb {
-  User user = User(id: -1);
   Configuration configuration = Configuration();
 
   EnginesModifier? _enginesModifier;
@@ -55,140 +26,12 @@ class LocalDb {
   PreferencesModifier? _preferencesModifier;
   TranslationTargetsModifier? _translationTargetsModifier;
 
-  final ObserverList<LocalDbListener> _listeners =
-      ObserverList<LocalDbListener>();
-
-  List<LocalDbListener> get listeners {
-    final List<LocalDbListener> localListeners =
-        List<LocalDbListener>.from(_listeners);
-    return localListeners;
-  }
-
-  bool get hasListeners {
-    return _listeners.isNotEmpty;
-  }
-
-  void addListener(LocalDbListener listener) {
-    _listeners.add(listener);
-  }
-
-  void removeListener(LocalDbListener listener) {
-    _listeners.remove(listener);
-  }
-
-  Future<void> setCurrentUser(User newUser) async {
-    User oldUser = user;
-
-    await _setCurrentUser(newUser);
-    user = newUser;
-
-    if (oldUser.id != newUser.id) {
-      await initLocalDb();
-    }
-
-    for (final LocalDbListener listener in listeners) {
-      listener.onUserChanged(oldUser, newUser);
-    }
-  }
-
-  Future<void> loadFromCloudServer() async {
-    var oldProEngineList = proEngines.list();
-    var oldProOcrEngineList = proOcrEngines.list();
-
-    List<TranslationEngineConfig> newProEngineList = [];
-    List<OcrEngineConfig> newProOcrEngineList = [];
-
-    try {
-      newProEngineList = await apiClient.engines.list();
-      newProEngineList = newProEngineList.map((engine) {
-        TranslationEngineConfig? oldEngine = oldProEngineList.firstWhereOrNull(
-          (e) => e.identifier == engine.identifier,
-        );
-        if (oldEngine != null) {
-          engine.disabled = oldEngine.disabled;
-        }
-        return engine;
-      }).toList();
-
-      await localDb.proEngines.deleteAll();
-      for (var item in newProEngineList) {
-        await localDb //
-            .proEngine(item.identifier)
-            .updateOrCreate(
-              type: item.type,
-              option: item.option,
-              supportedScopes: item.supportedScopes,
-              disabled: item.disabled,
-            );
-      }
-    } catch (error) {
-      // skip error
-    }
-
-    try {
-      newProOcrEngineList = await apiClient.ocrEngines.list();
-      newProOcrEngineList = newProOcrEngineList.map((engine) {
-        var oldOrcEngine = oldProOcrEngineList.firstWhereOrNull(
-          (e) => e.identifier == engine.identifier,
-        );
-        if (oldOrcEngine != null) {
-          engine.disabled = oldOrcEngine.disabled;
-        }
-
-        return engine;
-      }).toList();
-
-      newProOcrEngineList.removeWhere(
-        (e) => e.type == kOcrEngineTypeBuiltIn,
-      );
-
-      try {
-        if (await kDefaultBuiltInOcrEngine.isSupportedOnCurrentPlatform()) {
-          newProOcrEngineList.insert(
-              0,
-              OcrEngineConfig(
-                identifier: kDefaultBuiltInOcrEngine.identifier,
-                type: kDefaultBuiltInOcrEngine.type,
-                option: kDefaultBuiltInOcrEngine.option ?? {},
-                disabled: true,
-              ));
-        }
-      } catch (error) {
-        // skip error
-      }
-
-      await localDb.proOcrEngines.deleteAll();
-      for (var item in newProOcrEngineList) {
-        await localDb //
-            .proOcrEngine(item.identifier)
-            .updateOrCreate(
-              type: item.type,
-              option: item.option,
-              disabled: item.disabled,
-            );
-      }
-    } catch (error) {
-      // skip error
-    }
-
-    if (configuration.defaultEngineId == null ||
-        !engine(configuration.defaultEngineId).exists()) {
-      configuration.defaultEngineId =
-          newProEngineList.firstWhere((e) => e.type == 'baidu').identifier;
-    }
-
-    if (configuration.defaultOcrEngineId == null ||
-        !ocrEngine(configuration.defaultOcrEngineId).exists()) {
-      configuration.defaultOcrEngineId = newProOcrEngineList
-          .firstWhere((e) => e.type == 'built_in' || e.type == 'tesseract')
-          .identifier;
-    }
-  }
-
+  @Deprecated('No longer used.')
   EnginesModifier get engines {
     return engine(null);
   }
 
+  @Deprecated('No longer used.')
   EnginesModifier engine(String? id) {
     _enginesModifier ??= EnginesModifier();
     _enginesModifier?.setId(id);
@@ -196,10 +39,12 @@ class LocalDb {
     return _enginesModifier!;
   }
 
+  @Deprecated('No longer used.')
   OcrEnginesModifier get ocrEngines {
     return ocrEngine(null);
   }
 
+  @Deprecated('No longer used.')
   OcrEnginesModifier ocrEngine(String? id) {
     _ocrEnginesModifier ??= OcrEnginesModifier();
     _ocrEnginesModifier?.setId(id);
@@ -207,10 +52,12 @@ class LocalDb {
     return _ocrEnginesModifier!;
   }
 
+  @Deprecated('No longer used.')
   EnginesModifier get proEngines {
     return proEngine(null);
   }
 
+  @Deprecated('No longer used.')
   EnginesModifier proEngine(String? id) {
     _enginesModifier ??= EnginesModifier();
     _enginesModifier?.setId(id);
@@ -218,10 +65,12 @@ class LocalDb {
     return _enginesModifier!;
   }
 
+  @Deprecated('No longer used.')
   OcrEnginesModifier get proOcrEngines {
     return proOcrEngine(null);
   }
 
+  @Deprecated('No longer used.')
   OcrEnginesModifier proOcrEngine(String? id) {
     _ocrEnginesModifier ??= OcrEnginesModifier();
     _ocrEnginesModifier?.setId(id);
@@ -229,10 +78,12 @@ class LocalDb {
     return _ocrEnginesModifier!;
   }
 
+  @Deprecated('No longer used.')
   EnginesModifier get privateEngines {
     return privateEngine(null);
   }
 
+  @Deprecated('No longer used.')
   EnginesModifier privateEngine(String? id) {
     _enginesModifier ??= EnginesModifier();
     _enginesModifier?.setId(id);
@@ -240,10 +91,12 @@ class LocalDb {
     return _enginesModifier!;
   }
 
+  @Deprecated('No longer used.')
   OcrEnginesModifier get privateOcrEngines {
     return privateOcrEngine(null);
   }
 
+  @Deprecated('No longer used.')
   OcrEnginesModifier privateOcrEngine(String? id) {
     _ocrEnginesModifier ??= OcrEnginesModifier();
     _ocrEnginesModifier?.setId(id);
@@ -251,20 +104,24 @@ class LocalDb {
     return _ocrEnginesModifier!;
   }
 
+  @Deprecated('No longer used.')
   PreferencesModifier get preferences {
     return preference(null);
   }
 
+  @Deprecated('No longer used.')
   PreferencesModifier preference(String? key) {
     _preferencesModifier ??= PreferencesModifier();
     _preferencesModifier?.setKey(key);
     return _preferencesModifier!;
   }
 
+  @Deprecated('No longer used.')
   TranslationTargetsModifier get translationTargets {
     return translationTarget(null);
   }
 
+  @Deprecated('No longer used.')
   TranslationTargetsModifier translationTarget(String? id) {
     _translationTargetsModifier ??= TranslationTargetsModifier();
     _translationTargetsModifier?.setId(id);
@@ -272,6 +129,7 @@ class LocalDb {
   }
 }
 
+@Deprecated('No longer used.')
 final localDb = LocalDb();
 
 Future<void> _safeOpenBox(Directory userDataDirectory, String name) async {
@@ -297,11 +155,8 @@ Future<void> _safeOpenBox(Directory userDataDirectory, String name) async {
   }
 }
 
+@Deprecated('No longer used.')
 Future<void> initLocalDb() async {
-  if (!kIsWeb) {
-    localDb.user = await getCurrentUser();
-  }
-
   Directory userDataDirectory = await getUserDataDirectory();
 
   await Hive.close();
@@ -310,9 +165,8 @@ Future<void> initLocalDb() async {
   await _safeOpenBox(userDataDirectory, 'engines');
   await _safeOpenBox(userDataDirectory, 'ocr_engines');
   await _safeOpenBox(userDataDirectory, 'translation_targets');
-  await _safeOpenBox(userDataDirectory, 'newwords');
   // await migrateOldDb();
-  if (!kIsWeb) {
+  if (!UniPlatform.isWeb) {
     await initDataIfNeed();
   }
 }

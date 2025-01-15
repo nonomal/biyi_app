@@ -1,18 +1,25 @@
-import 'package:biyi_app/includes.dart';
-import 'package:flutter/material.dart';
+import 'package:biyi_app/utils/r.dart';
+import 'package:flutter/material.dart'
+    show Brightness, Colors, Theme, ThemeData;
+import 'package:flutter/widgets.dart';
 
 class OcrEngineIcon extends StatelessWidget {
   const OcrEngineIcon(
     this.type, {
-    Key? key,
+    super.key,
     this.size = 22,
-  }) : super(key: key);
+  });
 
   final String type;
   final double size;
 
   @override
   Widget build(BuildContext context) {
+    ThemeData themeData = Theme.of(context);
+    bool invertColors = false;
+    if (type == 'built_in' && themeData.brightness == Brightness.dark) {
+      invertColors = true;
+    }
     return Container(
       width: size,
       height: size,
@@ -20,6 +27,7 @@ class OcrEngineIcon extends StatelessWidget {
         image: DecorationImage(
           image: AssetImage(R.image('ocr_engine_icons/$type.png')),
           fit: BoxFit.cover,
+          invertColors: invertColors,
         ),
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         border: Border.all(

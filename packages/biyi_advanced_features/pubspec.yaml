@@ -1,0 +1,25 @@
+name: biyi_advanced_features
+description: biyi advanced features
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=2.18.0 <4.0.0"
+  flutter: ">=3.3.0"
+
+dependencies:
+  biyi_api_client:
+    path: ../biyi_api_client
+  crypto: ^3.0.3
+  device_info_plus: ^9.0.1
+  dio: ^5.1.2
+  flutter:
+    sdk: flutter
+  package_info_plus: ^5.0.1
+  uni_ocr_client: ^0.1.1
+  uni_translate_client: ^0.1.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mostly_reasonable_lints: ^0.1.2

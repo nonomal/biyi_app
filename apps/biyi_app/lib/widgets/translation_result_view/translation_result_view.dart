@@ -1,12 +1,13 @@
-import 'package:biyi_app/includes.dart';
+import 'package:biyi_app/models/translation_result.dart';
+import 'package:biyi_app/widgets/widgets.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/material.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 class TranslationResultView extends StatelessWidget {
   const TranslationResultView(
     this.translationResult, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final TranslationResult translationResult;
 
@@ -17,65 +18,38 @@ class TranslationResultView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      padding: const EdgeInsets.only(
-        left: 12,
-        right: 12,
-        top: 0,
-        bottom: 12,
-      ),
-      child: Container(
-        height: 40,
-        decoration: BoxDecoration(
-          color: Theme.of(context).canvasColor,
-          borderRadius: BorderRadius.circular(2),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              offset: const Offset(0.0, 1.0),
-              blurRadius: 3.0,
+    ThemeData themeData = Theme.of(context);
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 12),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: LanguageLabel(
+              sourceLanguage,
+              flagSize: 18,
             ),
-          ],
-        ),
-        padding: EdgeInsets.zero,
-        child: Row(
-          children: [
-            CustomButton(
-              padding: const EdgeInsets.only(left: 12, right: 12),
-              child: LanguageLabel(
-                sourceLanguage,
-                flagSize: 18,
-              ),
-              onPressed: () => {},
-            ),
-            SizedBox(
-              width: 20,
-              height: 38,
-              child: CustomButton(
-                padding: EdgeInsets.zero,
-                child: Container(
-                  margin: EdgeInsets.zero,
-                  child: Icon(
-                    FluentIcons.arrow_right_20_regular,
-                    size: 16,
-                    color: Theme.of(context).iconTheme.color,
-                  ),
-                ),
-                onPressed: () {},
+          ),
+          SizedBox(
+            width: 20,
+            height: 38,
+            child: Container(
+              margin: EdgeInsets.zero,
+              child: Icon(
+                FluentIcons.arrow_right_20_regular,
+                size: 16,
+                color: themeData.iconTheme.color,
               ),
             ),
-            CustomButton(
-              padding: const EdgeInsets.only(left: 12, right: 12),
-              child: LanguageLabel(
-                targetLanguage,
-                flagSize: 18,
-              ),
-              onPressed: () => {},
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: LanguageLabel(
+              targetLanguage,
+              flagSize: 18,
             ),
-            Expanded(child: Container()),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -1,14 +1,14 @@
-import 'package:biyi_app/includes.dart';
-import 'package:flutter/material.dart';
+import 'package:biyi_app/utils/r.dart';
+import 'package:reflect_ui/reflect_ui.dart';
 
 class TranslationEngineIcon extends StatelessWidget {
   const TranslationEngineIcon(
     this.type, {
-    Key? key,
+    super.key,
     this.size = 22,
     this.color,
     this.border,
-  }) : super(key: key);
+  });
 
   final String type;
   final double size;
@@ -21,6 +21,7 @@ class TranslationEngineIcon extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
+        color: Colors.white,
         image: DecorationImage(
           image: AssetImage(R.image('translation_engine_icons/$type.png')),
           fit: BoxFit.cover,
